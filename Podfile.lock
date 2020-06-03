@@ -1,0 +1,58 @@
+PODS:
+  - BEKListKit (1.0.3)
+  - Hero (1.5.0)
+  - IQKeyboardManagerSwift (6.5.5)
+  - lottie-ios (3.1.8)
+  - MaterialShowcase (0.7.1)
+  - SDWebImage (5.7.3):
+    - SDWebImage/Core (= 5.7.3)
+  - SDWebImage/Core (5.7.3)
+  - Siren (5.4.0)
+  - Stellar (0.67)
+  - SwiftRater (1.8.0)
+
+DEPENDENCIES:
+  - BEKListKit
+  - Hero
+  - IQKeyboardManagerSwift
+  - lottie-ios
+  - MaterialShowcase
+  - SDWebImage
+  - Siren
+  - Stellar (from `https://github.com/AugustRush/Stellar.git`)
+  - SwiftRater
+
+SPEC REPOS:
+  trunk:
+    - BEKListKit
+    - Hero
+    - IQKeyboardManagerSwift
+    - lottie-ios
+    - MaterialShowcase
+    - SDWebImage
+    - Siren
+    - SwiftRater
+
+EXTERNAL SOURCES:
+  Stellar:
+    :git: https://github.com/AugustRush/Stellar.git
+
+CHECKOUT OPTIONS:
+  Stellar:
+    :commit: 6c192427621f8b52f3b155d0088e1eabd156abe0
+    :git: https://github.com/AugustRush/Stellar.git
+
+SPEC CHECKSUMS:
+  BEKListKit: eced55022c40444e55975752a03595751286e123
+  Hero: b7385b75e7259da62f4f85462f59a5082d66b058
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
+  MaterialShowcase: baaca60627058085d6b304f5a30ee952e99cee21
+  SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
+  Siren: 9df16ed5278cfaad7ea034f3d2206e4f6983e9b8
+  Stellar: df980becd194eeb62d623af097582da0ef2219b9
+  SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
+
+PODFILE CHECKSUM: 6dded065eea1dc308f7474572304648d03f8d069
+
+COCOAPODS: 1.9.0
