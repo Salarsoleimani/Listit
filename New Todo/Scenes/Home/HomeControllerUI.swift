@@ -10,6 +10,7 @@ import UIKit
 
 extension HomeController {
   func setupUI() {
+    navigationItem.title = "all_items_navigation_title".localize()
     view.backgroundColor = Colors.background.value
   }
 }

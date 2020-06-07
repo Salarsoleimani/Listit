@@ -22,7 +22,9 @@ final class Application {
     let mainNavigationController = MainNavigationController()
     window.rootViewController = mainNavigationController
     window.makeKeyAndVisible()
-    SplashNavigator(navigationController: mainNavigationController, servicePackage: ServicePackage(dbManager: DBManager())).setup()
+    let dbManager = DBManager()
+    dbManager.configureDataBase()
+    SplashNavigator(navigationController: mainNavigationController, servicePackage: ServicePackage(dbManager: dbManager)).setup()
   }
   
   func setupApplicationConfigurations() {

@@ -1,0 +1,16 @@
+[
+  {
+    "iconColor": "#FF0000",
+    "iconId": 0,
+    "itemsCount": 0,
+    "title": "birthdays",
+    "type": 1
+  },
+  {
+    "iconColor": "#00BAFF",
+    "iconId": 31,
+    "itemsCount": 0,
+    "title": "todo",
+    "type": 0
+  }
+]

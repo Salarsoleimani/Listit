@@ -14,7 +14,10 @@ final class CoreDataStack {
   
   // MARK: - Core Data stack
   lazy var persistentContainer: NSPersistentCloudKitContainer = {
-    let container = NSPersistentCloudKitContainer(name: "CoreDataCloudKit")
+    let container = NSPersistentCloudKitContainer(name: "New_Todo")
+    guard let description = container.persistentStoreDescriptions.first else {
+      fatalError("No description found")
+    }
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
       if let error = error as NSError? {
         fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -26,6 +29,7 @@ final class CoreDataStack {
   static var managedContext: NSManagedObjectContext {
     let context = CoreDataStack.shared.persistentContainer.viewContext
     context.automaticallyMergesChangesFromParent = true
+    context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     return context
   }
   

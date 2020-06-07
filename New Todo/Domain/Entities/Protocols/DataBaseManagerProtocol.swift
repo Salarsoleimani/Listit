@@ -9,18 +9,19 @@
 import Foundation
 
 protocol DatabaseManagerProtocol {
-  //MARK: - Home Related Functions
-  func get(Home home: HomeModel)
+  //MARK: - Configuration
+  func configureDataBase()
   //MARK: - List Related Functions
-  func add(List list: List, response: ((Bool) -> Void)?)
-  func get(Lists response: @escaping ([List]) -> Void)
-  func delete(List id: UUID,  response: ((Bool) -> Void)?)
+  func add(List list: ListModel, response: ((Bool) -> Void)?)
+  func getAllLists(response: @escaping ([List]) -> Void)
+  func delete(List list: List,  response: ((Bool) -> Void)?)
   func update(List list: List, response: ((Bool) -> Void)?)
   
   //MARK: - Item Related Functions
-  func add(Item item: List, items: [Item], response: ((Bool) -> Void)?)
+  func add(Item item: ItemModel, response: ((Bool) -> Void)?)
   func get(ItemsForListUID: UUID, response: @escaping ([Item]) -> Void)
-  func delete(Item id: UUID,  response: ((Bool) -> Void)?)
+  func getAllItems(response: @escaping ([Item]) -> Void)
+  func delete(Item item: Item,  response: ((Bool) -> Void)?)
   func update(Item item: Item, response: ((Bool) -> Void)?)
   
   // Shared

@@ -9,36 +9,58 @@
 import CoreData
 
 final public class DBManager: DatabaseManagerProtocol {
-  //MARK: - Home Related Functions
-  func get(Home home: HomeModel) {
-    
+  //MARK: - Configuration
+  func configureDataBase() {
+    if Defaults.appOpenedCount == 0 {
+      let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
+      for templateList in templateLists {
+        add(List: templateList, response: nil)
+      }
+    }
   }
-  //MARK: - Home Related Functions
-  func add(List list: List, response: ((Bool) -> Void)?) {
-    
+  //MARK: - List Related Functions
+  func add(List list: ListModel, response: ((Bool) -> Void)?) {
+    let _ = list.asDBList()
+    CoreDataStack.shared.saveContext()
   }
   
-  func get(Lists response: @escaping ([List]) -> Void) {
-    
+  func getAllLists(response: @escaping ([List]) -> Void) {
+    let fetch = NSFetchRequest<List>(entityName: "List")
+    fetch.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+
+    do {
+      response(try CoreDataStack.managedContext.fetch(fetch))
+    } catch {
+      print("Error fetching lists")
+    }
   }
-  
-  func delete(List id: UUID, response: ((Bool) -> Void)?) {
+  func delete(List list: List, response: ((Bool) -> Void)?) {
     
   }
   
   func update(List list: List, response: ((Bool) -> Void)?) {
     
   }
-  
-  func add(Item item: List, items: [Item], response: ((Bool) -> Void)?) {
-    
+  //MARK: - Item Related Functions
+  func add(Item item: ItemModel, response: ((Bool) -> Void)?) {
+    let _ = item.asDBItem()
+    CoreDataStack.shared.saveContext()
   }
   
   func get(ItemsForListUID: UUID, response: @escaping ([Item]) -> Void) {
     
   }
-  
-  func delete(Item id: UUID, response: ((Bool) -> Void)?) {
+  func getAllItems(response: @escaping ([Item]) -> Void) {
+    let fetch = NSFetchRequest<Item>(entityName: "Item")
+    fetch.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+
+    do {
+      response(try CoreDataStack.managedContext.fetch(fetch))
+    } catch {
+      print("Error fetching lists")
+    }
+  }
+  func delete(Item item: Item, response: ((Bool) -> Void)?) {
     
   }
   
@@ -46,7 +68,7 @@ final public class DBManager: DatabaseManagerProtocol {
     
   }
   //MARK: - Shared
-
+  
   func resetFactory() {
     
   }

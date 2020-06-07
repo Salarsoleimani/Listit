@@ -6,4 +6,9 @@
 //  Copyright © 2020 SaSApps. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct StaticConstants {
+  static let mainScreenWidth = UIScreen.main.bounds.width
+  static let mainScreenHeight = UIScreen.main.bounds.height
+}

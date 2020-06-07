@@ -9,16 +9,78 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeController" customModule="New_Todo" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="iN0-l3-epB" id="kZW-tg-4bV"/>
+                <outlet property="googleAdView" destination="2vk-la-R4N" id="oa5-Nm-l0a"/>
+                <outlet property="itemsTableView" destination="X0H-6D-EL3" id="GUP-iN-nhF"/>
+                <outlet property="listsCollectionView" destination="MVh-zR-5Bi" id="X4l-wu-7A8"/>
+                <outlet property="view" destination="WLd-EZ-D6C" id="AI3-Ui-xnu"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="WLd-EZ-D6C">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-nr-Uma">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X0H-6D-EL3" customClass="BEKMultiCellTable" customModule="BEKListKit">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="594"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vk-la-R4N">
+                            <rect key="frame" x="0.0" y="606" width="414" height="100"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="Msk-G8-Dlh"/>
+                            </constraints>
+                        </view>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="MVh-zR-5Bi" customClass="BEKMultiCellCollection" customModule="BEKListKit">
+                            <rect key="frame" x="0.0" y="718" width="414" height="100"/>
+                            <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="eiP-kH-hdp"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yIT-eB-IL8">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="250" constant="100" id="TYJ-Mp-PZh"/>
+                    </constraints>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aJ-En-f6K">
+                    <rect key="frame" x="389" y="423" width="50" height="50"/>
+                    <color key="backgroundColor" red="0.72549019609999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="Ep4-ur-9A6"/>
+                        <constraint firstAttribute="height" constant="50" id="n2i-II-6jc"/>
+                    </constraints>
+                    <state key="normal" title=" +      "/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="addItemButtonPressed:" destination="-1" eventType="touchUpInside" id="oZt-VU-ewu"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="139" y="134"/>
+            <constraints>
+                <constraint firstItem="b6p-nr-Uma" firstAttribute="trailing" secondItem="bqe-v3-8Ux" secondAttribute="trailing" id="0VV-mD-Xi3"/>
+                <constraint firstItem="b6p-nr-Uma" firstAttribute="top" secondItem="bqe-v3-8Ux" secondAttribute="top" id="VA9-c9-AhK"/>
+                <constraint firstItem="b6p-nr-Uma" firstAttribute="leading" secondItem="bqe-v3-8Ux" secondAttribute="leading" id="fiQ-N9-6b3"/>
+                <constraint firstItem="bqe-v3-8Ux" firstAttribute="trailing" secondItem="0aJ-En-f6K" secondAttribute="trailing" constant="-25" id="hzV-1o-ggH"/>
+                <constraint firstItem="0aJ-En-f6K" firstAttribute="centerY" secondItem="WLd-EZ-D6C" secondAttribute="centerY" id="vZP-k4-LsJ"/>
+                <constraint firstItem="bqe-v3-8Ux" firstAttribute="bottom" secondItem="b6p-nr-Uma" secondAttribute="bottom" id="wHA-6L-HZb"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="bqe-v3-8Ux"/>
+            <point key="canvasLocation" x="133.59999999999999" y="154.27286356821591"/>
         </view>
     </objects>
 </document>

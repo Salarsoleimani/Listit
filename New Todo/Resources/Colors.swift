@@ -12,7 +12,7 @@ import UIKit
 enum Colors {
   case background
   
-  case navigationButtonTint
+  case title
   
   case walktroughTarget
   case walktroughBackground
@@ -42,8 +42,8 @@ extension Colors {
     case .background:
       instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x232323), lightModeColor: UIColor(hex: 0xF9F9F9))
       
-    // Navigation
-    case .navigationButtonTint:
+    // Shared
+    case .title:
       instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xF2F2F2), lightModeColor: UIColor(hex: 0x686868))
       
       // Walkthrough
@@ -56,11 +56,11 @@ extension Colors {
       
     // Lists
     case .listCellBackground:
-      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x2F2F2F), lightModeColor: UIColor(hex: 0xF5F5F5).withAlphaComponent(0.5))
+      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x1C1C1E), lightModeColor: UIColor(hex: 0xF5F5F5).withAlphaComponent(0.5))
     case .listCellTitle:
-      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xF2F2F2), lightModeColor: UIColor(hex: 0x686868))
+      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xDDDDDD), lightModeColor: UIColor(hex: 0x686868))
     case .listCellDescription:
-      instanceColor = UIColor(hex: 0x7F7F7F)
+      instanceColor = UIColor(hex: 0x666666)
     case .listCellShadow:
       instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x2C2C2C).withAlphaComponent(0.5), lightModeColor: UIColor(hex: 0xD8D8D8).withAlphaComponent(0.5))
       

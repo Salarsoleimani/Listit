@@ -18,7 +18,6 @@ class MainNavigationController: UINavigationController {
     let image = UIImage()
     navigationBar.setBackgroundImage(image, for: .default)
     navigationBar.shadowImage = image
-    navigationBar.tintColor = Colors.navigationButtonTint.value
   }
   private func setupNavigationBarUI() {
       UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for: .default)
@@ -26,10 +25,9 @@ class MainNavigationController: UINavigationController {
         .foregroundColor: UIColor.white,
         .font: Fonts.navigationLargeTitle
       ]
-  //    if #available(iOS 11.0, *) {
-  //      UINavigationBar.appearance().prefersLargeTitles = true
-  //      UINavigationBar.appearance().largeTitleTextAttributes = attrs
-  //    }
+      UINavigationBar.appearance().prefersLargeTitles = true
+      UINavigationBar.appearance().largeTitleTextAttributes = attrs
+      
       //UINavigationBar.appearance().barTintColor = LHColors.navigationButtonTint.value // [TODO]
       // buttons
       UINavigationBar.appearance().titleTextAttributes = attrs

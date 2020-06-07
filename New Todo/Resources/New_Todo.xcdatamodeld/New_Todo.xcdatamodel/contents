@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="notifDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="repeats" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="repeats" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String" defaultValueString="" spotlightIndexingEnabled="YES"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="items" inverseEntity="List"/>
     </entity>
     <entity name="List" representedClassName="List" syncable="YES" codeGenerationType="class">
-        <attribute name="iconId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="iconColor" optional="YES" attributeType="String"/>
+        <attribute name="iconId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="itemsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String" defaultValueString="" spotlightIndexingEnabled="YES"/>
+        <attribute name="type" attributeType="Integer 16" defaultValueString="3" usesScalarValueType="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="list" inverseEntity="Item"/>
     </entity>
     <elements>
-        <element name="Item" positionX="199.71484375" positionY="-31.6484375" width="128" height="118"/>
-        <element name="List" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="Item" positionX="199.71484375" positionY="-31.6484375" width="128" height="163"/>
+        <element name="List" positionX="-63" positionY="-18" width="128" height="163"/>
     </elements>
 </model>

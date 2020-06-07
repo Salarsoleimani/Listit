@@ -12,7 +12,8 @@ final class SplashNavigator: Navigator {
   func setup() {
     let vc = SplashController.initFromNib()
     vc.viewModel = SplashViewModel(navigator: self)
-    navigationController.viewControllers = [vc]
+    navigationController.popViewController(animated: false)
+    navigationController.pushViewController(vc, animated: true)
     //AnalyticLogProvider.logNavigator(name: NSStringFromClass(type(of: self)), functionName: "setup")
   }
   
