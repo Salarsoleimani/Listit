@@ -11,10 +11,15 @@ import CoreData
 final public class DBManager: DatabaseManagerProtocol {
   //MARK: - Configuration
   func configureDataBase() {
-    if Defaults.appOpenedCount == 0 {
+    if Defaults.appOpenedCount == 0 || !Defaults.isDatabaseConfigured {
       let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
       for templateList in templateLists {
-        add(List: templateList, response: nil)
+        var list = templateList
+        list.title = templateList.title.localize()
+        add(List: list, response: nil)
+        if let last = templateLists.last, templateList == last {
+          Defaults.isDatabaseConfigured = true
+        }
       }
     }
   }
@@ -35,7 +40,8 @@ final public class DBManager: DatabaseManagerProtocol {
     }
   }
   func delete(List list: List, response: ((Bool) -> Void)?) {
-    
+    CoreDataStack.managedContext.delete(list)
+    CoreDataStack.shared.saveContext()
   }
   
   func update(List list: List, response: ((Bool) -> Void)?) {

@@ -49,7 +49,6 @@ public class LanguageManager {
       return Languages(rawValue: defaultLanguage)!
     }
     set {
-      
       // swizzle the awakeFromNib from nib and localize the text in the new awakeFromNib
       UIView.localize()
       
@@ -350,24 +349,24 @@ public enum Languages: String {
   case ptPT = "pt-PT"
   case deviceLanguage
 }
-
-public enum LanguageId: Int16 {
-  case EN, IR, CH
-  public static let defaultValue = LanguageId.EN
-}
-
-extension LanguageId {
-  public func asStringName() -> String {
-    switch self {
-    case .EN:
-      return "English"
-    case .IR:
-      return "فارسی"
-    case .CH:
-      return "中文"
-    }
-  }
-}
+//
+//public enum LanguageId: Int16 {
+//  case EN, IR, CH
+//  public static let defaultValue = LanguageId.EN
+//}
+//
+//extension LanguageId {
+//  public func asStringName() -> String {
+//    switch self {
+//    case .EN:
+//      return "English"
+//    case .IR:
+//      return "فارسی"
+//    case .CH:
+//      return "中文"
+//    }
+//  }
+//}
 extension String {
   
   ///

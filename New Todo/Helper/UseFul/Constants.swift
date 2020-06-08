@@ -26,7 +26,8 @@ enum Constants {
     static let fontFamily = "com.storageKey.fontFamily"
     static let isAdsRemoved = "com.storageKey.isAdsRemoved"
     static let isOnboardingWatched = "com.storageKey.isOnboardingWatched"
-    
+    static let isDatabaseConfigured = "com.storageKey.isDatabaseConfigured"
+
     static let appOpenedCount = "com.storageKey.appOpenedCount"
   }
   struct Links {
@@ -37,6 +38,6 @@ enum Constants {
   }
   
   struct Radius {
-    static let cornerRadius: CGFloat = 10
+    static let cornerRadius: CGFloat = 13
   }
 }

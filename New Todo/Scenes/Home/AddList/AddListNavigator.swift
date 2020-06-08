@@ -9,8 +9,9 @@
 import Foundation
 
 final class AddListNavigator: Navigator {
-  func setup() {
+  func setup(list: List?) {
     let vc = AddListController(navigator: self, dbManager: servicePackage.dbManager)
+    vc.list = list
     navigationController.pushViewController(vc, animated: true)
   }
   func toIconSelector(delegate: AddListControllerDelegate) {

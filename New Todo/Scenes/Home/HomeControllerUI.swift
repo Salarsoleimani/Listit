@@ -10,7 +10,15 @@ import UIKit
 
 extension HomeController {
   func setupUI() {
-    navigationItem.title = "all_items_navigation_title".localize()
     view.backgroundColor = Colors.background.value
+
+    listsCollectionView.backgroundColor = .clear
+    itemsTableView.backgroundColor = .clear
+
+    navigationItem.title = "all_items_navigation_title".localize()
+    
+    addItemButton.backgroundColor = Colors.main.value
+    addItemLabel.font = Fonts.listCellTitle
+    addItemLabel.textColor = Colors.white.value
   }
 }

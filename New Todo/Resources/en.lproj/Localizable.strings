@@ -8,8 +8,32 @@
 
 /// - titles
 "all_items_navigation_title" = "All Items";
-/// - item show types
+"add_list_navigation_title" = "Add List";
+"edit_list_navigation_title" = "Edit List";
 
-"all_item_show_type" = "all items";
-"favorites_item_show_type" = "favorites";
-"today_item_show_type" = "today";
+/// - list types title
+"all_lists_type" = "All Items";
+"favorites_lists_type" = "Favorites";
+"today_lists_type" = "Today";
+"todo_lists_type" = "Todo";
+"birthday_lists_type" = "Birthdays";
+"gerocery_lists_type" = "Geroceries";
+/// - list types quantity title
+"all_lists_type_quantity" = "items";
+"favorites_lists_type_quantity" = "favorites";
+"today_lists_type_quantity" = "tasks";
+"todo_lists_type_quantity" = "todos";
+"birthday_lists_type_quantity" = "birthdays";
+"gerocery_lists_type_quantity" = "items";
+"none_lists_type_quantity" = "items";
+
+// - list menu actions
+"cancel_list_action" = "Cancel";
+"delete_list_action" = "Delete";
+"edit_list_action" = "Edit";
+"add_new_item_to_list_action" = "Add new";
+// - add list
+"add_list_title_placeholder" = "";
+// - alerts
+"delete_list_title_alert" = "Deleting \"%@\" list notice";
+"delete_list_desc_alert" = "Are you sure about deleting the \"%@\" list? It will permanently delete the list and items in it from the iCloud server and your phone. You won't be able to restore your data any more.\nAgain, are you sure about deleting the \"%@\" list?";

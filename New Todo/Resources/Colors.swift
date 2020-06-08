@@ -13,6 +13,7 @@ enum Colors {
   case background
   
   case title
+  case main
   
   case walktroughTarget
   case walktroughBackground
@@ -21,7 +22,8 @@ enum Colors {
   case listCellBackground
   case listCellTitle
   case listCellDescription
-  case listCellShadow
+  
+  case white
   
   case custom(hex: Int, alpha: Double)
   case customWithDarkModeString(hexForDarkMode: Int, hexForLightMode: Int, alpha: Double)
@@ -45,7 +47,9 @@ extension Colors {
     // Shared
     case .title:
       instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xF2F2F2), lightModeColor: UIColor(hex: 0x686868))
-      
+    case .main:
+      instanceColor = UIColor(hex: 0x02C39A)
+
       // Walkthrough
     case .walktroughTarget:
       instanceColor =  UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x444444), lightModeColor: UIColor(hex: 0x989595))
@@ -61,9 +65,10 @@ extension Colors {
       instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xDDDDDD), lightModeColor: UIColor(hex: 0x686868))
     case .listCellDescription:
       instanceColor = UIColor(hex: 0x666666)
-    case .listCellShadow:
-      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x2C2C2C).withAlphaComponent(0.5), lightModeColor: UIColor(hex: 0xD8D8D8).withAlphaComponent(0.5))
       
+      //
+    case .white:
+      instanceColor = .white
     // Custom
     case .custom(let hexString, let opacity):
       instanceColor = UIColor(hex: hexString).withAlphaComponent(CGFloat(opacity))

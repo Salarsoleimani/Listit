@@ -1,5 +1,7 @@
 PODS:
   - BEKListKit (1.0.3)
+  - CocoaTextField (1.0.0)
+  - GrowingTextView (0.7.2)
   - Haptico (1.0.2)
   - Hero (1.5.0)
   - IQKeyboardManagerSwift (6.5.5)
@@ -21,6 +23,8 @@ PODS:
 
 DEPENDENCIES:
   - BEKListKit
+  - CocoaTextField (~> 1.0.0)
+  - GrowingTextView (= 0.7.2)
   - Haptico
   - Hero
   - IQKeyboardManagerSwift
@@ -37,6 +41,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - BEKListKit
+    - CocoaTextField
+    - GrowingTextView
     - Haptico
     - Hero
     - IQKeyboardManagerSwift
@@ -61,6 +67,8 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BEKListKit: eced55022c40444e55975752a03595751286e123
+  CocoaTextField: e3a1e15afffb3ebcbc657aa25958e122f7a03b71
+  GrowingTextView: 876bf42005b5e4a4fd740597db12caaf41f0fe6c
   Haptico: ce38d1f993f3a0df9a6d7795a9dd2849648aa9d1
   Hero: b7385b75e7259da62f4f85462f59a5082d66b058
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
@@ -75,6 +83,6 @@ SPEC CHECKSUMS:
   SwiftLocalNotification: 971b8530997948187f97b7125f7acc88112640a3
   SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
 
-PODFILE CHECKSUM: 7f8cf9d1a8b26d00fd739e066730d10d0e16531a
+PODFILE CHECKSUM: aaae1d5552e3f18e4a02c844600445a5b4e2f9d9
 
 COCOAPODS: 1.9.0

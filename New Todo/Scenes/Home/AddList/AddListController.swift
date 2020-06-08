@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CocoaTextField
+
 protocol AddListControllerDelegate {
   func iconSelected(_ icon: IconCellViewModel)
 }
@@ -19,14 +21,17 @@ extension AddListController: AddListControllerDelegate {
 }
 class AddListController: UIViewController {
   // MARK:- Outlets
-  // MARK:- Outlets
+  @IBOutlet weak var containerView: UIView!
+
   @IBOutlet weak var iconButton: UIButton!
   @IBOutlet weak var iconContainerView: UIView!
-  @IBOutlet weak var titleTextField: UITextField!
+  @IBOutlet weak var titleTextField: CocoaTextField!
+  @IBOutlet weak var itemsQtyLabel: UILabel!
   // MARK:- variables
+  var list: List?
+  // MARK:- Constants
   private let navigator: AddListNavigator
   private let dbManager: DatabaseManagerProtocol
-  // MARK:- Constants
   //MARK:- Initialization
   init(navigator: AddListNavigator, dbManager: DatabaseManagerProtocol) {
     self.navigator = navigator
@@ -41,6 +46,10 @@ class AddListController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+  }
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    titleTextField.becomeFirstResponder()
   }
   // MARK:- Actions
   @IBAction private func didTapIcon(_ sender: UIButton) {

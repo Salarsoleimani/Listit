@@ -15,8 +15,8 @@ final class HomeNavigator: Navigator {
     navigationController.viewControllers = [vc]
     //AnalyticLogProvider.logNavigator(name: NSStringFromClass(type(of: self)), functionName: "setup")
   }
-  func toAddList() {
-    AddListNavigator(navigationController: navigationController, servicePackage: servicePackage).setup()
+  func toAddOrEditList(list: List?) {
+    AddListNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(list: list)
   }
   
   func toAddItem(forList: List?, lists: [List]) {

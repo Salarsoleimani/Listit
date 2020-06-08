@@ -22,8 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
   
   private func setupApplication() {
-    Application.shared.configureMainInterface(in: window!)
     Application.shared.setupApplicationConfigurations()
+    Application.shared.configureMainInterface(in: window!)
   }
   
   func sceneDidDisconnect(_ scene: UIScene) {

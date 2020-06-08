@@ -8,11 +8,12 @@
 
 import Foundation
 
-struct ListModel: Codable {
+struct ListModel: Codable, Equatable {
   let iconColor: String
   let iconId: Int16
+  let iconName: String
   let itemsCount: Int16
-  let title: String
+  var title: String
   let type: Int16
   
   func asDBList() -> List {
@@ -20,9 +21,11 @@ struct ListModel: Codable {
     dbList.id = UUID()
     dbList.iconColor = iconColor
     dbList.iconId = iconId
+    dbList.iconName = iconName
     dbList.itemsCount = 0
     dbList.title = title
     dbList.createdAt = Date()
+    dbList.type = type
     return dbList
   }
 }

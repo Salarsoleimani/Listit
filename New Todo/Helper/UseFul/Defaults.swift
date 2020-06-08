@@ -13,6 +13,9 @@ struct Defaults {
   @UserDefault(Constants.Keys.appOpenedCount, defaultValue: 0)
   static var appOpenedCount: Int
   
+  @UserDefault(Constants.Keys.isDatabaseConfigured, defaultValue: false)
+  static var isDatabaseConfigured: Bool
+  
   @UserDefault(Constants.Keys.isAdsRemoved, defaultValue: false)
   static var isAdsRemoved: Bool
   

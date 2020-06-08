@@ -9,7 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeController" customModule="New_Todo" customModuleProvider="target">
             <connections>
-                <outlet property="googleAdView" destination="2vk-la-R4N" id="oa5-Nm-l0a"/>
+                <outlet property="addItemButton" destination="0aJ-En-f6K" id="JNr-7E-7y1"/>
+                <outlet property="addItemLabel" destination="P8J-Tk-JTu" id="NYD-ql-2j8"/>
                 <outlet property="itemsTableView" destination="X0H-6D-EL3" id="GUP-iN-nhF"/>
                 <outlet property="listsCollectionView" destination="MVh-zR-5Bi" id="X4l-wu-7A8"/>
                 <outlet property="view" destination="WLd-EZ-D6C" id="AI3-Ui-xnu"/>
@@ -21,24 +22,59 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-nr-Uma">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="52" width="414" height="810"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X0H-6D-EL3" customClass="BEKMultiCellTable" customModule="BEKListKit">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="594"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        </tableView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2vk-la-R4N">
-                            <rect key="frame" x="0.0" y="606" width="414" height="100"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="100" id="Msk-G8-Dlh"/>
-                            </constraints>
-                        </view>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="MVh-zR-5Bi" customClass="BEKMultiCellCollection" customModule="BEKListKit">
-                            <rect key="frame" x="0.0" y="718" width="414" height="100"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eIo-xt-6dI">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="648"/>
+                            <subviews>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X0H-6D-EL3" customClass="BEKMultiCellTable" customModule="BEKListKit">
+                                    <rect key="frame" x="0.0" y="0.0" width="356" height="648"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </tableView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iev-yp-MRx">
+                                    <rect key="frame" x="364" y="0.0" width="50" height="648"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aJ-En-f6K">
+                                            <rect key="frame" x="0.0" y="0.0" width="42" height="648"/>
+                                            <color key="backgroundColor" red="0.72549019609999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <integer key="value" value="13"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="addItemButtonPressed:" destination="-1" eventType="touchUpInside" id="oZt-VU-ewu"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+   add   item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8J-Tk-JTu" customClass="UILabelX" customModule="New_Todo" customModuleProvider="target">
+                                            <rect key="frame" x="10.999999999999996" y="274.5" width="20.500000000000007" height="99.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="rotationAngle">
+                                                    <real key="value" value="-90"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="0aJ-En-f6K" secondAttribute="bottom" id="Fzz-x9-GqZ"/>
+                                        <constraint firstAttribute="width" constant="50" id="G6s-1Z-TMr"/>
+                                        <constraint firstItem="P8J-Tk-JTu" firstAttribute="centerX" secondItem="Iev-yp-MRx" secondAttribute="centerX" constant="-4" id="XcO-eh-2IW"/>
+                                        <constraint firstItem="P8J-Tk-JTu" firstAttribute="centerY" secondItem="Iev-yp-MRx" secondAttribute="centerY" id="hEE-3N-dre"/>
+                                        <constraint firstItem="0aJ-En-f6K" firstAttribute="top" secondItem="Iev-yp-MRx" secondAttribute="top" id="j9X-Hz-Ovz"/>
+                                        <constraint firstItem="0aJ-En-f6K" firstAttribute="leading" secondItem="Iev-yp-MRx" secondAttribute="leading" id="kA3-Br-hA6"/>
+                                        <constraint firstAttribute="trailing" secondItem="0aJ-En-f6K" secondAttribute="trailing" constant="8" id="z4u-9m-8VH"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="MVh-zR-5Bi" customClass="BEKMultiCellCollection" customModule="BEKListKit">
+                            <rect key="frame" x="0.0" y="660" width="414" height="150"/>
                             <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="100" id="eiP-kH-hdp"/>
+                                <constraint firstAttribute="height" constant="150" id="eiP-kH-hdp"/>
                             </constraints>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yIT-eB-IL8">
                                 <size key="itemSize" width="50" height="50"/>
@@ -52,35 +88,16 @@
                         <constraint firstAttribute="height" priority="250" constant="100" id="TYJ-Mp-PZh"/>
                     </constraints>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aJ-En-f6K">
-                    <rect key="frame" x="389" y="423" width="50" height="50"/>
-                    <color key="backgroundColor" red="0.72549019609999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="50" id="Ep4-ur-9A6"/>
-                        <constraint firstAttribute="height" constant="50" id="n2i-II-6jc"/>
-                    </constraints>
-                    <state key="normal" title=" +      "/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="25"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="addItemButtonPressed:" destination="-1" eventType="touchUpInside" id="oZt-VU-ewu"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="b6p-nr-Uma" firstAttribute="trailing" secondItem="bqe-v3-8Ux" secondAttribute="trailing" id="0VV-mD-Xi3"/>
-                <constraint firstItem="b6p-nr-Uma" firstAttribute="top" secondItem="bqe-v3-8Ux" secondAttribute="top" id="VA9-c9-AhK"/>
-                <constraint firstItem="b6p-nr-Uma" firstAttribute="leading" secondItem="bqe-v3-8Ux" secondAttribute="leading" id="fiQ-N9-6b3"/>
-                <constraint firstItem="bqe-v3-8Ux" firstAttribute="trailing" secondItem="0aJ-En-f6K" secondAttribute="trailing" constant="-25" id="hzV-1o-ggH"/>
-                <constraint firstItem="0aJ-En-f6K" firstAttribute="centerY" secondItem="WLd-EZ-D6C" secondAttribute="centerY" id="vZP-k4-LsJ"/>
+                <constraint firstItem="b6p-nr-Uma" firstAttribute="trailing" secondItem="WLd-EZ-D6C" secondAttribute="trailing" id="0VV-mD-Xi3"/>
+                <constraint firstItem="b6p-nr-Uma" firstAttribute="top" secondItem="bqe-v3-8Ux" secondAttribute="top" constant="8" id="VA9-c9-AhK"/>
+                <constraint firstItem="b6p-nr-Uma" firstAttribute="leading" secondItem="WLd-EZ-D6C" secondAttribute="leading" id="fiQ-N9-6b3"/>
                 <constraint firstItem="bqe-v3-8Ux" firstAttribute="bottom" secondItem="b6p-nr-Uma" secondAttribute="bottom" id="wHA-6L-HZb"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="bqe-v3-8Ux"/>
-            <point key="canvasLocation" x="133.59999999999999" y="154.27286356821591"/>
+            <point key="canvasLocation" x="133.33333333333334" y="154.01785714285714"/>
         </view>
     </objects>
 </document>

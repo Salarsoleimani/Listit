@@ -11,7 +11,10 @@ import BEKListKit
 
 class ListCell: UICollectionViewCell {
   // MARK:- Outlets
+  @IBOutlet weak var containerView: UIView!
+
   @IBOutlet weak var iconImageView: UIImageView!
+  @IBOutlet weak var iconContainerView: UIView!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var itemsQtyLabel: UILabel!
   // MARK:- Variables
@@ -24,6 +27,13 @@ class ListCell: UICollectionViewCell {
   }
   // MARK:- Functions
   private func setupUI() {
+    containerView.backgroundColor = Colors.listCellBackground.value
+    layer.cornerRadius = Constants.Radius.cornerRadius
+    
+    titleLabel.font = Fonts.listCellTitle
+    itemsQtyLabel.font = Fonts.listCellDescription
+    titleLabel.textColor = Colors.listCellTitle.value
+    itemsQtyLabel.textColor = Colors.listCellDescription.value
     
   }
   
@@ -33,6 +43,8 @@ extension ListCell: BEKBindableCell {
   typealias ViewModeltype = ListItemViewModel
   func bindData(withViewModel viewModel: ListItemViewModel) {
     self.viewModel = viewModel
+    iconContainerView.backgroundColor = viewModel.iconColor
+    iconImageView.tintColor = Colors.white.value
     iconImageView.image = viewModel.iconImage
     titleLabel.text = viewModel.title
     itemsQtyLabel.text = viewModel.itemsCount

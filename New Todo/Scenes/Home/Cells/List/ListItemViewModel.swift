@@ -16,18 +16,20 @@ struct ListItemViewModel {
   let itemsCount: String
   let type: ListType
   init(model: List) {
-//    let titleString = NSAttributedString(string: model.title ?? "") { make in
-//      make.font(Fonts.h4Regular)
-//      make.color(Colors.title.value)
-//    }
-    self.title = model.title ?? ""
     self.model = model
+    
+    self.title = model.title ?? ""
+    
     let type = ListType(rawValue: model.type) ?? ListType.default
     self.type = type
+    
     let itemsQuantity = model.itemsCount
-    let itemsCountText = itemsQuantity > 1 ? type.text() : type.text()
+    let quantityTitle = type.quantityTitle()
+    let itemsCountText = itemsQuantity > 1 ? quantityTitle : quantityTitle.dropLast().description
     self.itemsCount = "\(itemsQuantity) \(itemsCountText)"
-    self.iconImage = UIImage(named: "ic_\(model.iconId)") ?? UIImage(named: "ic_error")!
+    
+    let defaultIcon = UIImage(named: "ic_error")!
+    self.iconImage = model.iconId != -1 ? (UIImage(named: "ic_\(model.iconId)") ?? defaultIcon) : UIImage(named: model.iconName ?? "ic_error") ?? defaultIcon
     self.iconColor = UIColor(hexString: model.iconColor ?? "#FFFFFF") ?? .red
   }
 }

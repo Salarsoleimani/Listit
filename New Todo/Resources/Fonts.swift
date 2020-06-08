@@ -14,11 +14,8 @@ struct Fonts {
 
   // Navigation
   static let navigationLargeTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h1)).instance
-  // Onboarding
-  static let onboardingTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h2)).instance
-  static let onboardingDescription = SSFont(.installed(.montserrat, .regular), size: .standard(.h4)).instance
   
   // Lists
-  static let listCellTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h2)).instance
-  static let listCellDescription = SSFont(.installed(.montserrat, .regular), size: .standard(.h4)).instance
+  static let listCellTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h3)).instance
+  static let listCellDescription = SSFont(.installed(.montserrat, .regular), size: .standard(.h5)).instance
 }

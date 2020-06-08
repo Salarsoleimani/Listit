@@ -11,10 +11,17 @@ import UIKit
 class Navigator: NSObject {
   internal let navigationController: UINavigationController
   internal let servicePackage: ServicePackage
-
+  
   init(navigationController: UINavigationController, servicePackage: ServicePackage) {
     self.navigationController = navigationController
     self.servicePackage = servicePackage
+  }
+  func simpleAlert(title: String, message: String, actions: [UIAlertAction]) -> UIAlertController {
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+    for action in actions {
+      alertController.addAction(action)
+    }
+    return alertController
   }
 }
 

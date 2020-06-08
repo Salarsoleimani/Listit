@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		254A40E2248C852D00F9E3A7 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40E1248C852D00F9E3A7 /* ItemModel.swift */; };
+		254A40E4248DDE1200F9E3A7 /* SloppySwipingNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40E3248DDE1200F9E3A7 /* SloppySwipingNav.swift */; };
+		254A40E7248DE31E00F9E3A7 /* UILabelX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40E6248DE31E00F9E3A7 /* UILabelX.swift */; };
 		254F34A92485F4F60099C96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34A82485F4F60099C96C /* AppDelegate.swift */; };
 		254F34AB2485F4F60099C96C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AA2485F4F60099C96C /* SceneDelegate.swift */; };
 		254F34AD2485F4F60099C96C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AC2485F4F60099C96C /* HomeController.swift */; };
@@ -67,7 +69,6 @@
 		254F356124887ECE0099C96C /* ListNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F355F24887ECE0099C96C /* ListNameCell.swift */; };
 		254F356224887ECE0099C96C /* ListNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254F356024887ECE0099C96C /* ListNameCell.xib */; };
 		254F356424887FB20099C96C /* ListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F356324887FB20099C96C /* ListItemViewModel.swift */; };
-		254F3566248880F90099C96C /* ItemsShowTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F3565248880F90099C96C /* ItemsShowTypes.swift */; };
 		254F356B248885A20099C96C /* Veneer+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F3568248885A20099C96C /* Veneer+NSAttributedString.swift */; };
 		254F356C248885A20099C96C /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F3569248885A20099C96C /* Attributes.swift */; };
 		254F356D248885A20099C96C /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F356A248885A20099C96C /* Transform.swift */; };
@@ -113,6 +114,8 @@
 
 /* Begin PBXFileReference section */
 		254A40E1248C852D00F9E3A7 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		254A40E3248DDE1200F9E3A7 /* SloppySwipingNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SloppySwipingNav.swift; sourceTree = "<group>"; };
+		254A40E6248DE31E00F9E3A7 /* UILabelX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelX.swift; sourceTree = "<group>"; };
 		254F34A52485F4F60099C96C /* New Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254F34A82485F4F60099C96C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		254F34AA2485F4F60099C96C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,7 +178,6 @@
 		254F355F24887ECE0099C96C /* ListNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNameCell.swift; sourceTree = "<group>"; };
 		254F356024887ECE0099C96C /* ListNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListNameCell.xib; sourceTree = "<group>"; };
 		254F356324887FB20099C96C /* ListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemViewModel.swift; sourceTree = "<group>"; };
-		254F3565248880F90099C96C /* ItemsShowTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsShowTypes.swift; sourceTree = "<group>"; };
 		254F3568248885A20099C96C /* Veneer+NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Veneer+NSAttributedString.swift"; sourceTree = "<group>"; };
 		254F3569248885A20099C96C /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 		254F356A248885A20099C96C /* Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
@@ -221,6 +223,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		254A40E5248DE31100F9E3A7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				254A40E6248DE31E00F9E3A7 /* UILabelX.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		254F349C2485F4F60099C96C = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +306,8 @@
 		254F34DF248735320099C96C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				254A40E5248DE31100F9E3A7 /* View */,
+				254A40E3248DDE1200F9E3A7 /* SloppySwipingNav.swift */,
 				254F3567248885960099C96C /* Veneer */,
 				254F34E2248735540099C96C /* LanguageManager.swift */,
 				254F34E4248735540099C96C /* SoundEffects.swift */,
@@ -444,7 +456,6 @@
 				254A40E1248C852D00F9E3A7 /* ItemModel.swift */,
 				254F353D2487425A0099C96C /* ListModel.swift */,
 				254F352C24873D770099C96C /* Protocols */,
-				254F3565248880F90099C96C /* ItemsShowTypes.swift */,
 				254F359024889ED40099C96C /* ListType.swift */,
 				254F35A8248C849A0099C96C /* ItemState.swift */,
 			);
@@ -762,13 +773,14 @@
 				254F356B248885A20099C96C /* Veneer+NSAttributedString.swift in Sources */,
 				254F34DA248734E00099C96C /* UIViewControllerExtensions.swift in Sources */,
 				254F35A6248C42B00099C96C /* AddItemCell.swift in Sources */,
+				254A40E4248DDE1200F9E3A7 /* SloppySwipingNav.swift in Sources */,
 				254F356124887ECE0099C96C /* ListNameCell.swift in Sources */,
 				254F355D24887EBC0099C96C /* ItemCell.swift in Sources */,
 				254F358E24888D0C0099C96C /* AddListUI.swift in Sources */,
 				254F34FA248738AC0099C96C /* ColorModel.swift in Sources */,
 				254F35452487437D0099C96C /* CoreDataStack.swift in Sources */,
 				254F351024873C020099C96C /* SplashUI.swift in Sources */,
-				254F3566248880F90099C96C /* ItemsShowTypes.swift in Sources */,
+				254A40E7248DE31E00F9E3A7 /* UILabelX.swift in Sources */,
 				254F34B32485F4F60099C96C /* New_Todo.xcdatamodeld in Sources */,
 				254F34EA248735540099C96C /* SoundEffects.swift in Sources */,
 				254F353A2487410A0099C96C /* Fonts.swift in Sources */,
