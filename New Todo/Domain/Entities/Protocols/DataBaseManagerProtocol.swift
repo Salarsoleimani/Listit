@@ -12,7 +12,7 @@ protocol DatabaseManagerProtocol {
   //MARK: - Configuration
   func configureDataBase()
   //MARK: - List Related Functions
-  func add(List list: ListModel, response: ((Bool) -> Void)?)
+  func add(List list: ListModel, response: ((Bool) -> Void)?) -> List
   func getAllLists(response: @escaping ([List]) -> Void)
   func delete(List list: List,  response: ((Bool) -> Void)?)
   func update(List list: List, response: ((Bool) -> Void)?)

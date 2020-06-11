@@ -10,7 +10,7 @@
 "all_items_navigation_title" = "All Items";
 "add_list_navigation_title" = "Add List";
 "edit_list_navigation_title" = "Edit List";
-
+"select_icon_navigation_title" = "Icon & Color";
 /// - list types title
 "all_lists_type" = "All Items";
 "favorites_lists_type" = "Favorites";
@@ -33,7 +33,16 @@
 "edit_list_action" = "Edit";
 "add_new_item_to_list_action" = "Add new";
 // - add list
-"add_list_title_placeholder" = "";
+"add_list_title_placeholder" = "Your list title";
+"select_list_type_placeholder" = "Please select your list type";
+"list_type_title" = "List type:";
+"save_button_title" = "Save";
+
+"select_icon_description" = "Please pick a color and icon for your %@ list.";
 // - alerts
 "delete_list_title_alert" = "Deleting \"%@\" list notice";
 "delete_list_desc_alert" = "Are you sure about deleting the \"%@\" list? It will permanently delete the list and items in it from the iCloud server and your phone. You won't be able to restore your data any more.\nAgain, are you sure about deleting the \"%@\" list?";
+
+// Home
+"add_list_button_title" = "+  add  list";
+"add_item_button_title" = "+  add  item";

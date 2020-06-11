@@ -12,6 +12,7 @@ struct ColorModel: Codable {
   let id: Int
   let name: String
   let value: String
+  var isSelected: Bool?
 }
 extension ColorModel {
   func getColor() -> UIColor {

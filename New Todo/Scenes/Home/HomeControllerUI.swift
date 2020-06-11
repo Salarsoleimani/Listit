@@ -17,8 +17,14 @@ extension HomeController {
 
     navigationItem.title = "all_items_navigation_title".localize()
     
-    addItemButton.backgroundColor = Colors.main.value
+    addItemButton.makeNewTodoButton(title: "")
     addItemLabel.font = Fonts.listCellTitle
     addItemLabel.textColor = Colors.white.value
+    addItemLabel.text = "add_item_button_title".localize()
+    
+    addListButton.makeNewTodoButton(title: "")
+    addListLabel.font = Fonts.listCellTitle
+    addListLabel.textColor = Colors.white.value
+    addListLabel.text = "add_list_button_title".localize()
   }
 }

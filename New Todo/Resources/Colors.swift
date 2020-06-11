@@ -15,6 +15,8 @@ enum Colors {
   case title
   case main
   
+  case error
+  
   case walktroughTarget
   case walktroughBackground
   case walktroughText
@@ -67,6 +69,8 @@ extension Colors {
       instanceColor = UIColor(hex: 0x666666)
       
       //
+    case .error:
+      instanceColor = .red
     case .white:
       instanceColor = .white
     // Custom

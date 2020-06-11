@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Bold.ttf">
+            <string>Montserrat-Bold</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IconsController" customModule="ListHub" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IconsController" customModule="New_Todo" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="Qfv-KT-y4y" id="FjA-u5-JAN"/>
                 <outlet property="colorsCollectionView" destination="D32-nm-b5f" id="rIS-ql-ltW"/>
+                <outlet property="descriptionLabel" destination="ZkK-yO-XnW" id="wkS-dS-PHL"/>
                 <outlet property="iconsCollectionView" destination="OqY-Nn-HSy" id="vay-QS-gyk"/>
+                <outlet property="navigationTitleLabel" destination="iSL-eT-sCk" id="t8u-uc-QSX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,41 +30,96 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="OqY-Nn-HSy">
-                    <rect key="frame" x="0.0" y="100" width="414" height="796"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dSS-m8-KYF">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="D32-nm-b5f">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="100" id="Z8t-Tb-j5p"/>
-                    </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="F3A-UV-FnV">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9SD-Iz-o09">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47z-N3-JmD">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="104"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CTF-FW-ugX">
+                                    <rect key="frame" x="16" y="16" width="382" height="72"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qfv-KT-y4y">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="eBw-3a-fPn"/>
+                                            </constraints>
+                                            <state key="normal" image="xmark.circle" catalog="system"/>
+                                            <connections>
+                                                <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="KRO-Ot-Z4g"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icon &amp; Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSL-eT-sCk">
+                                            <rect key="frame" x="0.0" y="38" width="382" height="6"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="26"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please pick a color and icon for your %@ list." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkK-yO-XnW">
+                                            <rect key="frame" x="0.0" y="52" width="382" height="20"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="CTF-FW-ugX" firstAttribute="leading" secondItem="47z-N3-JmD" secondAttribute="leading" constant="16" id="f6L-Ye-jSW"/>
+                                <constraint firstItem="CTF-FW-ugX" firstAttribute="top" secondItem="47z-N3-JmD" secondAttribute="top" constant="16" id="ht2-tN-cJ4"/>
+                                <constraint firstAttribute="trailing" secondItem="CTF-FW-ugX" secondAttribute="trailing" constant="16" id="xvM-Yb-83i"/>
+                                <constraint firstAttribute="bottom" secondItem="CTF-FW-ugX" secondAttribute="bottom" constant="16" id="y3L-Fc-1i3"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjO-7M-chw">
+                            <rect key="frame" x="0.0" y="104" width="414" height="614"/>
+                            <subviews>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="OqY-Nn-HSy">
+                                    <rect key="frame" x="16" y="0.0" width="382" height="614"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dSS-m8-KYF">
+                                        <size key="itemSize" width="50" height="50"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                </collectionView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="OqY-Nn-HSy" secondAttribute="bottom" id="45O-3W-dd8"/>
+                                <constraint firstItem="OqY-Nn-HSy" firstAttribute="leading" secondItem="OjO-7M-chw" secondAttribute="leading" constant="16" id="B7A-fE-TTd"/>
+                                <constraint firstAttribute="trailing" secondItem="OqY-Nn-HSy" secondAttribute="trailing" constant="16" id="asm-Dl-WJW"/>
+                                <constraint firstItem="OqY-Nn-HSy" firstAttribute="top" secondItem="OjO-7M-chw" secondAttribute="top" id="lgC-jW-lKE"/>
+                            </constraints>
+                        </view>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="D32-nm-b5f">
+                            <rect key="frame" x="0.0" y="718" width="414" height="100"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="Z8t-Tb-j5p"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="F3A-UV-FnV">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="D32-nm-b5f" secondAttribute="trailing" id="Imn-gc-DgH"/>
-                <constraint firstItem="D32-nm-b5f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LnR-op-1qL"/>
-                <constraint firstAttribute="trailing" secondItem="OqY-Nn-HSy" secondAttribute="trailing" id="YuO-iu-Sw9"/>
-                <constraint firstItem="OqY-Nn-HSy" firstAttribute="top" secondItem="D32-nm-b5f" secondAttribute="bottom" id="Zfd-Pe-s7X"/>
-                <constraint firstItem="OqY-Nn-HSy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bOc-MP-dm2"/>
-                <constraint firstItem="D32-nm-b5f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jXG-Jc-35r"/>
-                <constraint firstAttribute="bottom" secondItem="OqY-Nn-HSy" secondAttribute="bottom" id="sgJ-a0-jx2"/>
+                <constraint firstItem="JEt-XU-jPC" firstAttribute="trailing" secondItem="9SD-Iz-o09" secondAttribute="trailing" id="RVs-5j-zzF"/>
+                <constraint firstItem="9SD-Iz-o09" firstAttribute="leading" secondItem="JEt-XU-jPC" secondAttribute="leading" id="W9R-2m-Bsj"/>
+                <constraint firstItem="9SD-Iz-o09" firstAttribute="top" secondItem="JEt-XU-jPC" secondAttribute="top" id="bB4-Ql-ifh"/>
+                <constraint firstItem="JEt-XU-jPC" firstAttribute="bottom" secondItem="9SD-Iz-o09" secondAttribute="bottom" id="jli-hb-kZF"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="JEt-XU-jPC"/>
             <point key="canvasLocation" x="33.333333333333336" y="54.241071428571423"/>
         </view>
     </objects>
+    <resources>
+        <image name="xmark.circle" catalog="system" width="64" height="60"/>
+    </resources>
 </document>

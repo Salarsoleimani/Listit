@@ -16,7 +16,7 @@ final public class DBManager: DatabaseManagerProtocol {
       for templateList in templateLists {
         var list = templateList
         list.title = templateList.title.localize()
-        add(List: list, response: nil)
+        _ = add(List: list, response: nil)
         if let last = templateLists.last, templateList == last {
           Defaults.isDatabaseConfigured = true
         }
@@ -24,9 +24,10 @@ final public class DBManager: DatabaseManagerProtocol {
     }
   }
   //MARK: - List Related Functions
-  func add(List list: ListModel, response: ((Bool) -> Void)?) {
-    let _ = list.asDBList()
+  func add(List list: ListModel, response: ((Bool) -> Void)?) -> List {
+    let dbList = list.asDBList()
     CoreDataStack.shared.saveContext()
+    return dbList
   }
   
   func getAllLists(response: @escaping ([List]) -> Void) {
@@ -45,7 +46,7 @@ final public class DBManager: DatabaseManagerProtocol {
   }
   
   func update(List list: List, response: ((Bool) -> Void)?) {
-    
+    CoreDataStack.shared.saveContext()
   }
   //MARK: - Item Related Functions
   func add(Item item: ItemModel, response: ((Bool) -> Void)?) {

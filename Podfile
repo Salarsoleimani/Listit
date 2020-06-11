@@ -19,8 +19,9 @@ target 'New Todo' do
   pod 'RxCocoa'
   pod 'SwiftLocalNotification'
 
+  pod 'SwiftEntryKit', '1.2.3'
+  
   pod 'GrowingTextView', '0.7.2'
-  pod 'CocoaTextField', '~> 1.0.0'
   # Physical
   pod 'Haptico'
   

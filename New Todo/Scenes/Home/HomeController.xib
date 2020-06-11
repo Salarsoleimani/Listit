@@ -11,6 +11,8 @@
             <connections>
                 <outlet property="addItemButton" destination="0aJ-En-f6K" id="JNr-7E-7y1"/>
                 <outlet property="addItemLabel" destination="P8J-Tk-JTu" id="NYD-ql-2j8"/>
+                <outlet property="addListButton" destination="PMO-e7-Iv9" id="y0f-ak-UDD"/>
+                <outlet property="addListLabel" destination="aLv-UC-1yY" id="nWu-GJ-q0m"/>
                 <outlet property="itemsTableView" destination="X0H-6D-EL3" id="GUP-iN-nhF"/>
                 <outlet property="listsCollectionView" destination="MVh-zR-5Bi" id="X4l-wu-7A8"/>
                 <outlet property="view" destination="WLd-EZ-D6C" id="AI3-Ui-xnu"/>
@@ -47,7 +49,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+   add   item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8J-Tk-JTu" customClass="UILabelX" customModule="New_Todo" customModuleProvider="target">
-                                            <rect key="frame" x="10.999999999999996" y="274.5" width="20.500000000000007" height="99.5"/>
+                                            <rect key="frame" x="-28.5" y="314" width="99.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -70,19 +72,62 @@
                                 </view>
                             </subviews>
                         </stackView>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="MVh-zR-5Bi" customClass="BEKMultiCellCollection" customModule="BEKListKit">
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yCj-Od-KAP">
                             <rect key="frame" x="0.0" y="660" width="414" height="150"/>
-                            <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="150" id="eiP-kH-hdp"/>
-                            </constraints>
-                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yIT-eB-IL8">
-                                <size key="itemSize" width="50" height="50"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                        </collectionView>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TEq-JF-rYG">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="150"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PMO-e7-Iv9">
+                                            <rect key="frame" x="8" y="0.0" width="42" height="150"/>
+                                            <color key="backgroundColor" red="0.72549019609999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <integer key="value" value="13"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="addListButtonPressed:" destination="-1" eventType="touchUpInside" id="yVw-KJ-Gfv"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+   add   list" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aLv-UC-1yY" customClass="UILabelX" customModule="New_Todo" customModuleProvider="target">
+                                            <rect key="frame" x="-15.5" y="65" width="89" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="rotationAngle">
+                                                    <real key="value" value="-90"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="aLv-UC-1yY" firstAttribute="centerX" secondItem="TEq-JF-rYG" secondAttribute="centerX" constant="4" id="5s3-6Q-6QF"/>
+                                        <constraint firstItem="PMO-e7-Iv9" firstAttribute="top" secondItem="TEq-JF-rYG" secondAttribute="top" id="GaQ-uO-5U3"/>
+                                        <constraint firstAttribute="width" constant="50" id="NZt-9f-1KL"/>
+                                        <constraint firstAttribute="trailing" secondItem="PMO-e7-Iv9" secondAttribute="trailing" id="TvO-yO-fZI"/>
+                                        <constraint firstItem="PMO-e7-Iv9" firstAttribute="leading" secondItem="TEq-JF-rYG" secondAttribute="leading" constant="8" id="XtU-mz-Gkh"/>
+                                        <constraint firstAttribute="bottom" secondItem="PMO-e7-Iv9" secondAttribute="bottom" id="kxH-8L-6zL"/>
+                                        <constraint firstItem="aLv-UC-1yY" firstAttribute="centerY" secondItem="TEq-JF-rYG" secondAttribute="centerY" id="tNC-Xr-YUT"/>
+                                    </constraints>
+                                    <viewLayoutGuide key="safeArea" id="AVc-hp-o8s"/>
+                                </view>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="MVh-zR-5Bi" customClass="BEKMultiCellCollection" customModule="BEKListKit">
+                                    <rect key="frame" x="58" y="0.0" width="356" height="150"/>
+                                    <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="150" id="eiP-kH-hdp"/>
+                                    </constraints>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yIT-eB-IL8">
+                                        <size key="itemSize" width="50" height="50"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                </collectionView>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="height" priority="250" constant="100" id="TYJ-Mp-PZh"/>
@@ -91,9 +136,9 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="b6p-nr-Uma" firstAttribute="trailing" secondItem="WLd-EZ-D6C" secondAttribute="trailing" id="0VV-mD-Xi3"/>
+                <constraint firstItem="b6p-nr-Uma" firstAttribute="trailing" secondItem="bqe-v3-8Ux" secondAttribute="trailing" id="0VV-mD-Xi3"/>
                 <constraint firstItem="b6p-nr-Uma" firstAttribute="top" secondItem="bqe-v3-8Ux" secondAttribute="top" constant="8" id="VA9-c9-AhK"/>
-                <constraint firstItem="b6p-nr-Uma" firstAttribute="leading" secondItem="WLd-EZ-D6C" secondAttribute="leading" id="fiQ-N9-6b3"/>
+                <constraint firstItem="b6p-nr-Uma" firstAttribute="leading" secondItem="bqe-v3-8Ux" secondAttribute="leading" id="fiQ-N9-6b3"/>
                 <constraint firstItem="bqe-v3-8Ux" firstAttribute="bottom" secondItem="b6p-nr-Uma" secondAttribute="bottom" id="wHA-6L-HZb"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="bqe-v3-8Ux"/>

@@ -20,7 +20,8 @@ final class IconsViewModel: ViewModelType {
 // MARK:- Functions
   func transform(input: IconsViewModel.Input) -> IconsViewModel.Output {
     let colors = getColors()
-    let randomColor = colors.randomElement() ?? ColorModel(id: 0, name: "green", value: "#217C6B")
+    var randomColor = colors.randomElement() ?? ColorModel(id: 0, name: "green", value: "#217C6B", isSelected: true)
+    randomColor.isSelected = true
     let icons = getIcons().map{IconCellViewModel(model: $0, colorModel: randomColor)}
     
     let outputIcons = Driver.combineLatest(Driver.just(icons), input.selectedColor).map { (oldIconsVM, selectedColor) -> [IconCellViewModel] in
@@ -30,15 +31,28 @@ final class IconsViewModel: ViewModelType {
       }
       return newIconsVm
     }.startWith(icons)
+    
+    let outputColors = Driver.combineLatest(Driver.just(colors), input.selectedColor).map { (colors, selectedColor) -> [ColorModel] in
+      var tempColors = colors
+      for (index, color) in colors.enumerated() {
+        if color.id == selectedColor.id {
+          tempColors[index].isSelected = true
+        } else {
+          tempColors[index].isSelected = false
+        }
+      }
+      return tempColors
+    }.startWith(colors)
+    
     let iconSelected = input.selectedIcon.map { [navigator] selectedIcon -> Void in
       navigator.popView(WithIcon: selectedIcon)
     }
-    return Output(icons: outputIcons, colors: Driver.just(colors), selectedIconTrigger: iconSelected)
+    return Output(icons: outputIcons, colors: outputColors, selectedIconTrigger: iconSelected)
   }
-  func getIcons() -> [IconModel] {
+  private func getIcons() -> [IconModel] {
     SSMocker<IconModel>.loadGenericObjectsFromLocalJson(fileName: "Icons")
   }
-  func getColors() -> [ColorModel] {
+  private func getColors() -> [ColorModel] {
     SSMocker<ColorModel>.loadGenericObjectsFromLocalJson(fileName: "Colors")
   }
 }

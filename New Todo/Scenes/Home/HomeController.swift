@@ -14,6 +14,8 @@ import SwiftLocalNotification
 protocol HomeControllerDelegate: class {
   func listAdded(list: List)
   func itemAdded(item: Item)
+  
+  func listUpdated(list: List)
 }
 
 class HomeController: UIViewController {
@@ -23,7 +25,9 @@ class HomeController: UIViewController {
   
   @IBOutlet weak var addItemLabel: UILabelX!
   @IBOutlet weak var addItemButton: UIButton!
-  
+  @IBOutlet weak var addListButton: UIButton!
+  @IBOutlet weak var addListLabel: UILabelX!
+
   //MARK:- Constants
   private let navigator: HomeNavigator
   private let dbManager: DatabaseManagerProtocol
@@ -49,18 +53,16 @@ class HomeController: UIViewController {
     super.viewDidLoad()
     setupUI()
     setupNavigationButtons()
-    let addListCell = BEKGenericCell.Collection<AddListCell>(viewModel: "")
-    listsCollectionView.push(cell: addListCell)
-    listsCollectionView.delegate = self
     
-    dbManager.getAllLists { [unowned self] (dbLists) in
+    let listNib = UINib(nibName: "ListCell", bundle: nil)
+    listsCollectionView.register(listNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
+    listsCollectionView.delegate = self
+    listsCollectionView.dataSource = self
+    dbManager.getAllLists { [unowned self, listsCollectionView] (dbLists) in
       self.allLists = dbLists
-      for list in dbLists {
-        let listVM = ListItemViewModel(model: list)
-        let listCell = BEKGenericCell.Collection<ListCell>(viewModel: listVM)
-        self.listsCollectionView.push(cell: listCell)
-      }
+      listsCollectionView?.reloadData()
     }
+    
     dbManager.getAllItems { [unowned self] (dbItems) in
       self.allItems = dbItems
       for item in dbItems {
@@ -75,6 +77,9 @@ class HomeController: UIViewController {
   @IBAction private func addItemButtonPressed(_ sender: UIButton) {
     navigator.toAddItem(forList: selectedList, lists: allLists)
   }
+  @IBAction private func addListButtonPressed(_ sender: UIButton) {
+    navigator.toAddOrEditList(list: nil, delegate: self)
+  }
   @objc private func infoWalkthroughButtonPressed() {
     
   }
@@ -87,6 +92,17 @@ class HomeController: UIViewController {
     let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingButtonPressed))
     navigationItem.leftBarButtonItems = [leftBarButton]
     navigationItem.rightBarButtonItems = [rightBarButton]
+  }
+}
+extension HomeController: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return allLists.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellIds.cellId, for: indexPath) as! ListCell
+    cell.bindData(withViewModel: ListItemViewModel(model: allLists[indexPath.item]))
+    return cell
   }
 }
 extension HomeController: UICollectionViewDelegate {
@@ -131,22 +147,20 @@ extension HomeController: UICollectionViewDelegate {
   }
   
   private func listSelected(_ row: Int) {
-    let index = row - 1
+    let index = row
     selectedList = allLists[index]
     navigationItem.title = allLists[index].title ?? ""
     updateItemsTableView(index)
   }
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if indexPath.item == 0, collectionView == listsCollectionView {
-      navigator.toAddOrEditList(list: nil)
-    } else if collectionView == listsCollectionView {
+    if collectionView == listsCollectionView {
       listSelected(indexPath.item)
     }
   }
   func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-    let index = indexPath.item - 1 < 0 ? 0 : indexPath.item - 1
+    let index = indexPath.item < 0 ? 0 : indexPath.item
     let type = ListType(rawValue: allLists[index].type) ?? ListType.default
-    if type != .today || type != .favorites || type != .all || indexPath.item != 0 {
+    if type != .today, type != .favorites, type != .all {
       let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [editListAction, addNewItemAction, deleteListAction] action in
         let addNewTitle = "add_new_item_to_list_action".localize()
         let typeTitle = type.quantityTitle().dropLast().description
@@ -169,7 +183,7 @@ extension HomeController: UICollectionViewDelegate {
     return nil
   }
   private func editListAction(_ index: Int) {
-    navigator.toAddOrEditList(list: allLists[index])
+    navigator.toAddOrEditList(list: allLists[index], delegate: self)
   }
   private func addNewItemAction(_ index: Int) {
     navigator.toAddItem(forList: allLists[index], lists: allLists)
@@ -188,15 +202,12 @@ extension HomeController: UICollectionViewDelegate {
   private func deleteList(_ index: Int) {
     dbManager.delete(List: allLists[index], response: nil)
     allLists.remove(at: index)
-    listsCollectionView?.remove(cellAtIndex: index + 1)
+    listsCollectionView.reloadData()
   }
 }
 extension HomeController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let listHeight = 150
-    if indexPath.item == 0, collectionView == listsCollectionView {
-      return CGSize(width: 50, height: listHeight)
-    }
     return CGSize(width: 150, height: listHeight)
   }
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -204,4 +215,26 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
   }
 }
 extension HomeController: UITableViewDelegate {
+}
+
+extension HomeController: HomeControllerDelegate {
+  func listUpdated(list: List) {
+    for (index, allList) in allLists.enumerated() {
+      if allList.id == list.id {
+        allLists[index] = list
+        listsCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+      }
+    }
+  }
+  
+  func listAdded(list: List) {
+    allLists.append(list)
+    listsCollectionView.reloadData()
+  }
+  
+  func itemAdded(item: Item) {
+    
+  }
+  
+  
 }

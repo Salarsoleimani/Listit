@@ -40,4 +40,11 @@ enum Constants {
   struct Radius {
     static let cornerRadius: CGFloat = 13
   }
+  
+  struct Defaults {
+    static let color = "#217C6B"
+  }
+  struct CellIds {
+    static let cellId = "cellId"
+  }
 }

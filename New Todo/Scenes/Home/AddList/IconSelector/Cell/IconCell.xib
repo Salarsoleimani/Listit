@@ -20,15 +20,15 @@
                         <rect key="frame" x="8" y="8" width="137" height="134"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A6N-eq-5Mz">
-                                <rect key="frame" x="0.0" y="0.0" width="137" height="134"/>
+                                <rect key="frame" x="8" y="8" width="121" height="118"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="A6N-eq-5Mz" secondAttribute="bottom" id="67l-O6-5ni"/>
-                            <constraint firstItem="A6N-eq-5Mz" firstAttribute="leading" secondItem="La9-2L-lYg" secondAttribute="leading" id="IXg-sV-7HB"/>
-                            <constraint firstAttribute="trailing" secondItem="A6N-eq-5Mz" secondAttribute="trailing" id="YnE-rL-pdD"/>
-                            <constraint firstItem="A6N-eq-5Mz" firstAttribute="top" secondItem="La9-2L-lYg" secondAttribute="top" id="xXE-fn-LmM"/>
+                            <constraint firstAttribute="bottom" secondItem="A6N-eq-5Mz" secondAttribute="bottom" constant="8" id="65i-m2-Zey"/>
+                            <constraint firstAttribute="trailing" secondItem="A6N-eq-5Mz" secondAttribute="trailing" constant="8" id="8eT-Yb-d5z"/>
+                            <constraint firstItem="A6N-eq-5Mz" firstAttribute="top" secondItem="La9-2L-lYg" secondAttribute="top" constant="8" id="QcA-dT-USa"/>
+                            <constraint firstItem="A6N-eq-5Mz" firstAttribute="leading" secondItem="La9-2L-lYg" secondAttribute="leading" constant="8" id="zC5-24-fLi"/>
                         </constraints>
                     </view>
                 </subviews>

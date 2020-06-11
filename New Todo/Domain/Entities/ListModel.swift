@@ -9,12 +9,12 @@
 import Foundation
 
 struct ListModel: Codable, Equatable {
-  let iconColor: String
-  let iconId: Int16
-  let iconName: String
+  var iconColor: String
+  var iconId: Int16
+  var iconName: String
   let itemsCount: Int16
   var title: String
-  let type: Int16
+  var type: Int16
   
   func asDBList() -> List {
     let dbList = List(context: CoreDataStack.managedContext)

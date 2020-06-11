@@ -15,9 +15,14 @@ class IconsController: UIViewController {
   @IBOutlet weak var colorsCollectionView: UICollectionView!
   @IBOutlet weak var iconsCollectionView: UICollectionView!
   
+  @IBOutlet weak var closeButton: UIButton!
+  @IBOutlet weak var navigationTitleLabel: UILabel!
+  @IBOutlet weak var descriptionLabel: UILabel!
+
   // MARK:- variables
   var viewModel: IconsViewModel!
   var defaultIcon: BehaviorRelay<IconCellViewModel>!
+  var listTitle = ""
   // MARK:- Constants
   let disposeBag = DisposeBag()
   
@@ -29,14 +34,16 @@ class IconsController: UIViewController {
     bindData()
   }
   // MARK:- Actions
-  
+  @IBAction private func closeButtonPressed(_ sender: UIButton) {
+    dismiss(animated: true, completion: nil)
+  }
   // MARK:- Functions
   private func bindData() {
     let selectedIcon = iconsCollectionView.rx.modelSelected(IconCellViewModel.self).asDriver()
     let selectedColor = colorsCollectionView.rx.modelSelected(ColorModel.self).asDriver()
     let inputs = IconsViewModel.Input(selectedColor: selectedColor, selectedIcon: selectedIcon)
     let outputs = viewModel.transform(input: inputs)
-    
+
     outputs.icons.drive(iconsCollectionView.rx.items(cellIdentifier: "cellId", cellType: IconCell.self)) { item, viewModel, cell in
       cell.viewModel = viewModel
       cell.bindData(withViewModel: viewModel)

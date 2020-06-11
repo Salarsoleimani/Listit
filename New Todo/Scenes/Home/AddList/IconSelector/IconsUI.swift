@@ -12,8 +12,21 @@ import BEKListKit
 extension IconsController {
   func setupUI() {
     view.backgroundColor = Colors.background.value
-    //setupIconsCollectionView()
-    //setupColorsCollectionView()
+    
+    closeButton.tintColor = Colors.main.value
+    
+    navigationTitleLabel.text = "select_icon_navigation_title".localize()
+    navigationTitleLabel.font = Fonts.navigationLargeTitle
+    navigationTitleLabel.textColor = Colors.listCellTitle.value
+    
+    descriptionLabel.text = String(format: "select_icon_description".localize(), listTitle)
+    descriptionLabel.font = Fonts.listCellDescription
+    descriptionLabel.textColor = Colors.listCellDescription.value
+    
+    colorsCollectionView.backgroundColor = Colors.listCellBackground.value
+    
+    setupIconsCollectionView()
+    setupColorsCollectionView()
   }
   private func setupColorsCollectionView() {
     let width = 64
@@ -21,7 +34,7 @@ extension IconsController {
     colorsCollectionView.collectionViewLayout = BEKCollectionLayoutComposer.makeLayout(ForItemSize: size, minimumLineSpacing:  0, minimumInteritemSpacing: 0, estimatedItemSize: .zero, scrollDirection: .horizontal)
   }
   private func setupIconsCollectionView() {
-    let width = (StaticConstants.mainScreenWidth) / 6
+    let width = (StaticConstants.mainScreenWidth - 32 - 32) / 5 
     let size = CGSize(width: width , height: width)
     iconsCollectionView.collectionViewLayout = BEKCollectionLayoutComposer.makeLayout(ForItemSize: size, minimumLineSpacing:  8, minimumInteritemSpacing: 8, estimatedItemSize: .zero, scrollDirection: .vertical)
   }

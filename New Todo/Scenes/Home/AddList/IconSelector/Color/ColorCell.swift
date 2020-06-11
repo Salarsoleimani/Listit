@@ -12,6 +12,8 @@ import BEKListKit
 class ColorCell: UICollectionViewCell {
   // MARK:- Outlets
   @IBOutlet weak var colorView: UIView!
+  @IBOutlet weak var selectedImageView: UIImageView!
+
   // MARK:- Variables
   var viewModel: ColorModel!
   // MARK:- LifeCycles
@@ -23,7 +25,7 @@ class ColorCell: UICollectionViewCell {
   // MARK:- Functions
 
   private func setupUI() {
-    colorView.layer.cornerRadius = 32
+    colorView.layer.cornerRadius = 24
   }
   
 }
@@ -33,5 +35,6 @@ extension ColorCell: BEKBindableCell {
   func bindData(withViewModel viewModel: ColorModel) {
     self.viewModel = viewModel
     colorView.backgroundColor = viewModel.getColor()
+    selectedImageView.isHidden = !(viewModel.isSelected ?? false)
   }
 }
