@@ -84,11 +84,11 @@ class AddListController: UIViewController {
   }
   @IBAction private func didTapSaveButton(_ sender: UIButton) {
     if let text = titleTextField.text, text.isEmpty {
-      navigator.toast(text: "asdasd", hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
     } else if titleTextField.text == nil {
-      navigator.toast(text: "asdasd", hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
     } else if listModel.type == 0 {
-      navigator.toast(text: "asdasd", hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      navigator.toast(text: "select_type_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
     } else {
       saveList()
     }

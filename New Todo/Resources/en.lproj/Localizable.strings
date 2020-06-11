@@ -46,3 +46,9 @@
 // Home
 "add_list_button_title" = "+  add  list";
 "add_item_button_title" = "+  add  item";
+
+
+// Errors
+"add_title_for_list_error" = "Please add title for your list";
+"select_type_for_list_error" = "Please select your list type";
+
