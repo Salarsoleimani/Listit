@@ -38,7 +38,6 @@ extension AddListController {
     listTypeTitleLabel.font = Fonts.h5Bold
     listTypeTitleLabel.textColor = Colors.listCellTitle.value
 
-    saveButton.makeNewTodoButton(title: "save_button_title".localize())
     if let list = list {
       iconContainerView.backgroundColor = UIColor(hexString: list.iconColor ?? "#FFFFFF") ?? .red
 
@@ -59,6 +58,10 @@ extension AddListController {
       listModel = ListModel(iconColor: list.iconColor ?? Constants.Defaults.color, iconId: list.iconId, iconName: "ic_\(list.iconId)", itemsCount: list.itemsCount, title: list.title ?? "", type: list.type)
       
       listTypeTextField.text = type.title()
+      saveButton.makeNewTodoButton(title: "update_button_title".localize())
+
+    } else {
+      saveButton.makeNewTodoButton(title: "save_button_title".localize())
 
     }
 

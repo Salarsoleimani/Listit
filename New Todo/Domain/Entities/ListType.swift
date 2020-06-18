@@ -18,7 +18,7 @@ enum ListType: Int16 {
   //case media = 5
   
   case favorites = 98
-  case today = 99
+  //case today = 99
   case all = 100
 }
 
@@ -40,8 +40,8 @@ extension ListType {
       return "all_lists_type".localize()
     case .favorites:
       return "favorites_lists_type".localize()
-    case .today:
-      return "today_lists_type".localize()
+//    case .today:
+//      return "today_lists_type".localize()
       
     }
   }
@@ -61,8 +61,8 @@ extension ListType {
       return "all_lists_type_quantity".localize()
     case .favorites:
       return "favorites_lists_type_quantity".localize()
-    case .today:
-      return "today_lists_type_quantity".localize()
+//    case .today:
+//      return "today_lists_type_quantity".localize()
       
     }
   }

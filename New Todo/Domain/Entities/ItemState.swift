@@ -9,5 +9,8 @@
 import Foundation
 
 enum ItemState: Int16 {
-  case done, todo, inBetween
+  case doing
+  case done
+  
+  static var `default` = ItemState.doing
 }

@@ -60,7 +60,7 @@
                                                 <action selector="moreInfoButtonPressed:" destination="-1" eventType="touchUpInside" id="vfg-DJ-Tbd"/>
                                             </connections>
                                         </button>
-                                        <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" text="DESC" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jzm-6k-TAs">
+                                        <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jzm-6k-TAs">
                                             <rect key="frame" x="0.0" y="92" width="350" height="75"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>

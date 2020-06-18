@@ -14,6 +14,7 @@ struct ItemModel {
   let repeats: RepeatingInterval?
   let description: String?
   let parentList: List
+  let state: ItemState?
   
   func asDBItem() -> Item {
     let dbItem = Item(context: CoreDataStack.managedContext)
@@ -24,6 +25,7 @@ struct ItemModel {
     dbItem.desc = description
     dbItem.notifDate = notifDate
     dbItem.repeats = repeats?.rawValue
+    dbItem.state = state?.rawValue ?? ItemState.default.rawValue
     return dbItem
   }
 }

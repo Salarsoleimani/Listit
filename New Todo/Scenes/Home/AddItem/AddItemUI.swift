@@ -24,7 +24,7 @@ extension AddItemController {
     titleTextField.font = Fonts.itemCellTitle
     titleTextField.textColor = Colors.itemCellTitle.value
     titleTextField.tintColor = Colors.main.value
-
+    
     moreInfoButton.tintColor = Colors.main.value
     moreInfoButton.setTitle("more_info_about_item_title".localize(), for: .normal)
     moreInfoButton.titleLabel?.font = Fonts.h5Regular
@@ -60,12 +60,12 @@ extension AddItemController {
     whichListTextField.font = Fonts.h5Regular
     whichListTextField.textColor = Colors.listCellTitle.value
     
-    saveButton.makeNewTodoButton(title: "save_button_title".localize())
-    saveAndAddAnotherButton.makeNewTodoButton(title: "save_and_another_item_button_title".localize())
+    saveAndAddAnotherButton.titleLabel?.adjustsFontSizeToFitWidth = true
+
 
     if let parentList = parentList {
       let type = ListType(rawValue: parentList.type) ?? ListType.default
-      if type != .all && type != .favorites && type != .today {
+      if type != .all && type != .favorites {
         whichListTextField.text = parentList.title
       } else {
         whichListTextField.text = "Please select a list"
@@ -76,7 +76,7 @@ extension AddItemController {
       parentList = item.list
       
       titleTextField.text = item.title
-      if let desc = item.desc {
+      if let desc = item.desc, !desc.isEmpty {
         moreInfoTextView.text = desc
         moreInfoButtonPressed(0)
         moreInfoButton.isHidden = true
@@ -98,6 +98,11 @@ extension AddItemController {
       }
       whichListTextField.text = item.list?.title
       
+      saveButton.makeNewTodoButton(title: "update_button_title".localize())
+      saveAndAddAnotherButton.makeNewTodoButton(title: "update_and_another_item_button_title".localize())
+    } else {
+      saveButton.makeNewTodoButton(title: "save_button_title".localize())
+      saveAndAddAnotherButton.makeNewTodoButton(title: "save_and_another_item_button_title".localize())
     }
   }
 }

@@ -7,6 +7,7 @@
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="notifDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="repeats" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String" defaultValueString="" spotlightIndexingEnabled="YES"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="items" inverseEntity="List"/>
     </entity>
@@ -22,7 +23,7 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="list" inverseEntity="Item"/>
     </entity>
     <elements>
-        <element name="Item" positionX="199.71484375" positionY="-31.6484375" width="128" height="163"/>
+        <element name="Item" positionX="199.71484375" positionY="-31.6484375" width="128" height="178"/>
         <element name="List" positionX="-63" positionY="-18" width="128" height="178"/>
     </elements>
 </model>

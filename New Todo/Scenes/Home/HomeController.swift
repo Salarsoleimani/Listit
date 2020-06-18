@@ -61,7 +61,7 @@ class HomeController: UIViewController {
   lazy var yourLists: [List] = {
     let filteredList = allLists.filter { (list) -> Bool in
       let type = ListType(rawValue: list.type) ?? ListType.default
-      return type != .all && type != .favorites && type != .today
+      return type != .all && type != .favorites
     }
     return filteredList
   }()
@@ -164,8 +164,8 @@ extension HomeController: UICollectionViewDelegate {
       predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: true))
     case .all:
       predicate = nil
-    case .today:
-      print("Do it later [TODO]")
+//    case .today:
+//      print("Do it later [TODO]")
 //      // Get the current calendar with local time zone
 //      var calendar = Calendar.current
 //      calendar.timeZone = NSTimeZone.local
@@ -211,7 +211,7 @@ extension HomeController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
     let index = indexPath.item < 0 ? 0 : indexPath.item
     let type = ListType(rawValue: allLists[index].type) ?? ListType.default
-    if type != .today, type != .favorites, type != .all {
+    if type != .favorites, type != .all {
       let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [editListAction, addNewItemAction, deleteListAction] action in
         let addNewTitle = "add_new_item_to_list_action".localize()
         let typeTitle = type.quantityTitle().dropLast().description
@@ -252,12 +252,11 @@ extension HomeController: UICollectionViewDelegate {
   }
   private func deleteList(_ index: Int) {
     dbManager.delete(List: allLists[index], response: nil)
-    for (itemIndex, item) in allItems.enumerated() where item.list == allLists[index] {
-      dbManager.delete(Item: item, response: nil)
-      allItems.remove(at: itemIndex)
+    if let items = allLists[index].items?.allObjects as? [Item] {
+      for item in items where item.list == allLists[index] {
+        dbManager.delete(Item: item, response: nil)
+      }
     }
-    allLists.remove(at: index)
-    listsCollectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
     
   }
 }

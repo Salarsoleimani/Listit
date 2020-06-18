@@ -46,6 +46,7 @@
 "select_list_type_placeholder" = "Please select your list type";
 "list_type_title" = "List type:";
 "save_button_title" = "Save";
+"update_button_title" = "Update";
 
 "select_icon_description" = "Please pick a color and icon for your %@ list.";
 
@@ -56,6 +57,8 @@
 "which_list_title" = "Into which list:";
 "select_list_placeholder" = "Please select a list";
 "save_and_another_item_button_title" = "Save & Add another";
+"update_and_another_item_button_title" = "Update & Add another";
+
 "remind_me_button_title" = "Please tap to set";
 "add_item_description" = "Add a new %@ into %@ list. You can save it or save the current %@ and add another %@.";
 "more_info_about_item_title" = "Add comment";

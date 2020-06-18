@@ -65,7 +65,8 @@ class AddItemController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    
+    titleTextField.becomeFirstResponder()
+
     whichListTextField.inputView = listsPickerView
   }
   // MARK:- Actions
@@ -84,25 +85,48 @@ class AddItemController: UIViewController {
       moreInfoTextView?.isHidden = false
       moreInfoButton?.isHidden = true
     }
+    moreInfoTextView.becomeFirstResponder()
   }
   @IBAction private func saveAndAddAnotherButtonPressed(_ sender: UIButton) {
-    
+    let isValid = validateSave()
+    if isValid {
+      titleTextField.text = ""
+      moreInfoTextView.text = ""
+      remindMeButton.setTitle("remind_me_button_title".localize(), for: .normal)
+      saveAndAddAnotherButton.setTitle("save_and_another_item_button_title".localize(), for: .normal)
+      saveButton.setTitle("save_button_title".localize(), for: .normal)
+      navigationItem.title = "add_item_navigation_title".localize()
+      
+      item = nil
+      notifDate = nil
+      repeats = nil
+    }
   }
-  @IBAction private func saveButtonPressed(_ sender: UIButton) {
-    if let text = titleTextField.text, text.isEmpty {
-      navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
-      titleTextField.becomeFirstResponder()
-    } else if titleTextField.text == nil {
-      navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
-      titleTextField.becomeFirstResponder()
-    } else if parentList == nil {
-      navigator.toast(text: "select_type_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
-      whichListTextField.becomeFirstResponder()
-    } else {
-      saveItem()
+  @IBAction private func saveButtonPressed(_ sender: Any?) {
+    let isValid = validateSave()
+    if isValid {
+      navigator.pop()
     }
   }
   // MARK:- Functions
+  private func validateSave() -> Bool {
+    if let text = titleTextField.text, text.isEmpty {
+      navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      titleTextField.becomeFirstResponder()
+      return false
+    } else if titleTextField.text == nil {
+      navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      titleTextField.becomeFirstResponder()
+      return false
+    } else if parentList == nil {
+      navigator.toast(text: "select_type_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      whichListTextField.becomeFirstResponder()
+      return false
+    } else {
+      saveItem()
+      return true
+    }
+  }
   private func saveItem() {
     if let item = item {
       item.title = titleTextField.text
@@ -110,14 +134,13 @@ class AddItemController: UIViewController {
       item.repeats = repeats?.rawValue
       item.notifDate = notifDate
       item.list = parentList
+      item.state = ItemState.default.rawValue
       
       dbManager.update(Item: item, response: nil)
-      navigator.pop()
       return
     }
-    let item = ItemModel(title: titleTextField.text ?? "", notifDate: notifDate, repeats: repeats, description: moreInfoTextView.text, parentList: parentList ?? lists[listsPickerView.tag])
+    let item = ItemModel(title: titleTextField.text ?? "", notifDate: notifDate, repeats: repeats, description: moreInfoTextView.text, parentList: parentList ?? lists[listsPickerView.tag], state: .doing)
     _ = dbManager.addItem(item, response: nil)
-    navigator.pop()
   }
 }
 extension AddItemController: UIPickerViewDelegate, UIPickerViewDataSource {
