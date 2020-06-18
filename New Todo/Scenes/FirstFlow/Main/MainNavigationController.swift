@@ -21,16 +21,21 @@ class MainNavigationController: SloppySwipingNav {
   }
   private func setupNavigationBarUI() {
     UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000, vertical: 0), for: .default)
-    let attrs: [NSAttributedString.Key: Any] = [
+    let largAttributes: [NSAttributedString.Key: Any] = [
       .foregroundColor: Colors.title.value,
       .font: Fonts.navigationLargeTitle
     ]
+    let defaultAttributes: [NSAttributedString.Key: Any] = [
+      .foregroundColor: Colors.title.value,
+      .font: Fonts.navigationTitle
+    ]
+    
     UINavigationBar.appearance().prefersLargeTitles = true
-    UINavigationBar.appearance().largeTitleTextAttributes = attrs
+    UINavigationBar.appearance().largeTitleTextAttributes = largAttributes
     
     UINavigationBar.appearance().tintColor = Colors.main.value
     // buttons
-    UINavigationBar.appearance().titleTextAttributes = attrs
+    UINavigationBar.appearance().titleTextAttributes = defaultAttributes
     UINavigationBar.appearance().isTranslucent = true
   }
 }

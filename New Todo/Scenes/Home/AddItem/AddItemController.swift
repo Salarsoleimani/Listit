@@ -41,7 +41,6 @@ class AddItemController: UIViewController {
   var item: Item?
   var notifDate: Date?
   var repeats: RepeatingInterval?
-  var delegate: HomeControllerDelegate?
   // MARK:- Constants
   private let navigator: AddItemNavigator
   private let dbManager: DatabaseManagerProtocol
@@ -113,13 +112,11 @@ class AddItemController: UIViewController {
       item.list = parentList
       
       dbManager.update(Item: item, response: nil)
-      delegate?.itemUpdated(item: item)
       navigator.pop()
       return
     }
     let item = ItemModel(title: titleTextField.text ?? "", notifDate: notifDate, repeats: repeats, description: moreInfoTextView.text, parentList: parentList ?? lists[listsPickerView.tag])
-    let dbItem = dbManager.addItem(item, response: nil)
-    delegate?.itemAdded(item: dbItem)
+    _ = dbManager.addItem(item, response: nil)
     navigator.pop()
   }
 }

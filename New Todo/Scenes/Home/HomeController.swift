@@ -10,14 +10,37 @@ import UIKit
 import CoreData
 import SwiftLocalNotification
 
-protocol HomeControllerDelegate: class {
-  func listAdded(list: List)
-  func listUpdated(list: List)
-  func listDeleted(list: List)
+fileprivate class ListsCollectionViewDataSource: FRCCollectionViewDataSource<List> {
   
-  func itemAdded(item: Item)
-  func itemUpdated(item: Item)
-  func itemDeleted(item: Item)
+}
+extension HomeController: FRCCollectionViewDelegate {
+  func frcCollectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellIds.cellId, for: indexPath) as! ListCell
+    let list = listsDataSource.object(at: indexPath)
+    cell.bindData(withViewModel: ListItemViewModel(model: list))
+    return cell
+  }
+}
+fileprivate class ItemsTableViewDataSource: FRCTableViewDataSource<Item> {
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    let context = frc.managedObjectContext
+    
+    switch editingStyle {
+    case .delete: context.delete(object(at: indexPath))
+    default: return
+    }
+  }
+  
+}
+extension HomeController: FRCTableViewDelegate {
+  
+  func frcTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIds.cellId, for: indexPath) as! ItemCell
+    let item = itemsDataSource.object(at: indexPath)
+    cell.bindData(withViewModel: ItemViewModel(model: item))
+    return cell
+  }
+  
 }
 
 class HomeController: UIViewController {
@@ -29,16 +52,26 @@ class HomeController: UIViewController {
   @IBOutlet weak var addItemButton: UIButton!
   @IBOutlet weak var addListButton: UIButton!
   @IBOutlet weak var addListLabel: UILabelX!
-
+  
   //MARK:- Constants
   private let navigator: HomeNavigator
   private let dbManager: DatabaseManagerProtocol
   //MARK:- Variables
-  var allLists = [List]()
+  lazy var allLists = listsDataSource.frc.fetchedObjects ?? [List]()
+  lazy var yourLists: [List] = {
+    let filteredList = allLists.filter { (list) -> Bool in
+      let type = ListType(rawValue: list.type) ?? ListType.default
+      return type != .all && type != .favorites && type != .today
+    }
+    return filteredList
+  }()
   var allItems = [Item]()
   var filteredItems = [Item]()
-
+  
   var selectedList: List?
+  private var itemsDataSource: ItemsTableViewDataSource!
+  private var listsDataSource: ListsCollectionViewDataSource!
+
   //MARK:- Initialization
   init(navigator: HomeNavigator, dbManager: DatabaseManagerProtocol) {
     self.navigator = navigator
@@ -57,41 +90,47 @@ class HomeController: UIViewController {
     
     let listNib = UINib(nibName: "ListCell", bundle: nil)
     listsCollectionView.register(listNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
-    listsCollectionView.delegate = self
-    listsCollectionView.dataSource = self
+    let listsFetchRequest: NSFetchRequest<List> = List.fetchRequest()
+    listsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+    listsDataSource = ListsCollectionViewDataSource(fetchRequest: listsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, collectionView: listsCollectionView)
     
+    listsCollectionView.delegate = self
+    listsCollectionView.dataSource = listsDataSource
+    try! listsDataSource.performFetch()
+
     let itemNib = UINib(nibName: "ItemCell", bundle: nil)
     itemsTableView.register(itemNib, forCellReuseIdentifier: Constants.CellIds.cellId)
+    
+    let itemsFetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+    itemsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+    itemsDataSource = ItemsTableViewDataSource(fetchRequest: itemsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, tableView: itemsTableView)
+    itemsTableView.dataSource = itemsDataSource
     itemsTableView.delegate = self
-    itemsTableView.dataSource = self
+    try! itemsDataSource.performFetch()
     
-    dbManager.getAllLists { [unowned self, listsCollectionView] (dbLists) in
-      self.allLists = dbLists
-      listsCollectionView?.reloadData()
-    }
+//    dbManager.getAllLists { [unowned self, listsCollectionView] (dbLists) in
+//      self.allLists = dbLists
+//      listsCollectionView?.reloadData()
+//    }
     
-    dbManager.getAllItems { [unowned self, itemsTableView] (dbItems) in
-      self.allItems = dbItems
-      self.filteredItems = dbItems
-      itemsTableView?.reloadData()
-    }
+    //    dbManager.getAllItems { [unowned self, itemsTableView] (dbItems) in
+    //      self.allItems = dbItems
+    //      self.filteredItems = dbItems
+    //      itemsTableView?.reloadData()
+    //    }
     
   }
   //MARK:- Actions
   @IBAction private func addItemButtonPressed(_ sender: UIButton) {
-    let filteredList = allLists.filter { (list) -> Bool in
-      let type = ListType(rawValue: list.type) ?? ListType.default
-      return type != .all && type != .favorites && type != .today
-    }
-    if !filteredList.isEmpty {
-      navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: filteredList, delegate: self)
+    if !yourLists.isEmpty {
+      navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: yourLists)
     } else {
       navigator.toast(text: "add_item_no_list_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
-      navigator.toAddOrEditList(list: nil, delegate: self)
+      navigator.toAddOrEditList(list: nil)
     }
   }
   @IBAction private func addListButtonPressed(_ sender: UIButton) {
-    navigator.toAddOrEditList(list: nil, delegate: self)
+    navigator.toAddOrEditList(list: nil)
   }
   @objc private func infoWalkthroughButtonPressed() {
     
@@ -107,52 +146,56 @@ class HomeController: UIViewController {
     navigationItem.rightBarButtonItems = [rightBarButton]
   }
 }
-extension HomeController: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return allLists.count
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellIds.cellId, for: indexPath) as! ListCell
-    cell.bindData(withViewModel: ListItemViewModel(model: allLists[indexPath.item]))
-    return cell
-  }
-}
+
 extension HomeController: UICollectionViewDelegate {
-  private func addDataToItemsTableView(data: [Item]) {
-    filteredItems = data
-    itemsTableView.reloadData()
-  }
   private func updateItemsTableView(_ selectedListRow: Int) {
     let listType = ListType(rawValue: allLists[selectedListRow].type) ?? ListType.default
-    let filteredItems = allItems.filter{ $0.list == allLists[selectedListRow] }
-
+    //let filteredItems = allItems.filter{ $0.list == allLists[selectedListRow] }
+    var predicate: NSPredicate?
+    
     switch listType {
     case .reminder:
-      addDataToItemsTableView(data: filteredItems)
+      predicate = NSPredicate(format: "list.type == \(listType.rawValue)")
     case .countdown:
-      addDataToItemsTableView(data: filteredItems)
+      predicate = NSPredicate(format: "list.type == \(listType.rawValue)")
     case .note:
-      addDataToItemsTableView(data: filteredItems)
+      predicate = NSPredicate(format: "list.type == \(listType.rawValue)")
     case .favorites:
-      let filteredItems = allItems.filter{ $0.isFavorite }
-      addDataToItemsTableView(data: filteredItems)
+      predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: true))
     case .all:
-      addDataToItemsTableView(data: allItems)
+      predicate = nil
     case .today:
-      let filteredItems = allItems.filter { (item) -> Bool in
-        if let notifDate = item.notifDate {
-          return Calendar.current.isDateInToday(notifDate)
-        }
-        if let repeats = item.repeats, let repeatInterval = RepeatingInterval(rawValue: repeats) {
-          return repeatInterval == .daily || repeatInterval == .hourly || repeatInterval == .minute
-        }
-        return false
-      }
-      addDataToItemsTableView(data: filteredItems)
+      print("Do it later [TODO]")
+//      // Get the current calendar with local time zone
+//      var calendar = Calendar.current
+//      calendar.timeZone = NSTimeZone.local
+//
+//      // Get today's beginning & end
+//      let dateFrom = calendar.startOfDay(for: Date()) // eg. 2016-10-10 00:00:00
+//      let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
+//      // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
+//
+//      // Set predicate as date being today's date
+//      let fromPredicate = NSPredicate(format: "%@ >= %@", date as NSDate, dateFrom as NSDate)
+//      let toPredicate = NSPredicate(format: "%@ < %@", date as NSDate, dateTo as NSDate)
+//      let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+//      predicate = datePredicate
+//      let filteredItems = allItems.filter { (item) -> Bool in
+//        if let notifDate = item.notifDate {
+//          return Calendar.current.isDateInToday(notifDate)
+//        }
+//        if let repeats = item.repeats, let repeatInterval = RepeatingInterval(rawValue: repeats) {
+//          return repeatInterval == .daily || repeatInterval == .hourly || repeatInterval == .minute
+//        }
+//        return false
+//      }
+//      addDataToItemsTableView(data: filteredItems)
     case .none:
-      addDataToItemsTableView(data: filteredItems)
+      predicate = nil
     }
+    itemsDataSource.frc.fetchRequest.predicate = predicate
+    try! itemsDataSource.performFetch()
+    itemsTableView.reloadData()
   }
   
   private func listSelected(_ row: Int) {
@@ -191,10 +234,10 @@ extension HomeController: UICollectionViewDelegate {
     return nil
   }
   private func editListAction(_ index: Int) {
-    navigator.toAddOrEditList(list: allLists[index], delegate: self)
+    navigator.toAddOrEditList(list: allLists[index])
   }
   private func addNewItemAction(_ index: Int) {
-    navigator.toAddOrEditItem(item: nil, forList: allLists[index], lists: allLists, delegate: self)
+    navigator.toAddOrEditItem(item: nil, forList: allLists[index], lists: yourLists)
   }
   private func deleteListAction(_ index: Int) {
     let cancelAction = UIAlertAction(title: "cancel_list_action".localize(), style: .cancel)
@@ -215,7 +258,7 @@ extension HomeController: UICollectionViewDelegate {
     }
     allLists.remove(at: index)
     listsCollectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
-
+    
   }
 }
 extension HomeController: UICollectionViewDelegateFlowLayout {
@@ -230,13 +273,12 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
 extension HomeController: UITableViewDelegate {
   private func deleteItem(_ item: Item, indexPath: IndexPath) {
     dbManager.delete(Item: item, response: nil)
-    filteredItems.remove(at: indexPath.row)
-    itemsTableView.deleteRows(at: [indexPath], with: .left)
   }
+  
   func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
     if let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
       let item = cell.viewModel.model
-      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, selectedList, allLists, deleteItem] action in
+      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, yourLists, deleteItem] action in
         
         let favoriteItem = UIAction(title: "favorite_item_title".localize(), image: UIImage(systemName: "star.fill"), handler: { [dbManager] action in
           dbManager.updateIsFavorite(isFavorite: true, item: item)
@@ -249,7 +291,7 @@ extension HomeController: UITableViewDelegate {
           deleteItem(item, indexPath)
         })
         let edit = UIAction(title: "edit_list_action".localize(), image: UIImage(systemName: "square.and.pencil"), handler: {action in
-          navigator.toAddOrEditItem(item: item, forList: selectedList, lists: allLists, delegate: self)
+          navigator.toAddOrEditItem(item: item, forList: item.list, lists: yourLists)
         })
         
         if item.isFavorite {
@@ -263,51 +305,5 @@ extension HomeController: UITableViewDelegate {
       return listConfiguration
     }
     return nil
-  }
-}
-extension HomeController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return filteredItems.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIds.cellId, for: indexPath) as! ItemCell
-    cell.bindData(withViewModel: ItemViewModel(model: filteredItems[indexPath.row]))
-    return cell
-  }
-}
-extension HomeController: HomeControllerDelegate {
-  func listDeleted(list: List) {
-    for (index, allList) in allLists.enumerated() {
-      if allList == list {
-        deleteList(index)
-      }
-    }
-  }
-  
-  func listUpdated(list: List) {
-    for (index, allList) in allLists.enumerated() {
-      if allList.id == list.id {
-        allLists[index] = list
-        listsCollectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
-      }
-    }
-  }
-  
-  func listAdded(list: List) {
-    allLists.append(list)
-    listsCollectionView.reloadData()
-  }
-  
-  func itemAdded(item: Item) {
-    
-  }
-  
-  func itemUpdated(item: Item) {
-    
-  }
-  
-  func itemDeleted(item: Item) {
-    
   }
 }

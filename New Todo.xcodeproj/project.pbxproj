@@ -15,6 +15,8 @@
 		254A40F42497DEE000F9E3A7 /* DateSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40EF2497DEE000F9E3A7 /* DateSelectionController.swift */; };
 		254A40F62497DEE000F9E3A7 /* DateSelectionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40F12497DEE000F9E3A7 /* DateSelectionUI.swift */; };
 		254A40F72497DEE000F9E3A7 /* DateSelectionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254A40F22497DEE000F9E3A7 /* DateSelectionController.xib */; };
+		254A40FF249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40FE249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift */; };
+		254A4101249B233900F9E3A7 /* FRCCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A4100249B233900F9E3A7 /* FRCCollectionViewDataSource.swift */; };
 		254F34A92485F4F60099C96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34A82485F4F60099C96C /* AppDelegate.swift */; };
 		254F34AB2485F4F60099C96C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AA2485F4F60099C96C /* SceneDelegate.swift */; };
 		254F34AD2485F4F60099C96C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AC2485F4F60099C96C /* HomeController.swift */; };
@@ -122,6 +124,8 @@
 		254A40EF2497DEE000F9E3A7 /* DateSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionController.swift; sourceTree = "<group>"; };
 		254A40F12497DEE000F9E3A7 /* DateSelectionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionUI.swift; sourceTree = "<group>"; };
 		254A40F22497DEE000F9E3A7 /* DateSelectionController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateSelectionController.xib; sourceTree = "<group>"; };
+		254A40FE249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCTableViewDataSource.swift; sourceTree = "<group>"; };
+		254A4100249B233900F9E3A7 /* FRCCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		254F34A52485F4F60099C96C /* New Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254F34A82485F4F60099C96C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		254F34AA2485F4F60099C96C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -482,6 +486,8 @@
 				254F35402487428A0099C96C /* DBManager.swift */,
 				254F35442487437D0099C96C /* CoreDataStack.swift */,
 				254F3546248743B80099C96C /* CoreDataError.swift */,
+				254A40FE249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift */,
+				254A4100249B233900F9E3A7 /* FRCCollectionViewDataSource.swift */,
 			);
 			path = DBManager;
 			sourceTree = "<group>";
@@ -796,9 +802,11 @@
 				254F34D0248734080099C96C /* StaticConstants.swift in Sources */,
 				254F356424887FB20099C96C /* ListItemViewModel.swift in Sources */,
 				254F357F24888CF10099C96C /* ColorCell.swift in Sources */,
+				254A4101249B233900F9E3A7 /* FRCCollectionViewDataSource.swift in Sources */,
 				254F34E9248735540099C96C /* Vibrator.swift in Sources */,
 				254F359F248C3E3B0099C96C /* AddItemNavigator.swift in Sources */,
 				254F358B24888D0C0099C96C /* AddListNavigator.swift in Sources */,
+				254A40FF249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift in Sources */,
 				254F353E2487425A0099C96C /* ListModel.swift in Sources */,
 				254F357924888CEB0099C96C /* IconsViewModel.swift in Sources */,
 				254F357724888CEB0099C96C /* IconsNavigator.swift in Sources */,

@@ -79,6 +79,10 @@ extension AddItemController {
       if let desc = item.desc {
         moreInfoTextView.text = desc
         moreInfoButtonPressed(0)
+        moreInfoButton.isHidden = true
+      } else {
+        moreInfoButton.isHidden = false
+        moreInfoTextView.isHidden = true
       }
       
       notifDate = item.notifDate

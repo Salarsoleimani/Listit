@@ -50,8 +50,7 @@ class AddListController: UIViewController {
   // MARK:- variables
   var list: List?
   var listModel = ListModel(iconColor: Constants.Defaults.color, iconId: 0, iconName: "ic_0", itemsCount: 0, title: "", type: 0)
-  var delegate: HomeControllerDelegate?
-  var listTypes = [ListType.countdown, .note, .reminder]
+  var listTypes = [ListType.reminder, .countdown, .note]
   // MARK:- Constants
   private let navigator: AddListNavigator
   private let dbManager: DatabaseManagerProtocol
@@ -119,14 +118,13 @@ class AddListController: UIViewController {
       list.type = listModel.type
       
       dbManager.update(List: list, response: nil)
-      delegate?.listUpdated(list: list)
       navigator.pop()
       return
     }
-    let dbList = dbManager.addList(listModel, response: nil)
-    delegate?.listAdded(list: dbList)
+    dbManager.addList(listModel, response: nil)
     navigator.pop()
   }
+  
   private func setupNavigationButtons() {
     let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteButtonPressed))
     navigationItem.rightBarButtonItems = [rightBarButton]
@@ -135,9 +133,9 @@ class AddListController: UIViewController {
   @objc private func deleteButtonPressed() {
     view.endEditing(true)
     let cancelAction = UIAlertAction(title: "cancel_list_action".localize(), style: .cancel)
-    let deleteAction = UIAlertAction(title: "delete_list_action".localize(), style: .destructive) { [delegate, list, navigator] (action) in
+    let deleteAction = UIAlertAction(title: "delete_list_action".localize(), style: .destructive) { [dbManager, list, navigator] (action) in
       if let list = list {
-        delegate?.listDeleted(list: list)
+        dbManager.delete(List: list, response: nil)
         navigator.pop()
       }
     }

@@ -26,10 +26,9 @@ final public class DBManager: DatabaseManagerProtocol {
     }
   }
   //MARK: - List Related Functions
-  func addList(_ list: ListModel, response: ((Bool) -> Void)?) -> List {
-    let dbList = list.asDBList()
+  func addList(_ list: ListModel, response: ((Bool) -> Void)?) {
+    _ = list.asDBList()
     CoreDataStack.shared.saveContext()
-    return dbList
   }
   
   func getAllLists(response: @escaping ([List]) -> Void) {
@@ -55,10 +54,9 @@ final public class DBManager: DatabaseManagerProtocol {
     item.isFavorite = isFavorite
     CoreDataStack.shared.saveContext()
   }
-  func addItem(_ item: ItemModel, response: ((Bool) -> Void)?) -> Item {
-    let dbItem = item.asDBItem()
+  func addItem(_ item: ItemModel, response: ((Bool) -> Void)?) {
+    _ = item.asDBItem()
     CoreDataStack.shared.saveContext()
-    return dbItem
   }
   
   func get(ItemsForListUID: UUID, response: @escaping ([Item]) -> Void) {
@@ -75,12 +73,12 @@ final public class DBManager: DatabaseManagerProtocol {
     }
   }
   func delete(Item item: Item, response: ((Bool) -> Void)?) {
-    
+    CoreDataStack.managedContext.delete(item)
+    CoreDataStack.shared.saveContext()
   }
   
   func update(Item item: Item, response: ((Bool) -> Void)?) {
-    CoreDataStack.managedContext.delete(item)
-    CoreDataStack.shared.saveContext()
+    
   }
   //MARK: - Shared
   
