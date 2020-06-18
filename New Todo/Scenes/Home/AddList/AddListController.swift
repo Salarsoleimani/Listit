@@ -26,7 +26,7 @@ extension AddListController: AddListControllerDelegate {
 class AddListController: UIViewController {
   // MARK:- Outlets
   @IBOutlet weak var containerView: UIView!
-
+  
   @IBOutlet weak var iconButton: UIButton!
   @IBOutlet weak var iconContainerView: UIView!
   @IBOutlet weak var titleTextField: UITextField!
@@ -39,18 +39,19 @@ class AddListController: UIViewController {
   @IBOutlet weak var listTypeTextField: UITextField!
   
   @IBOutlet weak var saveButton: UIButton!
-
-  lazy var listsPickerView: UIPickerView = {
+  
+  lazy var listTypesPickerView: UIPickerView = {
     let pv = UIPickerView()
     pv.dataSource = self
     pv.delegate = self
     return pv
   }()
+  
   // MARK:- variables
   var list: List?
   var listModel = ListModel(iconColor: Constants.Defaults.color, iconId: 0, iconName: "ic_0", itemsCount: 0, title: "", type: 0)
   var delegate: HomeControllerDelegate?
-  var listTypes = [ListType.birthday, .gerocery, .todo]
+  var listTypes = [ListType.countdown, .note, .reminder]
   // MARK:- Constants
   private let navigator: AddListNavigator
   private let dbManager: DatabaseManagerProtocol
@@ -70,10 +71,17 @@ class AddListController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    titleTextField.rx.text.orEmpty.subscribe(onNext: { [unowned self] (text) in
-      self.listModel.title = text
-    }).disposed(by: disposeBag)
+    
+    if list == nil {
+      randomizeIconColor()
+      randomizeIconImage()
+    } else {
+      setupNavigationButtons()
+    }
+    
+    observeOnTitleChange()
   }
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     titleTextField.becomeFirstResponder()
@@ -85,16 +93,19 @@ class AddListController: UIViewController {
   @IBAction private func didTapSaveButton(_ sender: UIButton) {
     if let text = titleTextField.text, text.isEmpty {
       navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      titleTextField.becomeFirstResponder()
     } else if titleTextField.text == nil {
       navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      titleTextField.becomeFirstResponder()
     } else if listModel.type == 0 {
       navigator.toast(text: "select_type_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      listTypeButtonPressed(0)
     } else {
       saveList()
     }
   }
   @IBAction func listTypeButtonPressed(_ sender: Any) {
-    listTypeTextField.inputView = listsPickerView
+    listTypeTextField.inputView = listTypesPickerView
     listTypeTextField.becomeFirstResponder()
   }
   
@@ -108,12 +119,53 @@ class AddListController: UIViewController {
       list.type = listModel.type
       
       dbManager.update(List: list, response: nil)
+      delegate?.listUpdated(list: list)
       navigator.pop()
       return
     }
-    let dbList = dbManager.add(List: listModel, response: nil)
+    let dbList = dbManager.addList(listModel, response: nil)
     delegate?.listAdded(list: dbList)
     navigator.pop()
+  }
+  private func setupNavigationButtons() {
+    let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteButtonPressed))
+    navigationItem.rightBarButtonItems = [rightBarButton]
+  }
+  
+  @objc private func deleteButtonPressed() {
+    view.endEditing(true)
+    let cancelAction = UIAlertAction(title: "cancel_list_action".localize(), style: .cancel)
+    let deleteAction = UIAlertAction(title: "delete_list_action".localize(), style: .destructive) { [delegate, list, navigator] (action) in
+      if let list = list {
+        delegate?.listDeleted(list: list)
+        navigator.pop()
+      }
+    }
+    let listTitle = list?.title ?? ""
+    let deleteListTitleAlert = String(format: "delete_list_title_alert".localize(), listTitle)
+    let deleteListDescAlert = String(format: "delete_list_desc_alert".localize(), arguments: [listTitle, listTitle])
+    let alertt = navigator.simpleAlert(title: deleteListTitleAlert, message: deleteListDescAlert, actions: [cancelAction, deleteAction])
+    present(alertt, animated: true, completion: nil)
+  }
+  private func observeOnTitleChange() {
+    titleTextField.rx.text.orEmpty.subscribe(onNext: { [unowned self] (text) in
+      self.listModel.title = text
+    }).disposed(by: disposeBag)
+  }
+  private func randomizeIconColor() {
+    let colors = SSMocker<ColorModel>.loadGenericObjectsFromLocalJson(fileName: "Colors")
+    if let randomColor = colors.randomElement() {
+      iconContainerView.backgroundColor = randomColor.getColor()
+      listModel.iconColor = randomColor.value
+    }
+  }
+  private func randomizeIconImage() {
+    let icons = SSMocker<IconModel>.loadGenericObjectsFromLocalJson(fileName: "Icons")
+    if let randomIcon = icons.randomElement() {
+      iconButton.setImage(randomIcon.getImage(), for: .normal)
+      listModel.iconId = Int16(randomIcon.id)
+      listModel.iconName = "ic_\(randomIcon.id)"
+    }
   }
 }
 extension AddListController: UIPickerViewDelegate, UIPickerViewDataSource {

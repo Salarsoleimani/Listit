@@ -29,7 +29,7 @@ final class Application {
   
   func setupApplicationConfigurations() {
     LanguageManager.shared.defaultLanguage = .deviceLanguage
-    IQKeyboardManager.shared.enable = true
+    configureKeyboard()
     setupRateManager()
     setupUpdateManager()
     resetNotificationBadge()
@@ -40,7 +40,10 @@ final class Application {
   func increaseAppOpenedCout() {
     Defaults.appOpenedCount += 1
   }
-  
+  private func configureKeyboard() {
+    IQKeyboardManager.shared.enable = true
+    IQKeyboardManager.shared.toolbarTintColor = Colors.main.value
+  }
   private func setupUpdateManager() {
     Siren.shared.wail()
     Siren.shared.rulesManager = RulesManager(majorUpdateRules: Rules(promptFrequency: .immediately, forAlertType: .force), minorUpdateRules: Rules(promptFrequency: .daily, forAlertType: .option), patchUpdateRules: Rules(promptFrequency: .weekly, forAlertType: .skip), revisionUpdateRules: Rules.default, showAlertAfterCurrentVersionHasBeenReleasedForDays: 3)

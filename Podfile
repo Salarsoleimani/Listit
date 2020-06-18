@@ -21,8 +21,8 @@ target 'New Todo' do
 
   pod 'SwiftEntryKit', '1.2.3'
   
-  pod 'GrowingTextView', '0.7.2'
-  # Physical
+  pod 'RSKGrowingTextView'
+# Physical
   pod 'Haptico'
   
   # Pods for New Todo

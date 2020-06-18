@@ -9,50 +9,61 @@
 import Foundation
 
 enum ListType: Int16 {
-  case todo = 6
-  case birthday = 1
-  case gerocery = 2
-  case favorites = 3
-  case all = 4
-  case today = 5
   case none = 0
+  
+  case reminder = 1
+  case note = 2
+  case countdown = 3
+  //case habit = 4
+  //case media = 5
+  
+  case favorites = 98
+  case today = 99
+  case all = 100
 }
+
 extension ListType {
   static let `default` = ListType.none
   func title() -> String {
     switch self {
-    case .todo:
-      return "todo_lists_type".localize()
-    case .birthday:
-      return "birthday_lists_type".localize()
-    case .gerocery:
-      return "gerocery_lists_type".localize()
+    case .none:
+      return "No type"
+      
+    case .reminder:
+      return "reminder_lists_type".localize()
+    case .note:
+      return "note_lists_type".localize()
+    case .countdown:
+      return "countdown_lists_type".localize()
+      
     case .all:
       return "all_lists_type".localize()
     case .favorites:
       return "favorites_lists_type".localize()
     case .today:
       return "today_lists_type".localize()
-    case .none:
-      return "No type"
+      
     }
   }
   func quantityTitle() -> String {
     switch self {
-    case .todo:
-      return "todo_lists_type_quantity".localize()
-    case .birthday:
-      return "birthday_lists_type_quantity".localize()
-    case .gerocery:
-      return "gerocery_lists_type_quantity".localize()
+    case .none:
+      return "none_lists_type_quantity"
+      
+    case .reminder:
+      return "reminder_lists_type_quantity".localize()
+    case .countdown:
+      return "countdown_lists_type_quantity".localize()
+    case .note:
+      return "note_lists_type_quantity".localize()
+      
     case .all:
       return "all_lists_type_quantity".localize()
     case .favorites:
       return "favorites_lists_type_quantity".localize()
     case .today:
       return "today_lists_type_quantity".localize()
-    case .none:
-      return "none_lists_type_quantity"
+      
     }
   }
 }

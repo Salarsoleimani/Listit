@@ -11,6 +11,10 @@
 		254A40E4248DDE1200F9E3A7 /* SloppySwipingNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40E3248DDE1200F9E3A7 /* SloppySwipingNav.swift */; };
 		254A40E7248DE31E00F9E3A7 /* UILabelX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40E6248DE31E00F9E3A7 /* UILabelX.swift */; };
 		254A40E924916B8100F9E3A7 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40E824916B8100F9E3A7 /* UIButtonExtensions.swift */; };
+		254A40F32497DEE000F9E3A7 /* DateSelectionNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40EE2497DEE000F9E3A7 /* DateSelectionNavigator.swift */; };
+		254A40F42497DEE000F9E3A7 /* DateSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40EF2497DEE000F9E3A7 /* DateSelectionController.swift */; };
+		254A40F62497DEE000F9E3A7 /* DateSelectionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40F12497DEE000F9E3A7 /* DateSelectionUI.swift */; };
+		254A40F72497DEE000F9E3A7 /* DateSelectionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254A40F22497DEE000F9E3A7 /* DateSelectionController.xib */; };
 		254F34A92485F4F60099C96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34A82485F4F60099C96C /* AppDelegate.swift */; };
 		254F34AB2485F4F60099C96C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AA2485F4F60099C96C /* SceneDelegate.swift */; };
 		254F34AD2485F4F60099C96C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AC2485F4F60099C96C /* HomeController.swift */; };
@@ -65,8 +69,6 @@
 		254F355A24887EB00099C96C /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254F355824887EB00099C96C /* ListCell.xib */; };
 		254F355D24887EBC0099C96C /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F355B24887EBC0099C96C /* ItemCell.swift */; };
 		254F355E24887EBC0099C96C /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254F355C24887EBC0099C96C /* ItemCell.xib */; };
-		254F356124887ECE0099C96C /* ListNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F355F24887ECE0099C96C /* ListNameCell.swift */; };
-		254F356224887ECE0099C96C /* ListNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254F356024887ECE0099C96C /* ListNameCell.xib */; };
 		254F356424887FB20099C96C /* ListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F356324887FB20099C96C /* ListItemViewModel.swift */; };
 		254F356B248885A20099C96C /* Veneer+NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F3568248885A20099C96C /* Veneer+NSAttributedString.swift */; };
 		254F356C248885A20099C96C /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F3569248885A20099C96C /* Attributes.swift */; };
@@ -116,6 +118,10 @@
 		254A40E3248DDE1200F9E3A7 /* SloppySwipingNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SloppySwipingNav.swift; sourceTree = "<group>"; };
 		254A40E6248DE31E00F9E3A7 /* UILabelX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelX.swift; sourceTree = "<group>"; };
 		254A40E824916B8100F9E3A7 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		254A40EE2497DEE000F9E3A7 /* DateSelectionNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionNavigator.swift; sourceTree = "<group>"; };
+		254A40EF2497DEE000F9E3A7 /* DateSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionController.swift; sourceTree = "<group>"; };
+		254A40F12497DEE000F9E3A7 /* DateSelectionUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectionUI.swift; sourceTree = "<group>"; };
+		254A40F22497DEE000F9E3A7 /* DateSelectionController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateSelectionController.xib; sourceTree = "<group>"; };
 		254F34A52485F4F60099C96C /* New Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254F34A82485F4F60099C96C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		254F34AA2485F4F60099C96C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,8 +179,6 @@
 		254F355824887EB00099C96C /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 		254F355B24887EBC0099C96C /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		254F355C24887EBC0099C96C /* ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
-		254F355F24887ECE0099C96C /* ListNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNameCell.swift; sourceTree = "<group>"; };
-		254F356024887ECE0099C96C /* ListNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListNameCell.xib; sourceTree = "<group>"; };
 		254F356324887FB20099C96C /* ListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemViewModel.swift; sourceTree = "<group>"; };
 		254F3568248885A20099C96C /* Veneer+NSAttributedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Veneer+NSAttributedString.swift"; sourceTree = "<group>"; };
 		254F3569248885A20099C96C /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
@@ -227,6 +231,17 @@
 				254A40E6248DE31E00F9E3A7 /* UILabelX.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		254A40ED2497DEC000F9E3A7 /* SelectDate */ = {
+			isa = PBXGroup;
+			children = (
+				254A40EE2497DEE000F9E3A7 /* DateSelectionNavigator.swift */,
+				254A40EF2497DEE000F9E3A7 /* DateSelectionController.swift */,
+				254A40F12497DEE000F9E3A7 /* DateSelectionUI.swift */,
+				254A40F22497DEE000F9E3A7 /* DateSelectionController.xib */,
+			);
+			path = SelectDate;
 			sourceTree = "<group>";
 		};
 		254F349C2485F4F60099C96C = {
@@ -444,6 +459,7 @@
 		254F353B2487424D0099C96C /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				254F352C24873D770099C96C /* Protocols */,
 				254F353C248742510099C96C /* Entities */,
 			);
 			path = Domain;
@@ -454,7 +470,6 @@
 			children = (
 				254A40E1248C852D00F9E3A7 /* ItemModel.swift */,
 				254F353D2487425A0099C96C /* ListModel.swift */,
-				254F352C24873D770099C96C /* Protocols */,
 				254F359024889ED40099C96C /* ListType.swift */,
 				254F35A8248C849A0099C96C /* ItemState.swift */,
 			);
@@ -490,18 +505,8 @@
 			children = (
 				254F355224887E070099C96C /* Items */,
 				254F355124887DF90099C96C /* List */,
-				254F355024887DF30099C96C /* ListNames */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		254F355024887DF30099C96C /* ListNames */ = {
-			isa = PBXGroup;
-			children = (
-				254F355F24887ECE0099C96C /* ListNameCell.swift */,
-				254F356024887ECE0099C96C /* ListNameCell.xib */,
-			);
-			path = ListNames;
 			sourceTree = "<group>";
 		};
 		254F355124887DF90099C96C /* List */ = {
@@ -592,6 +597,7 @@
 		254F3599248C3E130099C96C /* AddItem */ = {
 			isa = PBXGroup;
 			children = (
+				254A40ED2497DEC000F9E3A7 /* SelectDate */,
 				254F359A248C3E3B0099C96C /* AddItemNavigator.swift */,
 				254F359B248C3E3B0099C96C /* AddItemController.swift */,
 				254F359D248C3E3B0099C96C /* AddItemUI.swift */,
@@ -674,6 +680,7 @@
 				254F357E24888CF10099C96C /* ColorCell.xib in Resources */,
 				254F34F7248736950099C96C /* Montserrat-Bold.ttf in Resources */,
 				254F34F6248736950099C96C /* Montserrat-Regular.ttf in Resources */,
+				254A40F72497DEE000F9E3A7 /* DateSelectionController.xib in Resources */,
 				254F354C24874FD70099C96C /* HomeController.xib in Resources */,
 				254F355A24887EB00099C96C /* ListCell.xib in Resources */,
 				254F357A24888CEB0099C96C /* IconsController.xib in Resources */,
@@ -686,7 +693,6 @@
 				254F34FE248738C50099C96C /* Icons.json in Resources */,
 				254F34B82485F4F80099C96C /* LaunchScreen.storyboard in Resources */,
 				254F351124873C020099C96C /* SplashController.xib in Resources */,
-				254F356224887ECE0099C96C /* ListNameCell.xib in Resources */,
 				254F34C9248733B00099C96C /* Localizable.strings in Resources */,
 				254F34B52485F4F80099C96C /* Assets.xcassets in Resources */,
 				254F34FB248738AC0099C96C /* Colors.json in Resources */,
@@ -754,11 +760,13 @@
 				254F34CD248733E80099C96C /* Defaults.swift in Sources */,
 				254F34DD248734E00099C96C /* Error+Composer.swift in Sources */,
 				254F357824888CEB0099C96C /* IconsUI.swift in Sources */,
+				254A40F42497DEE000F9E3A7 /* DateSelectionController.swift in Sources */,
 				254F353224873FFE0099C96C /* DataBaseManagerProtocol.swift in Sources */,
 				254F352E24873D840099C96C /* ViewModelType.swift in Sources */,
 				254F359124889ED40099C96C /* ListType.swift in Sources */,
 				254A40E2248C852D00F9E3A7 /* ItemModel.swift in Sources */,
 				254F34DC248734E00099C96C /* UIColorExtensions.swift in Sources */,
+				254A40F62497DEE000F9E3A7 /* DateSelectionUI.swift in Sources */,
 				254F34E7248735540099C96C /* Utility.swift in Sources */,
 				254F355924887EB00099C96C /* ListCell.swift in Sources */,
 				254F351724873D170099C96C /* ServicePackage.swift in Sources */,
@@ -769,7 +777,6 @@
 				254F34DA248734E00099C96C /* UIViewControllerExtensions.swift in Sources */,
 				254F35A6248C42B00099C96C /* AddItemCell.swift in Sources */,
 				254A40E4248DDE1200F9E3A7 /* SloppySwipingNav.swift in Sources */,
-				254F356124887ECE0099C96C /* ListNameCell.swift in Sources */,
 				254F355D24887EBC0099C96C /* ItemCell.swift in Sources */,
 				254F358E24888D0C0099C96C /* AddListUI.swift in Sources */,
 				254F34FA248738AC0099C96C /* ColorModel.swift in Sources */,
@@ -796,6 +803,7 @@
 				254F357924888CEB0099C96C /* IconsViewModel.swift in Sources */,
 				254F357724888CEB0099C96C /* IconsNavigator.swift in Sources */,
 				254F356D248885A20099C96C /* Transform.swift in Sources */,
+				254A40F32497DEE000F9E3A7 /* DateSelectionNavigator.swift in Sources */,
 				254F3538248740D20099C96C /* Colors.swift in Sources */,
 				254F34FF248738C50099C96C /* IconModel.swift in Sources */,
 				254F354E248750080099C96C /* HomeControllerUI.swift in Sources */,

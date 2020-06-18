@@ -11,7 +11,7 @@ import SwiftLocalNotification
 struct ItemModel {
   let title: String
   let notifDate: Date?
-  let repeats: RepeatingInterval = .none
+  let repeats: RepeatingInterval?
   let description: String?
   let parentList: List
   
@@ -23,7 +23,7 @@ struct ItemModel {
     dbItem.list = parentList
     dbItem.desc = description
     dbItem.notifDate = notifDate
-    dbItem.repeats = repeats.rawValue
+    dbItem.repeats = repeats?.rawValue
     return dbItem
   }
 }

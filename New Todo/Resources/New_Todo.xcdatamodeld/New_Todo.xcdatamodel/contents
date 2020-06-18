@@ -16,7 +16,7 @@
         <attribute name="iconId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="iconName" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="itemsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="itemsCount" optional="YES" attributeType="Integer 16" derived="YES" derivationExpression="items.@count" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String" defaultValueString="" spotlightIndexingEnabled="YES"/>
         <attribute name="type" attributeType="Integer 16" defaultValueString="3" usesScalarValueType="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="list" inverseEntity="Item"/>

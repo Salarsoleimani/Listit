@@ -11,20 +11,22 @@ import CoreData
 final public class DBManager: DatabaseManagerProtocol {
   //MARK: - Configuration
   func configureDataBase() {
+//    let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
+//    for templateList in templateLists {
+//      var list = templateList
+//      list.title = templateList.title.localize()
+//      _ = addList(list, response: nil)
+//      if let last = templateLists.last, templateList == last {
+//        Defaults.isDatabaseConfigured = true
+//      }
+    //}
+    
     if Defaults.appOpenedCount == 0 || !Defaults.isDatabaseConfigured {
-      let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
-      for templateList in templateLists {
-        var list = templateList
-        list.title = templateList.title.localize()
-        _ = add(List: list, response: nil)
-        if let last = templateLists.last, templateList == last {
-          Defaults.isDatabaseConfigured = true
-        }
-      }
+      
     }
   }
   //MARK: - List Related Functions
-  func add(List list: ListModel, response: ((Bool) -> Void)?) -> List {
+  func addList(_ list: ListModel, response: ((Bool) -> Void)?) -> List {
     let dbList = list.asDBList()
     CoreDataStack.shared.saveContext()
     return dbList
@@ -33,7 +35,7 @@ final public class DBManager: DatabaseManagerProtocol {
   func getAllLists(response: @escaping ([List]) -> Void) {
     let fetch = NSFetchRequest<List>(entityName: "List")
     fetch.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
-
+    
     do {
       response(try CoreDataStack.managedContext.fetch(fetch))
     } catch {
@@ -49,9 +51,14 @@ final public class DBManager: DatabaseManagerProtocol {
     CoreDataStack.shared.saveContext()
   }
   //MARK: - Item Related Functions
-  func add(Item item: ItemModel, response: ((Bool) -> Void)?) {
-    let _ = item.asDBItem()
+  func updateIsFavorite(isFavorite: Bool = true, item: Item) {
+    item.isFavorite = isFavorite
     CoreDataStack.shared.saveContext()
+  }
+  func addItem(_ item: ItemModel, response: ((Bool) -> Void)?) -> Item {
+    let dbItem = item.asDBItem()
+    CoreDataStack.shared.saveContext()
+    return dbItem
   }
   
   func get(ItemsForListUID: UUID, response: @escaping ([Item]) -> Void) {
@@ -60,7 +67,7 @@ final public class DBManager: DatabaseManagerProtocol {
   func getAllItems(response: @escaping ([Item]) -> Void) {
     let fetch = NSFetchRequest<Item>(entityName: "Item")
     fetch.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
-
+    
     do {
       response(try CoreDataStack.managedContext.fetch(fetch))
     } catch {
@@ -72,7 +79,8 @@ final public class DBManager: DatabaseManagerProtocol {
   }
   
   func update(Item item: Item, response: ((Bool) -> Void)?) {
-    
+    CoreDataStack.managedContext.delete(item)
+    CoreDataStack.shared.saveContext()
   }
   //MARK: - Shared
   

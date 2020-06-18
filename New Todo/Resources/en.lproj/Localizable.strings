@@ -11,27 +11,36 @@
 "add_list_navigation_title" = "Add List";
 "edit_list_navigation_title" = "Edit List";
 "select_icon_navigation_title" = "Icon & Color";
+
+"add_item_navigation_title" = "Add item";
+"edit_item_navigation_title" = "Edit item";
+
 /// - list types title
 "all_lists_type" = "All Items";
 "favorites_lists_type" = "Favorites";
 "today_lists_type" = "Today";
-"todo_lists_type" = "Todo";
-"birthday_lists_type" = "Birthdays";
-"gerocery_lists_type" = "Geroceries";
+"reminder_lists_type" = "Reminder";
+"countdown_lists_type" = "Countdown";
+"note_lists_type" = "Note";
+
 /// - list types quantity title
 "all_lists_type_quantity" = "items";
 "favorites_lists_type_quantity" = "favorites";
 "today_lists_type_quantity" = "tasks";
-"todo_lists_type_quantity" = "todos";
-"birthday_lists_type_quantity" = "birthdays";
-"gerocery_lists_type_quantity" = "items";
+"reminder_lists_type_quantity" = "tasks";
+"countdown_lists_type_quantity" = "countdowns";
+"note_lists_type_quantity" = "notes";
 "none_lists_type_quantity" = "items";
 
 // - list menu actions
 "cancel_list_action" = "Cancel";
 "delete_list_action" = "Delete";
 "edit_list_action" = "Edit";
+
 "add_new_item_to_list_action" = "Add new";
+"favorite_item_title" = "Add to favorites";
+"unfavorite_item_title" = "Remove from favorites";
+
 // - add list
 "add_list_title_placeholder" = "Your list title";
 "select_list_type_placeholder" = "Please select your list type";
@@ -39,6 +48,24 @@
 "save_button_title" = "Save";
 
 "select_icon_description" = "Please pick a color and icon for your %@ list.";
+
+// - add item
+
+"add_item_title_placeholder" = "Your item title";
+"remind_me_title" = "Remind at:";
+"which_list_title" = "Into which list:";
+"select_list_placeholder" = "Please select a list";
+"save_and_another_item_button_title" = "Save & Add another";
+"remind_me_button_title" = "Please tap to set";
+"add_item_description" = "Add a new %@ into %@ list. You can save it or save the current %@ and add another %@.";
+"more_info_about_item_title" = "Add comment";
+// - date pick
+"pick_date_description" = "Please pick a date to remind you by push notification. You can also select the repeating interval to get the notification regularly.";
+"pick_date_navigation_title" = "Remind date";
+"date_title" = "Date:";
+"time_title" = "Time:";
+"repeating_title" = "Repeats:";
+"delete_reminder_button_title" = "Delete reminder";
 // - alerts
 "delete_list_title_alert" = "Deleting \"%@\" list notice";
 "delete_list_desc_alert" = "Are you sure about deleting the \"%@\" list? It will permanently delete the list and items in it from the iCloud server and your phone. You won't be able to restore your data any more.\nAgain, are you sure about deleting the \"%@\" list?";
@@ -52,3 +79,4 @@
 "add_title_for_list_error" = "Please add title for your list";
 "select_type_for_list_error" = "Please select your list type";
 
+"add_item_no_list_error" = "Please add a list first to add item in it";

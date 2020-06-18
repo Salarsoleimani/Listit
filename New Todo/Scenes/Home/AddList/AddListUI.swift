@@ -17,6 +17,7 @@ extension AddListController {
     titleTextField.placeholder = "add_list_title_placeholder".localize()
     titleTextField.font = Fonts.listCellTitle
     titleTextField.textColor = Colors.listCellTitle.value
+    titleTextField.tintColor = Colors.main.value
     
     containerView.backgroundColor = Colors.listCellBackground.value
     containerView.layer.cornerRadius = Constants.Radius.cornerRadius

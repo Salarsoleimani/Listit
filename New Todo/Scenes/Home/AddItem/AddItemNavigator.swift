@@ -7,12 +7,20 @@
 //
 
 import Foundation
+import SwiftLocalNotification
 
 final class AddItemNavigator: Navigator {
-  func setup(parentList: List?, lists: [List]) {
+  func setup(parentList: List?, lists: [List], delegate: HomeControllerDelegate) {
     let vc = AddItemController(navigator: self, dbManager: servicePackage.dbManager)
     vc.parentList = parentList
     vc.lists = lists
+    vc.delegate = delegate
     navigationController.pushViewController(vc, animated: true)
+  }
+  func toDateSelection(date: Date?, repeating: RepeatingInterval, delegate: AddItemController) {
+    DateSelectionNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(date: date, repeating: repeating, delegate: delegate)
+  }
+  func pop() {
+    navigationController.popViewController(animated: true)
   }
 }

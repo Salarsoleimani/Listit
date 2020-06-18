@@ -5,15 +5,7 @@
     "iconId": -1,
     "itemsCount": 0,
     "title": "all_lists_type",
-    "type": 4
-  },
-  {
-    "iconColor": "#FF6B31",
-    "iconName": "ic_favourite",
-    "iconId": -1,
-    "itemsCount": 0,
-    "title": "favorites_lists_type",
-    "type": 3
+    "type": 100
   },
   {
     "iconColor": "#7E84F4",
@@ -21,30 +13,38 @@
     "iconId": -1,
     "itemsCount": 0,
     "title": "today_lists_type",
-    "type": 5
+    "type": 99
+  },
+  {
+    "iconColor": "#FF6B31",
+    "iconName": "ic_favourite",
+    "iconId": -1,
+    "itemsCount": 0,
+    "title": "favorites_lists_type",
+    "type": 98
   },
   {
     "iconColor": "#87B37A",
     "iconName": "ic_30",
     "iconId": 30,
     "itemsCount": 0,
-    "title": "todo_lists_type",
-    "type": 6
+    "title": "reminder_lists_type",
+    "type": 1
   },
   {
     "iconColor": "#FCFF6C",
     "iconName": "ic_0",
     "iconId": 0,
     "itemsCount": 0,
-    "title": "birthday_lists_type",
-    "type": 1
+    "title": "countdown_lists_type",
+    "type": 3
   },
   {
     "iconColor": "#72FF3F",
     "iconName": "ic_31",
     "iconId": 31,
     "itemsCount": 0,
-    "title": "gerocery_lists_type",
+    "title": "note_lists_type",
     "type": 2
   }
 ]

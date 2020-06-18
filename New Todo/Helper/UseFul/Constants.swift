@@ -39,6 +39,7 @@ enum Constants {
   
   struct Radius {
     static let cornerRadius: CGFloat = 13
+    static let textViewCornerRadius: CGFloat = 8
   }
   
   struct Defaults {

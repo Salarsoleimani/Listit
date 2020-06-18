@@ -25,6 +25,9 @@ enum Colors {
   case listCellTitle
   case listCellDescription
   
+  case itemCellTitle
+  case itemCellDescription
+  
   case white
   
   case custom(hex: Int, alpha: Double)
@@ -44,7 +47,7 @@ extension Colors {
     switch self {
     // Shared
     case .background:
-      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x232323), lightModeColor: UIColor(hex: 0xF9F9F9))
+      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x232323), lightModeColor: UIColor(hex: 0xf0f0f0))
       
     // Shared
     case .title:
@@ -56,21 +59,26 @@ extension Colors {
     case .walktroughTarget:
       instanceColor =  UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x444444), lightModeColor: UIColor(hex: 0x989595))
     case .walktroughBackground:
-      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x232323), lightModeColor: UIColor(hex: 0xF9F9F9))
+      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x232323), lightModeColor: UIColor(hex: 0xf0f0f0))
     case .walktroughText:
       instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xF2F2F2), lightModeColor: UIColor(hex: 0x686868))
       
     // Lists
     case .listCellBackground:
-      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x1C1C1E), lightModeColor: UIColor(hex: 0xF5F5F5).withAlphaComponent(0.5))
+      instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x1C1C1E), lightModeColor: UIColor(hex: 0xDDDDDD).withAlphaComponent(0.5))
     case .listCellTitle:
       instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xDDDDDD), lightModeColor: UIColor(hex: 0x686868))
     case .listCellDescription:
       instanceColor = UIColor(hex: 0x666666)
+      // Items
       
+      case .itemCellTitle:
+        instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xDDDDDD), lightModeColor: UIColor(hex: 0x686868))
+      case .itemCellDescription:
+        instanceColor = UIColor(hex: 0x666666)
       //
     case .error:
-      instanceColor = .red
+      instanceColor = UIColor(hex: 0xEA2127)
     case .white:
       instanceColor = .white
     // Custom
