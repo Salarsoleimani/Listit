@@ -15,9 +15,13 @@ extension AddItemController {
     
     navigationItem.title = item == nil ? "add_item_navigation_title".localize() : "edit_item_navigation_title".localize()
     
-    descriptionLabel.text = "add_item_description".localize()
-    descriptionLabel.textColor = Colors.listCellDescription.value
-    descriptionLabel.font = Fonts.h5Regular
+    if let parentList = parentList, let title = parentList.title {
+      descriptionLabel?.text = String(format: "add_item_description".localize(), title)
+    } else {
+      descriptionLabel?.text = String(format: "add_item_description".localize(), "")
+    }
+    descriptionLabel?.textColor = Colors.listCellDescription.value
+    descriptionLabel?.font = Fonts.h5Regular
     
     
     titleTextField.placeholder = "add_item_title_placeholder".localize()
@@ -37,8 +41,8 @@ extension AddItemController {
     titleContainerView.backgroundColor = Colors.listCellBackground.value
     titleContainerView.layer.cornerRadius = Constants.Radius.cornerRadius
     
-    remindMeContainerView.backgroundColor = Colors.listCellBackground.value
-    remindMeContainerView.layer.cornerRadius = Constants.Radius.cornerRadius
+    remindMeContainerView?.backgroundColor = Colors.listCellBackground.value
+    remindMeContainerView?.layer.cornerRadius = Constants.Radius.cornerRadius
     
     remindMeButton.titleLabel?.font = Fonts.h5Regular
     remindMeButton.tintColor = Colors.main.value

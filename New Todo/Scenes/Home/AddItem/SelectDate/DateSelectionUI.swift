@@ -77,8 +77,6 @@ extension DateSelectionController {
         repeatsSegmentedControl.selectedSegmentIndex = 5
       }
       
-    } else {
-      deleteButton.isHidden = true
     }
   }
 }

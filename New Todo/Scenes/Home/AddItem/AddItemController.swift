@@ -18,7 +18,7 @@ class AddItemController: UIViewController {
   // MARK:- Outlets
   @IBOutlet weak var titleContainerView: UIView!
   
-  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet weak var descriptionLabel: UILabel?
   
   @IBOutlet weak var titleTextField: UITextField!
   @IBOutlet weak var moreInfoButton: UIButton!
@@ -28,7 +28,7 @@ class AddItemController: UIViewController {
   @IBOutlet weak var whichListTitleLabel: UILabel!
   @IBOutlet weak var whichListTextField: UITextField!
   
-  @IBOutlet weak var remindMeContainerView: UIView!
+  @IBOutlet weak var remindMeContainerView: UIView?
   @IBOutlet weak var remindMeTitleLabel: UILabel!
   @IBOutlet weak var remindMeButton: UIButton!
   
@@ -36,7 +36,20 @@ class AddItemController: UIViewController {
   @IBOutlet weak var saveAndAddAnotherButton: UIButton!
   
   // MARK:- variables
-  var parentList: List?
+  var parentList: List? {
+    didSet {
+      if let parentList = parentList {
+        if let title = parentList.title {
+          descriptionLabel?.text = String(format: "add_item_description".localize(), title)
+        }
+        if parentList.type == ListType.note.rawValue  {
+          remindMeContainerView?.isHidden = true
+        }
+      } else {
+        remindMeContainerView?.isHidden = false
+      }
+    }
+  }
   var lists = [List]()
   var item: Item?
   var notifDate: Date?
@@ -65,9 +78,14 @@ class AddItemController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    titleTextField.becomeFirstResponder()
-
+    if let parentList = parentList, parentList.type == ListType.note.rawValue {
+      remindMeContainerView?.isHidden = true
+    }
     whichListTextField.inputView = listsPickerView
+  }
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    titleTextField.becomeFirstResponder()
   }
   // MARK:- Actions
   
@@ -111,15 +129,15 @@ class AddItemController: UIViewController {
   // MARK:- Functions
   private func validateSave() -> Bool {
     if let text = titleTextField.text, text.isEmpty {
-      navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      navigator.toast(text: "add_title_for_item_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
       titleTextField.becomeFirstResponder()
       return false
     } else if titleTextField.text == nil {
-      navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      navigator.toast(text: "add_title_for_item_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
       titleTextField.becomeFirstResponder()
       return false
     } else if parentList == nil {
-      navigator.toast(text: "select_type_for_list_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      navigator.toast(text: "select_list_for_item_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
       whichListTextField.becomeFirstResponder()
       return false
     } else {

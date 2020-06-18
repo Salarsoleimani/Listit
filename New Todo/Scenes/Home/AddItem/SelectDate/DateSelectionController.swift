@@ -127,6 +127,8 @@ class DateSelectionController: UIViewController {
         self.minute = Int(hourMinute[1]) ?? 0
         self.hour = Int(hourMinute[0]) ?? 0
       }
+      deleteButton.isHidden = true
+
     }
     if let passedRepeats = repeatingInterval {
       repeatingInterval = passedRepeats

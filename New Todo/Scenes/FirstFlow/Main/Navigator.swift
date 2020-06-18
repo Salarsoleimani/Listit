@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftEntryKit
+import Haptico
 
 class Navigator: NSObject {
   internal let navigationController: UINavigationController
@@ -25,7 +26,7 @@ class Navigator: NSObject {
     return alertController
   }
   
-  func toast(text: String, hapticFeedbackType: EKAttributes.NotificationHapticFeedback, backgroundColor: UIColor) {
+  func toast(text: String, hapticFeedbackType: HapticoNotification, backgroundColor: UIColor) {
     var attributes = EKAttributes.toast
 
     attributes.entryBackground = .color(color: .init(light: backgroundColor, dark: backgroundColor))
@@ -35,7 +36,6 @@ class Navigator: NSObject {
     attributes.exitAnimation = .translation
     attributes.displayDuration = 3
     
-    attributes.hapticFeedbackType = hapticFeedbackType
     // Display the view with the configuration
     let style = EKProperty.LabelStyle(
       font: Fonts.h5Regular,
@@ -47,6 +47,9 @@ class Navigator: NSObject {
         style: style
     )
     let contentView = EKNoteMessageView(with: labelContent)
+    
+    Haptico.shared().generate(hapticFeedbackType)
+
 
     SwiftEntryKit.display(entry: contentView, using: attributes)
   }

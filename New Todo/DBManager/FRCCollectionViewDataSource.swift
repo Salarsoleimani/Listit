@@ -32,8 +32,13 @@ class FRCCollectionViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSO
     self.delegate = delegate
     self.collectionView = collectionView
   }
-  func performFetch() throws {
-    try frc.performFetch()
+  
+  func performFetch() {
+    do {
+      try frc.performFetch()
+    } catch let err {
+      print("error on fetchin lists: \(err)")
+    }
   }
   
   func object(at indexPath: IndexPath) -> FetchRequestResult {

@@ -60,7 +60,7 @@
 "update_and_another_item_button_title" = "Update & Add another";
 
 "remind_me_button_title" = "Please tap to set";
-"add_item_description" = "Add a new %@ into %@ list. You can save it or save the current %@ and add another %@.";
+"add_item_description" = "Add a new item into \"%@\" list. You can just save it or save the current and add another one.";
 "more_info_about_item_title" = "Add comment";
 // - date pick
 "pick_date_description" = "Please pick a date to remind you by push notification. You can also select the repeating interval to get the notification regularly.";
@@ -74,12 +74,18 @@
 "delete_list_desc_alert" = "Are you sure about deleting the \"%@\" list? It will permanently delete the list and items in it from the iCloud server and your phone. You won't be able to restore your data any more.\nAgain, are you sure about deleting the \"%@\" list?";
 
 // Home
-"add_list_button_title" = "+  add  list";
-"add_item_button_title" = "+  add  item";
+"add_list_button_title" = "+ add list";
+"add_item_button_title" = "+ add item";
+"quick_add_item_button_title" = "+ (quick) add item";
 
+"add_quick_item_title_placeholder" = "Name you item and tap continue";
 
 // Errors
 "add_title_for_list_error" = "Please add title for your list";
 "select_type_for_list_error" = "Please select your list type";
 
+
 "add_item_no_list_error" = "Please add a list first to add item in it";
+
+"add_title_for_item_error" = "Please add title for your item";
+"select_list_for_item_error" = "Please select a list wanted to be your item in";

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SwiftLocalNotification
+import Haptico
 
 fileprivate class ListsCollectionViewDataSource: FRCCollectionViewDataSource<List> {
   
@@ -53,6 +54,14 @@ class HomeController: UIViewController {
   @IBOutlet weak var addListButton: UIButton!
   @IBOutlet weak var addListLabel: UILabelX!
   
+  @IBOutlet weak var quickAddItembuttonContainerView: UIView!
+  @IBOutlet weak var quickAddItemLabel: UILabelX!
+  @IBOutlet weak var quickAddItemButton: UIButton!
+  
+  @IBOutlet weak var titleItemTextField: UITextField!
+  @IBOutlet weak var titleItemContainerView: UIView!
+  @IBOutlet weak var titleItemContainerViewBottomAnchor: NSLayoutConstraint!
+
   //MARK:- Constants
   private let navigator: HomeNavigator
   private let dbManager: DatabaseManagerProtocol
@@ -71,7 +80,7 @@ class HomeController: UIViewController {
   var selectedList: List?
   private var itemsDataSource: ItemsTableViewDataSource!
   private var listsDataSource: ListsCollectionViewDataSource!
-
+  
   //MARK:- Initialization
   init(navigator: HomeNavigator, dbManager: DatabaseManagerProtocol) {
     self.navigator = navigator
@@ -88,6 +97,11 @@ class HomeController: UIViewController {
     setupUI()
     setupNavigationButtons()
     
+    let notificationCenter = NotificationCenter.default
+    notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+    notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    
+    titleItemTextField.delegate = self
     let listNib = UINib(nibName: "ListCell", bundle: nil)
     listsCollectionView.register(listNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
     let listsFetchRequest: NSFetchRequest<List> = List.fetchRequest()
@@ -96,8 +110,8 @@ class HomeController: UIViewController {
     
     listsCollectionView.delegate = self
     listsCollectionView.dataSource = listsDataSource
-    try! listsDataSource.performFetch()
-
+    listsDataSource.performFetch()
+    
     let itemNib = UINib(nibName: "ItemCell", bundle: nil)
     itemsTableView.register(itemNib, forCellReuseIdentifier: Constants.CellIds.cellId)
     
@@ -106,12 +120,12 @@ class HomeController: UIViewController {
     itemsDataSource = ItemsTableViewDataSource(fetchRequest: itemsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, tableView: itemsTableView)
     itemsTableView.dataSource = itemsDataSource
     itemsTableView.delegate = self
-    try! itemsDataSource.performFetch()
+    itemsDataSource.performFetch()
     
-//    dbManager.getAllLists { [unowned self, listsCollectionView] (dbLists) in
-//      self.allLists = dbLists
-//      listsCollectionView?.reloadData()
-//    }
+    //    dbManager.getAllLists { [unowned self, listsCollectionView] (dbLists) in
+    //      self.allLists = dbLists
+    //      listsCollectionView?.reloadData()
+    //    }
     
     //    dbManager.getAllItems { [unowned self, itemsTableView] (dbItems) in
     //      self.allItems = dbItems
@@ -132,6 +146,9 @@ class HomeController: UIViewController {
   @IBAction private func addListButtonPressed(_ sender: UIButton) {
     navigator.toAddOrEditList(list: nil)
   }
+  @IBAction private func quickAddListButtonPressed(_ sender: UIButton) {
+    titleItemTextField.becomeFirstResponder()
+  }
   @objc private func infoWalkthroughButtonPressed() {
     
   }
@@ -144,6 +161,24 @@ class HomeController: UIViewController {
     let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingButtonPressed))
     navigationItem.leftBarButtonItems = [leftBarButton]
     navigationItem.rightBarButtonItems = [rightBarButton]
+  }
+  @objc private func adjustForKeyboard(notification: Notification) {
+    guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+    
+    let keyboardScreenEndFrame = keyboardValue.cgRectValue
+    let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+    
+    if notification.name == UIResponder.keyboardWillHideNotification {
+      UIView.animate(withDuration: 0.5) { [view, titleItemContainerViewBottomAnchor] in
+        titleItemContainerViewBottomAnchor?.constant = -102
+        view?.layoutIfNeeded()
+      }
+    } else {
+      UIView.animate(withDuration: 0.5) { [view, titleItemContainerViewBottomAnchor] in
+        titleItemContainerViewBottomAnchor?.constant = keyboardViewEndFrame.height - 26
+        view?.layoutIfNeeded()
+      }
+    }
   }
 }
 
@@ -164,37 +199,37 @@ extension HomeController: UICollectionViewDelegate {
       predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: true))
     case .all:
       predicate = nil
-//    case .today:
-//      print("Do it later [TODO]")
-//      // Get the current calendar with local time zone
-//      var calendar = Calendar.current
-//      calendar.timeZone = NSTimeZone.local
-//
-//      // Get today's beginning & end
-//      let dateFrom = calendar.startOfDay(for: Date()) // eg. 2016-10-10 00:00:00
-//      let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
-//      // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
-//
-//      // Set predicate as date being today's date
-//      let fromPredicate = NSPredicate(format: "%@ >= %@", date as NSDate, dateFrom as NSDate)
-//      let toPredicate = NSPredicate(format: "%@ < %@", date as NSDate, dateTo as NSDate)
-//      let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
-//      predicate = datePredicate
-//      let filteredItems = allItems.filter { (item) -> Bool in
-//        if let notifDate = item.notifDate {
-//          return Calendar.current.isDateInToday(notifDate)
-//        }
-//        if let repeats = item.repeats, let repeatInterval = RepeatingInterval(rawValue: repeats) {
-//          return repeatInterval == .daily || repeatInterval == .hourly || repeatInterval == .minute
-//        }
-//        return false
-//      }
-//      addDataToItemsTableView(data: filteredItems)
+      //    case .today:
+      //      print("Do it later [TODO]")
+      //      // Get the current calendar with local time zone
+      //      var calendar = Calendar.current
+      //      calendar.timeZone = NSTimeZone.local
+      //
+      //      // Get today's beginning & end
+      //      let dateFrom = calendar.startOfDay(for: Date()) // eg. 2016-10-10 00:00:00
+      //      let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
+      //      // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
+      //
+      //      // Set predicate as date being today's date
+      //      let fromPredicate = NSPredicate(format: "%@ >= %@", date as NSDate, dateFrom as NSDate)
+      //      let toPredicate = NSPredicate(format: "%@ < %@", date as NSDate, dateTo as NSDate)
+      //      let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+      //      predicate = datePredicate
+      //      let filteredItems = allItems.filter { (item) -> Bool in
+      //        if let notifDate = item.notifDate {
+      //          return Calendar.current.isDateInToday(notifDate)
+      //        }
+      //        if let repeats = item.repeats, let repeatInterval = RepeatingInterval(rawValue: repeats) {
+      //          return repeatInterval == .daily || repeatInterval == .hourly || repeatInterval == .minute
+      //        }
+      //        return false
+      //      }
+    //      addDataToItemsTableView(data: filteredItems)
     case .none:
       predicate = nil
     }
     itemsDataSource.frc.fetchRequest.predicate = predicate
-    try! itemsDataSource.performFetch()
+    itemsDataSource.performFetch()
     itemsTableView.reloadData()
   }
   
@@ -202,6 +237,17 @@ extension HomeController: UICollectionViewDelegate {
     selectedList = allLists[row]
     navigationItem.title = allLists[row].title ?? ""
     updateItemsTableView(row)
+    if let type = ListType(rawValue: allLists[row].type) {
+      if type == .all, type == .favorites {
+        UIView.animate(withDuration: 0.25) { [quickAddItembuttonContainerView] in
+          quickAddItembuttonContainerView?.isHidden = true
+        }
+      } else {
+        UIView.animate(withDuration: 0.25) { [quickAddItembuttonContainerView] in
+          quickAddItembuttonContainerView?.isHidden = false
+        }
+      }
+    }
   }
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if collectionView == listsCollectionView {
@@ -304,5 +350,20 @@ extension HomeController: UITableViewDelegate {
       return listConfiguration
     }
     return nil
+  }
+}
+
+extension HomeController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField == titleItemTextField, let text = textField.text, !text.isEmpty, let selectedList = selectedList {
+      let item = ItemModel(title: text, notifDate: nil, repeats: nil, description: nil, parentList: selectedList, state: nil)
+      dbManager.addItem(item, response: nil)
+      titleItemTextField.text = nil
+      Haptico.shared().generate(.success)
+      return true
+    } else {
+      navigator.toast(text: "add_quick_item_title_placeholder".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
+    }
+    return false
   }
 }

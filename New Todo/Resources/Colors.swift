@@ -14,6 +14,7 @@ enum Colors {
   
   case title
   case main
+  case second
   
   case error
   
@@ -54,7 +55,9 @@ extension Colors {
       instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xF2F2F2), lightModeColor: UIColor(hex: 0x686868))
     case .main:
       instanceColor = UIColor(hex: 0x02C39A)
-
+    case .second:
+      instanceColor = UIColor(hex: 0xe76f51)
+      
       // Walkthrough
     case .walktroughTarget:
       instanceColor =  UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x444444), lightModeColor: UIColor(hex: 0x989595))

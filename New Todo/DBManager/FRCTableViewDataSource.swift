@@ -34,8 +34,12 @@ class FRCTableViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject
     self.tableView = tableView
   }
   
-  func performFetch() throws {
-    try frc.performFetch()
+  func performFetch() {
+    do {
+      try frc.performFetch()
+    } catch let err {
+      print("error on fetchin lists: \(err)")
+    }
   }
   
   func object(at indexPath: IndexPath) -> FetchRequestResult {
