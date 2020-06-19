@@ -11,9 +11,11 @@ import CoreData
 
 protocol FRCTableViewDelegate: class {
   func frcTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+  func frcTableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?
+  func frcTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
 }
 
-class FRCTableViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class FRCTableViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
 
   let frc: NSFetchedResultsController<FetchRequestResult>
   weak var tableView: UITableView?
@@ -64,6 +66,20 @@ class FRCTableViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject
     } else {
       return UITableViewCell()
     }
+  }
+  // MARK: - UITableViewDelegate
+
+  func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    if let delegate = delegate {
+      return delegate.frcTableView(tableView, contextMenuConfigurationForRowAt: indexPath, point: point)
+    }
+    return nil
+  }
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if let delegate = delegate {
+      return delegate.frcTableView(tableView, heightForRowAt: indexPath)
+    }
+    return 0
   }
   
   // MARK: - NSFetchedResultsControllerDelegate

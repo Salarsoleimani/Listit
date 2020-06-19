@@ -34,10 +34,65 @@ fileprivate class ItemsTableViewDataSource: FRCTableViewDataSource<Item> {
   
 }
 extension HomeController: FRCTableViewDelegate {
+  private func deleteItem(_ item: Item, indexPath: IndexPath) {
+    dbManager.delete(Item: item, response: nil)
+  }
+  func frcTableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    if let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
+      let item = cell.viewModel.model
+      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, yourLists, deleteItem] action in
+        
+        let favoriteItem = UIAction(title: "favorite_item_title".localize(), image: UIImage(systemName: "star.fill"), handler: { [dbManager] action in
+          dbManager.updateIsFavorite(isFavorite: true, item: item)
+        })
+        let unfavoriteItem = UIAction(title: "unfavorite_item_title".localize(), image: UIImage(systemName: "star.slash.fill"), handler: { [dbManager] action in
+          dbManager.updateIsFavorite(isFavorite: false, item: item)
+        })
+        
+        let delete = UIAction(title: "delete_list_action".localize(), image: UIImage(systemName: "trash.fill"), attributes: .destructive, handler: { action in
+          deleteItem(item, indexPath)
+        })
+        let edit = UIAction(title: "edit_list_action".localize(), image: UIImage(systemName: "square.and.pencil"), handler: {action in
+          navigator.toAddOrEditItem(item: item, forList: item.list, lists: yourLists)
+        })
+        
+        if item.isFavorite {
+          return UIMenu(title: "", image: nil, identifier: nil, children: [unfavoriteItem, edit, delete])
+        } else {
+          return UIMenu(title: "", image: nil, identifier: nil, children: [favoriteItem, edit, delete])
+        }
+        
+      }
+      
+      return listConfiguration
+    }
+    return nil
+  }
+  
+  func frcTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    let items = itemsDataSource.frc.fetchedObjects
+    if let items = items, indexPath.row < items.count {
+      let specificItem = items[indexPath.row]
+      let itemListType = ListType(rawValue: specificItem.list?.type ?? ListType.default.rawValue) ?? ListType.default
+      switch itemListType {
+      case .none:
+        return 50
+      case .reminder:
+        return 120
+      case .note:
+        return 80
+      case .countdown:
+        return 150
+      default: break
+      }
+    }
+    return 50
+  }
   
   func frcTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIds.cellId, for: indexPath) as! ItemCell
     let item = itemsDataSource.object(at: indexPath)
+    cell.rowLabel.text = String(indexPath.row + 1)
     cell.bindData(withViewModel: ItemViewModel(model: item))
     return cell
   }
@@ -108,8 +163,8 @@ class HomeController: UIViewController {
     listsFetchRequest.fetchBatchSize = 5
     listsDataSource = ListsCollectionViewDataSource(fetchRequest: listsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, collectionView: listsCollectionView)
     
-    listsCollectionView.delegate = self
     listsCollectionView.dataSource = listsDataSource
+    listsCollectionView.delegate = self
     listsDataSource.performFetch()
 
     let itemNib = UINib(nibName: "ItemCell", bundle: nil)
@@ -117,11 +172,11 @@ class HomeController: UIViewController {
     
     let itemsFetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
     itemsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
-    itemsFetchRequest.fetchBatchSize = 5
+    itemsFetchRequest.fetchBatchSize = 20
 
     itemsDataSource = ItemsTableViewDataSource(fetchRequest: itemsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, tableView: itemsTableView)
     itemsTableView.dataSource = itemsDataSource
-    itemsTableView.delegate = self
+    itemsTableView.delegate = itemsDataSource
     itemsDataSource.performFetch()
     
     //    dbManager.getAllLists { [unowned self, listsCollectionView] (dbLists) in
@@ -322,59 +377,6 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
   }
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-  }
-}
-extension HomeController: UITableViewDelegate {
-  private func deleteItem(_ item: Item, indexPath: IndexPath) {
-    dbManager.delete(Item: item, response: nil)
-  }
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
-      let itemListType = cell.viewModel.type
-      switch itemListType {
-      case .none:
-        return 50
-      case .reminder:
-        return 120
-      case .note:
-        return 80
-      case .countdown:
-        return 150
-      default: break
-      }
-    }
-    return 50
-  }
-  func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-    if let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
-      let item = cell.viewModel.model
-      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, yourLists, deleteItem] action in
-        
-        let favoriteItem = UIAction(title: "favorite_item_title".localize(), image: UIImage(systemName: "star.fill"), handler: { [dbManager] action in
-          dbManager.updateIsFavorite(isFavorite: true, item: item)
-        })
-        let unfavoriteItem = UIAction(title: "unfavorite_item_title".localize(), image: UIImage(systemName: "star.slash.fill"), handler: { [dbManager] action in
-          dbManager.updateIsFavorite(isFavorite: false, item: item)
-        })
-        
-        let delete = UIAction(title: "delete_list_action".localize(), image: UIImage(systemName: "trash.fill"), attributes: .destructive, handler: { action in
-          deleteItem(item, indexPath)
-        })
-        let edit = UIAction(title: "edit_list_action".localize(), image: UIImage(systemName: "square.and.pencil"), handler: {action in
-          navigator.toAddOrEditItem(item: item, forList: item.list, lists: yourLists)
-        })
-        
-        if item.isFavorite {
-          return UIMenu(title: "", image: nil, identifier: nil, children: [unfavoriteItem, edit, delete])
-        } else {
-          return UIMenu(title: "", image: nil, identifier: nil, children: [favoriteItem, edit, delete])
-        }
-        
-      }
-      
-      return listConfiguration
-    }
-    return nil
   }
 }
 

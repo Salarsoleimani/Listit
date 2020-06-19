@@ -18,6 +18,7 @@
 		254A40FF249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40FE249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift */; };
 		254A4101249B233900F9E3A7 /* FRCCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A4100249B233900F9E3A7 /* FRCCollectionViewDataSource.swift */; };
 		254A4103249C5B2700F9E3A7 /* TemplateItems.json in Resources */ = {isa = PBXBuildFile; fileRef = 254A4102249C5B2700F9E3A7 /* TemplateItems.json */; };
+		254A4105249D436C00F9E3A7 /* FRCItemsCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A4104249D436C00F9E3A7 /* FRCItemsCollectionDataSource.swift */; };
 		254F34A92485F4F60099C96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34A82485F4F60099C96C /* AppDelegate.swift */; };
 		254F34AB2485F4F60099C96C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AA2485F4F60099C96C /* SceneDelegate.swift */; };
 		254F34AD2485F4F60099C96C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AC2485F4F60099C96C /* HomeController.swift */; };
@@ -126,6 +127,7 @@
 		254A40FE249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCTableViewDataSource.swift; sourceTree = "<group>"; };
 		254A4100249B233900F9E3A7 /* FRCCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		254A4102249C5B2700F9E3A7 /* TemplateItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TemplateItems.json; sourceTree = "<group>"; };
+		254A4104249D436C00F9E3A7 /* FRCItemsCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCItemsCollectionDataSource.swift; sourceTree = "<group>"; };
 		254F34A52485F4F60099C96C /* New Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254F34A82485F4F60099C96C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		254F34AA2485F4F60099C96C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 				254F3546248743B80099C96C /* CoreDataError.swift */,
 				254A40FE249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift */,
 				254A4100249B233900F9E3A7 /* FRCCollectionViewDataSource.swift */,
+				254A4104249D436C00F9E3A7 /* FRCItemsCollectionDataSource.swift */,
 			);
 			path = DBManager;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				254F3598248C39070099C96C /* ItemViewModel.swift in Sources */,
 				254F34EB248735540099C96C /* SSMocker.swift in Sources */,
 				254F351324873CB70099C96C /* Navigator.swift in Sources */,
+				254A4105249D436C00F9E3A7 /* FRCItemsCollectionDataSource.swift in Sources */,
 				254F34DB248734E00099C96C /* UIViewExtensions.swift in Sources */,
 				254F350D24873C020099C96C /* SplashNavigator.swift in Sources */,
 				254F34C6248732AF0099C96C /* Application.swift in Sources */,

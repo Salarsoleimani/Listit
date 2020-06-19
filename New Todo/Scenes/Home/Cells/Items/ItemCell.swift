@@ -12,6 +12,9 @@ import CountdownLabel
 
 class ItemCell: UITableViewCell {
   // MARK:- Outlets
+  
+  @IBOutlet weak var rowLabel: UILabel!
+  
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var countdownLabel: CountdownLabel!
   @IBOutlet weak var isFavoriteButton: UIButton!
@@ -21,6 +24,7 @@ class ItemCell: UITableViewCell {
   
   @IBOutlet weak var repeatLabel: UILabel!
   @IBOutlet weak var repeatIcon: UIImageView!
+  
   // MARK:- Variables
   var viewModel: ItemViewModel!
   // MARK:- LifeCycles
@@ -31,6 +35,11 @@ class ItemCell: UITableViewCell {
   }
   // MARK:- Functions
   private func setupUI() {
+    backgroundColor = .clear
+    
+    rowLabel.font = Fonts.h5Regular
+    rowLabel.textColor = Colors.itemCellTitle.value
+    
     countdownLabel.animationType = .Scale
     repeatIcon.tintColor = Colors.itemCellTitle.value
     
