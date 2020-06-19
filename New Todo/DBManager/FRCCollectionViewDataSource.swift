@@ -70,10 +70,10 @@ class FRCCollectionViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSO
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     blockOperation = BlockOperation()
   }
-
+  
   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
     let sectionIndexSet = IndexSet(integer: sectionIndex)
-
+    
     switch type {
     case .insert:
       blockOperation.addExecutionBlock {
@@ -100,26 +100,34 @@ class FRCCollectionViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSO
     case .insert:
       guard let newIndexPath = newIndexPath else { break }
       
-      blockOperation.addExecutionBlock {
-        self.collectionView?.insertItems(at: [newIndexPath])
+      blockOperation.addExecutionBlock { [collectionView] in
+        DispatchQueue.main.async {
+          collectionView?.insertItems(at: [newIndexPath])
+        }
       }
     case .delete:
       guard let indexPath = indexPath else { break }
       
-      blockOperation.addExecutionBlock {
-        self.collectionView?.deleteItems(at: [indexPath])
+      blockOperation.addExecutionBlock { [collectionView] in
+        DispatchQueue.main.async {
+          collectionView?.deleteItems(at: [indexPath])
+        }
       }
     case .update:
       guard let indexPath = indexPath else { break }
       
-      blockOperation.addExecutionBlock {
-        self.collectionView?.reloadItems(at: [indexPath])
+      blockOperation.addExecutionBlock { [collectionView] in
+        DispatchQueue.main.async {
+          collectionView?.reloadItems(at: [indexPath])
+        }
       }
     case .move:
       guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
       
-      blockOperation.addExecutionBlock {
-        self.collectionView?.moveItem(at: indexPath, to: newIndexPath)
+      blockOperation.addExecutionBlock { [collectionView] in
+        DispatchQueue.main.async {
+          collectionView?.moveItem(at: indexPath, to: newIndexPath)
+        }
       }
     @unknown default:
       fatalError()
@@ -129,7 +137,10 @@ class FRCCollectionViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSO
   func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     collectionView?.performBatchUpdates({
       self.blockOperation.start()
-      }, completion: nil)
+    }, completion: nil)
   }
   
+  deinit {
+    blockOperation.cancel()
+  }
 }

@@ -23,14 +23,14 @@ extension HomeController: FRCCollectionViewDelegate {
   }
 }
 fileprivate class ItemsTableViewDataSource: FRCTableViewDataSource<Item> {
-  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    let context = frc.managedObjectContext
-    
-    switch editingStyle {
-    case .delete: context.delete(object(at: indexPath))
-    default: return
-    }
-  }
+//  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//    let context = frc.managedObjectContext
+//
+//    switch editingStyle {
+//    case .delete: context.delete(object(at: indexPath))
+//    default: return
+//    }
+//  }
   
 }
 extension HomeController: FRCTableViewDelegate {
@@ -41,7 +41,6 @@ extension HomeController: FRCTableViewDelegate {
     cell.bindData(withViewModel: ItemViewModel(model: item))
     return cell
   }
-  
 }
 
 class HomeController: UIViewController {
@@ -106,17 +105,20 @@ class HomeController: UIViewController {
     listsCollectionView.register(listNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
     let listsFetchRequest: NSFetchRequest<List> = List.fetchRequest()
     listsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+    listsFetchRequest.fetchBatchSize = 5
     listsDataSource = ListsCollectionViewDataSource(fetchRequest: listsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, collectionView: listsCollectionView)
     
     listsCollectionView.delegate = self
     listsCollectionView.dataSource = listsDataSource
     listsDataSource.performFetch()
-    
+
     let itemNib = UINib(nibName: "ItemCell", bundle: nil)
     itemsTableView.register(itemNib, forCellReuseIdentifier: Constants.CellIds.cellId)
     
     let itemsFetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
     itemsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+    itemsFetchRequest.fetchBatchSize = 5
+
     itemsDataSource = ItemsTableViewDataSource(fetchRequest: itemsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, tableView: itemsTableView)
     itemsTableView.dataSource = itemsDataSource
     itemsTableView.delegate = self
@@ -146,20 +148,20 @@ class HomeController: UIViewController {
   @IBAction private func addListButtonPressed(_ sender: UIButton) {
     navigator.toAddOrEditList(list: nil)
   }
-  @IBAction private func quickAddListButtonPressed(_ sender: UIButton) {
-    titleItemTextField.becomeFirstResponder()
+  @IBAction private func quickAddListButtonPressed(_ sender: Any) {
+    if let selectedList = selectedList, selectedList.type != ListType.all.rawValue, selectedList.type != ListType.favorites.rawValue {
+      titleItemTextField.becomeFirstResponder()
+    } else {
+      navigator.toast(text: "select_list_for_item_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
+    }
   }
-  @objc private func infoWalkthroughButtonPressed() {
-    
-  }
+  
   @objc private func settingButtonPressed() {
     
   }
   //MARK:- Functions
   private func setupNavigationButtons() {
-    let leftBarButton = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(infoWalkthroughButtonPressed))
     let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingButtonPressed))
-    navigationItem.leftBarButtonItems = [leftBarButton]
     navigationItem.rightBarButtonItems = [rightBarButton]
   }
   @objc private func adjustForKeyboard(notification: Notification) {
@@ -238,7 +240,7 @@ extension HomeController: UICollectionViewDelegate {
     navigationItem.title = allLists[row].title ?? ""
     updateItemsTableView(row)
     if let type = ListType(rawValue: allLists[row].type) {
-      if type == .all, type == .favorites {
+      if type == .all || type == .favorites {
         UIView.animate(withDuration: 0.25) { [quickAddItembuttonContainerView] in
           quickAddItembuttonContainerView?.isHidden = true
         }
@@ -258,13 +260,16 @@ extension HomeController: UICollectionViewDelegate {
     let index = indexPath.item < 0 ? 0 : indexPath.item
     let type = ListType(rawValue: allLists[index].type) ?? ListType.default
     if type != .favorites, type != .all {
-      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [editListAction, addNewItemAction, deleteListAction] action in
+      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [editListAction, addNewItemAction, deleteListAction, quickAddNewItemAction] action in
         let addNewTitle = "add_new_item_to_list_action".localize()
         let typeTitle = type.quantityTitle().dropLast().description
         let addItem = UIAction(title: "\(addNewTitle) \(typeTitle)", image: UIImage(systemName: "plus.circle"), handler: {action in
           addNewItemAction(index)
         })
-        
+        let quickAddNewTitle = "quick_add_new_item_to_list_action".localize()
+        let quickAddItem = UIAction(title: "\(quickAddNewTitle) \(typeTitle)", image: UIImage(systemName: "plus.circle"), handler: {action in
+          quickAddNewItemAction(index)
+        })
         let delete = UIAction(title: "delete_list_action".localize(), image: UIImage(systemName: "trash.fill"), attributes: .destructive, handler: { action in
           deleteListAction(index)
         })
@@ -272,7 +277,7 @@ extension HomeController: UICollectionViewDelegate {
           editListAction(index)
         })
         
-        return UIMenu(title: "", image: nil, identifier: nil, children: [addItem, edit, delete])
+        return UIMenu(title: "", image: nil, identifier: nil, children: [quickAddItem, addItem, edit, delete])
       }
       
       return listConfiguration
@@ -284,6 +289,10 @@ extension HomeController: UICollectionViewDelegate {
   }
   private func addNewItemAction(_ index: Int) {
     navigator.toAddOrEditItem(item: nil, forList: allLists[index], lists: yourLists)
+  }
+  private func quickAddNewItemAction(_ index: Int) {
+    selectedList = allLists[index]
+    quickAddListButtonPressed(0)
   }
   private func deleteListAction(_ index: Int) {
     let cancelAction = UIAlertAction(title: "cancel_list_action".localize(), style: .cancel)
@@ -319,7 +328,23 @@ extension HomeController: UITableViewDelegate {
   private func deleteItem(_ item: Item, indexPath: IndexPath) {
     dbManager.delete(Item: item, response: nil)
   }
-  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
+      let itemListType = cell.viewModel.type
+      switch itemListType {
+      case .none:
+        return 50
+      case .reminder:
+        return 120
+      case .note:
+        return 80
+      case .countdown:
+        return 150
+      default: break
+      }
+    }
+    return 50
+  }
   func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
     if let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
       let item = cell.viewModel.model

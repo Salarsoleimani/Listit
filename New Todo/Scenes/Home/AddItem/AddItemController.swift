@@ -50,6 +50,7 @@ class AddItemController: UIViewController {
       }
     }
   }
+  
   var lists = [List]()
   var item: Item?
   var notifDate: Date?
@@ -90,9 +91,8 @@ class AddItemController: UIViewController {
   // MARK:- Actions
   
   @IBAction private func remindMeButtonPressed(_ sender: UIButton) {
-    if let notifDate = item?.notifDate, let repeats = item?.repeats {
-      let repeatsInterval = RepeatingInterval(rawValue: repeats) ?? RepeatingInterval.none
-      navigator.toDateSelection(date: notifDate, repeating: repeatsInterval, delegate: self)
+    if let notifDate = notifDate, let repeats = repeats {
+      navigator.toDateSelection(date: notifDate, repeating: repeats, delegate: self)
     } else {
       navigator.toDateSelection(date: nil, repeating: RepeatingInterval.none, delegate: self)
     }
@@ -190,6 +190,7 @@ extension AddItemController: AddItemControllerDelegate {
   func didSelectDateAndTime(date: Date, hour: Int, minute: Int, repeatingInterval: RepeatingInterval) {
     notifDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: date)
     repeats = repeatingInterval
+    
     if let rep = repeats, let notifDate = notifDate {
       let formatter = DateFormatter()
       formatter.dateFormat = "YYYY/MMM/dd HH:mm"

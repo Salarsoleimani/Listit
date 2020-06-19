@@ -1,11 +1,11 @@
 PODS:
   - BEKListKit (1.0.3)
+  - CountdownLabel (4.0.1)
   - Haptico (1.0.2)
   - Hero (1.5.0)
   - IQKeyboardManagerSwift (6.5.5)
   - lottie-ios (3.1.8)
   - MaterialShowcase (0.7.1)
-  - NextGrowingTextView (1.6.0)
   - QuickLayout (3.0.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
@@ -25,12 +25,12 @@ PODS:
 
 DEPENDENCIES:
   - BEKListKit
+  - CountdownLabel
   - Haptico
   - Hero
   - IQKeyboardManagerSwift
   - lottie-ios
   - MaterialShowcase
-  - NextGrowingTextView
   - RxCocoa
   - RxSwift
   - SDWebImage
@@ -43,12 +43,12 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - BEKListKit
+    - CountdownLabel
     - Haptico
     - Hero
     - IQKeyboardManagerSwift
     - lottie-ios
     - MaterialShowcase
-    - NextGrowingTextView
     - QuickLayout
     - RxCocoa
     - RxRelay
@@ -70,12 +70,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BEKListKit: eced55022c40444e55975752a03595751286e123
+  CountdownLabel: c9975e3f329140b5e7d1f45cd63b1300badd1712
   Haptico: ce38d1f993f3a0df9a6d7795a9dd2849648aa9d1
   Hero: b7385b75e7259da62f4f85462f59a5082d66b058
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   MaterialShowcase: baaca60627058085d6b304f5a30ee952e99cee21
-  NextGrowingTextView: 39dce2d55291f30b415ca8828f79bbd3e7de1e9c
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
@@ -87,6 +87,6 @@ SPEC CHECKSUMS:
   SwiftLocalNotification: 971b8530997948187f97b7125f7acc88112640a3
   SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
 
-PODFILE CHECKSUM: 4b4d39e54f93b28ee9d80323448de06fc3f95573
+PODFILE CHECKSUM: d3589a2d7e248bdb94e511ceba408b234343d0fa
 
 COCOAPODS: 1.9.0

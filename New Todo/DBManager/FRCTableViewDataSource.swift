@@ -14,7 +14,7 @@ protocol FRCTableViewDelegate: class {
 }
 
 class FRCTableViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject, UITableViewDataSource, NSFetchedResultsControllerDelegate {
-  
+
   let frc: NSFetchedResultsController<FetchRequestResult>
   weak var tableView: UITableView?
   weak var delegate: FRCTableViewDelegate?

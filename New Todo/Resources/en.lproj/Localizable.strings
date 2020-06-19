@@ -23,6 +23,10 @@
 "countdown_lists_type" = "Countdown";
 "note_lists_type" = "Note";
 
+"template_motivations_list" = "Motivation quotes";
+"template_birthdays_list" = "Birthdays";
+"template_geroceries_list" = "Groceries";
+
 /// - list types quantity title
 "all_lists_type_quantity" = "items";
 "favorites_lists_type_quantity" = "favorites";
@@ -38,6 +42,8 @@
 "edit_list_action" = "Edit";
 
 "add_new_item_to_list_action" = "Add new";
+"quick_add_new_item_to_list_action" = "Quick add new";
+
 "favorite_item_title" = "Add to favorites";
 "unfavorite_item_title" = "Remove from favorites";
 
@@ -58,6 +64,8 @@
 "select_list_placeholder" = "Please select a list";
 "save_and_another_item_button_title" = "Save & Add another";
 "update_and_another_item_button_title" = "Update & Add another";
+
+"select_into_which_list_placeholder" = "Please select a list to move your item into it";
 
 "remind_me_button_title" = "Please tap to set";
 "add_item_description" = "Add a new item into \"%@\" list. You can just save it or save the current and add another one.";

@@ -7,13 +7,22 @@
 //
 
 import SwiftLocalNotification
-
-struct ItemModel {
+struct ItemModelCodable: Codable, Equatable {
   let title: String
-  let notifDate: Date?
+  let repeats: String?
+  let description: String?
+  let state: ItemState?
+
+  func toItemModel() -> ItemModel {
+    return ItemModel(title: title, notifDate: nil, repeats: RepeatingInterval(rawValue: repeats ?? "none"), description: description, parentList: nil, state: state)
+  }
+}
+struct ItemModel {
+  var title: String
+  var notifDate: Date?
   let repeats: RepeatingInterval?
   let description: String?
-  let parentList: List
+  var parentList: List?
   let state: ItemState?
   
   func asDBItem() -> Item {

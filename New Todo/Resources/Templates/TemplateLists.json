@@ -8,14 +8,6 @@
     "type": 100
   },
   {
-    "iconColor": "#7E84F4",
-    "iconName": "calendar",
-    "iconId": -1,
-    "itemsCount": 0,
-    "title": "today_lists_type",
-    "type": 99
-  },
-  {
     "iconColor": "#FF6B31",
     "iconName": "ic_favourite",
     "iconId": -1,
@@ -28,7 +20,7 @@
     "iconName": "ic_30",
     "iconId": 30,
     "itemsCount": 0,
-    "title": "reminder_lists_type",
+    "title": "template_motivations_list",
     "type": 1
   },
   {
@@ -36,7 +28,7 @@
     "iconName": "ic_0",
     "iconId": 0,
     "itemsCount": 0,
-    "title": "countdown_lists_type",
+    "title": "template_birthdays_list",
     "type": 3
   },
   {
@@ -44,7 +36,7 @@
     "iconName": "ic_31",
     "iconId": 31,
     "itemsCount": 0,
-    "title": "note_lists_type",
+    "title": "template_geroceries_list",
     "type": 2
   }
 ]

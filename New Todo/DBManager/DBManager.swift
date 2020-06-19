@@ -7,28 +7,113 @@
 //
 
 import CoreData
+import CloudKit
+import SwiftLocalNotification
 
 final public class DBManager: DatabaseManagerProtocol {
   //MARK: - Configuration
   func configureDataBase() {
-//    let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
-//    for templateList in templateLists {
-//      var list = templateList
-//      list.title = templateList.title.localize()
-//      _ = addList(list, response: nil)
-//      if let last = templateLists.last, templateList == last {
-//        Defaults.isDatabaseConfigured = true
-//      }
-    //}
+    if !Defaults.isDatabaseConfigured {
+      CKContainer.default().fetchUserRecordID { (id, err) in
+        if let error = err as NSError? {
+          print("errrrrrrr\(error.code)")
+        } else {
+          print("idddd: \(String(describing: id))")
+        }
+      }
+      let query = CKQuery(recordType: "CD_List", predicate: NSPredicate(value: true))
+      CKContainer.default().privateCloudDatabase.perform(query, inZoneWith: nil) { [addTemplateLists] results, error in
+        if let error = error as NSError? {
+          if error.code == 11 {
+            addTemplateLists()
+          }
+          print(error.localizedDescription)
+          return
+        } else {
+          if let results = results, results.count == 0 {
+            addTemplateLists()
+          }
+        }
+      }
+    }
+  }
+  
+  private func addTemplateLists() {
+    let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
+    let templateItems = SSMocker<ItemModelCodable>.loadGenericObjectsFromLocalJson(fileName: "TemplateItems")
     
-    if Defaults.appOpenedCount == 0 || !Defaults.isDatabaseConfigured {
+    for templateList in templateLists {
+      
+      var list = templateList
+      list.title = templateList.title.localize()
+      let dbList = addList(list, response: nil)
+      
+      for (index, templateItem) in templateItems.enumerated() {
+        if index <= 4, templateList.type == ListType.reminder.rawValue {
+          var item = templateItem.toItemModel()
+          item.title = templateItem.title
+          item.parentList = dbList
+          var notifDate: Date?
+          switch index {
+          case 0:
+            notifDate = Calendar.current.date(bySettingHour: 10, minute: 0, second: 0, of: Date()) ?? Date()
+          case 1:
+            notifDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date()) ?? Date()
+          case 2:
+            notifDate = Calendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date()) ?? Date()
+          case 3:
+            notifDate = Calendar.current.date(bySettingHour: 16, minute: 0, second: 0, of: Date()) ?? Date()
+          case 4:
+            notifDate = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date()) ?? Date()
+          default:
+            print("Another index of template items for reminders")
+          }
+          item.notifDate = notifDate
+          addItem(item, response: nil)
+
+        } else if index > 4, index <= 6, templateList.type == ListType.countdown.rawValue {
+          var item = templateItem.toItemModel()
+          item.title = templateItem.title
+          item.parentList = dbList
+          var notifDate: Date?
+          switch index {
+          case 5:
+            notifDate = Date()
+          case 6:
+            var dateComponents = DateComponents()
+            dateComponents.year = 1989
+            dateComponents.month = 8
+            dateComponents.day = 2
+            dateComponents.hour = 0
+            dateComponents.minute = 0
+            dateComponents.timeZone = Calendar.current.timeZone
+            notifDate = Calendar.current.date(from: dateComponents)
+          default:
+            print("Another index of template items for coundowns")
+          }
+          item.notifDate = notifDate
+          addItem(item, response: nil)
+
+        } else if index > 6, index <= 9, templateList.type == ListType.note.rawValue {
+          var item = templateItem.toItemModel()
+          item.title = templateItem.title
+          item.parentList = dbList
+          addItem(item, response: nil)
+        }
+      }
+      
+      if let last = templateLists.last, templateList == last {
+        Defaults.isDatabaseConfigured = true
+      }
       
     }
   }
+  
   //MARK: - List Related Functions
-  func addList(_ list: ListModel, response: ((Bool) -> Void)?) {
-    _ = list.asDBList()
+  func addList(_ list: ListModel, response: ((Bool) -> Void)?) -> List {
+    let dbList = list.asDBList()
     CoreDataStack.shared.saveContext()
+    return dbList
   }
   
   func getAllLists(response: @escaping ([List]) -> Void) {
@@ -78,7 +163,7 @@ final public class DBManager: DatabaseManagerProtocol {
   }
   
   func update(Item item: Item, response: ((Bool) -> Void)?) {
-    
+    CoreDataStack.shared.saveContext()
   }
   //MARK: - Shared
   

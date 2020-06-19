@@ -17,6 +17,7 @@
 		254A40F72497DEE000F9E3A7 /* DateSelectionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254A40F22497DEE000F9E3A7 /* DateSelectionController.xib */; };
 		254A40FF249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40FE249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift */; };
 		254A4101249B233900F9E3A7 /* FRCCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A4100249B233900F9E3A7 /* FRCCollectionViewDataSource.swift */; };
+		254A4103249C5B2700F9E3A7 /* TemplateItems.json in Resources */ = {isa = PBXBuildFile; fileRef = 254A4102249C5B2700F9E3A7 /* TemplateItems.json */; };
 		254F34A92485F4F60099C96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34A82485F4F60099C96C /* AppDelegate.swift */; };
 		254F34AB2485F4F60099C96C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AA2485F4F60099C96C /* SceneDelegate.swift */; };
 		254F34AD2485F4F60099C96C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F34AC2485F4F60099C96C /* HomeController.swift */; };
@@ -124,6 +125,7 @@
 		254A40F22497DEE000F9E3A7 /* DateSelectionController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateSelectionController.xib; sourceTree = "<group>"; };
 		254A40FE249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCTableViewDataSource.swift; sourceTree = "<group>"; };
 		254A4100249B233900F9E3A7 /* FRCCollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FRCCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		254A4102249C5B2700F9E3A7 /* TemplateItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TemplateItems.json; sourceTree = "<group>"; };
 		254F34A52485F4F60099C96C /* New Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Todo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		254F34A82485F4F60099C96C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		254F34AA2485F4F60099C96C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -589,6 +591,7 @@
 		254F3592248AEB630099C96C /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				254A4102249C5B2700F9E3A7 /* TemplateItems.json */,
 				254F3595248AEB9C0099C96C /* TemplateLists.json */,
 			);
 			path = Templates;
@@ -691,6 +694,7 @@
 				254F358F24888D0C0099C96C /* AddListController.xib in Resources */,
 				254F34FE248738C50099C96C /* Icons.json in Resources */,
 				254F34B82485F4F80099C96C /* LaunchScreen.storyboard in Resources */,
+				254A4103249C5B2700F9E3A7 /* TemplateItems.json in Resources */,
 				254F351124873C020099C96C /* SplashController.xib in Resources */,
 				254F34C9248733B00099C96C /* Localizable.strings in Resources */,
 				254F34B52485F4F80099C96C /* Assets.xcassets in Resources */,
@@ -970,7 +974,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ca.SaSApps.New-Todo";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -991,7 +995,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ca.SaSApps.New-Todo";
+				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

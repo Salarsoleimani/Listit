@@ -21,7 +21,7 @@ target 'New Todo' do
 
   pod 'SwiftEntryKit', '1.2.3'
   
-  pod 'RSKGrowingTextView'
+  pod 'CountdownLabel'
 # Physical
   pod 'Haptico'
   

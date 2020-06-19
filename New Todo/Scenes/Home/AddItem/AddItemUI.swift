@@ -60,7 +60,6 @@ extension AddItemController {
     whichListTitleLabel.textColor = Colors.listCellTitle.value
     
     
-    whichListTextField.placeholder = "select_list_placeholder".localize()
     whichListTextField.font = Fonts.h5Regular
     whichListTextField.textColor = Colors.listCellTitle.value
     
@@ -82,7 +81,7 @@ extension AddItemController {
       titleTextField.text = item.title
       if let desc = item.desc, !desc.isEmpty {
         moreInfoTextView.text = desc
-        moreInfoButtonPressed(0)
+        moreInfoTextView?.isHidden = false
         moreInfoButton.isHidden = true
       } else {
         moreInfoButton.isHidden = false
@@ -104,9 +103,12 @@ extension AddItemController {
       
       saveButton.makeNewTodoButton(title: "update_button_title".localize())
       saveAndAddAnotherButton.makeNewTodoButton(title: "update_and_another_item_button_title".localize())
+      whichListTextField.placeholder = "select_into_which_list_placeholder".localize()
     } else {
       saveButton.makeNewTodoButton(title: "save_button_title".localize())
       saveAndAddAnotherButton.makeNewTodoButton(title: "save_and_another_item_button_title".localize())
+      whichListTextField.placeholder = "select_list_placeholder".localize()
+
     }
   }
 }

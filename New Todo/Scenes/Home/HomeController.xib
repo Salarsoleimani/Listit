@@ -30,23 +30,23 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-nr-Uma">
-                    <rect key="frame" x="0.0" y="52" width="414" height="810"/>
+                    <rect key="frame" x="0.0" y="52" width="414" height="802"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eIo-xt-6dI">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="648"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
                             <subviews>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X0H-6D-EL3">
-                                    <rect key="frame" x="0.0" y="0.0" width="356" height="648"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="356" height="640"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </tableView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6yq-87-MGB">
-                                    <rect key="frame" x="364" y="0.0" width="50" height="648"/>
+                                    <rect key="frame" x="364" y="0.0" width="50" height="640"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iev-yp-MRx">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="318"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="640"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aJ-En-f6K">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="318"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="640"/>
                                                     <color key="backgroundColor" red="0.72549019609999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -58,7 +58,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+   add   item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8J-Tk-JTu" customClass="UILabelX" customModule="New_Todo" customModuleProvider="target">
-                                                    <rect key="frame" x="-28.5" y="149" width="99.5" height="20.5"/>
+                                                    <rect key="frame" x="-28.5" y="310" width="99.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -79,11 +79,11 @@
                                                 <constraint firstAttribute="trailing" secondItem="0aJ-En-f6K" secondAttribute="trailing" constant="8" id="z4u-9m-8VH"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PpJ-rT-fTf">
-                                            <rect key="frame" x="0.0" y="330" width="50" height="318"/>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PpJ-rT-fTf">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="0.0"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Su5-zV-zvS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="318"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="0.0"/>
                                                     <color key="backgroundColor" red="0.72549019609999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -95,7 +95,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+   add   item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7R4-YY-yb9" customClass="UILabelX" customModule="New_Todo" customModuleProvider="target">
-                                                    <rect key="frame" x="-28.5" y="149" width="99.5" height="20.5"/>
+                                                    <rect key="frame" x="-28.5" y="-10" width="99.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -121,7 +121,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yCj-Od-KAP">
-                            <rect key="frame" x="0.0" y="660" width="414" height="150"/>
+                            <rect key="frame" x="0.0" y="652" width="414" height="150"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TEq-JF-rYG">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="150"/>
@@ -211,7 +211,7 @@
                 <constraint firstItem="B6Q-5L-rTf" firstAttribute="leading" secondItem="WLd-EZ-D6C" secondAttribute="leading" id="Rjs-Rf-XJ7"/>
                 <constraint firstItem="b6p-nr-Uma" firstAttribute="top" secondItem="6fG-i0-pgR" secondAttribute="top" constant="8" id="VA9-c9-AhK"/>
                 <constraint firstItem="b6p-nr-Uma" firstAttribute="leading" secondItem="WLd-EZ-D6C" secondAttribute="leading" id="fiQ-N9-6b3"/>
-                <constraint firstItem="6fG-i0-pgR" firstAttribute="bottom" secondItem="b6p-nr-Uma" secondAttribute="bottom" id="wHA-6L-HZb"/>
+                <constraint firstItem="6fG-i0-pgR" firstAttribute="bottom" secondItem="b6p-nr-Uma" secondAttribute="bottom" constant="8" id="wHA-6L-HZb"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="6fG-i0-pgR"/>
             <point key="canvasLocation" x="76.811594202898561" y="111.83035714285714"/>

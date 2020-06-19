@@ -71,9 +71,13 @@ class DateSelectionController: UIViewController {
   // MARK:- LifeCycles
   override func viewDidLoad() {
     super.viewDidLoad()
-    fillData()
     setupUI()
     observeOnPickerChanges()
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    fillData()
+
   }
   // MARK:- Actions
   @IBAction private func closeButtonPressed(_ sender: UIButton) {
@@ -112,13 +116,14 @@ class DateSelectionController: UIViewController {
 
     if let passedDate = date {
       date = passedDate
-      datePicker.date = passedDate
       let timeFormatterString = self.timeFormatter.string(from: passedDate)
       let hourMinute = timeFormatterString.components(separatedBy: ":")
       if hourMinute.count == 2 {
         self.minute = Int(hourMinute[1]) ?? 0
         self.hour = Int(hourMinute[0]) ?? 0
       }
+      saveButton.setTitle("update_button_title".localize(), for: .normal)
+      deleteButton.isHidden = false
     } else {
       date = Date().addingTimeInterval(300)
       let timeFormatterString = self.timeFormatter.string(from: date!)
@@ -128,8 +133,9 @@ class DateSelectionController: UIViewController {
         self.hour = Int(hourMinute[0]) ?? 0
       }
       deleteButton.isHidden = true
-
+      saveButton.setTitle("save_button_title".localize(), for: .normal)
     }
+    
     if let passedRepeats = repeatingInterval {
       repeatingInterval = passedRepeats
     } else {
@@ -151,6 +157,11 @@ class DateSelectionController: UIViewController {
       repeatsSegmentedControl.selectedSegmentIndex = 5
     default:
       print("Something went wrong in selecting repeating interval")
+    }
+    
+    if let date = date {
+      timePicker.setDate(date, animated: false)
+      datePicker.setDate(date, animated: false)
     }
   }
   private func observeOnPickerChanges() {

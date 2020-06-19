@@ -117,7 +117,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="0Re-ex-hYa">
                                     <rect key="frame" x="16" y="16" width="350" height="391"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Into which list:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="js5-c3-yzi">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Into which list:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="js5-c3-yzi">
                                             <rect key="frame" x="0.0" y="0.0" width="109.5" height="391"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

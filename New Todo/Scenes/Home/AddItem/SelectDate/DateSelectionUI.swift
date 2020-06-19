@@ -57,26 +57,5 @@ extension DateSelectionController {
     deleteButton.tintColor = Colors.error.value
     deleteButton.setTitle("delete_reminder_button_title".localize(), for: .normal)
     
-    if let date = date, let interval = repeatingInterval {
-      timePicker.setDate(date, animated: false)
-      datePicker.setDate(date, animated: false)
-      switch interval {
-      case .none:
-        repeatsSegmentedControl.selectedSegmentIndex = 0
-      case .minute:
-        print("interval is minute which is not included in the app")
-      case .hourly:
-        repeatsSegmentedControl.selectedSegmentIndex = 1
-      case .daily:
-        repeatsSegmentedControl.selectedSegmentIndex = 2
-      case .weekly:
-        repeatsSegmentedControl.selectedSegmentIndex = 3
-      case .monthly:
-        repeatsSegmentedControl.selectedSegmentIndex = 4
-      case .yearly:
-        repeatsSegmentedControl.selectedSegmentIndex = 5
-      }
-      
-    }
   }
 }
