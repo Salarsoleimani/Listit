@@ -24,7 +24,4 @@ target 'New Todo' do
   pod 'CountdownLabel'
 # Physical
   pod 'Haptico'
-  
-  # Pods for New Todo
-
 end

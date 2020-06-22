@@ -13,7 +13,7 @@ extension HomeController {
     view.backgroundColor = Colors.background.value
 
     listsCollectionView.backgroundColor = .clear
-    itemsTableView.backgroundColor = .clear
+    itemsCollectionView.backgroundColor = .clear
 
     navigationItem.title = "all_items_navigation_title".localize()
     

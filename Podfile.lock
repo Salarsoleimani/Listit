@@ -13,10 +13,10 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
-  - SDWebImage (5.7.3):
-    - SDWebImage/Core (= 5.7.3)
-  - SDWebImage/Core (5.7.3)
-  - Siren (5.4.0)
+  - SDWebImage (5.8.1):
+    - SDWebImage/Core (= 5.8.1)
+  - SDWebImage/Core (5.8.1)
+  - Siren (5.4.4)
   - Stellar (0.67)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
@@ -80,13 +80,13 @@ SPEC CHECKSUMS:
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
-  SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
-  Siren: 9df16ed5278cfaad7ea034f3d2206e4f6983e9b8
+  SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
+  Siren: 43ebf58c6593ed947a951ab6a03bdc413ffa371a
   Stellar: df980becd194eeb62d623af097582da0ef2219b9
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftLocalNotification: 971b8530997948187f97b7125f7acc88112640a3
   SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
 
-PODFILE CHECKSUM: d3589a2d7e248bdb94e511ceba408b234343d0fa
+PODFILE CHECKSUM: 3d1a0d41ee5665b2ffa359f53eb8cb066bc5a55e
 
 COCOAPODS: 1.9.0

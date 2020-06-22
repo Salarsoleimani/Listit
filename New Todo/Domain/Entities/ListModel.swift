@@ -18,7 +18,7 @@ struct ListModel: Codable, Equatable {
   
   func asDBList() -> List {
     let dbList = List(context: CoreDataStack.managedContext)
-    dbList.id = UUID()
+    dbList.id = UUID().uuidString
     dbList.iconColor = iconColor
     dbList.iconId = iconId
     dbList.iconName = iconName

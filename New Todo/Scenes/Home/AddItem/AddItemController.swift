@@ -36,6 +36,7 @@ class AddItemController: UIViewController {
   @IBOutlet weak var saveAndAddAnotherButton: UIButton!
   
   // MARK:- variables
+  var allItemsList: List?
   var parentList: List? {
     didSet {
       if let parentList = parentList {
@@ -158,7 +159,7 @@ class AddItemController: UIViewController {
       return
     }
     let item = ItemModel(title: titleTextField.text ?? "", notifDate: notifDate, repeats: repeats, description: moreInfoTextView.text, parentList: parentList ?? lists[listsPickerView.tag], state: .doing)
-    _ = dbManager.addItem(item, response: nil)
+    _ = dbManager.addItem(item, allItemsList: allItemsList, response: nil)
   }
 }
 extension AddItemController: UIPickerViewDelegate, UIPickerViewDataSource {

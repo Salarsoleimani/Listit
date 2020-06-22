@@ -42,11 +42,16 @@ final public class DBManager: DatabaseManagerProtocol {
     let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
     let templateItems = SSMocker<ItemModelCodable>.loadGenericObjectsFromLocalJson(fileName: "TemplateItems")
     
+    var allItemsList: List?
     for templateList in templateLists {
       
       var list = templateList
       list.title = templateList.title.localize()
       let dbList = addList(list, response: nil)
+      
+      if templateList.type == ListType.all.rawValue {
+        allItemsList = dbList
+      }
       
       for (index, templateItem) in templateItems.enumerated() {
         if index <= 4, templateList.type == ListType.reminder.rawValue {
@@ -69,7 +74,8 @@ final public class DBManager: DatabaseManagerProtocol {
             print("Another index of template items for reminders")
           }
           item.notifDate = notifDate
-          addItem(item, response: nil)
+
+          addItem(item, allItemsList: allItemsList, response: nil)
 
         } else if index > 4, index <= 6, templateList.type == ListType.countdown.rawValue {
           var item = templateItem.toItemModel()
@@ -92,13 +98,13 @@ final public class DBManager: DatabaseManagerProtocol {
             print("Another index of template items for coundowns")
           }
           item.notifDate = notifDate
-          addItem(item, response: nil)
+          addItem(item, allItemsList: allItemsList, response: nil)
 
         } else if index > 6, index <= 9, templateList.type == ListType.note.rawValue {
           var item = templateItem.toItemModel()
           item.title = templateItem.title
           item.parentList = dbList
-          addItem(item, response: nil)
+          addItem(item, allItemsList: allItemsList, response: nil)
         }
       }
       
@@ -126,6 +132,7 @@ final public class DBManager: DatabaseManagerProtocol {
       print("Error fetching lists")
     }
   }
+  
   func delete(List list: List, response: ((Bool) -> Void)?) {
     CoreDataStack.managedContext.delete(list)
     CoreDataStack.shared.saveContext()
@@ -135,11 +142,15 @@ final public class DBManager: DatabaseManagerProtocol {
     CoreDataStack.shared.saveContext()
   }
   //MARK: - Item Related Functions
-  func updateIsFavorite(isFavorite: Bool = true, item: Item) {
+  func updateIsFavorite(isFavorite: Bool = true, favoriteList: List?, item: Item) {
+    favoriteList?.itemsCount += 1
     item.isFavorite = isFavorite
     CoreDataStack.shared.saveContext()
   }
-  func addItem(_ item: ItemModel, response: ((Bool) -> Void)?) {
+  func addItem(_ item: ItemModel, allItemsList: List?, response: ((Bool) -> Void)?) {
+    allItemsList?.itemsCount += 1
+    item.parentList?.itemsCount += 1
+    
     _ = item.asDBItem()
     CoreDataStack.shared.saveContext()
   }
@@ -147,6 +158,7 @@ final public class DBManager: DatabaseManagerProtocol {
   func get(ItemsForListUID: UUID, response: @escaping ([Item]) -> Void) {
     
   }
+  
   func getAllItems(response: @escaping ([Item]) -> Void) {
     let fetch = NSFetchRequest<Item>(entityName: "Item")
     fetch.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]

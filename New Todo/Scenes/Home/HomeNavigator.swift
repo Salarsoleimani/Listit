@@ -19,7 +19,7 @@ final class HomeNavigator: Navigator {
     AddListNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(list: list)
   }
   
-  func toAddOrEditItem(item: Item?, forList: List?, lists: [List]) {
-    AddItemNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(item: item, parentList: forList, lists: lists)
+  func toAddOrEditItem(item: Item?, forList: List?, lists: [List], allItemsList: List?) {
+    AddItemNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(item: item, parentList: forList, lists: lists, allItemsList: allItemsList)
   }
 }

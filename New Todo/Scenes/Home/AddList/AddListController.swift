@@ -121,7 +121,7 @@ class AddListController: UIViewController {
       navigator.pop()
       return
     }
-    dbManager.addList(listModel, response: nil)
+    _ = dbManager.addList(listModel, response: nil)
     navigator.pop()
   }
   

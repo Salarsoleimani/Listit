@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol FRCItemsCollectionDelegate: class {
-  func frcCollectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+  func frcItemsCollectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
 }
 
 class FRCItemsCollectionDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
@@ -59,7 +59,7 @@ class FRCItemsCollectionDataSource<FetchRequestResult: NSFetchRequestResult>: NS
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if let delegate = delegate {
-      return delegate.frcCollectionView(collectionView, cellForItemAt: indexPath)
+      return delegate.frcItemsCollectionView(collectionView, cellForItemAt: indexPath)
     } else {
       return UICollectionViewCell()
     }

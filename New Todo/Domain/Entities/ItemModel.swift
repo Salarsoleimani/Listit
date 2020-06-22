@@ -27,7 +27,7 @@ struct ItemModel {
   
   func asDBItem() -> Item {
     let dbItem = Item(context: CoreDataStack.managedContext)
-    dbItem.id = UUID()
+    dbItem.id = UUID().uuidString
     dbItem.title = title
     dbItem.createdAt = Date()
     dbItem.list = parentList

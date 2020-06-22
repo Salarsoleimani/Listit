@@ -19,78 +19,24 @@ extension HomeController: FRCCollectionViewDelegate {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellIds.cellId, for: indexPath) as! ListCell
     let list = listsDataSource.object(at: indexPath)
     cell.bindData(withViewModel: ListItemViewModel(model: list))
+
+    if list.type == ListType.all.rawValue {
+      let allItemsCount = itemsDataSource.frc.fetchedObjects?.count ?? 0
+      cell.itemsQtyLabel.text = "\(allItemsCount) \("all_lists_type_quantity".localize())"
+    } else if list.type == ListType.favorites.rawValue {
+      let favItemsCount = itemsDataSource.frc.fetchedObjects?.filter{$0.isFavorite}.count ?? 0
+      cell.itemsQtyLabel.text = "\(favItemsCount) \("favorites_lists_type_quantity".localize())"
+    }
     return cell
   }
 }
-fileprivate class ItemsTableViewDataSource: FRCTableViewDataSource<Item> {
-//  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//    let context = frc.managedObjectContext
-//
-//    switch editingStyle {
-//    case .delete: context.delete(object(at: indexPath))
-//    default: return
-//    }
-//  }
+fileprivate class ItemsCollectionViewDataSource: FRCItemsCollectionDataSource<Item> {
+  
   
 }
-extension HomeController: FRCTableViewDelegate {
-  private func deleteItem(_ item: Item, indexPath: IndexPath) {
-    dbManager.delete(Item: item, response: nil)
-  }
-  func frcTableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-    if let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
-      let item = cell.viewModel.model
-      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, yourLists, deleteItem] action in
-        
-        let favoriteItem = UIAction(title: "favorite_item_title".localize(), image: UIImage(systemName: "star.fill"), handler: { [dbManager] action in
-          dbManager.updateIsFavorite(isFavorite: true, item: item)
-        })
-        let unfavoriteItem = UIAction(title: "unfavorite_item_title".localize(), image: UIImage(systemName: "star.slash.fill"), handler: { [dbManager] action in
-          dbManager.updateIsFavorite(isFavorite: false, item: item)
-        })
-        
-        let delete = UIAction(title: "delete_list_action".localize(), image: UIImage(systemName: "trash.fill"), attributes: .destructive, handler: { action in
-          deleteItem(item, indexPath)
-        })
-        let edit = UIAction(title: "edit_list_action".localize(), image: UIImage(systemName: "square.and.pencil"), handler: {action in
-          navigator.toAddOrEditItem(item: item, forList: item.list, lists: yourLists)
-        })
-        
-        if item.isFavorite {
-          return UIMenu(title: "", image: nil, identifier: nil, children: [unfavoriteItem, edit, delete])
-        } else {
-          return UIMenu(title: "", image: nil, identifier: nil, children: [favoriteItem, edit, delete])
-        }
-        
-      }
-      
-      return listConfiguration
-    }
-    return nil
-  }
-  
-  func frcTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    let items = itemsDataSource.frc.fetchedObjects
-    if let items = items, indexPath.row < items.count {
-      let specificItem = items[indexPath.row]
-      let itemListType = ListType(rawValue: specificItem.list?.type ?? ListType.default.rawValue) ?? ListType.default
-      switch itemListType {
-      case .none:
-        return 50
-      case .reminder:
-        return 120
-      case .note:
-        return 80
-      case .countdown:
-        return 150
-      default: break
-      }
-    }
-    return 50
-  }
-  
-  func frcTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CellIds.cellId, for: indexPath) as! ItemCell
+extension HomeController: FRCItemsCollectionDelegate {
+  func frcItemsCollectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.CellIds.cellId, for: indexPath) as! ItemCell
     let item = itemsDataSource.object(at: indexPath)
     cell.rowLabel.text = String(indexPath.row + 1)
     cell.bindData(withViewModel: ItemViewModel(model: item))
@@ -100,7 +46,7 @@ extension HomeController: FRCTableViewDelegate {
 
 class HomeController: UIViewController {
   //MARK:- Outlets
-  @IBOutlet weak var itemsTableView: UITableView!
+  @IBOutlet weak var itemsCollectionView: UICollectionView!
   @IBOutlet weak var listsCollectionView: UICollectionView!
   
   @IBOutlet weak var addItemLabel: UILabelX!
@@ -120,7 +66,11 @@ class HomeController: UIViewController {
   private let navigator: HomeNavigator
   private let dbManager: DatabaseManagerProtocol
   //MARK:- Variables
-  lazy var allLists = listsDataSource.frc.fetchedObjects ?? [List]()
+  lazy var allLists: [List] = {
+    listsDataSource.performFetch()
+    return listsDataSource.frc.fetchedObjects ?? [List]()
+  }()
+  
   lazy var yourLists: [List] = {
     let filteredList = allLists.filter { (list) -> Bool in
       let type = ListType(rawValue: list.type) ?? ListType.default
@@ -128,11 +78,9 @@ class HomeController: UIViewController {
     }
     return filteredList
   }()
-  var allItems = [Item]()
-  var filteredItems = [Item]()
-  
+    
   var selectedList: List?
-  private var itemsDataSource: ItemsTableViewDataSource!
+  private var itemsDataSource: ItemsCollectionViewDataSource!
   private var listsDataSource: ListsCollectionViewDataSource!
   
   //MARK:- Initialization
@@ -156,11 +104,12 @@ class HomeController: UIViewController {
     notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     
     titleItemTextField.delegate = self
+    
     let listNib = UINib(nibName: "ListCell", bundle: nil)
     listsCollectionView.register(listNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
     let listsFetchRequest: NSFetchRequest<List> = List.fetchRequest()
     listsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
-    listsFetchRequest.fetchBatchSize = 5
+    listsFetchRequest.fetchBatchSize = 20
     listsDataSource = ListsCollectionViewDataSource(fetchRequest: listsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, collectionView: listsCollectionView)
     
     listsCollectionView.dataSource = listsDataSource
@@ -168,41 +117,33 @@ class HomeController: UIViewController {
     listsDataSource.performFetch()
 
     let itemNib = UINib(nibName: "ItemCell", bundle: nil)
-    itemsTableView.register(itemNib, forCellReuseIdentifier: Constants.CellIds.cellId)
+    itemsCollectionView.register(itemNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
     
     let itemsFetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
     itemsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
     itemsFetchRequest.fetchBatchSize = 20
 
-    itemsDataSource = ItemsTableViewDataSource(fetchRequest: itemsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, tableView: itemsTableView)
-    itemsTableView.dataSource = itemsDataSource
-    itemsTableView.delegate = itemsDataSource
+    itemsDataSource = ItemsCollectionViewDataSource(fetchRequest: itemsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, collectionView: itemsCollectionView)
+    itemsCollectionView.dataSource = itemsDataSource
+    itemsCollectionView.delegate = self
     itemsDataSource.performFetch()
-    
-    //    dbManager.getAllLists { [unowned self, listsCollectionView] (dbLists) in
-    //      self.allLists = dbLists
-    //      listsCollectionView?.reloadData()
-    //    }
-    
-    //    dbManager.getAllItems { [unowned self, itemsTableView] (dbItems) in
-    //      self.allItems = dbItems
-    //      self.filteredItems = dbItems
-    //      itemsTableView?.reloadData()
-    //    }
     
   }
   //MARK:- Actions
   @IBAction private func addItemButtonPressed(_ sender: UIButton) {
     if !yourLists.isEmpty {
-      navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: yourLists)
+      let allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
+      navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: yourLists, allItemsList: allItemsList)
     } else {
       navigator.toast(text: "add_item_no_list_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
       navigator.toAddOrEditList(list: nil)
     }
   }
+  
   @IBAction private func addListButtonPressed(_ sender: UIButton) {
     navigator.toAddOrEditList(list: nil)
   }
+  
   @IBAction private func quickAddListButtonPressed(_ sender: Any) {
     if let selectedList = selectedList, selectedList.type != ListType.all.rawValue, selectedList.type != ListType.favorites.rawValue {
       titleItemTextField.becomeFirstResponder()
@@ -240,18 +181,18 @@ class HomeController: UIViewController {
 }
 
 extension HomeController: UICollectionViewDelegate {
-  private func updateItemsTableView(_ selectedListRow: Int) {
-    let listType = ListType(rawValue: allLists[selectedListRow].type) ?? ListType.default
+  private func updateItemsTableView(_ list: List, selectedListItem: Int) {
+    let listType = ListType(rawValue: list.type) ?? ListType.default
     //let filteredItems = allItems.filter{ $0.list == allLists[selectedListRow] }
     var predicate: NSPredicate?
     
     switch listType {
     case .reminder:
-      predicate = NSPredicate(format: "list.type == \(listType.rawValue)")
+      predicate = NSPredicate(format: "list.id == %@", list.id ?? "")
     case .countdown:
-      predicate = NSPredicate(format: "list.type == \(listType.rawValue)")
+      predicate = NSPredicate(format: "list.id == %@", list.id ?? "")
     case .note:
-      predicate = NSPredicate(format: "list.type == \(listType.rawValue)")
+      predicate = NSPredicate(format: "list.id == %@", list.id ?? "")
     case .favorites:
       predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: true))
     case .all:
@@ -287,14 +228,14 @@ extension HomeController: UICollectionViewDelegate {
     }
     itemsDataSource.frc.fetchRequest.predicate = predicate
     itemsDataSource.performFetch()
-    itemsTableView.reloadData()
+    itemsCollectionView.reloadData()
   }
   
-  private func listSelected(_ row: Int) {
-    selectedList = allLists[row]
-    navigationItem.title = allLists[row].title ?? ""
-    updateItemsTableView(row)
-    if let type = ListType(rawValue: allLists[row].type) {
+  private func listSelected(_ list: List, selectedItem: Int) {
+    selectedList = list
+    navigationItem.title = list.title ?? ""
+    updateItemsTableView(list, selectedListItem: selectedItem)
+    if let type = ListType(rawValue: list.type) {
       if type == .all || type == .favorites {
         UIView.animate(withDuration: 0.25) { [quickAddItembuttonContainerView] in
           quickAddItembuttonContainerView?.isHidden = true
@@ -306,64 +247,105 @@ extension HomeController: UICollectionViewDelegate {
       }
     }
   }
+  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if collectionView == listsCollectionView {
-      listSelected(indexPath.item)
+    if collectionView == listsCollectionView, let listCell = collectionView.cellForItem(at: indexPath) as? ListCell {
+      let selectedList = listCell.viewModel.model
+      listSelected(selectedList, selectedItem: indexPath.item)
     }
   }
   func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-    let index = indexPath.item < 0 ? 0 : indexPath.item
-    let type = ListType(rawValue: allLists[index].type) ?? ListType.default
-    if type != .favorites, type != .all {
-      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [editListAction, addNewItemAction, deleteListAction, quickAddNewItemAction] action in
-        let addNewTitle = "add_new_item_to_list_action".localize()
-        let typeTitle = type.quantityTitle().dropLast().description
-        let addItem = UIAction(title: "\(addNewTitle) \(typeTitle)", image: UIImage(systemName: "plus.circle"), handler: {action in
-          addNewItemAction(index)
+    if collectionView == listsCollectionView, let listCell = collectionView.cellForItem(at: indexPath) as? ListCell {
+      let selectedList = listCell.viewModel.model
+      let type = ListType(rawValue: selectedList.type) ?? ListType.default
+      if type != .favorites, type != .all {
+        let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [editListAction, addNewItemAction, deleteListAction, quickAddNewItemAction] action in
+          let addNewTitle = "add_new_item_to_list_action".localize()
+          let typeTitle = type.quantityTitle().dropLast().description
+          let addItem = UIAction(title: "\(addNewTitle) \(typeTitle)", image: UIImage(systemName: "plus.circle"), handler: {action in
+            addNewItemAction(selectedList)
+          })
+          let quickAddNewTitle = "quick_add_new_item_to_list_action".localize()
+          let quickAddItem = UIAction(title: "\(quickAddNewTitle) \(typeTitle)", image: UIImage(systemName: "plus.circle"), handler: {action in
+            quickAddNewItemAction(selectedList)
+          })
+          let delete = UIAction(title: "delete_list_action".localize(), image: UIImage(systemName: "trash.fill"), attributes: .destructive, handler: { action in
+            deleteListAction(selectedList)
+          })
+          let edit = UIAction(title: "edit_list_action".localize(), image: UIImage(systemName: "square.and.pencil"), handler: {action in
+            editListAction(selectedList)
+          })
+          
+          return UIMenu(title: "", image: nil, identifier: nil, children: [quickAddItem, addItem, edit, delete])
+        }
+        
+        return listConfiguration
+      }
+    } else if collectionView == itemsCollectionView, let cell = collectionView.cellForItem(at: indexPath) as? ItemCell {
+      let item = cell.viewModel.model
+      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, yourLists, deleteItem, listsDataSource] action in
+        
+        let favoriteItem = UIAction(title: "favorite_item_title".localize(), image: UIImage(systemName: "star.fill"), handler: { [dbManager] action in
+          let favoriteList = listsDataSource?.frc.fetchedObjects?.filter{$0.type == ListType.favorites.rawValue}.first
+          dbManager.updateIsFavorite(isFavorite: true, favoriteList: favoriteList, item: item)
         })
-        let quickAddNewTitle = "quick_add_new_item_to_list_action".localize()
-        let quickAddItem = UIAction(title: "\(quickAddNewTitle) \(typeTitle)", image: UIImage(systemName: "plus.circle"), handler: {action in
-          quickAddNewItemAction(index)
-        })
-        let delete = UIAction(title: "delete_list_action".localize(), image: UIImage(systemName: "trash.fill"), attributes: .destructive, handler: { action in
-          deleteListAction(index)
-        })
-        let edit = UIAction(title: "edit_list_action".localize(), image: UIImage(systemName: "square.and.pencil"), handler: {action in
-          editListAction(index)
+        let unfavoriteItem = UIAction(title: "unfavorite_item_title".localize(), image: UIImage(systemName: "star.slash.fill"), handler: { [dbManager] action in
+          let favoriteList = listsDataSource?.frc.fetchedObjects?.filter{$0.type == ListType.favorites.rawValue}.first
+
+          dbManager.updateIsFavorite(isFavorite: false, favoriteList: favoriteList, item: item)
         })
         
-        return UIMenu(title: "", image: nil, identifier: nil, children: [quickAddItem, addItem, edit, delete])
+        let delete = UIAction(title: "delete_list_action".localize(), image: UIImage(systemName: "trash.fill"), attributes: .destructive, handler: { action in
+          deleteItem(item, indexPath)
+        })
+        let edit = UIAction(title: "edit_list_action".localize(), image: UIImage(systemName: "square.and.pencil"), handler: {action in
+          let allItemsList = listsDataSource?.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
+
+          navigator.toAddOrEditItem(item: item, forList: item.list, lists: yourLists, allItemsList: allItemsList)
+        })
+        
+        if item.isFavorite {
+          return UIMenu(title: "", image: nil, identifier: nil, children: [unfavoriteItem, edit, delete])
+        } else {
+          return UIMenu(title: "", image: nil, identifier: nil, children: [favoriteItem, edit, delete])
+        }
+        
       }
       
       return listConfiguration
     }
     return nil
   }
-  private func editListAction(_ index: Int) {
-    navigator.toAddOrEditList(list: allLists[index])
+  private func deleteItem(_ item: Item, indexPath: IndexPath) {
+    dbManager.delete(Item: item, response: nil)
   }
-  private func addNewItemAction(_ index: Int) {
-    navigator.toAddOrEditItem(item: nil, forList: allLists[index], lists: yourLists)
+  private func editListAction(_ list: List) {
+    navigator.toAddOrEditList(list: list)
   }
-  private func quickAddNewItemAction(_ index: Int) {
-    selectedList = allLists[index]
+  private func addNewItemAction(_ list: List) {
+    let allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
+
+    navigator.toAddOrEditItem(item: nil, forList: list, lists: yourLists, allItemsList: allItemsList)
+  }
+  private func quickAddNewItemAction(_ list: List) {
+    selectedList = list
     quickAddListButtonPressed(0)
   }
-  private func deleteListAction(_ index: Int) {
+  private func deleteListAction(list: List) {
     let cancelAction = UIAlertAction(title: "cancel_list_action".localize(), style: .cancel)
     let deleteAction = UIAlertAction(title: "delete_list_action".localize(), style: .destructive) { [deleteList] (action) in
-      deleteList(index)
+      deleteList(list)
     }
-    let listTitle = allLists[index].title ?? ""
+    let listTitle = list.title ?? ""
     let deleteListTitleAlert = String(format: "delete_list_title_alert".localize(), listTitle)
     let deleteListDescAlert = String(format: "delete_list_desc_alert".localize(), arguments: [listTitle, listTitle])
     let alertt = navigator.simpleAlert(title: deleteListTitleAlert, message: deleteListDescAlert, actions: [cancelAction, deleteAction])
     present(alertt, animated: true, completion: nil)
   }
-  private func deleteList(_ index: Int) {
-    dbManager.delete(List: allLists[index], response: nil)
-    if let items = allLists[index].items?.allObjects as? [Item] {
-      for item in items where item.list == allLists[index] {
+  private func deleteList(_ list: List) {
+    dbManager.delete(List: list, response: nil)
+    if let items = list.items?.allObjects as? [Item] {
+      for item in items where item.list == list {
         dbManager.delete(Item: item, response: nil)
       }
     }
@@ -372,8 +354,29 @@ extension HomeController: UICollectionViewDelegate {
 }
 extension HomeController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let listHeight = 150
-    return CGSize(width: 150, height: listHeight)
+    if collectionView == listsCollectionView {
+      let listHeight = 150
+      return CGSize(width: 150, height: listHeight)
+    }
+    let itemsCVWidth = itemsCollectionView.frame.width
+    var height: CGFloat = 50
+    let items = itemsDataSource.frc.fetchedObjects
+    if let items = items, indexPath.row < items.count {
+      let specificItem = items[indexPath.row]
+      let itemListType = ListType(rawValue: specificItem.list?.type ?? ListType.default.rawValue) ?? ListType.default
+      switch itemListType {
+      case .reminder:
+        height =  92
+      case .note:
+        height = 72
+      case .countdown:
+        height = 132
+      default: break
+      }
+      if let desc = specificItem.desc, !desc.isEmpty {} else {height -= 12}
+    }
+    return CGSize(width: itemsCVWidth, height: height)
+    
   }
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
@@ -384,7 +387,9 @@ extension HomeController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == titleItemTextField, let text = textField.text, !text.isEmpty, let selectedList = selectedList {
       let item = ItemModel(title: text, notifDate: nil, repeats: nil, description: nil, parentList: selectedList, state: nil)
-      dbManager.addItem(item, response: nil)
+      let allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
+
+      dbManager.addItem(item, allItemsList: allItemsList, response: nil)
       titleItemTextField.text = nil
       Haptico.shared().generate(.success)
       return true

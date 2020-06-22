@@ -99,7 +99,7 @@
 		254F35A2248C3E3B0099C96C /* AddItemUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F359D248C3E3B0099C96C /* AddItemUI.swift */; };
 		254F35A3248C3E3B0099C96C /* AddItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254F359E248C3E3B0099C96C /* AddItemController.xib */; };
 		254F35A9248C849A0099C96C /* ItemState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F35A8248C849A0099C96C /* ItemState.swift */; };
-		655548906F710990942F149B /* Pods_New_Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD2C185DC18537D8AE73F51 /* Pods_New_Todo.framework */; };
+		5BB2CAA2C9B45DC71C25C876 /* Pods_New_Todo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 584FA61D62F6AF308A948208 /* Pods_New_Todo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -211,9 +211,9 @@
 		254F359D248C3E3B0099C96C /* AddItemUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemUI.swift; sourceTree = "<group>"; };
 		254F359E248C3E3B0099C96C /* AddItemController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddItemController.xib; sourceTree = "<group>"; };
 		254F35A8248C849A0099C96C /* ItemState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemState.swift; sourceTree = "<group>"; };
-		389C8EF0D9155926C8ACE191 /* Pods-New Todo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-New Todo.release.xcconfig"; path = "Target Support Files/Pods-New Todo/Pods-New Todo.release.xcconfig"; sourceTree = "<group>"; };
-		934F33F61941FB1E85D90373 /* Pods-New Todo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-New Todo.debug.xcconfig"; path = "Target Support Files/Pods-New Todo/Pods-New Todo.debug.xcconfig"; sourceTree = "<group>"; };
-		9AD2C185DC18537D8AE73F51 /* Pods_New_Todo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_New_Todo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		584FA61D62F6AF308A948208 /* Pods_New_Todo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_New_Todo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C511CDD5CAE77CDDDC380E7D /* Pods-New Todo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-New Todo.debug.xcconfig"; path = "Target Support Files/Pods-New Todo/Pods-New Todo.debug.xcconfig"; sourceTree = "<group>"; };
+		C73F082419B50466FDC1F86F /* Pods-New Todo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-New Todo.release.xcconfig"; path = "Target Support Files/Pods-New Todo/Pods-New Todo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,7 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				254F34C2248702F20099C96C /* CloudKit.framework in Frameworks */,
-				655548906F710990942F149B /* Pods_New_Todo.framework in Frameworks */,
+				5BB2CAA2C9B45DC71C25C876 /* Pods_New_Todo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				254F34C1248702F20099C96C /* CloudKit.framework */,
-				9AD2C185DC18537D8AE73F51 /* Pods_New_Todo.framework */,
+				584FA61D62F6AF308A948208 /* Pods_New_Todo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -615,8 +615,8 @@
 		688903B344A7F855D872F57D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				934F33F61941FB1E85D90373 /* Pods-New Todo.debug.xcconfig */,
-				389C8EF0D9155926C8ACE191 /* Pods-New Todo.release.xcconfig */,
+				C511CDD5CAE77CDDDC380E7D /* Pods-New Todo.debug.xcconfig */,
+				C73F082419B50466FDC1F86F /* Pods-New Todo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -628,12 +628,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 254F34BC2485F4F80099C96C /* Build configuration list for PBXNativeTarget "New Todo" */;
 			buildPhases = (
-				F47AD1FB0C68EF83D5D80250 /* [CP] Check Pods Manifest.lock */,
+				B820CCCAE84A5C98C068E1FF /* [CP] Check Pods Manifest.lock */,
 				254F34A12485F4F60099C96C /* Sources */,
 				254F34A22485F4F60099C96C /* Frameworks */,
 				254F34A32485F4F60099C96C /* Resources */,
-				1FA27CB5B810FA0B96E2063A /* [CP] Embed Pods Frameworks */,
 				254F352924873D370099C96C /* Embed Frameworks */,
+				22047923A63D0940614D77E0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -709,7 +709,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1FA27CB5B810FA0B96E2063A /* [CP] Embed Pods Frameworks */ = {
+		22047923A63D0940614D77E0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -726,7 +726,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-New Todo/Pods-New Todo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F47AD1FB0C68EF83D5D80250 /* [CP] Check Pods Manifest.lock */ = {
+		B820CCCAE84A5C98C068E1FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -966,7 +966,7 @@
 		};
 		254F34BD2485F4F80099C96C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 934F33F61941FB1E85D90373 /* Pods-New Todo.debug.xcconfig */;
+			baseConfigurationReference = C511CDD5CAE77CDDDC380E7D /* Pods-New Todo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "New Todo/New Todo.entitlements";
@@ -987,7 +987,7 @@
 		};
 		254F34BE2485F4F80099C96C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 389C8EF0D9155926C8ACE191 /* Pods-New Todo.release.xcconfig */;
+			baseConfigurationReference = C73F082419B50466FDC1F86F /* Pods-New Todo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "New Todo/New Todo.entitlements";

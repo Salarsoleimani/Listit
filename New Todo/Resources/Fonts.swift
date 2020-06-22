@@ -10,6 +10,8 @@ import Foundation
 
 struct Fonts {
   static let h2Bold = SSFont(.installed(.montserrat, .bold), size: .standard(.h1)).instance
+  static let h2Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h1)).instance
+
   static let h5Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h5)).instance
   static let h7Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h7)).instance
 
@@ -24,7 +26,7 @@ struct Fonts {
   static let listCellDescription = SSFont(.installed(.montserrat, .regular), size: .standard(.h5)).instance
   
   // Items
-  static let itemCellTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h3)).instance
+  static let itemCellTitle = SSFont(.installed(.montserrat, .regular), size: .standard(.h3)).instance
   static let itemCellDescription = SSFont(.installed(.montserrat, .regular), size: .standard(.h5)).instance
   
   // Button
