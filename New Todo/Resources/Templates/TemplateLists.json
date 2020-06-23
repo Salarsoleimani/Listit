@@ -8,7 +8,7 @@
     "type": 100
   },
   {
-    "iconColor": "#e76f51",
+    "iconColor": "#E76F51",
     "iconName": "ic_favourite",
     "iconId": -1,
     "itemsCount": 0,
@@ -17,14 +17,14 @@
   },
   {
     "iconColor": "#87B37A",
-    "iconName": "ic_30",
-    "iconId": 30,
+    "iconName": "ic_24",
+    "iconId": 24,
     "itemsCount": 0,
     "title": "template_motivations_list",
     "type": 1
   },
   {
-    "iconColor": "#FCFF6C",
+    "iconColor": "#B5AB00",
     "iconName": "ic_0",
     "iconId": 0,
     "itemsCount": 0,
@@ -32,9 +32,9 @@
     "type": 3
   },
   {
-    "iconColor": "#72FF3F",
-    "iconName": "ic_31",
-    "iconId": 31,
+    "iconColor": "#56B800",
+    "iconName": "ic_29",
+    "iconId": 29,
     "itemsCount": 0,
     "title": "template_geroceries_list",
     "type": 2

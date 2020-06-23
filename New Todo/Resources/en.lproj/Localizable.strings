@@ -47,6 +47,9 @@
 "favorite_item_title" = "Add to favorites";
 "unfavorite_item_title" = "Remove from favorites";
 
+"mark_as_completed_item_title" = "Mark as finished";
+"uncomplete_item_title" = "Mark as unfinished";
+
 // - add list
 "add_list_title_placeholder" = "Your list title";
 "select_list_type_placeholder" = "Please select your list type";
@@ -70,6 +73,9 @@
 "remind_me_button_title" = "Please tap to set";
 "add_item_description" = "Add a new item into \"%@\" list. You can just save it or save the current and add another one.";
 "more_info_about_item_title" = "Add comment";
+
+"doesnt_set_date_title" = "No due date";
+"doesnt_set_repeats_title" = "No repeats";
 // - date pick
 "pick_date_description" = "Please pick a date to remind you by push notification. You can also select the repeating interval to get the notification regularly.";
 "pick_date_navigation_title" = "Remind date";
@@ -97,3 +103,4 @@
 
 "add_title_for_item_error" = "Please add title for your item";
 "select_list_for_item_error" = "Please select a list wanted to be your item in";
+"select_date_for_item_error" = "Please selec a date for your countdown";

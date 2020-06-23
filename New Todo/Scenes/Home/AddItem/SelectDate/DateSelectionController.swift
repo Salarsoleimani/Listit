@@ -72,12 +72,11 @@ class DateSelectionController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    observeOnPickerChanges()
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     fillData()
-
+    observeOnPickerChanges()
   }
   // MARK:- Actions
   @IBAction private func closeButtonPressed(_ sender: UIButton) {
@@ -113,7 +112,6 @@ class DateSelectionController: UIViewController {
   }
   // MARK:- Functions
   private func fillData() {
-
     if let passedDate = date {
       date = passedDate
       let timeFormatterString = self.timeFormatter.string(from: passedDate)

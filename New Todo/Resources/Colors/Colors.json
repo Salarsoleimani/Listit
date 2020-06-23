@@ -7,7 +7,7 @@
   {
     "id": 1,
     "name": "yellow",
-    "value": "#FFF100"
+    "value": "#B5AB00"
   },
   {
     "id": 2,
@@ -41,12 +41,17 @@
   },
   {
     "id": 8,
-    "name": "white",
-    "value": "#FFFFFF"
+    "name": "green",
+    "value": "#56B800"
   },
   {
     "id": 9,
     "name": "black",
     "value": "#000000"
+  },
+  {
+    "id": 9,
+    "name": "blue",
+    "value": "#457b9d"
   }
 ]

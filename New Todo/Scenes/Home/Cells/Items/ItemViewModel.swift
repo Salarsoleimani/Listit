@@ -15,16 +15,18 @@ struct ItemViewModel {
   let description: String
   let toDate: Date?
   let type: ListType
-  let repeats: String
   let countdownTimeFormat: String
   
+  let repeats: String
+  let dueDate: String
+  let haveDate: Bool
+
   let backgroundColor: UIColor
   let borderColor: UIColor
   let isFavoriteImage: UIImage
   let finishedLineImage: UIImage
   let finishedLineIsHidden: Bool
   var isShowingDetail: Bool
-  
   init(model: Item) {
     self.model = model
     self.title = model.title ?? ""
@@ -46,24 +48,41 @@ struct ItemViewModel {
     
     self.toDate = Calendar.current.date(from: component)
     
-    self.repeats = model.repeats ?? "Once"
+    if let repeats = model.repeats {
+      self.repeats = repeats
+    } else {
+      self.repeats = "doesnt_set_repeats_title".localize()
+    }
     let intervals = RepeatingInterval(rawValue: model.repeats ?? "none") ?? RepeatingInterval.none
-    
+    let dateFormatter = DateFormatter()
     switch intervals {
     case .none:
+      dateFormatter.dateFormat = "YYYY/MMM/dd HH:mm"
       self.countdownTimeFormat = "dd:hh:mm:ss"
     case .minute:
       self.countdownTimeFormat = "ss"
     case .hourly:
+      dateFormatter.dateFormat = "HH:mm"
       self.countdownTimeFormat = "mm:ss"
     case .daily:
+      dateFormatter.dateFormat = "HH:mm"
       self.countdownTimeFormat = "hh:mm:ss"
     case .weekly:
+      dateFormatter.dateFormat = "YYYY/MMM/dd HH:mm"
       self.countdownTimeFormat = "dd:hh:mm:ss"
     case .monthly:
+      dateFormatter.dateFormat = "YYYY/MMM/dd HH:mm"
       self.countdownTimeFormat = "dd:hh:mm:ss"
     case .yearly:
+      dateFormatter.dateFormat = "YYYY/MMM/dd HH:mm"
       self.countdownTimeFormat = "dd:hh:mm:ss"
+    }
+    if let notifDate = model.notifDate {
+      self.dueDate = dateFormatter.string(from: notifDate)
+      self.haveDate = true
+    } else {
+      self.dueDate = "doesnt_set_date_title".localize()
+      self.haveDate = false
     }
     
     self.backgroundColor = (UIColor(hexString: model.list?.iconColor ?? "") ?? Colors.main.value).withAlphaComponent(0.2)

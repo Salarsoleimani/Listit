@@ -141,6 +141,10 @@ class AddItemController: UIViewController {
       navigator.toast(text: "select_list_for_item_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
       whichListTextField.becomeFirstResponder()
       return false
+    } else if let parentList = parentList, parentList.type == ListType.countdown.rawValue, notifDate == nil {
+      navigator.toast(text: "select_date_for_item_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
+      navigator.toDateSelection(date: nil, repeating: .none, delegate: self)
+      return false
     } else {
       saveItem()
       return true

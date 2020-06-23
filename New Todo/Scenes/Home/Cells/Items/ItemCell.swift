@@ -30,9 +30,12 @@ class ItemCell: UICollectionViewCell {
   @IBOutlet weak var reminderDateLabel: UILabel!
   @IBOutlet weak var reminderDateIcon: UIImageView!
   
+  @IBOutlet weak var dateContainerStackView: UIStackView!
+
   @IBOutlet weak var finishedLineImageView: UIImageView!
   // MARK:- Variables
   var viewModel: ItemViewModel!
+  var isShowingDetail = false
   // MARK:- LifeCycles
   
   override func awakeFromNib() {
@@ -42,6 +45,9 @@ class ItemCell: UICollectionViewCell {
   // MARK:- Functions
   private func setupUI() {
     backgroundColor = .clear
+    
+    containerView.layer.borderWidth = 1.5
+    containerView.layer.cornerRadius = Constants.Radius.cornerRadius
     
     isFavoriteButton.tintColor = Colors.second.value
     
@@ -70,8 +76,12 @@ class ItemCell: UICollectionViewCell {
     reminderDateLabel.textColor = Colors.itemCellDescription.value
 
     reminderDateContainerView.backgroundColor = .clear
+    reminderDateContainerView.layer.borderWidth = 1.5
+    reminderDateContainerView.layer.cornerRadius = Constants.Radius.cornerRadius
     
     repeatContainerView.backgroundColor = .clear
+    repeatContainerView.layer.borderWidth = 1.5
+    repeatContainerView.layer.cornerRadius = Constants.Radius.cornerRadius
   }
   
   @IBAction func isFavoriteButtonPressed(_ sender: Any) {
@@ -94,18 +104,12 @@ extension ItemCell: BEKBindableCell {
   func bindData(withViewModel viewModel: ItemViewModel) {
     self.viewModel = viewModel
     containerView.backgroundColor = viewModel.backgroundColor
-    containerView.layer.cornerRadius = Constants.Radius.cornerRadius
     containerView.layer.borderColor = viewModel.borderColor.cgColor
-    containerView.layer.borderWidth = 1.5
-    
+
     reminderDateContainerView.layer.borderColor = viewModel.borderColor.cgColor
-    reminderDateContainerView.layer.borderWidth = 1.5
-    reminderDateContainerView.layer.cornerRadius = Constants.Radius.cornerRadius
     
     repeatContainerView.layer.borderColor = viewModel.borderColor.cgColor
-    repeatContainerView.layer.borderWidth = 1.5
-    repeatContainerView.layer.cornerRadius = Constants.Radius.cornerRadius
-
+    
     titleLabel.text = viewModel.title
     descriptionLabel.text = viewModel.description
     isFavoriteButton.setImage(viewModel.isFavoriteImage, for: .normal)
@@ -114,27 +118,86 @@ extension ItemCell: BEKBindableCell {
     finishedLineImageView.image = viewModel.finishedLineImage
     finishedLineImageView.isHidden = viewModel.finishedLineIsHidden
     
-    switch viewModel.type {
-    case .reminder:
-      countdownLabel.isHidden = true
-      repeatContainerView.isHidden = false
-      reminderDateContainerView.isHidden = false
-    case .note:
-      countdownLabel.isHidden = true
-      repeatContainerView.isHidden = true
-      reminderDateContainerView.isHidden = true
-    case .countdown:
+    reminderDateLabel.text = viewModel.dueDate
+    if viewModel.type == .countdown {
       countdownLabel.isHidden = false
-      repeatContainerView.isHidden = false
-      reminderDateContainerView.isHidden = false
       countdownLabel.timeFormat = viewModel.countdownTimeFormat
       countdownLabel.setCountDownDate(fromDate: NSDate(), targetDate: (viewModel.toDate ?? Date()) as NSDate)
       countdownLabel.start()
-    default: break
+    } else {
+      countdownLabel.isHidden = true
     }
-    
-    descriptionLabel.isHidden = viewModel.isShowingDetail
-    //reminderDateContainerView.isHidden = viewModel.isShowingDetail
-    //repeatContainerView.isHidden = viewModel.isShowingDetail
+    showDetail(isShowingDetail)
+  }
+  
+  func showDetail(_ isShowingDetail: Bool = false) {
+    if isShowingDetail {
+      descriptionLabel.isHidden = false
+      switch viewModel.type {
+      case .reminder:
+
+        reminderDateLabel.isHidden = false
+        reminderDateContainerView.isHidden = false
+        reminderDateIcon.isHidden = false
+        
+        repeatContainerView.isHidden = false
+        repeatLabel.isHidden = false
+        repeatIcon.isHidden = false
+      case .note:
+
+        reminderDateLabel.isHidden = true
+        reminderDateContainerView.isHidden = true
+        reminderDateIcon.isHidden = true
+        
+        repeatContainerView.isHidden = true
+        repeatLabel.isHidden = true
+        repeatIcon.isHidden = true
+      case .countdown:
+
+        reminderDateLabel.isHidden = false
+        reminderDateContainerView.isHidden = false
+        reminderDateIcon.isHidden = false
+        
+        repeatContainerView.isHidden = false
+        repeatLabel.isHidden = false
+        repeatIcon.isHidden = false
+        
+        
+      default: break
+      }
+    } else {
+      descriptionLabel.isHidden = true
+      switch viewModel.type {
+      case .reminder:
+
+        reminderDateLabel.isHidden = true
+        reminderDateContainerView.isHidden = true
+        reminderDateIcon.isHidden = true
+        
+        repeatContainerView.isHidden = true
+        repeatLabel.isHidden = true
+        repeatIcon.isHidden = true
+      case .note:
+
+        reminderDateLabel.isHidden = true
+        reminderDateContainerView.isHidden = true
+        reminderDateIcon.isHidden = true
+        
+        repeatContainerView.isHidden = true
+        repeatLabel.isHidden = true
+        repeatIcon.isHidden = true
+      case .countdown:
+
+        reminderDateLabel.isHidden = true
+        reminderDateContainerView.isHidden = true
+        reminderDateIcon.isHidden = true
+        
+        repeatContainerView.isHidden = true
+        repeatLabel.isHidden = true
+        repeatIcon.isHidden = true
+        
+      default: break
+      }
+    }
   }
 }

@@ -16,7 +16,7 @@ struct ColorModel: Codable {
 }
 extension ColorModel {
   func getColor() -> UIColor {
-    return UIColor(hexString: value)!
+    return UIColor(hexString: value)
   }
 }
 

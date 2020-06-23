@@ -24,6 +24,7 @@ protocol DatabaseManagerProtocol {
   func delete(Item item: Item,  response: ((Bool) -> Void)?)
   func update(Item item: Item, response: ((Bool) -> Void)?)
   func updateIsFavorite(isFavorite: Bool, favoriteList: List?, item: Item)
+  func updateState(item: Item, state: ItemState)
   // Shared
   func resetFactory()
 }

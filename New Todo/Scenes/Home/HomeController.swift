@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import SwiftLocalNotification
 import Haptico
+import IQKeyboardManagerSwift
 
 fileprivate class ListsCollectionViewDataSource: FRCCollectionViewDataSource<List> {
   
@@ -20,13 +21,13 @@ extension HomeController: FRCCollectionViewDelegate {
     let list = listsDataSource.object(at: indexPath)
     cell.bindData(withViewModel: ListItemViewModel(model: list))
 
-    if list.type == ListType.all.rawValue {
-      let allItemsCount = itemsDataSource.frc.fetchedObjects?.count ?? 0
-      cell.itemsQtyLabel.text = "\(allItemsCount) \("all_lists_type_quantity".localize())"
-    } else if list.type == ListType.favorites.rawValue {
-      let favItemsCount = itemsDataSource.frc.fetchedObjects?.filter{$0.isFavorite}.count ?? 0
-      cell.itemsQtyLabel.text = "\(favItemsCount) \("favorites_lists_type_quantity".localize())"
-    }
+//    if list.type == ListType.all.rawValue {
+//      let allItemsCount = itemsDataSource.frc.fetchedObjects?.count ?? 0
+//      cell.itemsQtyLabel.text = "\(allItemsCount) \("all_lists_type_quantity".localize())"
+//    } else if list.type == ListType.favorites.rawValue {
+//      let favItemsCount = itemsDataSource.frc.fetchedObjects?.filter{$0.isFavorite}.count ?? 0
+//      cell.itemsQtyLabel.text = "\(favItemsCount) \("favorites_lists_type_quantity".localize())"
+//    }
     return cell
   }
 }
@@ -47,6 +48,7 @@ extension HomeController: FRCItemsCollectionDelegate {
 class HomeController: UIViewController {
   //MARK:- Outlets
   @IBOutlet weak var itemsCollectionView: UICollectionView!
+  
   @IBOutlet weak var listsCollectionView: UICollectionView!
   
   @IBOutlet weak var addItemLabel: UILabelX!
@@ -78,8 +80,12 @@ class HomeController: UIViewController {
     }
     return filteredList
   }()
-    
-  var selectedList: List?
+  var selecteItemIndexpaths = [IndexPath]()
+  var selectedList: List? {
+    didSet {
+      selecteItemIndexpaths.removeAll()
+    }
+  }
   private var itemsDataSource: ItemsCollectionViewDataSource!
   private var listsDataSource: ListsCollectionViewDataSource!
   
@@ -96,6 +102,7 @@ class HomeController: UIViewController {
   //MARK:- Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
+
     setupUI()
     setupNavigationButtons()
     
@@ -173,7 +180,7 @@ class HomeController: UIViewController {
       }
     } else {
       UIView.animate(withDuration: 0.5) { [view, titleItemContainerViewBottomAnchor] in
-        titleItemContainerViewBottomAnchor?.constant = keyboardViewEndFrame.height - 26
+        titleItemContainerViewBottomAnchor?.constant = keyboardViewEndFrame.height - 20
         view?.layoutIfNeeded()
       }
     }
@@ -252,6 +259,19 @@ extension HomeController: UICollectionViewDelegate {
     if collectionView == listsCollectionView, let listCell = collectionView.cellForItem(at: indexPath) as? ListCell {
       let selectedList = listCell.viewModel.model
       listSelected(selectedList, selectedItem: indexPath.item)
+    } else if collectionView == itemsCollectionView, let itemCell = collectionView.cellForItem(at: indexPath) as? ItemCell {
+      if selecteItemIndexpaths.contains(indexPath) {
+        for (index, indexP) in selecteItemIndexpaths.enumerated() {
+          if indexP == indexPath {
+            selecteItemIndexpaths.remove(at: index)
+          }
+        }
+        itemCell.isShowingDetail = true
+      } else {
+        selecteItemIndexpaths.append(indexPath)
+        itemCell.isShowingDetail = false
+      }
+      collectionView.reloadItems(at: [indexPath])
     }
   }
   func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -285,6 +305,12 @@ extension HomeController: UICollectionViewDelegate {
       let item = cell.viewModel.model
       let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, yourLists, deleteItem, listsDataSource] action in
         
+        let markAsFinishedItem = UIAction(title: "mark_as_completed_item_title".localize(), image: UIImage(systemName: "checkmark.circle"), handler: { [dbManager] action in
+          dbManager.updateState(item: item, state: ItemState.done)
+        })
+        let markAsUnfinishedItem = UIAction(title: "uncomplete_item_title".localize(), image: UIImage(systemName: "arrow.uturn.left.circle"), handler: { [dbManager] action in
+          dbManager.updateState(item: item, state: ItemState.doing)
+        })
         let favoriteItem = UIAction(title: "favorite_item_title".localize(), image: UIImage(systemName: "star.fill"), handler: { [dbManager] action in
           let favoriteList = listsDataSource?.frc.fetchedObjects?.filter{$0.type == ListType.favorites.rawValue}.first
           dbManager.updateIsFavorite(isFavorite: true, favoriteList: favoriteList, item: item)
@@ -303,13 +329,21 @@ extension HomeController: UICollectionViewDelegate {
 
           navigator.toAddOrEditItem(item: item, forList: item.list, lists: yourLists, allItemsList: allItemsList)
         })
-        
-        if item.isFavorite {
-          return UIMenu(title: "", image: nil, identifier: nil, children: [unfavoriteItem, edit, delete])
-        } else {
-          return UIMenu(title: "", image: nil, identifier: nil, children: [favoriteItem, edit, delete])
+        let itemState = ItemState(rawValue: item.state) ?? ItemState.default
+        switch itemState {
+        case .doing:
+          if item.isFavorite {
+            return UIMenu(title: "", image: nil, identifier: nil, children: [markAsFinishedItem, unfavoriteItem, edit, delete])
+          } else {
+            return UIMenu(title: "", image: nil, identifier: nil, children: [markAsFinishedItem, favoriteItem, edit, delete])
+          }
+        case .done:
+          if item.isFavorite {
+            return UIMenu(title: "", image: nil, identifier: nil, children: [markAsUnfinishedItem, unfavoriteItem, edit, delete])
+          } else {
+            return UIMenu(title: "", image: nil, identifier: nil, children: [markAsUnfinishedItem, favoriteItem, edit, delete])
+          }
         }
-        
       }
       
       return listConfiguration
@@ -361,22 +395,39 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
     let itemsCVWidth = itemsCollectionView.frame.width
     var height: CGFloat = 50
     let items = itemsDataSource.frc.fetchedObjects
+
+    if selecteItemIndexpaths.contains(indexPath) {
+      if let items = items, indexPath.row < items.count {
+        let specificItem = items[indexPath.row]
+        let itemListType = ListType(rawValue: specificItem.list?.type ?? ListType.default.rawValue) ?? ListType.default
+        switch itemListType {
+        case .reminder:
+          height =  124
+        case .note:
+          height = 80
+        case .countdown:
+          height = 166
+        default: break
+        }
+        if let desc = specificItem.desc, !desc.isEmpty {} else {height -= 22}
+      }
+      return CGSize(width: itemsCVWidth, height: height)
+    }
     if let items = items, indexPath.row < items.count {
       let specificItem = items[indexPath.row]
       let itemListType = ListType(rawValue: specificItem.list?.type ?? ListType.default.rawValue) ?? ListType.default
       switch itemListType {
       case .reminder:
-        height =  92
+        height =  58
       case .note:
-        height = 72
+        height = 58
       case .countdown:
-        height = 132
+        height = 98
       default: break
       }
-      if let desc = specificItem.desc, !desc.isEmpty {} else {height -= 12}
     }
     return CGSize(width: itemsCVWidth, height: height)
-    
+
   }
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)

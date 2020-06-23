@@ -7,14 +7,16 @@
 //
 
 import SwiftLocalNotification
+
 struct ItemModelCodable: Codable, Equatable {
   let title: String
   let repeats: String?
   let description: String?
-  let state: ItemState?
+  let state: Int16?
 
   func toItemModel() -> ItemModel {
-    return ItemModel(title: title, notifDate: nil, repeats: RepeatingInterval(rawValue: repeats ?? "none"), description: description, parentList: nil, state: state)
+    let statee = ItemState(rawValue: state ?? 0) ?? ItemState.default
+    return ItemModel(title: title, notifDate: nil, repeats: RepeatingInterval(rawValue: repeats ?? "none"), description: description, parentList: nil, state: statee)
   }
 }
 struct ItemModel {

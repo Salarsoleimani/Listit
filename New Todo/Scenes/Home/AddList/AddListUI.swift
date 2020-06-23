@@ -22,9 +22,6 @@ extension AddListController {
     containerView.backgroundColor = Colors.listCellBackground.value
     containerView.layer.cornerRadius = Constants.Radius.cornerRadius
     
-    itemsQtyLabel.font = Fonts.listCellDescription
-    itemsQtyLabel.textColor = Colors.listCellDescription.value
-    
     iconButton.tintColor = Colors.white.value
     
     listTypeContainerView.backgroundColor = Colors.listCellBackground.value
@@ -50,10 +47,6 @@ extension AddListController {
       titleTextField.text = list.title
       
       let type = ListType(rawValue: list.type) ?? ListType.default
-      let itemsQuantity = list.itemsCount
-      let quantityTitle = type.quantityTitle()
-      let itemsCountText = itemsQuantity > 1 ? quantityTitle : quantityTitle.dropLast().description
-      itemsQtyLabel.text = "\(itemsQuantity) \(itemsCountText)"
       
       listModel = ListModel(iconColor: list.iconColor ?? Constants.Defaults.color, iconId: list.iconId, iconName: "ic_\(list.iconId)", itemsCount: list.itemsCount, title: list.title ?? "", type: list.type)
       

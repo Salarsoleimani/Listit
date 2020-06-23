@@ -30,7 +30,6 @@ class AddListController: UIViewController {
   @IBOutlet weak var iconButton: UIButton!
   @IBOutlet weak var iconContainerView: UIView!
   @IBOutlet weak var titleTextField: UITextField!
-  @IBOutlet weak var itemsQtyLabel: UILabel!
   
   @IBOutlet weak var listTypeContainerView: UIView!
   

@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ItemState: Int16, Codable {
+enum ItemState: Int16 {
   case doing
   case done
   

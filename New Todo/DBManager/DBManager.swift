@@ -147,6 +147,11 @@ final public class DBManager: DatabaseManagerProtocol {
     item.isFavorite = isFavorite
     CoreDataStack.shared.saveContext()
   }
+  func updateState(item: Item, state: ItemState) {
+    item.state = state.rawValue
+    CoreDataStack.shared.saveContext()
+
+  }
   func addItem(_ item: ItemModel, allItemsList: List?, response: ((Bool) -> Void)?) {
     allItemsList?.itemsCount += 1
     item.parentList?.itemsCount += 1
