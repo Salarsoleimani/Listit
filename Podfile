@@ -1,7 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'New Todo' do
+target 'Listit' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 # UI
@@ -22,6 +22,15 @@ target 'New Todo' do
   pod 'SwiftEntryKit', '1.2.3'
   
   pod 'CountdownLabel'
+  pod 'SPPermissions/Notification'
 # Physical
   pod 'Haptico'
+
+# Google
+  pod 'Google-Mobile-Ads-SDK'
+pod 'Firebase'
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Crashlytics'
+    pod 'FCUUID'
+
 end

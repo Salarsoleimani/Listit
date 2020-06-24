@@ -1,11 +1,92 @@
 PODS:
   - BEKListKit (1.0.3)
   - CountdownLabel (4.0.1)
+  - FCUUID (1.3.1):
+    - UICKeyChainStore (~> 2.1.0)
+  - Firebase (6.27.0):
+    - Firebase/Core (= 6.27.0)
+  - Firebase/Analytics (6.27.0):
+    - Firebase/Core
+  - Firebase/Core (6.27.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 6.6.1)
+  - Firebase/CoreOnly (6.27.0):
+    - FirebaseCore (= 6.8.0)
+  - Firebase/Crashlytics (6.27.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 4.2.0)
+  - FirebaseAnalytics (6.6.1):
+    - FirebaseCore (~> 6.8)
+    - FirebaseInstallations (~> 1.4)
+    - GoogleAppMeasurement (= 6.6.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 1.30905.0)
+  - FirebaseCore (6.8.0):
+    - FirebaseCoreDiagnostics (~> 1.3)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+  - FirebaseCoreDiagnostics (1.4.0):
+    - GoogleDataTransportCCTSupport (~> 3.1)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+    - nanopb (~> 1.30905.0)
+  - FirebaseCrashlytics (4.2.0):
+    - FirebaseCore (~> 6.8)
+    - FirebaseInstallations (~> 1.1)
+    - GoogleDataTransport (~> 6.1)
+    - GoogleDataTransportCCTSupport (~> 3.1)
+    - nanopb (~> 1.30905.0)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstallations (1.4.0):
+    - FirebaseCore (~> 6.8)
+    - GoogleUtilities/Environment (~> 6.6)
+    - GoogleUtilities/UserDefaults (~> 6.6)
+    - PromisesObjC (~> 1.2)
+  - Google-Mobile-Ads-SDK (7.61.0):
+    - GoogleAppMeasurement (~> 6.0)
+  - GoogleAppMeasurement (6.6.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 1.30905.0)
+  - GoogleDataTransport (6.2.1)
+  - GoogleDataTransportCCTSupport (3.2.0):
+    - GoogleDataTransport (~> 6.1)
+    - nanopb (~> 1.30905.0)
+  - GoogleUtilities/AppDelegateSwizzler (6.6.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.6.0):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.6.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.6.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.6.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.6.0)"
+  - GoogleUtilities/Reachability (6.6.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.6.0):
+    - GoogleUtilities/Logger
   - Haptico (1.0.2)
   - Hero (1.5.0)
   - IQKeyboardManagerSwift (6.5.5)
   - lottie-ios (3.1.8)
   - MaterialShowcase (0.7.1)
+  - nanopb (1.30905.0):
+    - nanopb/decode (= 1.30905.0)
+    - nanopb/encode (= 1.30905.0)
+  - nanopb/decode (1.30905.0)
+  - nanopb/encode (1.30905.0)
+  - PromisesObjC (1.2.9)
   - QuickLayout (3.0.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
@@ -17,15 +98,24 @@ PODS:
     - SDWebImage/Core (= 5.8.1)
   - SDWebImage/Core (5.8.1)
   - Siren (5.4.4)
+  - SPPermissions/Core (5.3.2)
+  - SPPermissions/Notification (5.3.2):
+    - SPPermissions/Core
   - Stellar (0.67)
   - SwiftEntryKit (1.2.3):
     - QuickLayout (= 3.0.0)
   - SwiftLocalNotification (1.0.3)
   - SwiftRater (1.8.0)
+  - UICKeyChainStore (2.1.2)
 
 DEPENDENCIES:
   - BEKListKit
   - CountdownLabel
+  - FCUUID
+  - Firebase
+  - Firebase/Analytics
+  - Firebase/Crashlytics
+  - Google-Mobile-Ads-SDK
   - Haptico
   - Hero
   - IQKeyboardManagerSwift
@@ -35,6 +125,7 @@ DEPENDENCIES:
   - RxSwift
   - SDWebImage
   - Siren
+  - SPPermissions/Notification
   - Stellar (from `https://github.com/AugustRush/Stellar.git`)
   - SwiftEntryKit (= 1.2.3)
   - SwiftLocalNotification
@@ -44,20 +135,36 @@ SPEC REPOS:
   trunk:
     - BEKListKit
     - CountdownLabel
+    - FCUUID
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseCrashlytics
+    - FirebaseInstallations
+    - Google-Mobile-Ads-SDK
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleDataTransportCCTSupport
+    - GoogleUtilities
     - Haptico
     - Hero
     - IQKeyboardManagerSwift
     - lottie-ios
     - MaterialShowcase
+    - nanopb
+    - PromisesObjC
     - QuickLayout
     - RxCocoa
     - RxRelay
     - RxSwift
     - SDWebImage
     - Siren
+    - SPPermissions
     - SwiftEntryKit
     - SwiftLocalNotification
     - SwiftRater
+    - UICKeyChainStore
 
 EXTERNAL SOURCES:
   Stellar:
@@ -71,22 +178,38 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   BEKListKit: eced55022c40444e55975752a03595751286e123
   CountdownLabel: c9975e3f329140b5e7d1f45cd63b1300badd1712
+  FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
+  Firebase: fc4cbf6f1592636431821ef9a3c557e4dfd9f268
+  FirebaseAnalytics: 0ea640473474f036cabbc2576e20c2d63671c92f
+  FirebaseCore: feda061cb1ee6d8ad4824f4a4a8ffbcfe284f595
+  FirebaseCoreDiagnostics: 4505e4d4009b1d93f605088ee7d7764d5f0d1c84
+  FirebaseCrashlytics: 7d0fa02ea8842cc4b2ab07b0735edafde1ad77d6
+  FirebaseInstallations: 293f567159b6d66d1c990f13bb868066096c94ec
+  Google-Mobile-Ads-SDK: 4c3b24b04293b4bb370b2cb392cdd3ee97c87752
+  GoogleAppMeasurement: 2fd5c5a56c069db635c8e7b92d4809a9591d0a69
+  GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
+  GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
+  GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
   Haptico: ce38d1f993f3a0df9a6d7795a9dd2849648aa9d1
   Hero: b7385b75e7259da62f4f85462f59a5082d66b058
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   MaterialShowcase: baaca60627058085d6b304f5a30ee952e99cee21
+  nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   QuickLayout: 07b45a72b10083fee3f095990cfed1c1e7b27f0a
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SDWebImage: e3eae2eda88578db0685a0c88597fdadd9433f05
   Siren: 43ebf58c6593ed947a951ab6a03bdc413ffa371a
+  SPPermissions: f1f82ba07d1a07e1d73521b19e7c3550b0bc0ddb
   Stellar: df980becd194eeb62d623af097582da0ef2219b9
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftLocalNotification: 971b8530997948187f97b7125f7acc88112640a3
   SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
+  UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
 
-PODFILE CHECKSUM: 3d1a0d41ee5665b2ffa359f53eb8cb066bc5a55e
+PODFILE CHECKSUM: 428347532ca8de0be8bf2f577faa352503ed6617
 
 COCOAPODS: 1.9.0
