@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import GoogleMobileAds
 
 protocol AddListControllerDelegate {
   func iconSelected(_ icon: IconCellViewModel)
@@ -25,6 +26,9 @@ extension AddListController: AddListControllerDelegate {
 }
 class AddListController: UIViewController {
   // MARK:- Outlets
+  @IBOutlet weak var adBannerContainerView: UIView!
+  @IBOutlet weak var removeAdButton: UIButton!
+  
   @IBOutlet weak var containerView: UIView!
   
   @IBOutlet weak var iconButton: UIButton!
@@ -47,9 +51,15 @@ class AddListController: UIViewController {
   }()
   
   // MARK:- variables
+  var delegate: HomeControllerDelegate?
   var list: List?
   var listModel = ListModel(iconColor: Constants.Defaults.color, iconId: 0, iconName: "ic_0", itemsCount: 0, title: "", type: 0)
   var listTypes = [ListType.reminder, .countdown, .note]
+  
+  let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+  var rewardedAd: GADRewardedAd?
+  var isRewardedAdWatched = false
+  
   // MARK:- Constants
   private let navigator: AddListNavigator
   private let dbManager: DatabaseManagerProtocol
@@ -69,7 +79,9 @@ class AddListController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
-    
+    if !Defaults.isAdsRemoved {
+      setupAds()
+    }
     if list == nil {
       randomizeIconColor()
       randomizeIconImage()
@@ -86,7 +98,12 @@ class AddListController: UIViewController {
   }
   // MARK:- Actions
   @IBAction private func didTapIcon(_ sender: UIButton) {
-    navigator.toIconSelector(delegate: self, listTitle: list?.title ?? listModel.title)
+    if isRewardedAdWatched {
+      navigator.toIconSelector(delegate: self, listTitle: list?.title ?? listModel.title)
+      isRewardedAdWatched = false
+      return
+    }
+    showRewardedAd()
   }
   @IBAction private func didTapSaveButton(_ sender: UIButton) {
     if let text = titleTextField.text, text.isEmpty {
@@ -120,7 +137,8 @@ class AddListController: UIViewController {
       navigator.pop()
       return
     }
-    _ = dbManager.addList(listModel, response: nil)
+    let list = dbManager.addList(listModel, response: nil)
+    delegate?.listAdded(list)
     navigator.pop()
   }
   

@@ -106,6 +106,15 @@
 		25B32BEA24A2E3CF00524CD9 /* HomeLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BE924A2E3CF00524CD9 /* HomeLists.swift */; };
 		25B32BEC24A2E5E400524CD9 /* HomeCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BEB24A2E5E400524CD9 /* HomeCollectionViewDelegate.swift */; };
 		25B32BEE24A2E64000524CD9 /* HomeCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BED24A2E64000524CD9 /* HomeCollectionViewFlowLayout.swift */; };
+		25B32BF024A2EBB500524CD9 /* AddItemAdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BEF24A2EBB500524CD9 /* AddItemAdMob.swift */; };
+		25B32BF224A2EFCD00524CD9 /* AddListAdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BF124A2EFCD00524CD9 /* AddListAdMob.swift */; };
+		25B32BF524A2F33100524CD9 /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BF424A2F33100524CD9 /* IAPService.swift */; };
+		25B32BF724A2F38D00524CD9 /* IAPProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BF624A2F38D00524CD9 /* IAPProducts.swift */; };
+		25B32BFE24A2F48100524CD9 /* SettingNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BF924A2F48100524CD9 /* SettingNavigator.swift */; };
+		25B32BFF24A2F48100524CD9 /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BFA24A2F48100524CD9 /* SettingController.swift */; };
+		25B32C0124A2F48100524CD9 /* SettingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BFC24A2F48100524CD9 /* SettingUI.swift */; };
+		25B32C0224A2F48100524CD9 /* SettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B32BFD24A2F48100524CD9 /* SettingController.xib */; };
+		25B32C0424A309D900524CD9 /* HomeControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C0324A309D900524CD9 /* HomeControllerDelegate.swift */; };
 		54DCA4EDC7598EDBBF1A5BF2 /* Pods_Listit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681C012384A06C1A9D1A7C6B /* Pods_Listit.framework */; };
 /* End PBXBuildFile section */
 
@@ -225,6 +234,15 @@
 		25B32BE924A2E3CF00524CD9 /* HomeLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLists.swift; sourceTree = "<group>"; };
 		25B32BEB24A2E5E400524CD9 /* HomeCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		25B32BED24A2E64000524CD9 /* HomeCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		25B32BEF24A2EBB500524CD9 /* AddItemAdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemAdMob.swift; sourceTree = "<group>"; };
+		25B32BF124A2EFCD00524CD9 /* AddListAdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListAdMob.swift; sourceTree = "<group>"; };
+		25B32BF424A2F33100524CD9 /* IAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
+		25B32BF624A2F38D00524CD9 /* IAPProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPProducts.swift; sourceTree = "<group>"; };
+		25B32BF924A2F48100524CD9 /* SettingNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNavigator.swift; sourceTree = "<group>"; };
+		25B32BFA24A2F48100524CD9 /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
+		25B32BFC24A2F48100524CD9 /* SettingUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUI.swift; sourceTree = "<group>"; };
+		25B32BFD24A2F48100524CD9 /* SettingController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingController.xib; sourceTree = "<group>"; };
+		25B32C0324A309D900524CD9 /* HomeControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeControllerDelegate.swift; sourceTree = "<group>"; };
 		681C012384A06C1A9D1A7C6B /* Pods_Listit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Listit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7AA76764A90D72C40FC3B85 /* Pods-Listit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listit.release.xcconfig"; path = "Target Support Files/Pods-Listit/Pods-Listit.release.xcconfig"; sourceTree = "<group>"; };
 		BD000643B42F3E614A290640 /* Pods-Listit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listit.debug.xcconfig"; path = "Target Support Files/Pods-Listit/Pods-Listit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -283,6 +301,7 @@
 		254F34A72485F4F60099C96C /* Listit */ = {
 			isa = PBXGroup;
 			children = (
+				25B32BF324A2F31F00524CD9 /* InApp */,
 				25B32BE024A2906E00524CD9 /* Analytics */,
 				254F353F2487427F0099C96C /* DBManager */,
 				254F353B2487424D0099C96C /* Domain */,
@@ -430,6 +449,7 @@
 		254F350224873BAC0099C96C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				25B32BF824A2F47200524CD9 /* Setting */,
 				254F354824874CB20099C96C /* Home */,
 				254F350324873BB10099C96C /* FirstFlow */,
 			);
@@ -516,6 +536,7 @@
 				254F356E24888C9A0099C96C /* AddList */,
 				254F354F24887DE90099C96C /* Cells */,
 				254F34AC2485F4F60099C96C /* HomeController.swift */,
+				25B32C0324A309D900524CD9 /* HomeControllerDelegate.swift */,
 				254F354924874CBE0099C96C /* HomeNavigator.swift */,
 				254F354B24874FD70099C96C /* HomeController.xib */,
 				254F354D248750080099C96C /* HomeControllerUI.swift */,
@@ -575,6 +596,7 @@
 				254F358724888D0C0099C96C /* AddListController.swift */,
 				254F358924888D0C0099C96C /* AddListUI.swift */,
 				254F358A24888D0C0099C96C /* AddListController.xib */,
+				25B32BF124A2EFCD00524CD9 /* AddListAdMob.swift */,
 			);
 			path = AddList;
 			sourceTree = "<group>";
@@ -629,6 +651,7 @@
 				254F359B248C3E3B0099C96C /* AddItemController.swift */,
 				254F359D248C3E3B0099C96C /* AddItemUI.swift */,
 				254F359E248C3E3B0099C96C /* AddItemController.xib */,
+				25B32BEF24A2EBB500524CD9 /* AddItemAdMob.swift */,
 			);
 			path = AddItem;
 			sourceTree = "<group>";
@@ -639,6 +662,26 @@
 				25B32BE124A2907F00524CD9 /* AppAnalytics.swift */,
 			);
 			path = Analytics;
+			sourceTree = "<group>";
+		};
+		25B32BF324A2F31F00524CD9 /* InApp */ = {
+			isa = PBXGroup;
+			children = (
+				25B32BF424A2F33100524CD9 /* IAPService.swift */,
+				25B32BF624A2F38D00524CD9 /* IAPProducts.swift */,
+			);
+			path = InApp;
+			sourceTree = "<group>";
+		};
+		25B32BF824A2F47200524CD9 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				25B32BF924A2F48100524CD9 /* SettingNavigator.swift */,
+				25B32BFA24A2F48100524CD9 /* SettingController.swift */,
+				25B32BFC24A2F48100524CD9 /* SettingUI.swift */,
+				25B32BFD24A2F48100524CD9 /* SettingController.xib */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		688903B344A7F855D872F57D /* Pods */ = {
@@ -730,6 +773,7 @@
 				254F351124873C020099C96C /* SplashController.xib in Resources */,
 				254F34C9248733B00099C96C /* Localizable.strings in Resources */,
 				254F34B52485F4F80099C96C /* Assets.xcassets in Resources */,
+				25B32C0224A2F48100524CD9 /* SettingController.xib in Resources */,
 				25B32BE424A2943200524CD9 /* GoogleService-Info.plist in Resources */,
 				254F34FB248738AC0099C96C /* Colors.json in Resources */,
 				254F35A3248C3E3B0099C96C /* AddItemController.xib in Resources */,
@@ -785,6 +829,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25B32BFF24A2F48100524CD9 /* SettingController.swift in Sources */,
 				254F356C248885A20099C96C /* Attributes.swift in Sources */,
 				254F350F24873C020099C96C /* SplashViewModel.swift in Sources */,
 				254F3598248C39070099C96C /* ItemViewModel.swift in Sources */,
@@ -811,6 +856,8 @@
 				254F34E7248735540099C96C /* Utility.swift in Sources */,
 				254F355924887EB00099C96C /* ListCell.swift in Sources */,
 				254F351724873D170099C96C /* ServicePackage.swift in Sources */,
+				25B32C0424A309D900524CD9 /* HomeControllerDelegate.swift in Sources */,
+				25B32BF024A2EBB500524CD9 /* AddItemAdMob.swift in Sources */,
 				254F354A24874CBE0099C96C /* HomeNavigator.swift in Sources */,
 				254F350E24873C020099C96C /* SplashController.swift in Sources */,
 				254F358C24888D0C0099C96C /* AddListController.swift in Sources */,
@@ -825,12 +872,15 @@
 				254A40E7248DE31E00F9E3A7 /* UILabelX.swift in Sources */,
 				254F34B32485F4F60099C96C /* Listit.xcdatamodeld in Sources */,
 				254F34EA248735540099C96C /* SoundEffects.swift in Sources */,
+				25B32C0124A2F48100524CD9 /* SettingUI.swift in Sources */,
+				25B32BFE24A2F48100524CD9 /* SettingNavigator.swift in Sources */,
 				254F353A2487410A0099C96C /* Fonts.swift in Sources */,
 				254F35A0248C3E3B0099C96C /* AddItemController.swift in Sources */,
 				254F35412487428A0099C96C /* DBManager.swift in Sources */,
 				254F34AD2485F4F60099C96C /* HomeController.swift in Sources */,
 				254F34A92485F4F60099C96C /* AppDelegate.swift in Sources */,
 				254F351524873CD60099C96C /* MainNavigationController.swift in Sources */,
+				25B32BF224A2EFCD00524CD9 /* AddListAdMob.swift in Sources */,
 				254F358324888CF60099C96C /* IconCell.swift in Sources */,
 				254F34F2248736700099C96C /* SSFonts.swift in Sources */,
 				254F34D0248734080099C96C /* StaticConstants.swift in Sources */,
@@ -857,9 +907,11 @@
 				254F34AB2485F4F60099C96C /* SceneDelegate.swift in Sources */,
 				254F34E6248735540099C96C /* UserDefaults.swift in Sources */,
 				254F34D2248734160099C96C /* Constants.swift in Sources */,
+				25B32BF724A2F38D00524CD9 /* IAPProducts.swift in Sources */,
 				254A40E924916B8100F9E3A7 /* UIButtonExtensions.swift in Sources */,
 				254F34E8248735540099C96C /* LanguageManager.swift in Sources */,
 				25B32BE624A2E03900524CD9 /* HomeAdMob.swift in Sources */,
+				25B32BF524A2F33100524CD9 /* IAPService.swift in Sources */,
 				254F358424888CF60099C96C /* IconCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1014,6 +1066,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = Listit;
 				SWIFT_VERSION = 5.0;
@@ -1035,6 +1088,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = Listit;
 				SWIFT_VERSION = 5.0;

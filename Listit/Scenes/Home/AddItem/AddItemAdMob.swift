@@ -1,5 +1,5 @@
 //
-//  HomeAdMob.swift
+//  AddItemAdMob.swift
 //  Listit
 //
 //  Created by Salar Soleimani on 2020-06-23.
@@ -9,7 +9,7 @@
 import GoogleMobileAds
 import UIKit
 
-extension HomeController {
+extension AddItemController {
   func setupAds() {
     adBannerContainerView.isHidden = false
     removeAdButton.isHidden = false
@@ -17,11 +17,13 @@ extension HomeController {
     addBannerAdToView()
     setupRewardedAd()
   }
+  
   private func loadBannerAd() {
     bannerView.adUnitID = Constants.AdMobIds.testAdBannerUnitID // [TODO] -force change to adBannerHomeBottom
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
   }
+  
   private func addBannerAdToView() {
     adBannerContainerView.addSubview(bannerView)
     NSLayoutConstraint.activate([
@@ -55,9 +57,10 @@ extension HomeController {
     }
   }
 }
-extension HomeController: GADRewardedAdDelegate {
+extension AddItemController: GADRewardedAdDelegate {
   func rewardedAd(_ rewardedAd: GADRewardedAd, userDidEarn reward: GADAdReward) {
     AppAnalytics.shared.countUpRewardAd()
+    isRewardedAdWatched = true
   }
   func rewardedAdDidDismiss(_ rewardedAd: GADRewardedAd) {
     self.rewardedAd = createAndLoadRewardedAd()

@@ -15,7 +15,6 @@ class HomeController: UIViewController {
   //MARK:- Outlets
   @IBOutlet weak var adBannerContainerView: UIView!
   @IBOutlet weak var removeAdButton: UIButton!
-  @IBOutlet weak var adBannerContainerViewHeightAnchor: NSLayoutConstraint!
 
   @IBOutlet weak var itemsCollectionView: UICollectionView!
   
@@ -61,6 +60,7 @@ class HomeController: UIViewController {
   var selectedList: List? {
     didSet {
       selecteItemIndexpaths.removeAll()
+      navigationItem.title = selectedList?.title ?? ""
     }
   }
   //MARK:- Initialization
@@ -86,7 +86,9 @@ class HomeController: UIViewController {
     configureListsDataSource()
     configureItemsDataSource()
     
-    setupAds()
+    if !Defaults.isAdsRemoved {
+      setupAds()
+    }
   }
   
   //MARK:- Actions
@@ -96,15 +98,17 @@ class HomeController: UIViewController {
       navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: yourLists, allItemsList: allItemsList)
     } else {
       navigator.toast(text: "add_item_no_list_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
-      navigator.toAddOrEditList(list: nil)
+      navigator.toAddOrEditList(list: nil, delegate: self)
     }
   }
   
   @IBAction private func addListButtonPressed(_ sender: UIButton) {
-    navigator.toAddOrEditList(list: nil)
+    navigator.toAddOrEditList(list: nil, delegate: self)
   }
-  
-  @IBAction private func quickAddListButtonPressed(_ sender: Any) {
+  @IBAction private func removeAdsButtonPressed(_ sender: UIButton) {
+    
+  }
+  @IBAction internal func quickAddListButtonPressed(_ sender: Any) {
     if let selectedList = selectedList, selectedList.type != ListType.all.rawValue, selectedList.type != ListType.favorites.rawValue {
       titleItemTextField.becomeFirstResponder()
     } else {
@@ -113,7 +117,7 @@ class HomeController: UIViewController {
   }
   
   @objc private func settingButtonPressed() {
-    
+    navigator.toSetting()
   }
   //MARK:- Functions
   func configureCollectionViewsDelegate() {

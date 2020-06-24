@@ -61,7 +61,6 @@ extension HomeController: UICollectionViewDelegate {
   
   private func listSelected(_ list: List, selectedItem: Int) {
     selectedList = list
-    navigationItem.title = list.title ?? ""
     updateItemsTableView(list, selectedListItem: selectedItem)
     if let type = ListType(rawValue: list.type) {
       if type == .all || type == .favorites {
@@ -175,7 +174,7 @@ extension HomeController: UICollectionViewDelegate {
     dbManager.delete(Item: item, response: nil)
   }
   private func editListAction(_ list: List) {
-    navigator.toAddOrEditList(list: list)
+    navigator.toAddOrEditList(list: list, delegate: self)
   }
   private func addNewItemAction(_ list: List) {
     let allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first

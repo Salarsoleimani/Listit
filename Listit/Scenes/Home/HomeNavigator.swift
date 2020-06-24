@@ -14,11 +14,14 @@ final class HomeNavigator: Navigator {
     navigationController.pushViewController(vc, animated: true)
     navigationController.viewControllers = [vc]
   }
-  func toAddOrEditList(list: List?) {
-    AddListNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(list: list)
+  func toAddOrEditList(list: List?, delegate: HomeControllerDelegate) {
+    AddListNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(list: list, delegate: delegate)
   }
   
   func toAddOrEditItem(item: Item?, forList: List?, lists: [List], allItemsList: List?) {
     AddItemNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(item: item, parentList: forList, lists: lists, allItemsList: allItemsList)
+  }
+  func toSetting() {
+    SettingNavigator(navigationController: navigationController, servicePackage: servicePackage).setup()
   }
 }

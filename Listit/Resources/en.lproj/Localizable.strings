@@ -7,7 +7,7 @@
 */
 
 /// - titles
-"all_items_navigation_title" = "All Items";
+"all_items_navigation_title" = "All";
 "add_list_navigation_title" = "Add List";
 "edit_list_navigation_title" = "Edit List";
 "select_icon_navigation_title" = "Icon & Color";
@@ -15,8 +15,10 @@
 "add_item_navigation_title" = "Add item";
 "edit_item_navigation_title" = "Edit item";
 
+"setting_navigation_title" = "Setting";
+
 /// - list types title
-"all_lists_type" = "All Items";
+"all_lists_type" = "All";
 "favorites_lists_type" = "Favorites";
 "today_lists_type" = "Today";
 "reminder_lists_type" = "Reminder";

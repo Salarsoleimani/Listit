@@ -9,6 +9,7 @@
 import UIKit
 import SPPermissions
 import SwiftLocalNotification
+import GoogleMobileAds
 
 protocol AddItemControllerDelegate: class {
   func didSelectDateAndTime(date: Date, hour: Int, minute: Int, repeatingInterval: RepeatingInterval)
@@ -17,6 +18,10 @@ protocol AddItemControllerDelegate: class {
 
 class AddItemController: UIViewController {
   // MARK:- Outlets
+  
+  @IBOutlet weak var adBannerContainerView: UIView!
+  @IBOutlet weak var removeAdButton: UIButton!
+  
   @IBOutlet weak var titleContainerView: UIView!
   
   @IBOutlet weak var descriptionLabel: UILabel?
@@ -58,7 +63,10 @@ class AddItemController: UIViewController {
   var notifDate: Date?
   var repeats: RepeatingInterval?
   // MARK:- Constants
-  private let scheduler = SwiftLocalNotification()
+  let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+  var rewardedAd: GADRewardedAd?
+  var isRewardedAdWatched = false
+
   private let navigator: AddItemNavigator
   private let dbManager: DatabaseManagerProtocol
   
@@ -82,6 +90,9 @@ class AddItemController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    if !Defaults.isAdsRemoved {
+      setupAds()
+    }
     if let parentList = parentList, parentList.type == ListType.note.rawValue {
       remindMeContainerView?.isHidden = true
     }
@@ -95,13 +106,16 @@ class AddItemController: UIViewController {
   
   @IBAction private func remindMeButtonPressed(_ sender: UIButton) {
     if !SPPermission.notification.isAuthorized {
-
       let controller = SPPermissions.dialog([.notification])
-
       controller.present(on: self)
       return
     }
-    goToDateSelection() 
+    if isRewardedAdWatched {
+      goToDateSelection()
+      isRewardedAdWatched = false
+      return
+    }
+    showRewardedAd()
   }
   
   @IBAction func moreInfoButtonPressed(_ sender: Any) {
@@ -227,6 +241,11 @@ extension AddItemController: AddItemControllerDelegate {
 
 extension AddItemController: SPPermissionsDelegate {
   func didAllow(permission: SPPermission) {
-    goToDateSelection()
+    if isRewardedAdWatched {
+      goToDateSelection()
+      isRewardedAdWatched = false
+      return
+    }
+    showRewardedAd()
   }
 }

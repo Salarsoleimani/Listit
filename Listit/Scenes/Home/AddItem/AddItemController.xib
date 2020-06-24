@@ -9,12 +9,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddItemController" customModule="Listit" customModuleProvider="target">
             <connections>
+                <outlet property="adBannerContainerView" destination="nbL-Aq-ipx" id="Pke-EJ-prl"/>
                 <outlet property="descriptionLabel" destination="QTQ-ud-0yA" id="mYj-vt-frX"/>
                 <outlet property="moreInfoButton" destination="Wwg-2D-xR4" id="8s7-OR-PbE"/>
                 <outlet property="moreInfoTextView" destination="jzm-6k-TAs" id="Utf-Zp-t25"/>
                 <outlet property="remindMeButton" destination="A6S-nM-OKb" id="VYP-QD-XUp"/>
                 <outlet property="remindMeContainerView" destination="UV8-vG-7JQ" id="Mdo-je-mcq"/>
                 <outlet property="remindMeTitleLabel" destination="fDi-aa-kgZ" id="sYy-Eu-SBF"/>
+                <outlet property="removeAdButton" destination="ii5-ni-OsK" id="oiZ-CR-0ru"/>
                 <outlet property="saveAndAddAnotherButton" destination="MEn-Ma-pC4" id="eFJ-yp-2rf"/>
                 <outlet property="saveButton" destination="kVb-nT-4aI" id="cZu-tQ-35Z"/>
                 <outlet property="titleContainerView" destination="kYP-3p-bBX" id="GUk-fP-wUj"/>
@@ -143,6 +145,22 @@
                                         <constraint firstItem="0Re-ex-hYa" firstAttribute="leading" secondItem="rjD-ev-uwj" secondAttribute="leading" constant="16" id="z9N-I1-Z3K"/>
                                     </constraints>
                                 </view>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbL-Aq-ipx">
+                                    <rect key="frame" x="0.0" y="826.5" width="382" height="0.0"/>
+                                    <subviews>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ii5-ni-OsK">
+                                            <rect key="frame" x="310" y="-9.5" width="56" height="19"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <state key="normal" title="remove" image="multiply.circle" catalog="system"/>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="ii5-ni-OsK" secondAttribute="trailing" constant="16" id="RzK-Re-zTw"/>
+                                        <constraint firstItem="ii5-ni-OsK" firstAttribute="centerY" secondItem="nbL-Aq-ipx" secondAttribute="centerY" id="VrL-bM-fhX"/>
+                                        <constraint firstAttribute="height" priority="999" id="Z66-EC-Y82"/>
+                                    </constraints>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="lIF-Ys-xuH">
                                     <rect key="frame" x="0.0" y="832.5" width="382" height="50"/>
                                     <subviews>
@@ -193,4 +211,7 @@
             <point key="canvasLocation" x="-630.43478260869574" y="153.34821428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="multiply.circle" catalog="system" width="64" height="60"/>
+    </resources>
 </document>

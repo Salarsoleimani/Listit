@@ -10,7 +10,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeController" customModule="Listit" customModuleProvider="target">
             <connections>
                 <outlet property="adBannerContainerView" destination="7UC-50-b3t" id="Zsc-nc-Shz"/>
-                <outlet property="adBannerContainerViewHeightAnchor" destination="8zX-pc-PKU" id="E7n-rj-Apc"/>
                 <outlet property="addItemButton" destination="0aJ-En-f6K" id="JNr-7E-7y1"/>
                 <outlet property="addItemLabel" destination="P8J-Tk-JTu" id="NYD-ql-2j8"/>
                 <outlet property="addListButton" destination="PMO-e7-Iv9" id="y0f-ak-UDD"/>
@@ -32,14 +31,14 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-nr-Uma">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-nr-Uma">
                     <rect key="frame" x="0.0" y="52" width="414" height="810"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eIo-xt-6dI">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="644"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="656"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yRT-cU-giJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="356" height="644"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="356" height="656"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gPB-jj-HhL">
                                         <size key="itemSize" width="50" height="50"/>
@@ -49,13 +48,13 @@
                                     </collectionViewFlowLayout>
                                 </collectionView>
                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6yq-87-MGB">
-                                    <rect key="frame" x="364" y="0.0" width="50" height="644"/>
+                                    <rect key="frame" x="364" y="0.0" width="50" height="656"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iev-yp-MRx">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="644"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="656"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aJ-En-f6K">
-                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="644"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="42" height="656"/>
                                                     <color key="backgroundColor" red="0.72549019609999998" green="0.20000000000000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -67,7 +66,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+   add   item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8J-Tk-JTu" customClass="UILabelX" customModule="Listit" customModuleProvider="target">
-                                                    <rect key="frame" x="10.999999999999996" y="272.5" width="20.500000000000007" height="99.5"/>
+                                                    <rect key="frame" x="10.999999999999996" y="278.5" width="20.500000000000007" height="99.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -129,13 +128,13 @@
                                 </stackView>
                             </subviews>
                         </stackView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7UC-50-b3t">
-                            <rect key="frame" x="0.0" y="652" width="414" height="0.0"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7UC-50-b3t">
+                            <rect key="frame" x="0.0" y="658" width="414" height="0.0"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzq-dU-ZpH">
-                                    <rect key="frame" x="289" y="-10.5" width="109" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <state key="normal" title="remove ads" image="multiply.circle" catalog="system"/>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzq-dU-ZpH">
+                                    <rect key="frame" x="342" y="-9.5" width="56" height="19"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                    <state key="normal" title="remove" image="multiply.circle" catalog="system"/>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
