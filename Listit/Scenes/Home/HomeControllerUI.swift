@@ -40,4 +40,10 @@ extension HomeController {
     
     titleItemContainerView.backgroundColor = Colors.listCellBackground.value
   }
+  func registerCollectionViewCells() {
+    let listNib = UINib(nibName: "ListCell", bundle: nil)
+    listsCollectionView.register(listNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
+    let itemNib = UINib(nibName: "ItemCell", bundle: nil)
+    itemsCollectionView.register(itemNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
+  }
 }

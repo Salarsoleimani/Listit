@@ -101,6 +101,11 @@
 		254F35A9248C849A0099C96C /* ItemState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F35A8248C849A0099C96C /* ItemState.swift */; };
 		25B32BE224A2907F00524CD9 /* AppAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BE124A2907F00524CD9 /* AppAnalytics.swift */; };
 		25B32BE424A2943200524CD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25B32BE324A2943200524CD9 /* GoogleService-Info.plist */; };
+		25B32BE624A2E03900524CD9 /* HomeAdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BE524A2E03900524CD9 /* HomeAdMob.swift */; };
+		25B32BE824A2E39900524CD9 /* HomeItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BE724A2E39900524CD9 /* HomeItems.swift */; };
+		25B32BEA24A2E3CF00524CD9 /* HomeLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BE924A2E3CF00524CD9 /* HomeLists.swift */; };
+		25B32BEC24A2E5E400524CD9 /* HomeCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BEB24A2E5E400524CD9 /* HomeCollectionViewDelegate.swift */; };
+		25B32BEE24A2E64000524CD9 /* HomeCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BED24A2E64000524CD9 /* HomeCollectionViewFlowLayout.swift */; };
 		54DCA4EDC7598EDBBF1A5BF2 /* Pods_Listit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681C012384A06C1A9D1A7C6B /* Pods_Listit.framework */; };
 /* End PBXBuildFile section */
 
@@ -215,6 +220,11 @@
 		254F35A8248C849A0099C96C /* ItemState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemState.swift; sourceTree = "<group>"; };
 		25B32BE124A2907F00524CD9 /* AppAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnalytics.swift; sourceTree = "<group>"; };
 		25B32BE324A2943200524CD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		25B32BE524A2E03900524CD9 /* HomeAdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAdMob.swift; sourceTree = "<group>"; };
+		25B32BE724A2E39900524CD9 /* HomeItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeItems.swift; sourceTree = "<group>"; };
+		25B32BE924A2E3CF00524CD9 /* HomeLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLists.swift; sourceTree = "<group>"; };
+		25B32BEB24A2E5E400524CD9 /* HomeCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		25B32BED24A2E64000524CD9 /* HomeCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		681C012384A06C1A9D1A7C6B /* Pods_Listit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Listit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7AA76764A90D72C40FC3B85 /* Pods-Listit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listit.release.xcconfig"; path = "Target Support Files/Pods-Listit/Pods-Listit.release.xcconfig"; sourceTree = "<group>"; };
 		BD000643B42F3E614A290640 /* Pods-Listit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listit.debug.xcconfig"; path = "Target Support Files/Pods-Listit/Pods-Listit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -509,6 +519,11 @@
 				254F354924874CBE0099C96C /* HomeNavigator.swift */,
 				254F354B24874FD70099C96C /* HomeController.xib */,
 				254F354D248750080099C96C /* HomeControllerUI.swift */,
+				25B32BE524A2E03900524CD9 /* HomeAdMob.swift */,
+				25B32BE724A2E39900524CD9 /* HomeItems.swift */,
+				25B32BE924A2E3CF00524CD9 /* HomeLists.swift */,
+				25B32BEB24A2E5E400524CD9 /* HomeCollectionViewDelegate.swift */,
+				25B32BED24A2E64000524CD9 /* HomeCollectionViewFlowLayout.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -774,11 +789,14 @@
 				254F350F24873C020099C96C /* SplashViewModel.swift in Sources */,
 				254F3598248C39070099C96C /* ItemViewModel.swift in Sources */,
 				254F34EB248735540099C96C /* SSMocker.swift in Sources */,
+				25B32BE824A2E39900524CD9 /* HomeItems.swift in Sources */,
 				254F351324873CB70099C96C /* Navigator.swift in Sources */,
+				25B32BEA24A2E3CF00524CD9 /* HomeLists.swift in Sources */,
 				254A4105249D436C00F9E3A7 /* FRCItemsCollectionDataSource.swift in Sources */,
 				254F34DB248734E00099C96C /* UIViewExtensions.swift in Sources */,
 				254F350D24873C020099C96C /* SplashNavigator.swift in Sources */,
 				254F34C6248732AF0099C96C /* Application.swift in Sources */,
+				25B32BEE24A2E64000524CD9 /* HomeCollectionViewFlowLayout.swift in Sources */,
 				254F34CD248733E80099C96C /* Defaults.swift in Sources */,
 				254F34DD248734E00099C96C /* Error+Composer.swift in Sources */,
 				254F357824888CEB0099C96C /* IconsUI.swift in Sources */,
@@ -821,6 +839,7 @@
 				254A4101249B233900F9E3A7 /* FRCCollectionViewDataSource.swift in Sources */,
 				254F34E9248735540099C96C /* Vibrator.swift in Sources */,
 				254F359F248C3E3B0099C96C /* AddItemNavigator.swift in Sources */,
+				25B32BEC24A2E5E400524CD9 /* HomeCollectionViewDelegate.swift in Sources */,
 				254F358B24888D0C0099C96C /* AddListNavigator.swift in Sources */,
 				254A40FF249B1BCC00F9E3A7 /* FRCTableViewDataSource.swift in Sources */,
 				254F353E2487425A0099C96C /* ListModel.swift in Sources */,
@@ -840,6 +859,7 @@
 				254F34D2248734160099C96C /* Constants.swift in Sources */,
 				254A40E924916B8100F9E3A7 /* UIButtonExtensions.swift in Sources */,
 				254F34E8248735540099C96C /* LanguageManager.swift in Sources */,
+				25B32BE624A2E03900524CD9 /* HomeAdMob.swift in Sources */,
 				254F358424888CF60099C96C /* IconCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
