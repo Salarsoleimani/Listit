@@ -10,7 +10,8 @@ import Foundation
 import StoreKit
 
 protocol IAPServiceDelegate {
-  func didAdsRemoved(completion: @escaping ()->())
+  func didAdsRemoved()
+  func restoredPurchase()
 }
 
 class IAPService: NSObject {
@@ -42,8 +43,9 @@ class IAPService: NSObject {
     paymentQueue.add(payment)
   }
   
-  func restorePurchases() {
+  func restorePurchases(delegate: IAPServiceDelegate?) {
     print("restore purchases")
+    self.delegate = delegate
     paymentQueue.restoreCompletedTransactions()
   }
   
@@ -57,7 +59,7 @@ extension IAPService: SKProductsRequestDelegate {
     }
   }
   func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-    
+    delegate?.restoredPurchase()
   }
 }
 
@@ -66,12 +68,12 @@ extension IAPService: SKPaymentTransactionObserver {
     for transaction in transactions {
       if transaction.transactionState == .purchased, transaction.payment.productIdentifier == IAPProducts.removeAds.rawValue {
         AppAnalytics.shared.adsRemoved()
-        delegate?.didAdsRemoved { }
+        delegate?.didAdsRemoved()
       }
       print(transaction.transactionState.status(), transaction.payment.productIdentifier)
       if transaction.transactionState == .restored, transaction.payment.productIdentifier == IAPProducts.removeAds.rawValue {
         AppAnalytics.shared.adsRemoved()
-        delegate?.didAdsRemoved { }
+        delegate?.didAdsRemoved()
       }
       switch transaction.transactionState {
       case .purchasing: break

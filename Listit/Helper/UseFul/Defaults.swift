@@ -33,4 +33,14 @@ struct Defaults {
   
   @UserDefault(Constants.Keys.isOnboardingWatched, defaultValue: false)
   static var isOnboardingWatched: Bool
+  
+  // From Server
+  @UserDefault(Constants.Keys.email, defaultValue: "listitappco@gmail.com")
+  static var email: String
+  
+  @UserDefault(Constants.Keys.emailSubject, defaultValue: "Feedback")
+  static var emailSubject: String
+  
+  @UserDefault(Constants.Keys.shareText, defaultValue: "Hi,/nI am using Listit. It is amazing and so useful. I taught it would help you too./nGo visit their website:/nwww.listitapp.co/n/nor simply download it from Appstore:\nhttps://")
+  static var shareText: String
 }

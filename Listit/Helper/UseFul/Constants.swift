@@ -33,6 +33,13 @@ enum Constants {
     static let removeAds = "com.storageKey.removeAds"
     static let isOnboardingWatched = "com.storageKey.isOnboardingWatched"
     static let userFullName = "com.storageKey.userFullName"
+    
+    // From Server
+    static let email = "com.storageKey.email"
+    static let emailSubject = "com.storageKey.emailSubject"
+    static let shareText = "com.storageKey.shareText"
+
+
   }
   struct Links {
     static let youtube = "https://www.youtube.com/channel/UCVv19836gsoYpdpU_FTE21Q"

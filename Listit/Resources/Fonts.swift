@@ -28,7 +28,12 @@ struct Fonts {
   // Items
   static let itemCellTitle = SSFont(.installed(.montserrat, .regular), size: .standard(.h3)).instance
   static let itemCellDescription = SSFont(.installed(.montserrat, .regular), size: .standard(.h5)).instance
-  
+  // Setting
+  static let settingTitle = SSFont(.installed(.montserrat, .regular), size: .standard(.h4)).instance
+  static let settingBoldTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h4)).instance
+
+  static let settingDescription = SSFont(.installed(.montserrat, .regular), size: .standard(.h3)).instance
+
   // Button
   static let button = SSFont(.installed(.montserrat, .bold), size: .standard(.h5)).instance
 }

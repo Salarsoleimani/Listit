@@ -115,6 +115,13 @@
 		25B32C0124A2F48100524CD9 /* SettingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BFC24A2F48100524CD9 /* SettingUI.swift */; };
 		25B32C0224A2F48100524CD9 /* SettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B32BFD24A2F48100524CD9 /* SettingController.xib */; };
 		25B32C0424A309D900524CD9 /* HomeControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C0324A309D900524CD9 /* HomeControllerDelegate.swift */; };
+		25B32C0824A3E28D00524CD9 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C0624A3E28D00524CD9 /* SettingCell.swift */; };
+		25B32C0924A3E28D00524CD9 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B32C0724A3E28D00524CD9 /* SettingCell.xib */; };
+		25B32C0C24A3E31200524CD9 /* SettingTableViewDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C0B24A3E31200524CD9 /* SettingTableViewDelegates.swift */; };
+		25B32C0E24A3ED0900524CD9 /* SettingAdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C0D24A3ED0900524CD9 /* SettingAdMob.swift */; };
+		25B32C1024A3F06900524CD9 /* SettingAppMailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C0F24A3F06900524CD9 /* SettingAppMailDelegate.swift */; };
+		25B32C1624A592AF00524CD9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C1524A592AF00524CD9 /* NetworkManager.swift */; };
+		25B32C1824A592F500524CD9 /* ConfigurationNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C1724A592F500524CD9 /* ConfigurationNetworkModel.swift */; };
 		54DCA4EDC7598EDBBF1A5BF2 /* Pods_Listit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681C012384A06C1A9D1A7C6B /* Pods_Listit.framework */; };
 /* End PBXBuildFile section */
 
@@ -243,6 +250,17 @@
 		25B32BFC24A2F48100524CD9 /* SettingUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUI.swift; sourceTree = "<group>"; };
 		25B32BFD24A2F48100524CD9 /* SettingController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingController.xib; sourceTree = "<group>"; };
 		25B32C0324A309D900524CD9 /* HomeControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeControllerDelegate.swift; sourceTree = "<group>"; };
+		25B32C0624A3E28D00524CD9 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		25B32C0724A3E28D00524CD9 /* SettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		25B32C0B24A3E31200524CD9 /* SettingTableViewDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewDelegates.swift; sourceTree = "<group>"; };
+		25B32C0D24A3ED0900524CD9 /* SettingAdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAdMob.swift; sourceTree = "<group>"; };
+		25B32C0F24A3F06900524CD9 /* SettingAppMailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAppMailDelegate.swift; sourceTree = "<group>"; };
+		25B32C1124A5822A00524CD9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		25B32C1224A5822B00524CD9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		25B32C1324A5823C00524CD9 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		25B32C1424A5823D00524CD9 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
+		25B32C1524A592AF00524CD9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		25B32C1724A592F500524CD9 /* ConfigurationNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationNetworkModel.swift; sourceTree = "<group>"; };
 		681C012384A06C1A9D1A7C6B /* Pods_Listit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Listit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7AA76764A90D72C40FC3B85 /* Pods-Listit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listit.release.xcconfig"; path = "Target Support Files/Pods-Listit/Pods-Listit.release.xcconfig"; sourceTree = "<group>"; };
 		BD000643B42F3E614A290640 /* Pods-Listit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listit.debug.xcconfig"; path = "Target Support Files/Pods-Listit/Pods-Listit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -367,6 +385,7 @@
 				254F34E0248735540099C96C /* UserDefaults.swift */,
 				254F34E1248735540099C96C /* Utility.swift */,
 				254F34E3248735540099C96C /* Vibrator.swift */,
+				25B32C1524A592AF00524CD9 /* NetworkManager.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -449,6 +468,8 @@
 		254F350224873BAC0099C96C /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				254F356E24888C9A0099C96C /* AddList */,
+				254F3599248C3E130099C96C /* AddItem */,
 				25B32BF824A2F47200524CD9 /* Setting */,
 				254F354824874CB20099C96C /* Home */,
 				254F350324873BB10099C96C /* FirstFlow */,
@@ -512,6 +533,7 @@
 				254F353D2487425A0099C96C /* ListModel.swift */,
 				254F359024889ED40099C96C /* ListType.swift */,
 				254F35A8248C849A0099C96C /* ItemState.swift */,
+				25B32C1724A592F500524CD9 /* ConfigurationNetworkModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -532,8 +554,6 @@
 		254F354824874CB20099C96C /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				254F3599248C3E130099C96C /* AddItem */,
-				254F356E24888C9A0099C96C /* AddList */,
 				254F354F24887DE90099C96C /* Cells */,
 				254F34AC2485F4F60099C96C /* HomeController.swift */,
 				25B32C0324A309D900524CD9 /* HomeControllerDelegate.swift */,
@@ -676,12 +696,25 @@
 		25B32BF824A2F47200524CD9 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				25B32C0524A3E21E00524CD9 /* Cell */,
 				25B32BF924A2F48100524CD9 /* SettingNavigator.swift */,
 				25B32BFA24A2F48100524CD9 /* SettingController.swift */,
 				25B32BFC24A2F48100524CD9 /* SettingUI.swift */,
 				25B32BFD24A2F48100524CD9 /* SettingController.xib */,
+				25B32C0B24A3E31200524CD9 /* SettingTableViewDelegates.swift */,
+				25B32C0D24A3ED0900524CD9 /* SettingAdMob.swift */,
+				25B32C0F24A3F06900524CD9 /* SettingAppMailDelegate.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		25B32C0524A3E21E00524CD9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				25B32C0624A3E28D00524CD9 /* SettingCell.swift */,
+				25B32C0724A3E28D00524CD9 /* SettingCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		688903B344A7F855D872F57D /* Pods */ = {
@@ -738,6 +771,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				fa,
 			);
 			mainGroup = 254F349C2485F4F60099C96C;
 			productRefGroup = 254F34A62485F4F60099C96C /* Products */;
@@ -776,6 +811,7 @@
 				25B32C0224A2F48100524CD9 /* SettingController.xib in Resources */,
 				25B32BE424A2943200524CD9 /* GoogleService-Info.plist in Resources */,
 				254F34FB248738AC0099C96C /* Colors.json in Resources */,
+				25B32C0924A3E28D00524CD9 /* SettingCell.xib in Resources */,
 				254F35A3248C3E3B0099C96C /* AddItemController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -840,6 +876,7 @@
 				254A4105249D436C00F9E3A7 /* FRCItemsCollectionDataSource.swift in Sources */,
 				254F34DB248734E00099C96C /* UIViewExtensions.swift in Sources */,
 				254F350D24873C020099C96C /* SplashNavigator.swift in Sources */,
+				25B32C0C24A3E31200524CD9 /* SettingTableViewDelegates.swift in Sources */,
 				254F34C6248732AF0099C96C /* Application.swift in Sources */,
 				25B32BEE24A2E64000524CD9 /* HomeCollectionViewFlowLayout.swift in Sources */,
 				254F34CD248733E80099C96C /* Defaults.swift in Sources */,
@@ -872,7 +909,11 @@
 				254A40E7248DE31E00F9E3A7 /* UILabelX.swift in Sources */,
 				254F34B32485F4F60099C96C /* Listit.xcdatamodeld in Sources */,
 				254F34EA248735540099C96C /* SoundEffects.swift in Sources */,
+				25B32C1824A592F500524CD9 /* ConfigurationNetworkModel.swift in Sources */,
+				25B32C1024A3F06900524CD9 /* SettingAppMailDelegate.swift in Sources */,
 				25B32C0124A2F48100524CD9 /* SettingUI.swift in Sources */,
+				25B32C1624A592AF00524CD9 /* NetworkManager.swift in Sources */,
+				25B32C0E24A3ED0900524CD9 /* SettingAdMob.swift in Sources */,
 				25B32BFE24A2F48100524CD9 /* SettingNavigator.swift in Sources */,
 				254F353A2487410A0099C96C /* Fonts.swift in Sources */,
 				254F35A0248C3E3B0099C96C /* AddItemController.swift in Sources */,
@@ -897,6 +938,7 @@
 				254F357724888CEB0099C96C /* IconsNavigator.swift in Sources */,
 				254F356D248885A20099C96C /* Transform.swift in Sources */,
 				254A40F32497DEE000F9E3A7 /* DateSelectionNavigator.swift in Sources */,
+				25B32C0824A3E28D00524CD9 /* SettingCell.swift in Sources */,
 				254F3538248740D20099C96C /* Colors.swift in Sources */,
 				254F34FF248738C50099C96C /* IconModel.swift in Sources */,
 				254F354E248750080099C96C /* HomeControllerUI.swift in Sources */,
@@ -923,6 +965,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				254F34B72485F4F80099C96C /* Base */,
+				25B32C1124A5822A00524CD9 /* zh-Hans */,
+				25B32C1324A5823C00524CD9 /* fa */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -931,6 +975,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				254F34CA248733B00099C96C /* en */,
+				25B32C1224A5822B00524CD9 /* zh-Hans */,
+				25B32C1424A5823D00524CD9 /* fa */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -942,6 +988,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1002,6 +1049,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1070,7 +1118,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = Listit;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1092,7 +1140,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = Listit;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -23,6 +23,7 @@ class SplashController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     assert(viewModel != nil)
+    viewModel.getConfiguration()
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)

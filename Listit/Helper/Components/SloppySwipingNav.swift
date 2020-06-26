@@ -191,7 +191,7 @@ open class SloppySwipingNav: UINavigationController, UIViewControllerTransitioni
   
   public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     if let lastVC = viewControllers.last {
-      lastVC.view.endEditing(true)
+      lastVC.view.endEditing(false)
     }
     animatedTransitioning.reverse = operation == .pop
     return animatedTransitioning

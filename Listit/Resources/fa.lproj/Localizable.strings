@@ -15,7 +15,7 @@
 "add_item_navigation_title" = "Add item";
 "edit_item_navigation_title" = "Edit item";
 
-"setting_navigation_title" = "Setting";
+"setting_navigation_title" = "تنظیمات";
 
 /// - list types title
 "all_lists_type" = "All";
@@ -97,28 +97,23 @@
 "add_quick_item_title_placeholder" = "Name you item and tap continue";
 // Setting
 
-"language_title" = "Language:";
-"remove_ads_title" = "Remove advertisements";
-"restore_purchase_title" = "Restore purchase";
-"make_us_better_title" = "Make us better 😉";
-"support_us_title" = "Support us 🙏🏾";
-"support_us_description" = "Support us to improve the Listit app. We need your support to make app functionality better and more useful. We are very proud that you are using Listit and It means a lot for us, more than you imagine, that you support us as well. Thank you 🙏🏾";
-
-"terms_of_use_title" = "Terms of use";
-"policy_privacy_title" = "Privacy policy";
+"language_title" = "زبان:";
+"remove_ads_title" = "حذف تبلیغات";
+"restore_purchase_title" = "بازگرداندن خرید قبلی";
+"make_us_better_title" = "ما را بهینه‌تر کنید 😉";
+"support_us_title" = "پشتیبان ما باشید 🙏🏾";
+"terms_of_use_title" = "قوانین استفاده از اپلیکیشن";
+"policy_privacy_title" = "حریم خصوصی";
 
 
-"donate_button_title" = "Please donate";
-"donate_description" = "If you enjoy using the Listit, please donate us at least by watching a video.";
+"donate_button_title" = "لطفا کمک کنید";
+"donate_description" = "با پشتیبانی از Listit شما برای بهتر شدن اپلیکیشن به ما کمک بزرگی میکنید تا اپلیکیشن بهینه‌تر و مناسب تر با نیازهای شما بسازیم.\nاگه دارید از اپلیکیشن لذت میبرید لطفا حداقل با دیدن یک ویدیو تبلیغاتی به ما کمک کنید.";
 
 
-"language_button_title" = "Language";
-"language_button_description" = "Please select your language.";
+"language_button_title" = "انتخاب زبان";
+"language_button_description" = "لطفا زبان مورد نظر خود را انتخاب کنید.";
 
-"close_button_title" = "Close";
-
-"rate_alert_title" = "Please rate Listit";
-"share_us_alert_title" = "Tell your friends about us";
+"close_button_title" = "بستن";
 
 // Errors
 "add_title_for_list_error" = "Please add title for your list";

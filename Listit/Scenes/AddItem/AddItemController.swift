@@ -222,6 +222,7 @@ extension AddItemController: AddItemControllerDelegate {
   func deleteReminder() {
     notifDate = nil
     repeats = nil
+    view.endEditing(true)
     remindMeButton.setTitle("remind_me_button_title".localize(), for: .normal)
   }
   

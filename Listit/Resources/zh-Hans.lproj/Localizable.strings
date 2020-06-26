@@ -15,7 +15,7 @@
 "add_item_navigation_title" = "Add item";
 "edit_item_navigation_title" = "Edit item";
 
-"setting_navigation_title" = "Setting";
+"setting_navigation_title" = "设置";
 
 /// - list types title
 "all_lists_type" = "All";
@@ -95,30 +95,24 @@
 "quick_add_item_button_title" = "+ (quick) add item";
 
 "add_quick_item_title_placeholder" = "Name you item and tap continue";
+
 // Setting
+"language_title" = "语言:";
+"remove_ads_title" = "删除广告";
+"restore_purchase_title" = "恢复购买";
+"make_us_better_title" = "让我们变得更好😉";
+"support_us_title" = "支持我们🙏🏾";
+"terms_of_use_title" = "使用条款";
+"policy_privacy_title" = "隐私政策";
 
-"language_title" = "Language:";
-"remove_ads_title" = "Remove advertisements";
-"restore_purchase_title" = "Restore purchase";
-"make_us_better_title" = "Make us better 😉";
-"support_us_title" = "Support us 🙏🏾";
-"support_us_description" = "Support us to improve the Listit app. We need your support to make app functionality better and more useful. We are very proud that you are using Listit and It means a lot for us, more than you imagine, that you support us as well. Thank you 🙏🏾";
-
-"terms_of_use_title" = "Terms of use";
-"policy_privacy_title" = "Privacy policy";
-
-
-"donate_button_title" = "Please donate";
-"donate_description" = "If you enjoy using the Listit, please donate us at least by watching a video.";
+"donate_button_title" = "请捐款支持我们";
+"donate_description" = "支持我们改进 “Listit” 应用程序。 我们需要您的支持，以使应用程序功能更好，更有用。\n如果您喜欢使用 “Listit”，请至少通过观看视频向我们捐款。";
 
 
-"language_button_title" = "Language";
-"language_button_description" = "Please select your language.";
+"language_button_title" = "语言";
+"language_button_description" = "请选择您的语言。";
 
-"close_button_title" = "Close";
-
-"rate_alert_title" = "Please rate Listit";
-"share_us_alert_title" = "Tell your friends about us";
+"close_button_title" = "关";
 
 // Errors
 "add_title_for_list_error" = "Please add title for your list";
