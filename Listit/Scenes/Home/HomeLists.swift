@@ -28,6 +28,7 @@ extension HomeController {
     listsFetchRequest.fetchBatchSize = 20
     listsDataSource = ListsCollectionViewDataSource(fetchRequest: listsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, collectionView: listsCollectionView)
     listsCollectionView.dataSource = listsDataSource
+    listsCollectionView.delegate = self
     listsDataSource.performFetch()
 
   }

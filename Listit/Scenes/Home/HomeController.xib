@@ -14,7 +14,7 @@
                 <outlet property="addItemLabel" destination="P8J-Tk-JTu" id="NYD-ql-2j8"/>
                 <outlet property="addListButton" destination="PMO-e7-Iv9" id="y0f-ak-UDD"/>
                 <outlet property="addListLabel" destination="aLv-UC-1yY" id="nWu-GJ-q0m"/>
-                <outlet property="itemsCollectionView" destination="yRT-cU-giJ" id="bfl-fP-l6j"/>
+                <outlet property="itemsTableView" destination="RbK-Qe-9Ew" id="tb1-jX-qme"/>
                 <outlet property="listsCollectionView" destination="MVh-zR-5Bi" id="X4l-wu-7A8"/>
                 <outlet property="quickAddItemButton" destination="Su5-zV-zvS" id="3ep-Um-uqA"/>
                 <outlet property="quickAddItemLabel" destination="7R4-YY-yb9" id="igu-L3-eXo"/>
@@ -37,16 +37,10 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eIo-xt-6dI">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="656"/>
                             <subviews>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yRT-cU-giJ">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RbK-Qe-9Ew">
                                     <rect key="frame" x="0.0" y="0.0" width="356" height="656"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gPB-jj-HhL">
-                                        <size key="itemSize" width="50" height="50"/>
-                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </collectionViewFlowLayout>
-                                </collectionView>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                </tableView>
                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6yq-87-MGB">
                                     <rect key="frame" x="364" y="0.0" width="50" height="656"/>
                                     <subviews>

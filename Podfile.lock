@@ -106,6 +106,7 @@ PODS:
     - QuickLayout (= 3.0.0)
   - SwiftLocalNotification (1.0.3)
   - SwiftRater (1.8.0)
+  - SwipeCellKit (2.7.1)
   - UICKeyChainStore (2.1.2)
 
 DEPENDENCIES:
@@ -130,6 +131,7 @@ DEPENDENCIES:
   - SwiftEntryKit (= 1.2.3)
   - SwiftLocalNotification
   - SwiftRater
+  - SwipeCellKit
 
 SPEC REPOS:
   trunk:
@@ -164,6 +166,7 @@ SPEC REPOS:
     - SwiftEntryKit
     - SwiftLocalNotification
     - SwiftRater
+    - SwipeCellKit
     - UICKeyChainStore
 
 EXTERNAL SOURCES:
@@ -208,8 +211,9 @@ SPEC CHECKSUMS:
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
   SwiftLocalNotification: 971b8530997948187f97b7125f7acc88112640a3
   SwiftRater: 6094fa6e9b3866ff8beca0a871b4b5f9ab896a6d
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
 
-PODFILE CHECKSUM: 428347532ca8de0be8bf2f577faa352503ed6617
+PODFILE CHECKSUM: eff71b5299b7b1c6acb851d6ba86b8655d621066
 
 COCOAPODS: 1.9.0

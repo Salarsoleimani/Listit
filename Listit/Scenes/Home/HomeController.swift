@@ -16,7 +16,7 @@ class HomeController: UIViewController {
   @IBOutlet weak var adBannerContainerView: UIView!
   @IBOutlet weak var removeAdButton: UIButton!
 
-  @IBOutlet weak var itemsCollectionView: UICollectionView!
+  @IBOutlet weak var itemsTableView: UITableView!
   
   @IBOutlet weak var listsCollectionView: UICollectionView!
   
@@ -39,7 +39,7 @@ class HomeController: UIViewController {
   //MARK:- Constants
   internal let navigator: HomeNavigator
   internal let dbManager: DatabaseManagerProtocol
-  internal var itemsDataSource: ItemsCollectionViewDataSource!
+  internal var itemsDataSource: ItemsTableViewDataSource!
   internal var listsDataSource: ListsCollectionViewDataSource!
   
   //MARK:- Variables
@@ -80,8 +80,7 @@ class HomeController: UIViewController {
     setupNavigationButtons()
     setupKeyboardObserver()
     
-    registerCollectionViewCells()
-    configureCollectionViewsDelegate()
+    registerCells()
     
     configureListsDataSource()
     configureItemsDataSource()
@@ -120,10 +119,6 @@ class HomeController: UIViewController {
     navigator.toSetting()
   }
   //MARK:- Functions
-  func configureCollectionViewsDelegate() {
-    listsCollectionView.delegate = self
-    itemsCollectionView.delegate = self
-  }
   private func setupKeyboardObserver() {
     let notificationCenter = NotificationCenter.default
     notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)

@@ -13,10 +13,11 @@ protocol FRCTableViewDelegate: class {
   func frcTableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
   func frcTableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration?
   func frcTableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+  func frcTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
 }
 
 class FRCTableViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
-
+  
   let frc: NSFetchedResultsController<FetchRequestResult>
   weak var tableView: UITableView?
   weak var delegate: FRCTableViewDelegate?
@@ -68,7 +69,11 @@ class FRCTableViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject
     }
   }
   // MARK: - UITableViewDelegate
-
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let delegate = delegate {
+      delegate.frcTableView(tableView, didSelectRowAt: indexPath)
+    }
+  }
   func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
     if let delegate = delegate {
       return delegate.frcTableView(tableView, contextMenuConfigurationForRowAt: indexPath, point: point)

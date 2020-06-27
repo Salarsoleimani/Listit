@@ -25,7 +25,7 @@ struct ItemViewModel {
   let borderColor: UIColor
   let isFavoriteImage: UIImage
   let finishedLineImage: UIImage
-  let finishedLineIsHidden: Bool
+  var finishedLineIsHidden: Bool
   var isShowingDetail: Bool
   init(model: Item) {
     self.model = model

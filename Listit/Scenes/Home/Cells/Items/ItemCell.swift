@@ -7,17 +7,14 @@
 //
 
 import UIKit
-import BEKListKit
 import CountdownLabel
+import SwipeCellKit
 
-class ItemCell: UICollectionViewCell {
+class ItemCell: SwipeTableViewCell {
   // MARK:- Outlets
-  
-  @IBOutlet weak var rowLabel: UILabel!
-  
+    
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var countdownLabel: CountdownLabel!
-  @IBOutlet weak var isFavoriteButton: UIButton!
   @IBOutlet weak var titleLabel: UILabel!
   
   @IBOutlet weak var descriptionLabel: UILabel!
@@ -48,12 +45,7 @@ class ItemCell: UICollectionViewCell {
     
     containerView.layer.borderWidth = 1.5
     containerView.layer.cornerRadius = Constants.Radius.cornerRadius
-    
-    isFavoriteButton.tintColor = Colors.second.value
-    
-    rowLabel.font = Fonts.h5Regular
-    rowLabel.textColor = Colors.itemCellTitle.value
-    
+            
     countdownLabel.animationType = .Scale
     
     repeatIcon.tintColor = Colors.itemCellTitle.value
@@ -84,23 +76,22 @@ class ItemCell: UICollectionViewCell {
     repeatContainerView.layer.cornerRadius = Constants.Radius.cornerRadius
   }
   
-  @IBAction func isFavoriteButtonPressed(_ sender: Any) {
-    if viewModel.model.isFavorite {
-      viewModel.model.isFavorite = false
-      let image = UIImage(systemName: "star")!.withTintColor(Colors.second.value, renderingMode: .alwaysTemplate)
-      isFavoriteButton.setImage(image, for: .normal)
-    } else {
-      viewModel.model.isFavorite = true
-      let image = UIImage(systemName: "star.fill")!.withTintColor(Colors.second.value, renderingMode: .alwaysTemplate)
-      isFavoriteButton.setImage(image, for: .normal)
-    }
-    CoreDataStack.shared.saveContext()
-  }
+//  @IBAction func isFavoriteButtonPressed(_ sender: Any) {
+//    if viewModel.model.isFavorite {
+//      viewModel.model.isFavorite = false
+//      let image = UIImage(systemName: "star")!.withTintColor(Colors.second.value, renderingMode: .alwaysTemplate)
+//      //isFavoriteButton.setImage(image, for: .normal)
+//    } else {
+//      viewModel.model.isFavorite = true
+//      let image = UIImage(systemName: "star.fill")!.withTintColor(Colors.second.value, renderingMode: .alwaysTemplate)
+//      //isFavoriteButton.setImage(image, for: .normal)
+//    }
+//    CoreDataStack.shared.saveContext()
+//  }
 }
 
 // MARK:- BEKListKit
-extension ItemCell: BEKBindableCell {
-  typealias ViewModeltype = ItemViewModel
+extension ItemCell {
   func bindData(withViewModel viewModel: ItemViewModel) {
     self.viewModel = viewModel
     containerView.backgroundColor = viewModel.backgroundColor
@@ -112,7 +103,7 @@ extension ItemCell: BEKBindableCell {
     
     titleLabel.text = viewModel.title
     descriptionLabel.text = viewModel.description
-    isFavoriteButton.setImage(viewModel.isFavoriteImage, for: .normal)
+
     repeatLabel.text = viewModel.repeats
 
     finishedLineImageView.image = viewModel.finishedLineImage
@@ -124,6 +115,11 @@ extension ItemCell: BEKBindableCell {
       countdownLabel.timeFormat = viewModel.countdownTimeFormat
       countdownLabel.setCountDownDate(fromDate: NSDate(), targetDate: (viewModel.toDate ?? Date()) as NSDate)
       countdownLabel.start()
+      if viewModel.model.notifDate == nil {
+        countdownLabel.isHidden = true
+      } else {
+        countdownLabel.isHidden = false
+      }
     } else {
       countdownLabel.isHidden = true
     }

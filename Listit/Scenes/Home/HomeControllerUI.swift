@@ -13,7 +13,7 @@ extension HomeController {
     view.backgroundColor = Colors.background.value
 
     listsCollectionView.backgroundColor = .clear
-    itemsCollectionView.backgroundColor = .clear
+    itemsTableView.backgroundColor = .clear
 
     navigationItem.title = "all_items_navigation_title".localize()
     
@@ -40,10 +40,10 @@ extension HomeController {
     
     titleItemContainerView.backgroundColor = Colors.listCellBackground.value
   }
-  func registerCollectionViewCells() {
+  func registerCells() {
     let listNib = UINib(nibName: "ListCell", bundle: nil)
     listsCollectionView.register(listNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
     let itemNib = UINib(nibName: "ItemCell", bundle: nil)
-    itemsCollectionView.register(itemNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
+    itemsTableView.register(itemNib, forCellReuseIdentifier: Constants.CellIds.cellId)
   }
 }

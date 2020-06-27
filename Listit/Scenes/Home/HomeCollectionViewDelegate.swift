@@ -56,7 +56,7 @@ extension HomeController: UICollectionViewDelegate {
     }
     itemsDataSource.frc.fetchRequest.predicate = predicate
     itemsDataSource.performFetch()
-    itemsCollectionView.reloadData()
+    itemsTableView.reloadData()
   }
   
   private func listSelected(_ list: List, selectedItem: Int) {
@@ -76,22 +76,9 @@ extension HomeController: UICollectionViewDelegate {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if collectionView == listsCollectionView, let listCell = collectionView.cellForItem(at: indexPath) as? ListCell {
+    if let listCell = collectionView.cellForItem(at: indexPath) as? ListCell {
       let selectedList = listCell.viewModel.model
       listSelected(selectedList, selectedItem: indexPath.item)
-    } else if collectionView == itemsCollectionView, let itemCell = collectionView.cellForItem(at: indexPath) as? ItemCell {
-      if selecteItemIndexpaths.contains(indexPath) {
-        for (index, indexP) in selecteItemIndexpaths.enumerated() {
-          if indexP == indexPath {
-            selecteItemIndexpaths.remove(at: index)
-          }
-        }
-        itemCell.isShowingDetail = true
-      } else {
-        selecteItemIndexpaths.append(indexPath)
-        itemCell.isShowingDetail = false
-      }
-      collectionView.reloadItems(at: [indexPath])
     }
   }
   func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -121,58 +108,10 @@ extension HomeController: UICollectionViewDelegate {
         
         return listConfiguration
       }
-    } else if collectionView == itemsCollectionView, let cell = collectionView.cellForItem(at: indexPath) as? ItemCell {
-      let item = cell.viewModel.model
-      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, yourLists, deleteItem, listsDataSource] action in
-        
-        let markAsFinishedItem = UIAction(title: "mark_as_completed_item_title".localize(), image: UIImage(systemName: "checkmark.circle"), handler: { [dbManager] action in
-          dbManager.updateState(item: item, state: ItemState.done)
-        })
-        let markAsUnfinishedItem = UIAction(title: "uncomplete_item_title".localize(), image: UIImage(systemName: "arrow.uturn.left.circle"), handler: { [dbManager] action in
-          dbManager.updateState(item: item, state: ItemState.doing)
-        })
-        let favoriteItem = UIAction(title: "favorite_item_title".localize(), image: UIImage(systemName: "star.fill"), handler: { [dbManager] action in
-          let favoriteList = listsDataSource?.frc.fetchedObjects?.filter{$0.type == ListType.favorites.rawValue}.first
-          dbManager.updateIsFavorite(isFavorite: true, favoriteList: favoriteList, item: item)
-        })
-        let unfavoriteItem = UIAction(title: "unfavorite_item_title".localize(), image: UIImage(systemName: "star.slash.fill"), handler: { [dbManager] action in
-          let favoriteList = listsDataSource?.frc.fetchedObjects?.filter{$0.type == ListType.favorites.rawValue}.first
-
-          dbManager.updateIsFavorite(isFavorite: false, favoriteList: favoriteList, item: item)
-        })
-        
-        let delete = UIAction(title: "delete_list_action".localize(), image: UIImage(systemName: "trash.fill"), attributes: .destructive, handler: { action in
-          deleteItem(item, indexPath)
-        })
-        let edit = UIAction(title: "edit_list_action".localize(), image: UIImage(systemName: "square.and.pencil"), handler: {action in
-          let allItemsList = listsDataSource?.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
-
-          navigator.toAddOrEditItem(item: item, forList: item.list, lists: yourLists, allItemsList: allItemsList)
-        })
-        let itemState = ItemState(rawValue: item.state) ?? ItemState.default
-        switch itemState {
-        case .doing:
-          if item.isFavorite {
-            return UIMenu(title: "", image: nil, identifier: nil, children: [markAsFinishedItem, unfavoriteItem, edit, delete])
-          } else {
-            return UIMenu(title: "", image: nil, identifier: nil, children: [markAsFinishedItem, favoriteItem, edit, delete])
-          }
-        case .done:
-          if item.isFavorite {
-            return UIMenu(title: "", image: nil, identifier: nil, children: [markAsUnfinishedItem, unfavoriteItem, edit, delete])
-          } else {
-            return UIMenu(title: "", image: nil, identifier: nil, children: [markAsUnfinishedItem, favoriteItem, edit, delete])
-          }
-        }
-      }
-      
-      return listConfiguration
     }
     return nil
   }
-  private func deleteItem(_ item: Item, indexPath: IndexPath) {
-    dbManager.delete(Item: item, response: nil)
-  }
+  
   private func editListAction(_ list: List) {
     navigator.toAddOrEditList(list: list, delegate: self)
   }

@@ -20,7 +20,7 @@ final class SplashViewModel {
     navigator.toHome()
   }
   func getConfiguration() {
-    let urlString = "https://github.com/Salarsoleimani/Listit-Website/blob/master/Configuration.json"
+    let urlString = "https://raw.githubusercontent.com/Salarsoleimani/Listit-Website/master/Configuration.json"
     guard let url = URL(string: urlString) else { return }
     NetworkManager.shared.fetchGenericDataWithURL(url: url) { (response: ConfigurationNetworkModel?, error) in
       if let response = response, error == .ok {

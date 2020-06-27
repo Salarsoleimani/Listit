@@ -13,6 +13,7 @@ import SwiftRater
 extension SettingController {
   func setupUI() {
     setSettingData()
+    setLocalizations()
     navigationItem.title = "setting_navigation_title".localize()
 
     view.backgroundColor = Colors.background.value
