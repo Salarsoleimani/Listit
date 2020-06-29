@@ -20,7 +20,9 @@ extension HomeController: HomeControllerDelegate {
       let index = IndexPath(item: row, section: 0)
       selectedList = lists[row]
       listsCollectionView.selectItem(at: index, animated: true, scrollPosition: .left)
-      fetchItems()
+      let listType = ListType(rawValue: lists[row].type) ?? ListType.default
+      let predicate = properPredicateFor(ListType: listType, listId: lists[row].id ?? "")
+      fetchItems(predicate)
       thereAreItems()
     }
   }

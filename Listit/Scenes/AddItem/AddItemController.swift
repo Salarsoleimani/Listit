@@ -10,6 +10,7 @@ import UIKit
 import SPPermissions
 import SwiftLocalNotification
 import GoogleMobileAds
+import Haptico
 
 protocol AddItemControllerDelegate: class {
   func didSelectDateAndTime(date: Date, hour: Int, minute: Int, repeatingInterval: RepeatingInterval)
@@ -174,6 +175,12 @@ class AddItemController: UIViewController {
     }
   }
   private func saveItem() {
+    Haptico.shared().generate(.success)
+
+    if item?.list != nil, item?.list != parentList {
+      item?.list?.itemsCount -= 1
+      parentList?.itemsCount += 1
+    }
     if let item = item {
       item.title = titleTextField.text
       item.desc = moreInfoTextView.text

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Haptico
 
 extension HomeController: UICollectionViewDelegate {
   private func updateItemsTableView(_ list: List, selectedListItem: Int) {
@@ -14,11 +15,10 @@ extension HomeController: UICollectionViewDelegate {
     //let filteredItems = allItems.filter{ $0.list == allLists[selectedListRow] }
     let predicate = properPredicateFor(ListType: listType, listId: list.id ?? "")
     let stateSort = NSSortDescriptor(key: "state", ascending: false)
-    itemsDataSource.frc.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true), stateSort]
+    itemsDataSource.frc.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false), stateSort]
     
     fetchItems(predicate)
-    thereAreItems(listType: listType)
-    itemsTableView.reloadData()
+    thereAreItems()
   }
   internal func fetchItems(_ predicate: NSPredicate? = nil) {
     itemsDataSource.frc.fetchRequest.predicate = predicate
@@ -32,11 +32,13 @@ extension HomeController: UICollectionViewDelegate {
     } else {
       noItemsStackView.isHidden = true
     }
+    itemsTableView.reloadData()
   }
   private func listSelected(_ list: List, selectedItem: Int) {
+    Haptico.shared().generate(.light)
     selectedList = list
     updateItemsTableView(list, selectedListItem: selectedItem)
-    guard let type = ListType(rawValue: list.type) else { return }
+    let type = ListType(rawValue: list.type) ?? ListType.default
     autoLayoutAddItemButtons(type)
   }
   private func autoLayoutAddItemButtons(_ type: ListType) {
@@ -88,11 +90,12 @@ extension HomeController: UICollectionViewDelegate {
   }
   
   private func editListAction(_ list: List) {
+    Haptico.shared().generate(.light)
     navigator.toAddOrEditList(list: list, delegate: self)
   }
   private func addNewItemAction(_ list: List) {
     let allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
-
+    Haptico.shared().generate(.light)
     navigator.toAddOrEditItem(item: nil, forList: list, lists: yourLists, allItemsList: allItemsList)
   }
   private func quickAddNewItemAction(_ list: List) {
@@ -100,6 +103,7 @@ extension HomeController: UICollectionViewDelegate {
     quickAddListButtonPressed(0)
   }
   private func deleteListAction(list: List) {
+    Haptico.shared().generate(.light)
     let cancelAction = UIAlertAction(title: "cancel_list_action".localize(), style: .cancel)
     let deleteAction = UIAlertAction(title: "delete_list_action".localize(), style: .destructive) { [deleteList] (action) in
       deleteList(list)
@@ -111,12 +115,13 @@ extension HomeController: UICollectionViewDelegate {
     present(alertt, animated: true, completion: nil)
   }
   private func deleteList(_ list: List) {
-    dbManager.delete(List: list, response: nil)
+    Haptico.shared().generate(.success)
     if let items = list.items?.allObjects as? [Item] {
       for item in items where item.list == list {
         dbManager.delete(Item: item, allItemsList: allItemsList, response: nil)
       }
     }
+    dbManager.delete(List: list, response: nil)
   }
   internal func properPredicateFor(ListType listType: ListType, listId: String) -> NSPredicate? {
      var predicate: NSPredicate?

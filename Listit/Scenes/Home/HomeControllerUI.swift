@@ -10,8 +10,6 @@ import UIKit
 
 extension HomeController {
   func setLocalization() {
-    navigationItem.title = "all_items_navigation_title".localize()
-
     addItemLabel.text = "add_item_button_title".localize()
 
     quickAddItemLabel.text = "quick_add_item_button_title".localize()
@@ -19,10 +17,11 @@ extension HomeController {
     addListLabel.text = "add_list_button_title".localize()
 
     titleItemTextField.placeholder = "add_item_title_placeholder".localize()
-
   }
   
   func setupUI() {
+    navigationItem.title = "all_items_navigation_title".localize()
+
     view.backgroundColor = Colors.background.value
 
     listsCollectionView.backgroundColor = .clear

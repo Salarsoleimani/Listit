@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import GoogleMobileAds
+import Haptico
 
 class HomeController: UIViewController {
   //MARK:- Outlets
@@ -102,6 +103,7 @@ class HomeController: UIViewController {
   @IBAction private func addItemButtonPressed(_ sender: UIButton) {
     if !yourLists.isEmpty {
       navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: yourLists, allItemsList: allItemsList)
+      Haptico.shared().generate(.light)
     } else {
       navigator.toast(text: "add_item_no_list_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
       navigator.toAddOrEditList(list: nil, delegate: self)
@@ -109,6 +111,7 @@ class HomeController: UIViewController {
   }
   
   @IBAction private func addListButtonPressed(_ sender: UIButton) {
+    Haptico.shared().generate(.light)
     navigator.toAddOrEditList(list: nil, delegate: self)
   }
   @IBAction private func removeAdsButtonPressed(_ sender: UIButton) {
@@ -117,12 +120,14 @@ class HomeController: UIViewController {
   @IBAction internal func quickAddListButtonPressed(_ sender: Any) {
     if let selectedList = selectedList, selectedList.type != ListType.all.rawValue, selectedList.type != ListType.favorites.rawValue {
       titleItemTextField.becomeFirstResponder()
+      Haptico.shared().generate(.light)
     } else {
       navigator.toast(text: "select_list_for_item_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
     }
   }
   
   @objc private func settingButtonPressed() {
+    Haptico.shared().generate(.light)
     navigator.toSetting()
   }
   //MARK:- Functions

@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import GoogleMobileAds
+import Haptico
 
 protocol AddListControllerDelegate {
   func iconSelected(_ icon: IconCellViewModel)
@@ -91,7 +92,10 @@ class AddListController: UIViewController {
     
     observeOnTitleChange()
   }
-  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(true)
+    setupLocalization()
+  }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     titleTextField.becomeFirstResponder()
@@ -126,6 +130,7 @@ class AddListController: UIViewController {
   
   // MARK:- Functions
   private func saveList() {
+    Haptico.shared().generate(.success)
     if let list = list {
       list.iconColor = listModel.iconColor
       list.iconId = listModel.iconId
