@@ -9,36 +9,47 @@
 import UIKit
 
 extension HomeController {
+  func setLocalization() {
+    navigationItem.title = "all_items_navigation_title".localize()
+
+    addItemLabel.text = "add_item_button_title".localize()
+
+    quickAddItemLabel.text = "quick_add_item_button_title".localize()
+
+    addListLabel.text = "add_list_button_title".localize()
+
+    titleItemTextField.placeholder = "add_item_title_placeholder".localize()
+
+  }
+  
   func setupUI() {
     view.backgroundColor = Colors.background.value
 
     listsCollectionView.backgroundColor = .clear
     itemsTableView.backgroundColor = .clear
 
-    navigationItem.title = "all_items_navigation_title".localize()
     
     addItemButton.makeNewTodoButton(title: "")
     addItemLabel.font = Fonts.listCellTitle
     addItemLabel.textColor = Colors.white.value
-    addItemLabel.text = "add_item_button_title".localize()
     
     quickAddItemButton.makeNewTodoButton(title: "")
     quickAddItemButton.backgroundColor = Colors.second.value
     quickAddItemLabel.font = Fonts.listCellTitle
     quickAddItemLabel.textColor = Colors.white.value
-    quickAddItemLabel.text = "quick_add_item_button_title".localize()
     
     addListButton.makeNewTodoButton(title: "")
     addListLabel.font = Fonts.listCellTitle
     addListLabel.textColor = Colors.white.value
-    addListLabel.text = "add_list_button_title".localize()
     
     titleItemTextField.tintColor = Colors.main.value
-    titleItemTextField.placeholder = "".localize()
     titleItemTextField.font = Fonts.itemCellTitle
     titleItemTextField.textColor = Colors.itemCellTitle.value
     
     titleItemContainerView.backgroundColor = Colors.listCellBackground.value
+    
+    noItemsLabel.font = Fonts.h5Regular
+    noItemsLabel.textColor = Colors.itemCellTitle.value
   }
   func registerCells() {
     let listNib = UINib(nibName: "ListCell", bundle: nil)

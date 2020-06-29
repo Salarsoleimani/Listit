@@ -18,8 +18,18 @@ enum Constants {
     static let testAdNativeAdvancedUnitID = "ca-app-pub-3940256099942544/3986624511"
     static let testAdNativeAdvancedVideoUnitID = "ca-app-pub-3940256099942544/2521693316"
     // my ads unit ids
-    static let adBannerHomeBottom = "ca-app-pub-1135958579537389/1781667294"
-    static let adRewardedHome = "ca-app-pub-1135958579537389/6650850596"
+    
+    static let adRewardedHome = "ca-app-pub-1135958579537389/7638984237"
+    static let adHomeBottomBanner = "ca-app-pub-1135958579537389/6517474251"
+
+    static let adSettingBottomBanner = "ca-app-pub-1135958579537389/1456719265"
+    static let adRewardedSetting = "ca-app-pub-1135958579537389/5232027335"
+    
+    static let adRewardedAddItem = "ca-app-pub-1135958579537389/3657901848"
+    static let adAddItemBottomBanner = "ca-app-pub-1135958579537389/3773451918"
+    
+    static let adRewardedAddList = "ca-app-pub-1135958579537389/5086533583"
+    static let adAddListBottomBanner = "ca-app-pub-1135958579537389/3727373970"
   }
   struct Keys {
     static let fontScale = "com.storageKey.fontScale"

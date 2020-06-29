@@ -17,8 +17,8 @@ enum ActionDescriptor {
     case .unfinished: return "uncomplete_item_title".localize()
     case .edit: return "Edit"
     case .delete: return "Delete"
-    case .important: return "Important"
-    case .notImportant: return "Not Important"
+    case .important: return "favorite_item_title".localize()
+    case .notImportant: return "unfavorite_item_title".localize()
     }
   }
   
@@ -29,18 +29,18 @@ enum ActionDescriptor {
     case .unfinished: name = "arrow.uturn.left.circle"
     case .edit: name = "flag.fill"
     case .delete: name = "trash.fill"
-      case .important: name = "flag.fill"
-      case .notImportant: name = "envelope.badge.fill"
+      case .important: name = "star.fill"
+      case .notImportant: name = "star.slash.fill"
     }
-    let config = UIImage.SymbolConfiguration(pointSize: 22.0, weight: .regular)
+    let config = UIImage.SymbolConfiguration(pointSize: 20.0, weight: .regular)
     let image = UIImage(systemName: name, withConfiguration: config)?.withTintColor(.white, renderingMode: .alwaysTemplate)
-    return circularIcon(with: color(), size: CGSize(width: 40, height: 40), icon: image) ?? UIImage()
+    return circularIcon(with: color(), size: CGSize(width: 30, height: 30), icon: image) ?? UIImage()
   }
   
   func color() -> UIColor {
     switch self {
-    case .finished, .unfinished: return UIColor.systemBlue
-    case .important, .notImportant: return UIColor.purple
+    case .finished, .unfinished: return Colors.error.value
+    case .important, .notImportant: return Colors.second.value
     case .edit:
       return #colorLiteral(red: 0.7803494334, green: 0.7761332393, blue: 0.7967314124, alpha: 1)
     case .delete: return #colorLiteral(red: 1, green: 0.2352941176, blue: 0.1882352941, alpha: 1)

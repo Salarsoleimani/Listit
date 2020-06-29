@@ -78,7 +78,7 @@ extension Colors {
       case .itemCellTitle:
         instanceColor = UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0xDDDDDD), lightModeColor: UIColor(hex: 0x686868))
       case .itemCellDescription:
-        instanceColor = UIColor(hex: 0x666666)
+        instanceColor = UIColor.secondaryLabel
       //
     case .error:
       instanceColor = UIColor(hex: 0xEA2127)

@@ -52,13 +52,15 @@ final class Application {
   private func resetNotificationBadge() {
     UIApplication.shared.applicationIconBadgeNumber = 0
   }
-  
-  private func setupRateManager() {
+  func setRateManagerLocalization() {
     SwiftRater.alertCancelTitle = "Rate_alertCancelTitle".localize()
     SwiftRater.alertMessage = "Rate_alertMessage".localize()
     SwiftRater.alertRateLaterTitle = "Rate_alertRateLaterTitle".localize()
     SwiftRater.alertRateTitle = "Rate_alertRateTitle".localize()
     SwiftRater.alertTitle = "Rate_alertTitle".localize()
+  }
+  private func setupRateManager() {
+    setRateManagerLocalization()
     
     SwiftRater.daysUntilPrompt = 2
     SwiftRater.usesUntilPrompt = 10

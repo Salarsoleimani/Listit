@@ -27,6 +27,7 @@ extension SettingController {
     languageButton.titleLabel?.font = Fonts.settingDescription
     languageButton.tintColor = Colors.main.value
     
+    versionLabel.text = "version \(Utility.version() ?? "") © 2020 listitapp.co"
     versionLabel.textColor = Colors.listCellDescription.value
     versionLabel.font = Fonts.h7Regular
 
@@ -161,6 +162,7 @@ extension SettingController {
   
   private func setLanguage(_ lang: Languages) {
     LanguageManager.shared.setLanguage(language: lang)
+    Application.shared.setRateManagerLocalization()
     setLocalizations()
   }
   

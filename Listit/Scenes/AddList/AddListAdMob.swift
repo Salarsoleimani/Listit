@@ -19,7 +19,7 @@ extension AddListController {
   }
   
   private func loadBannerAd() {
-    bannerView.adUnitID = Constants.AdMobIds.testAdBannerUnitID // [TODO] -force change to adBannerHomeBottom
+    bannerView.adUnitID = Constants.AdMobIds.adAddItemBottomBanner // [TODO] -force change to adAddItemBottomBanner
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
   }
@@ -41,7 +41,7 @@ extension AddListController {
     }
   }
   private func createAndLoadRewardedAd() -> GADRewardedAd? {
-    rewardedAd = GADRewardedAd(adUnitID: Constants.AdMobIds.testAdRewardedVideoUnitID) // [TODO] -force change to adRewardedConfiguration
+    rewardedAd = GADRewardedAd(adUnitID: Constants.AdMobIds.adRewardedAddItem) // [TODO] -force change to adRewardedAddItem
     rewardedAd?.load(GADRequest()) { error in
       if let error = error {
         print("Loading ad failed: \(error)")

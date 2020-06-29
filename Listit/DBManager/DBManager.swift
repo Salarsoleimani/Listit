@@ -144,15 +144,19 @@ final public class DBManager: DatabaseManagerProtocol {
   }
   //MARK: - Item Related Functions
   func updateIsFavorite(isFavorite: Bool = true, favoriteList: List?, item: Item) {
-    favoriteList?.itemsCount += 1
+    if isFavorite {
+      favoriteList?.itemsCount += 1
+    } else {
+      favoriteList?.itemsCount -= 1
+    }
     item.isFavorite = isFavorite
     CoreDataStack.shared.saveContext()
   }
   func updateState(item: Item, state: ItemState) {
     item.state = state.rawValue
     CoreDataStack.shared.saveContext()
-
   }
+  
   func addItem(_ item: ItemModel, allItemsList: List?, response: ((Bool) -> Void)?) {
     allItemsList?.itemsCount += 1
     item.parentList?.itemsCount += 1
@@ -182,7 +186,10 @@ final public class DBManager: DatabaseManagerProtocol {
       print("Error fetching lists")
     }
   }
-  func delete(Item item: Item, response: ((Bool) -> Void)?) {
+  func delete(Item item: Item, allItemsList: List?, response: ((Bool) -> Void)?) {
+    allItemsList?.itemsCount -= 1
+    item.list?.itemsCount -= 1
+    
     DBManager.scheduler.cancel(notificationIds: item.id ?? "")
     CoreDataStack.managedContext.delete(item)
     CoreDataStack.shared.saveContext()

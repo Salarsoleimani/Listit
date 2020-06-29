@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import Haptico
 import GoogleMobileAds
 
 class HomeController: UIViewController {
@@ -33,6 +32,10 @@ class HomeController: UIViewController {
   @IBOutlet weak var titleItemContainerView: UIView!
   @IBOutlet weak var titleItemContainerViewBottomAnchor: NSLayoutConstraint!
 
+  @IBOutlet weak var noItemsStackView: UIStackView!
+  @IBOutlet weak var noItemsLabel: UILabel!
+  @IBOutlet weak var noItemsImageView: UIImageView!
+
   let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
   var rewardedAd: GADRewardedAd?
 
@@ -43,7 +46,8 @@ class HomeController: UIViewController {
   internal var listsDataSource: ListsCollectionViewDataSource!
   
   //MARK:- Variables
-  
+  internal lazy var allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
+  internal lazy var favoriteList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.favorites.rawValue}.first
   lazy var allLists: [List] = {
     listsDataSource.performFetch()
     return listsDataSource.frc.fetchedObjects ?? [List]()
@@ -89,11 +93,14 @@ class HomeController: UIViewController {
       setupAds()
     }
   }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setLocalization()
+  }
   
   //MARK:- Actions
   @IBAction private func addItemButtonPressed(_ sender: UIButton) {
     if !yourLists.isEmpty {
-      let allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
       navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: yourLists, allItemsList: allItemsList)
     } else {
       navigator.toast(text: "add_item_no_list_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
@@ -146,25 +153,9 @@ class HomeController: UIViewController {
    }
   
   private func setupNavigationButtons() {
-    let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingButtonPressed))
+    let rightBarButton = UIBarButtonItem(image: UIImage(named: "ic_menu"), style: .plain, target: self, action: #selector(settingButtonPressed))
     navigationItem.rightBarButtonItems = [rightBarButton]
   }
  
 }
 
-extension HomeController: UITextFieldDelegate {
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField == titleItemTextField, let text = textField.text, !text.isEmpty, let selectedList = selectedList {
-      let item = ItemModel(title: text, notifDate: nil, repeats: nil, description: nil, parentList: selectedList, state: nil)
-      let allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
-
-      dbManager.addItem(item, allItemsList: allItemsList, response: nil)
-      titleItemTextField.text = nil
-      Haptico.shared().generate(.success)
-      return true
-    } else {
-      navigator.toast(text: "add_quick_item_title_placeholder".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
-    }
-    return false
-  }
-}

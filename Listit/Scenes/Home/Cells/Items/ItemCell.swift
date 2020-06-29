@@ -14,11 +14,14 @@ class ItemCell: SwipeTableViewCell {
   // MARK:- Outlets
     
   @IBOutlet weak var containerView: UIView!
+  @IBOutlet weak var containerStackView: UIStackView!
+
   @IBOutlet weak var countdownLabel: CountdownLabel!
+
   @IBOutlet weak var titleLabel: UILabel!
   
   @IBOutlet weak var descriptionLabel: UILabel!
-  
+
   @IBOutlet weak var repeatContainerView: UIView!
   @IBOutlet weak var repeatLabel: UILabel!
   @IBOutlet weak var repeatIcon: UIImageView!
@@ -94,6 +97,7 @@ class ItemCell: SwipeTableViewCell {
 extension ItemCell {
   func bindData(withViewModel viewModel: ItemViewModel) {
     self.viewModel = viewModel
+
     containerView.backgroundColor = viewModel.backgroundColor
     containerView.layer.borderColor = viewModel.borderColor.cgColor
 
@@ -111,26 +115,23 @@ extension ItemCell {
     
     reminderDateLabel.text = viewModel.dueDate
     if viewModel.type == .countdown {
-      countdownLabel.isHidden = false
       countdownLabel.timeFormat = viewModel.countdownTimeFormat
       countdownLabel.setCountDownDate(fromDate: NSDate(), targetDate: (viewModel.toDate ?? Date()) as NSDate)
       countdownLabel.start()
-      if viewModel.model.notifDate == nil {
-        countdownLabel.isHidden = true
-      } else {
-        countdownLabel.isHidden = false
-      }
-    } else {
-      countdownLabel.isHidden = true
     }
-    showDetail(isShowingDetail)
   }
   
   func showDetail(_ isShowingDetail: Bool = false) {
+    if viewModel.description.isEmpty {
+      descriptionLabel.isHidden = true
+    } else {
+      descriptionLabel.isHidden = false
+    }
     if isShowingDetail {
       descriptionLabel.isHidden = false
       switch viewModel.type {
       case .reminder:
+        dateContainerStackView.isHidden = false
 
         reminderDateLabel.isHidden = false
         reminderDateContainerView.isHidden = false
@@ -139,7 +140,10 @@ extension ItemCell {
         repeatContainerView.isHidden = false
         repeatLabel.isHidden = false
         repeatIcon.isHidden = false
+
+        countdownLabel.isHidden = true
       case .note:
+        dateContainerStackView.isHidden = true
 
         reminderDateLabel.isHidden = true
         reminderDateContainerView.isHidden = true
@@ -148,7 +152,10 @@ extension ItemCell {
         repeatContainerView.isHidden = true
         repeatLabel.isHidden = true
         repeatIcon.isHidden = true
+
+        countdownLabel.isHidden = true
       case .countdown:
+        dateContainerStackView.isHidden = false
 
         reminderDateLabel.isHidden = false
         reminderDateContainerView.isHidden = false
@@ -157,12 +164,18 @@ extension ItemCell {
         repeatContainerView.isHidden = false
         repeatLabel.isHidden = false
         repeatIcon.isHidden = false
-        
+        if viewModel.model.notifDate == nil {
+          countdownLabel.isHidden = true
+        } else {
+          countdownLabel.isHidden = false
+        }
         
       default: break
       }
     } else {
       descriptionLabel.isHidden = true
+      dateContainerStackView.isHidden = true
+
       switch viewModel.type {
       case .reminder:
 
@@ -173,6 +186,8 @@ extension ItemCell {
         repeatContainerView.isHidden = true
         repeatLabel.isHidden = true
         repeatIcon.isHidden = true
+        
+        countdownLabel.isHidden = true
       case .note:
 
         reminderDateLabel.isHidden = true
@@ -182,6 +197,8 @@ extension ItemCell {
         repeatContainerView.isHidden = true
         repeatLabel.isHidden = true
         repeatIcon.isHidden = true
+        
+        countdownLabel.isHidden = true
       case .countdown:
 
         reminderDateLabel.isHidden = true
@@ -191,9 +208,15 @@ extension ItemCell {
         repeatContainerView.isHidden = true
         repeatLabel.isHidden = true
         repeatIcon.isHidden = true
-        
+        if viewModel.model.notifDate == nil {
+          countdownLabel.isHidden = true
+        } else {
+          countdownLabel.isHidden = false
+        }
       default: break
       }
     }
+    contentView.layoutIfNeeded()
+    contentView.layoutSubviews()
   }
 }

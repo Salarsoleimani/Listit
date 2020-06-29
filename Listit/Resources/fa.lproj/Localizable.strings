@@ -125,3 +125,13 @@
 "add_title_for_item_error" = "Please add title for your item";
 "select_list_for_item_error" = "Please select a list wanted to be your item in";
 "select_date_for_item_error" = "Please selec a date for your countdown";
+
+///////
+/// Rate
+
+"Rate_alertCancelTitle" = "الان نه، ممنون";
+"Rate_alertMessage" = "اگر از استفاده از Listit لذت می برید ، آیا می خواهید یک لحظه برای ارزیابی آن دقت کنید؟ فقط کمتر از یک دقیقه طول می کشد. این برنامه از ما برای ترغیب برنامه مناسب تر حمایت می کند. \n از حمایت شما متشکریم";
+"Rate_alertRateLaterTitle" = "بعدا به من یادآوری کن";
+"Rate_alertRateTitle" = "به Listit امتیاز دهید";
+"Rate_alertTitle" = "به ما امتیاز دهید 🙂";
+

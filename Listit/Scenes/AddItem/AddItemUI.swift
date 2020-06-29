@@ -10,9 +10,7 @@ import UIKit
 import SwiftLocalNotification
 
 extension AddItemController {
-  func setupUI() {
-    view.backgroundColor = Colors.background.value
-    
+  func setupLocalization() {
     navigationItem.title = item == nil ? "add_item_navigation_title".localize() : "edit_item_navigation_title".localize()
     
     if let parentList = parentList, let title = parentList.title {
@@ -20,17 +18,47 @@ extension AddItemController {
     } else {
       descriptionLabel?.text = String(format: "add_item_description".localize(), "")
     }
+    
+    titleTextField.placeholder = "add_item_title_placeholder".localize()
+    
+    moreInfoButton.setTitle("more_info_about_item_title".localize(), for: .normal)
+    
+    remindMeButton.setTitle("remind_me_button_title".localize(), for: .normal)
+    
+    remindMeTitleLabel.text = "remind_me_title".localize()
+    
+    whichListTitleLabel.text = "which_list_title".localize()
+    
+    if let parentList = parentList {
+      let type = ListType(rawValue: parentList.type) ?? ListType.default
+      if type != .all && type != .favorites {
+        whichListTextField.text = parentList.title
+      } else {
+        whichListTextField.text = "select_list_placeholder"
+      }
+    }
+    if item != nil {
+      saveButton.makeNewTodoButton(title: "update_button_title".localize())
+      saveAndAddAnotherButton.makeNewTodoButton(title: "update_and_another_item_button_title".localize())
+      whichListTextField.placeholder = "select_into_which_list_placeholder".localize()
+    } else {
+      saveButton.makeNewTodoButton(title: "save_button_title".localize())
+      saveAndAddAnotherButton.makeNewTodoButton(title: "save_and_another_item_button_title".localize())
+      whichListTextField.placeholder = "select_list_placeholder".localize()
+      
+    }
+  }
+  func setupUI() {
+    view.backgroundColor = Colors.background.value
+    
     descriptionLabel?.textColor = Colors.listCellDescription.value
     descriptionLabel?.font = Fonts.h5Regular
     
-    
-    titleTextField.placeholder = "add_item_title_placeholder".localize()
     titleTextField.font = Fonts.itemCellTitle
     titleTextField.textColor = Colors.itemCellTitle.value
     titleTextField.tintColor = Colors.main.value
     
     moreInfoButton.tintColor = Colors.main.value
-    moreInfoButton.setTitle("more_info_about_item_title".localize(), for: .normal)
     moreInfoButton.titleLabel?.font = Fonts.h5Regular
     
     moreInfoTextView.font = Fonts.itemCellDescription
@@ -46,16 +74,13 @@ extension AddItemController {
     
     remindMeButton.titleLabel?.font = Fonts.h5Regular
     remindMeButton.tintColor = Colors.main.value
-    remindMeButton.setTitle("remind_me_button_title".localize(), for: .normal)
     
-    remindMeTitleLabel.text = "remind_me_title".localize()
     remindMeTitleLabel.font = Fonts.h5Bold
     remindMeTitleLabel.textColor = Colors.listCellTitle.value
     
     whichListContainerView.backgroundColor = Colors.listCellBackground.value
     whichListContainerView.layer.cornerRadius = Constants.Radius.cornerRadius
     
-    whichListTitleLabel.text = "which_list_title".localize()
     whichListTitleLabel.font = Fonts.h5Bold
     whichListTitleLabel.textColor = Colors.listCellTitle.value
     
@@ -64,16 +89,6 @@ extension AddItemController {
     whichListTextField.textColor = Colors.listCellTitle.value
     
     saveAndAddAnotherButton.titleLabel?.adjustsFontSizeToFitWidth = true
-
-
-    if let parentList = parentList {
-      let type = ListType(rawValue: parentList.type) ?? ListType.default
-      if type != .all && type != .favorites {
-        whichListTextField.text = parentList.title
-      } else {
-        whichListTextField.text = "Please select a list"
-      }
-    }
     
     if let item = item {
       parentList = item.list
@@ -101,14 +116,6 @@ extension AddItemController {
       }
       whichListTextField.text = item.list?.title
       
-      saveButton.makeNewTodoButton(title: "update_button_title".localize())
-      saveAndAddAnotherButton.makeNewTodoButton(title: "update_and_another_item_button_title".localize())
-      whichListTextField.placeholder = "select_into_which_list_placeholder".localize()
-    } else {
-      saveButton.makeNewTodoButton(title: "save_button_title".localize())
-      saveAndAddAnotherButton.makeNewTodoButton(title: "save_and_another_item_button_title".localize())
-      whichListTextField.placeholder = "select_list_placeholder".localize()
-
     }
   }
 }

@@ -12,69 +12,44 @@ extension HomeController: UICollectionViewDelegate {
   private func updateItemsTableView(_ list: List, selectedListItem: Int) {
     let listType = ListType(rawValue: list.type) ?? ListType.default
     //let filteredItems = allItems.filter{ $0.list == allLists[selectedListRow] }
-    var predicate: NSPredicate?
+    let predicate = properPredicateFor(ListType: listType, listId: list.id ?? "")
+    let stateSort = NSSortDescriptor(key: "state", ascending: false)
+    itemsDataSource.frc.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true), stateSort]
     
-    switch listType {
-    case .reminder:
-      predicate = NSPredicate(format: "list.id == %@", list.id ?? "")
-    case .countdown:
-      predicate = NSPredicate(format: "list.id == %@", list.id ?? "")
-    case .note:
-      predicate = NSPredicate(format: "list.id == %@", list.id ?? "")
-    case .favorites:
-      predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: true))
-    case .all:
-      predicate = nil
-      //    case .today:
-      //      print("Do it later [TODO]")
-      //      // Get the current calendar with local time zone
-      //      var calendar = Calendar.current
-      //      calendar.timeZone = NSTimeZone.local
-      //
-      //      // Get today's beginning & end
-      //      let dateFrom = calendar.startOfDay(for: Date()) // eg. 2016-10-10 00:00:00
-      //      let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
-      //      // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
-      //
-      //      // Set predicate as date being today's date
-      //      let fromPredicate = NSPredicate(format: "%@ >= %@", date as NSDate, dateFrom as NSDate)
-      //      let toPredicate = NSPredicate(format: "%@ < %@", date as NSDate, dateTo as NSDate)
-      //      let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
-      //      predicate = datePredicate
-      //      let filteredItems = allItems.filter { (item) -> Bool in
-      //        if let notifDate = item.notifDate {
-      //          return Calendar.current.isDateInToday(notifDate)
-      //        }
-      //        if let repeats = item.repeats, let repeatInterval = RepeatingInterval(rawValue: repeats) {
-      //          return repeatInterval == .daily || repeatInterval == .hourly || repeatInterval == .minute
-      //        }
-      //        return false
-      //      }
-    //      addDataToItemsTableView(data: filteredItems)
-    case .none:
-      predicate = nil
-    }
-    itemsDataSource.frc.fetchRequest.predicate = predicate
-    itemsDataSource.performFetch()
+    fetchItems(predicate)
+    thereAreItems(listType: listType)
     itemsTableView.reloadData()
   }
-  
+  internal func fetchItems(_ predicate: NSPredicate? = nil) {
+    itemsDataSource.frc.fetchRequest.predicate = predicate
+    itemsDataSource.performFetch()
+  }
+  internal func thereAreItems(listType: ListType? = nil) {
+    if itemsDataSource.frc.fetchedObjects?.isEmpty ?? false {
+      noItemsLabel.text = listType != .favorites ? String(format: "no_items_in_list_title".localize(), selectedList?.title ?? "") : "no_items_in_importants_title".localize()
+      noItemsStackView.isHidden = false
+      noItemsImageView.isHidden = listType != .favorites ? false : true
+    } else {
+      noItemsStackView.isHidden = true
+    }
+  }
   private func listSelected(_ list: List, selectedItem: Int) {
     selectedList = list
     updateItemsTableView(list, selectedListItem: selectedItem)
-    if let type = ListType(rawValue: list.type) {
-      if type == .all || type == .favorites {
-        UIView.animate(withDuration: 0.25) { [quickAddItembuttonContainerView] in
-          quickAddItembuttonContainerView?.isHidden = true
-        }
-      } else {
-        UIView.animate(withDuration: 0.25) { [quickAddItembuttonContainerView] in
-          quickAddItembuttonContainerView?.isHidden = false
-        }
+    guard let type = ListType(rawValue: list.type) else { return }
+    autoLayoutAddItemButtons(type)
+  }
+  private func autoLayoutAddItemButtons(_ type: ListType) {
+    if type == .all || type == .favorites {
+      UIView.animate(withDuration: 0.25) { [quickAddItembuttonContainerView] in
+        quickAddItembuttonContainerView?.isHidden = true
+      }
+    } else {
+      UIView.animate(withDuration: 0.25) { [quickAddItembuttonContainerView] in
+        quickAddItembuttonContainerView?.isHidden = false
       }
     }
   }
-  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if let listCell = collectionView.cellForItem(at: indexPath) as? ListCell {
       let selectedList = listCell.viewModel.model
@@ -139,9 +114,53 @@ extension HomeController: UICollectionViewDelegate {
     dbManager.delete(List: list, response: nil)
     if let items = list.items?.allObjects as? [Item] {
       for item in items where item.list == list {
-        dbManager.delete(Item: item, response: nil)
+        dbManager.delete(Item: item, allItemsList: allItemsList, response: nil)
       }
     }
-    
   }
+  internal func properPredicateFor(ListType listType: ListType, listId: String) -> NSPredicate? {
+     var predicate: NSPredicate?
+     
+     switch listType {
+     case .reminder:
+       predicate = NSPredicate(format: "list.id == %@", listId)
+     case .countdown:
+       predicate = NSPredicate(format: "list.id == %@", listId)
+     case .note:
+       predicate = NSPredicate(format: "list.id == %@", listId)
+     case .favorites:
+       predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: true))
+     case .all:
+       predicate = nil
+       //    case .today:
+       //      print("Do it later [TODO]")
+       //      // Get the current calendar with local time zone
+       //      var calendar = Calendar.current
+       //      calendar.timeZone = NSTimeZone.local
+       //
+       //      // Get today's beginning & end
+       //      let dateFrom = calendar.startOfDay(for: Date()) // eg. 2016-10-10 00:00:00
+       //      let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
+       //      // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
+       //
+       //      // Set predicate as date being today's date
+       //      let fromPredicate = NSPredicate(format: "%@ >= %@", date as NSDate, dateFrom as NSDate)
+       //      let toPredicate = NSPredicate(format: "%@ < %@", date as NSDate, dateTo as NSDate)
+       //      let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+       //      predicate = datePredicate
+       //      let filteredItems = allItems.filter { (item) -> Bool in
+       //        if let notifDate = item.notifDate {
+       //          return Calendar.current.isDateInToday(notifDate)
+       //        }
+       //        if let repeats = item.repeats, let repeatInterval = RepeatingInterval(rawValue: repeats) {
+       //          return repeatInterval == .daily || repeatInterval == .hourly || repeatInterval == .minute
+       //        }
+       //        return false
+       //      }
+     //      addDataToItemsTableView(data: filteredItems)
+     case .none:
+       predicate = nil
+     }
+     return predicate
+   }
 }

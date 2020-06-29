@@ -19,7 +19,7 @@
 
 /// - list types title
 "all_lists_type" = "All";
-"favorites_lists_type" = "Favorites";
+"favorites_lists_type" = "Importants";
 "today_lists_type" = "Today";
 "reminder_lists_type" = "Reminder";
 "countdown_lists_type" = "Countdown";
@@ -31,7 +31,7 @@
 
 /// - list types quantity title
 "all_lists_type_quantity" = "items";
-"favorites_lists_type_quantity" = "favorites";
+"favorites_lists_type_quantity" = "importants";
 "today_lists_type_quantity" = "tasks";
 "reminder_lists_type_quantity" = "tasks";
 "countdown_lists_type_quantity" = "countdowns";
@@ -46,11 +46,11 @@
 "add_new_item_to_list_action" = "Add new";
 "quick_add_new_item_to_list_action" = "Quick add new";
 
-"favorite_item_title" = "Add to favorites";
-"unfavorite_item_title" = "Remove from favorites";
+"favorite_item_title" = "It is important";
+"unfavorite_item_title" = "Not important anymore";
 
-"mark_as_completed_item_title" = "Mark as finished";
-"uncomplete_item_title" = "Mark as unfinished";
+"mark_as_completed_item_title" = "Finished?";
+"uncomplete_item_title" = "Unfinished";
 
 // - add list
 "add_list_title_placeholder" = "Your list title";
@@ -95,10 +95,12 @@
 "quick_add_item_button_title" = "+ (quick) add item";
 
 "add_quick_item_title_placeholder" = "Name you item and tap continue";
+"no_items_in_list_title" = "There is no item in %@ list.\nChoose to add item quickly or with more detail.";
+"no_items_in_importants_title" = "There is no item in importants.\nSwipe left on an item to add it into importants.";
 // Setting
 
 "language_title" = "Language:";
-"remove_ads_title" = "Remove advertisements";
+"remove_ads_title" = "Remove advertisements forever";
 "restore_purchase_title" = "Restore purchase";
 "make_us_better_title" = "Make us better 😉";
 "support_us_title" = "Support us 🙏🏾";
@@ -130,3 +132,11 @@
 "add_title_for_item_error" = "Please add title for your item";
 "select_list_for_item_error" = "Please select a list wanted to be your item in";
 "select_date_for_item_error" = "Please select a date for your countdown";
+
+/// Rate
+
+"Rate_alertCancelTitle" = "Not now, thanks";
+"Rate_alertMessage" = "If you enjoy using Listit, would you mind taking a moment to rate it? it just takes less than a minute. it supports to encourage us to make the app more sufficient.\nThanks for your support 🙌🏾";
+"Rate_alertRateLaterTitle" = "Remind me later";
+"Rate_alertRateTitle" = "Rate Listit";
+"Rate_alertTitle" = "Please rate us 🙂";

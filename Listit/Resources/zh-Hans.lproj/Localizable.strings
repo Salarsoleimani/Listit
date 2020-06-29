@@ -124,3 +124,14 @@
 "add_title_for_item_error" = "Please add title for your item";
 "select_list_for_item_error" = "Please select a list wanted to be your item in";
 "select_date_for_item_error" = "Please selec a date for your countdown";
+
+
+///////
+/// Rate
+
+"Rate_alertCancelTitle" = "不是现在，谢谢";
+"Rate_alertMessage" = "如果您喜欢使用 Listit，您会花一点时间对其进行评分吗？ 只需不到一分钟。 它支持鼓励我们使应用程序变得更充分。\n感谢您的支持 🙌🏾";
+"Rate_alertRateLaterTitle" = "稍后提醒我";
+"Rate_alertRateTitle" = "费率 Listit";
+"Rate_alertTitle" = "请给我们打分 🙂";
+
