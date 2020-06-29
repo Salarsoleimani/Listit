@@ -151,7 +151,7 @@ extension HomeController: SwipeTableViewCellDelegate {
   func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
     let itemCell = itemsTableView.cellForRow(at: indexPath) as! ItemCell
     if orientation == .left {
-      let finishedOrUnfinished = makeFinishedOrUnfinishedSwipeAction(itemCell.viewModel.model, finishedLineIsHidden: itemCell.viewModel.finishedLineIsHidden)
+      let finishedOrUnfinished = makeFinishedOrUnfinishedSwipeAction(itemCell.viewModel.model, finishedLineIsHidden: itemCell.viewModel.finishedLineIsHidden, cell: itemCell)
       configure(action: finishedOrUnfinished.swipeAction, with: finishedOrUnfinished.descriptor)
       return [finishedOrUnfinished.swipeAction]
     }
@@ -170,13 +170,14 @@ extension HomeController: SwipeTableViewCellDelegate {
     let descriptor: ActionDescriptor = item.isFavorite ? .notImportant : .important
     return (importantsOrNot, descriptor)
   }
-  private func makeFinishedOrUnfinishedSwipeAction(_ item: Item, finishedLineIsHidden: Bool) -> (swipeAction: SwipeAction, descriptor: ActionDescriptor) {
+  private func makeFinishedOrUnfinishedSwipeAction(_ item: Item, finishedLineIsHidden: Bool, cell: ItemCell) -> (swipeAction: SwipeAction, descriptor: ActionDescriptor) {
     let finishedOrUnfinished = SwipeAction(style: .default, title: nil) { [dbManager] action, indexPath in
       if finishedLineIsHidden {
         dbManager.updateState(item: item, state: ItemState.done)
       } else {
         dbManager.updateState(item: item, state: ItemState.doing)
       }
+      cell.finishedLineImageView.isHidden = !finishedLineIsHidden
     }
     let descriptor: ActionDescriptor = finishedLineIsHidden ? .finished : .unfinished
 
@@ -204,7 +205,7 @@ extension HomeController: SwipeTableViewCellDelegate {
 extension HomeController {
   func configureItemsDataSource() {
     let itemsFetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-    itemsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true), NSSortDescriptor(key: "state", ascending: false)]
+    itemsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "state", ascending: true), NSSortDescriptor(key: "createdAt", ascending: true)]
     itemsFetchRequest.fetchBatchSize = 20
     
     itemsDataSource = ItemsTableViewDataSource(fetchRequest: itemsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, tableView: itemsTableView)

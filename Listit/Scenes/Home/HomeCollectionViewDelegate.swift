@@ -14,8 +14,8 @@ extension HomeController: UICollectionViewDelegate {
     let listType = ListType(rawValue: list.type) ?? ListType.default
     //let filteredItems = allItems.filter{ $0.list == allLists[selectedListRow] }
     let predicate = properPredicateFor(ListType: listType, listId: list.id ?? "")
-    let stateSort = NSSortDescriptor(key: "state", ascending: false)
-    itemsDataSource.frc.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false), stateSort]
+    let stateSort = NSSortDescriptor(key: "state", ascending: true)
+    itemsDataSource.frc.fetchRequest.sortDescriptors = [stateSort, NSSortDescriptor(key: "createdAt", ascending: false)]
     
     fetchItems(predicate)
     thereAreItems()
