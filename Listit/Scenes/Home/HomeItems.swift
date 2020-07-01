@@ -200,7 +200,7 @@ extension HomeController: SwipeTableViewCellDelegate {
 extension HomeController {
   func configureItemsDataSource() {
     let itemsFetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-    itemsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "state", ascending: true), NSSortDescriptor(key: "createdAt", ascending: true)]
+    itemsFetchRequest.sortDescriptors = [NSSortDescriptor(key: "state", ascending: true), NSSortDescriptor(key: "createdAt", ascending: false)]
     itemsFetchRequest.fetchBatchSize = 20
     
     itemsDataSource = ItemsTableViewDataSource(fetchRequest: itemsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, tableView: itemsTableView)

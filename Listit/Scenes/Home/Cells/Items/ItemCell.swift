@@ -114,10 +114,13 @@ extension ItemCell {
     finishedLineImageView.isHidden = viewModel.finishedLineIsHidden
     
     reminderDateLabel.text = viewModel.dueDate
-    if viewModel.type == .countdown {
+    if viewModel.type == .countdown, viewModel.finishedLineIsHidden {
       countdownLabel.timeFormat = viewModel.countdownTimeFormat
       countdownLabel.setCountDownDate(fromDate: NSDate(), targetDate: (viewModel.toDate ?? Date()) as NSDate)
       countdownLabel.start()
+    } else {
+      countdownLabel.cancel()
+      countdownLabel.text = "mark_as_completed_item_title".localize()
     }
   }
   

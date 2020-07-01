@@ -222,7 +222,6 @@ class AddItemController: UIViewController {
     
     let item = ItemModel(title: titleTextField.text ?? "", notifDate: notifDate, repeats: repeats, description: moreInfoTextView.text, parentList: parentList ?? lists[listsPickerView.tag], state: .doing)
     
-    
     dbManager.addItem(item, allItemsList: allItemsList, withHaptic: true, response: nil)
   }
   func goToDateSelection() {

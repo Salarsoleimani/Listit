@@ -25,6 +25,7 @@ extension HomeController: HomeControllerDelegate {
       let predicate = properPredicateFor(ListType: listType, listId: lists[row].id ?? "")
       fetchItems(predicate)
       thereAreItems(listType: listType)
+      autoLayoutAddItemButtons(listType)
     }
   }
 }

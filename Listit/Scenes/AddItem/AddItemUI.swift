@@ -38,6 +38,13 @@ extension AddItemController {
       }
     }
     if item != nil {
+      if let interval = repeats, let notifDate = notifDate {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY/MMM/dd HH:mm"
+        let dateStr = formatter.string(from: notifDate)
+        let title = interval != .none ? "\(dateStr) (\(interval.rawValue))": dateStr
+        remindMeButton.setTitle(title, for: .normal)
+      }
       saveButton.makeNewTodoButton(title: "update_button_title".localize())
       saveAndAddAnotherButton.makeNewTodoButton(title: "update_and_another_item_button_title".localize())
       whichListTextField.placeholder = "select_into_which_list_placeholder".localize()

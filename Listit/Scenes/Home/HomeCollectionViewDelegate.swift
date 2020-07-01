@@ -51,7 +51,7 @@ extension HomeController: UICollectionViewDelegate {
     autoLayoutAddItemButtons(type)
     
   }
-  private func autoLayoutAddItemButtons(_ type: ListType) {
+  internal func autoLayoutAddItemButtons(_ type: ListType) {
     if type == .all || type == .favorites {
       setupAddItemButton()
       addItemButton.tag = 0

@@ -149,6 +149,9 @@ class DateSelectionController: UIViewController {
     
     if let passedRepeats = repeatingInterval {
       repeatingInterval = passedRepeats
+      if passedRepeats == .hourly || passedRepeats == .daily {
+        showOrHideDateContainer(isHidden: true)
+      }
     } else {
       repeatingInterval = RepeatingInterval.none
     }

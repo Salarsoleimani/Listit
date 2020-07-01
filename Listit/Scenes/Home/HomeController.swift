@@ -150,15 +150,15 @@ class HomeController: UIViewController {
      let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
      
      if notification.name == UIResponder.keyboardWillHideNotification {
-       UIView.animate(withDuration: 0.5) { [titleItemContainerView, titleItemContainerViewBottomAnchor, titleItemTextField] in
+       UIView.animate(withDuration: 0.5) { [view, titleItemContainerViewBottomAnchor, titleItemTextField] in
          titleItemContainerViewBottomAnchor?.constant = -132
         titleItemTextField?.text = ""
-        titleItemContainerView?.layoutIfNeeded()
+        view?.layoutIfNeeded()
        }
      } else {
-       UIView.animate(withDuration: 0.5) { [titleItemContainerView, titleItemContainerViewBottomAnchor] in
+       UIView.animate(withDuration: 0.5) { [view, titleItemContainerViewBottomAnchor] in
          titleItemContainerViewBottomAnchor?.constant = keyboardViewEndFrame.height - 20
-         titleItemContainerView?.layoutIfNeeded()
+         view?.layoutIfNeeded()
        }
      }
    }

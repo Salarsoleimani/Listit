@@ -139,7 +139,6 @@ class AddListController: UIViewController {
       isRewardedAdWatched = true
     } else {
       adBannerContainerView.isHidden = false
-      isRewardedAdWatched = false
     }
   }
   private func saveList() {

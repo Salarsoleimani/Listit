@@ -22,7 +22,7 @@ struct ItemModelCodable: Codable, Equatable {
 struct ItemModel {
   var title: String
   var notifDate: Date?
-  let repeats: RepeatingInterval?
+  var repeats: RepeatingInterval?
   let description: String?
   var parentList: List?
   let state: ItemState?

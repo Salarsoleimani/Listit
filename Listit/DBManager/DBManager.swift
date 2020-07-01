@@ -76,7 +76,7 @@ final public class DBManager: DatabaseManagerProtocol {
             print("Another index of template items for reminders")
           }
           item.notifDate = notifDate
-
+          item.repeats = RepeatingInterval.daily
           addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
 
         } else if index > 4, index <= 6, templateList.type == ListType.countdown.rawValue {
@@ -100,6 +100,8 @@ final public class DBManager: DatabaseManagerProtocol {
             print("Another index of template items for coundowns")
           }
           item.notifDate = notifDate
+          item.repeats = RepeatingInterval.none
+
           addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
 
         } else if index > 6, index <= 9, templateList.type == ListType.note.rawValue {
@@ -127,16 +129,6 @@ final public class DBManager: DatabaseManagerProtocol {
     return dbList
   }
   
-  func getAllLists(response: @escaping ([List]) -> Void) {
-    let fetch = NSFetchRequest<List>(entityName: "List")
-    fetch.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
-    
-    do {
-      response(try CoreDataStack.managedContext.fetch(fetch))
-    } catch {
-      print("Error fetching lists")
-    }
-  }
   
   func delete(List list: List, response: ((Bool) -> Void)?) {
     CoreDataStack.managedContext.delete(list)
@@ -160,6 +152,14 @@ final public class DBManager: DatabaseManagerProtocol {
     Haptico.shared().generate(.success)
   }
   func updateState(item: Item, state: ItemState) {
+    if state == .done {
+      DBManager.scheduler.cancel(notificationIds: item.id ?? "")
+    } else {
+      if let notifDate = item.notifDate, let repeats = item.repeats {
+        let notifModel = SwiftLocalNotificationModel(title: item.desc ?? "", body: item.title ?? "", date: notifDate, repeating: RepeatingInterval(rawValue: repeats) ?? .none)
+        item.id = DBManager.scheduler.schedule(notification: notifModel)
+      }
+    }
     item.state = state.rawValue
     CoreDataStack.shared.saveContext()
     Haptico.shared().generate(.success)
@@ -172,8 +172,7 @@ final public class DBManager: DatabaseManagerProtocol {
     let dbItem = item.asDBItem()
     
     if let notifDate = item.notifDate, let repeats = item.repeats {
-      let notifModel = SwiftLocalNotificationModel(title: item.title, body: item.description ?? "", date: notifDate, repeating: repeats)
-      DBManager.scheduler.push(notification: notifModel, secondsLater: 15)
+      let notifModel = SwiftLocalNotificationModel(title: item.description ?? "", body: item.title, date: notifDate, repeating: repeats)
       dbItem.id = DBManager.scheduler.schedule(notification: notifModel)
     }
     
@@ -183,21 +182,19 @@ final public class DBManager: DatabaseManagerProtocol {
       Haptico.shared().generate(.success)
     }
   }
-  
-  func get(ItemsForListUID: UUID, response: @escaping ([Item]) -> Void) {
-    
-  }
-  
-  func getAllItems(response: @escaping ([Item]) -> Void) {
-    let fetch = NSFetchRequest<Item>(entityName: "Item")
-    fetch.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
-    
-    do {
-      response(try CoreDataStack.managedContext.fetch(fetch))
-    } catch {
-      print("Error fetching lists")
+  func update(Item item: Item, isNotifDateChanged: Bool, response: ((Bool) -> Void)?) {
+    if isNotifDateChanged {
+      DBManager.scheduler.cancel(notificationIds: item.id ?? "")
+
+      if let notifDate = item.notifDate, let repeats = item.repeats {
+        let notifModel = SwiftLocalNotificationModel(title: item.title ?? "", body: item.desc ?? "", date: notifDate, repeating: RepeatingInterval(rawValue: repeats) ?? RepeatingInterval.none)
+        item.id = DBManager.scheduler.schedule(notification: notifModel)
+      }
     }
+    CoreDataStack.shared.saveContext()
+    Haptico.shared().generate(.success)
   }
+  
   func delete(Item item: Item, allItemsList: List?, response: ((Bool) -> Void)?) {
     allItemsList?.itemsCount -= 1
     item.list?.itemsCount -= 1
@@ -209,19 +206,7 @@ final public class DBManager: DatabaseManagerProtocol {
     Haptico.shared().generate(.success)
   }
   
-  func update(Item item: Item, isNotifDateChanged: Bool, response: ((Bool) -> Void)?) {
-    if isNotifDateChanged {
-      DBManager.scheduler.cancel(notificationIds: item.id ?? "")
-
-      if let notifDate = item.notifDate, let repeats = item.repeats {
-        let notifModel = SwiftLocalNotificationModel(title: item.title ?? "", body: item.desc ?? "", date: notifDate, repeating: RepeatingInterval(rawValue: repeats) ?? RepeatingInterval.none)
-        item.id = DBManager.scheduler.schedule(notification: notifModel)
-
-      }
-    }
-    CoreDataStack.shared.saveContext()
-    Haptico.shared().generate(.success)
-  }
+  
   //MARK: - Shared
   
   func resetFactory() {
