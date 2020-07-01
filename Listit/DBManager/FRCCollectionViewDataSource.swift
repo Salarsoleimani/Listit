@@ -107,12 +107,16 @@ class FRCCollectionViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSO
       }
     case .delete:
       guard let indexPath = indexPath else { break }
-      
-      blockOperation.addExecutionBlock { [collectionView] in
-        DispatchQueue.main.async {
-          collectionView?.deleteItems(at: [indexPath])
+      let itemsCount = frc.fetchedObjects?.count ?? 0
+      print(indexPath.item, itemsCount)
+      if indexPath.item <= itemsCount - 1 {
+        blockOperation.addExecutionBlock { [collectionView] in
+          DispatchQueue.main.async {
+            collectionView?.deleteItems(at: [indexPath])
+          }
         }
       }
+      
     case .update:
       guard let indexPath = indexPath else { break }
       

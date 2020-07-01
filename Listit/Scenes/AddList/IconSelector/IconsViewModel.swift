@@ -19,10 +19,10 @@ final class IconsViewModel: ViewModelType {
   }
 // MARK:- Functions
   func transform(input: IconsViewModel.Input) -> IconsViewModel.Output {
-    let colors = getColors()
-    var randomColor = colors.randomElement() ?? ColorModel(id: 0, name: "green", value: "#217C6B", isSelected: true)
-    randomColor.isSelected = true
-    let icons = getIcons().map{IconCellViewModel(model: $0, colorModel: randomColor)}
+    var colors = getColors().shuffled()
+    colors[3].isSelected = true
+    
+    let icons = getIcons().map{IconCellViewModel(model: $0, colorModel: colors[3])}.shuffled()
     
     let outputIcons = Driver.combineLatest(Driver.just(icons), input.selectedColor).map { (oldIconsVM, selectedColor) -> [IconCellViewModel] in
       var newIconsVm = [IconCellViewModel]()
