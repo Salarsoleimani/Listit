@@ -47,22 +47,18 @@ extension HomeController: FRCTableViewDelegate {
   func frcTableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
     if tableView == itemsTableView, let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
       let item = cell.viewModel.model
-      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, yourLists, deleteItem, listsDataSource, favoriteList] action in
+      let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [dbManager, navigator, yourLists, deleteItem, favoriteList, allItemsList] action in
         
         let markAsFinishedItem = UIAction(title: "mark_as_completed_item_title".localize(), image: UIImage(systemName: "checkmark.circle"), handler: { [dbManager] action in
-          Haptico.shared().generate(.success)
           dbManager.updateState(item: item, state: ItemState.done)
         })
         let markAsUnfinishedItem = UIAction(title: "uncomplete_item_title".localize(), image: UIImage(systemName: "arrow.uturn.left.circle"), handler: { [dbManager] action in
-          Haptico.shared().generate(.success)
           dbManager.updateState(item: item, state: ItemState.doing)
         })
         let favoriteItem = UIAction(title: "favorite_item_title".localize(), image: UIImage(systemName: "star.fill"), handler: { [dbManager, favoriteList] action in
-          Haptico.shared().generate(.success)
           dbManager.updateIsFavorite(isFavorite: true, favoriteList: favoriteList, item: item)
         })
         let unfavoriteItem = UIAction(title: "unfavorite_item_title".localize(), image: UIImage(systemName: "star.slash.fill"), handler: { [dbManager, favoriteList] action in
-          Haptico.shared().generate(.success)
           dbManager.updateIsFavorite(isFavorite: false, favoriteList: favoriteList, item: item)
         })
         
@@ -70,8 +66,6 @@ extension HomeController: FRCTableViewDelegate {
           deleteItem(item, indexPath)
         })
         let edit = UIAction(title: "edit_list_action".localize(), image: UIImage(systemName: "square.and.pencil"), handler: {action in
-          let allItemsList = listsDataSource?.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
-          Haptico.shared().generate(.light)
           navigator.toAddOrEditItem(item: item, forList: item.list, lists: yourLists, allItemsList: allItemsList)
         })
         let itemState = ItemState(rawValue: item.state) ?? ItemState.default
@@ -177,6 +171,7 @@ extension HomeController: SwipeTableViewCellDelegate {
       } else {
         dbManager.updateState(item: item, state: ItemState.doing)
       }
+      cell.viewModel.finishedLineIsHidden = !cell.viewModel.finishedLineIsHidden
       cell.finishedLineImageView.isHidden = !finishedLineIsHidden
     }
     let descriptor: ActionDescriptor = finishedLineIsHidden ? .finished : .unfinished

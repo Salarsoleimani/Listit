@@ -9,6 +9,7 @@
 import CoreData
 import CloudKit
 import SwiftLocalNotification
+import Haptico
 
 final public class DBManager: DatabaseManagerProtocol {
   private static let scheduler = SwiftLocalNotification()
@@ -48,7 +49,7 @@ final public class DBManager: DatabaseManagerProtocol {
       
       var list = templateList
       list.title = templateList.title.localize()
-      let dbList = addList(list, response: nil)
+      let dbList = addList(list, withHaptic: false, response: nil)
       
       if templateList.type == ListType.all.rawValue {
         allItemsList = dbList
@@ -76,7 +77,7 @@ final public class DBManager: DatabaseManagerProtocol {
           }
           item.notifDate = notifDate
 
-          addItem(item, allItemsList: allItemsList, response: nil)
+          addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
 
         } else if index > 4, index <= 6, templateList.type == ListType.countdown.rawValue {
           var item = templateItem.toItemModel()
@@ -99,13 +100,13 @@ final public class DBManager: DatabaseManagerProtocol {
             print("Another index of template items for coundowns")
           }
           item.notifDate = notifDate
-          addItem(item, allItemsList: allItemsList, response: nil)
+          addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
 
         } else if index > 6, index <= 9, templateList.type == ListType.note.rawValue {
           var item = templateItem.toItemModel()
           item.title = templateItem.title
           item.parentList = dbList
-          addItem(item, allItemsList: allItemsList, response: nil)
+          addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
         }
       }
       
@@ -117,7 +118,10 @@ final public class DBManager: DatabaseManagerProtocol {
   }
   
   //MARK: - List Related Functions
-  func addList(_ list: ListModel, response: ((Bool) -> Void)?) -> List {
+  func addList(_ list: ListModel, withHaptic: Bool = true, response: ((Bool) -> Void)?) -> List {
+    if withHaptic {
+      Haptico.shared().generate(.success)
+    }
     let dbList = list.asDBList()
     CoreDataStack.shared.saveContext()
     return dbList
@@ -137,10 +141,12 @@ final public class DBManager: DatabaseManagerProtocol {
   func delete(List list: List, response: ((Bool) -> Void)?) {
     CoreDataStack.managedContext.delete(list)
     CoreDataStack.shared.saveContext()
+    Haptico.shared().generate(.success)
   }
   
   func update(List list: List, response: ((Bool) -> Void)?) {
     CoreDataStack.shared.saveContext()
+    Haptico.shared().generate(.success)
   }
   //MARK: - Item Related Functions
   func updateIsFavorite(isFavorite: Bool = true, favoriteList: List?, item: Item) {
@@ -151,13 +157,15 @@ final public class DBManager: DatabaseManagerProtocol {
     }
     item.isFavorite = isFavorite
     CoreDataStack.shared.saveContext()
+    Haptico.shared().generate(.success)
   }
   func updateState(item: Item, state: ItemState) {
     item.state = state.rawValue
     CoreDataStack.shared.saveContext()
+    Haptico.shared().generate(.success)
   }
   
-  func addItem(_ item: ItemModel, allItemsList: List?, response: ((Bool) -> Void)?) {
+  func addItem(_ item: ItemModel, allItemsList: List?, withHaptic: Bool = true, response: ((Bool) -> Void)?) {
     allItemsList?.itemsCount += 1
     item.parentList?.itemsCount += 1
     
@@ -170,6 +178,10 @@ final public class DBManager: DatabaseManagerProtocol {
     }
     
     CoreDataStack.shared.saveContext()
+    
+    if withHaptic {
+      Haptico.shared().generate(.success)
+    }
   }
   
   func get(ItemsForListUID: UUID, response: @escaping ([Item]) -> Void) {
@@ -193,6 +205,8 @@ final public class DBManager: DatabaseManagerProtocol {
     DBManager.scheduler.cancel(notificationIds: item.id ?? "")
     CoreDataStack.managedContext.delete(item)
     CoreDataStack.shared.saveContext()
+    
+    Haptico.shared().generate(.success)
   }
   
   func update(Item item: Item, isNotifDateChanged: Bool, response: ((Bool) -> Void)?) {
@@ -206,6 +220,7 @@ final public class DBManager: DatabaseManagerProtocol {
       }
     }
     CoreDataStack.shared.saveContext()
+    Haptico.shared().generate(.success)
   }
   //MARK: - Shared
   

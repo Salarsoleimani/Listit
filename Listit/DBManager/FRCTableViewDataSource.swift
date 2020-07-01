@@ -86,7 +86,6 @@ class FRCTableViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject
     }
     return 0
   }
-  
   // MARK: - NSFetchedResultsControllerDelegate
   
   func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

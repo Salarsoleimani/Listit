@@ -34,7 +34,7 @@ extension AddItemController {
       if type != .all && type != .favorites {
         whichListTextField.text = parentList.title
       } else {
-        whichListTextField.text = "select_list_placeholder"
+        whichListTextField.text = "select_list_placeholder".localize()
       }
     }
     if item != nil {
@@ -90,6 +90,7 @@ extension AddItemController {
     
     saveAndAddAnotherButton.titleLabel?.adjustsFontSizeToFitWidth = true
     
+    titleTextField.text = itemTitle
     if let item = item {
       parentList = item.list
       

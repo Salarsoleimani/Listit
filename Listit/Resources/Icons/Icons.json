@@ -153,5 +153,20 @@
     "id": 30,
     "name": "ic_30",
     "tags": ["todo", "list"]
+  },
+  {
+    "id": 31,
+    "name": "ic_31",
+    "tags": ["ear", "listen"]
+  },
+  {
+    "id": 32,
+    "name": "ic_32",
+    "tags": ["help", "charity"]
+  },
+  {
+    "id": 33,
+    "name": "ic_33",
+    "tags": ["smile", "happy"]
   }
 ]

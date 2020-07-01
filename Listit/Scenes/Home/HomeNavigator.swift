@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Haptico
 
 final class HomeNavigator: Navigator {
   func setup() {
@@ -15,13 +16,16 @@ final class HomeNavigator: Navigator {
     navigationController.viewControllers = [vc]
   }
   func toAddOrEditList(list: List?, delegate: HomeControllerDelegate) {
+    Haptico.shared().generate(.light)
     AddListNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(list: list, delegate: delegate)
   }
   
-  func toAddOrEditItem(item: Item?, forList: List?, lists: [List], allItemsList: List?) {
-    AddItemNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(item: item, parentList: forList, lists: lists, allItemsList: allItemsList)
+  func toAddOrEditItem(item: Item?, forList: List?, lists: [List], allItemsList: List?, itemTitle: String = "") {
+    Haptico.shared().generate(.light)
+    AddItemNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(item: item, parentList: forList, lists: lists, allItemsList: allItemsList, itemTitle: itemTitle)
   }
   func toSetting() {
+    Haptico.shared().generate(.light)
     SettingNavigator(navigationController: navigationController, servicePackage: servicePackage).setup()
   }
 }

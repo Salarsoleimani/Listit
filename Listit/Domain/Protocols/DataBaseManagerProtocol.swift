@@ -12,13 +12,13 @@ protocol DatabaseManagerProtocol {
   //MARK: - Configuration
   func configureDataBase()
   //MARK: - List Related Functions
-  func addList(_ list: ListModel, response: ((Bool) -> Void)?) -> List
+  func addList(_ list: ListModel, withHaptic: Bool, response: ((Bool) -> Void)?) -> List
   func getAllLists(response: @escaping ([List]) -> Void)
   func delete(List list: List,  response: ((Bool) -> Void)?)
   func update(List list: List, response: ((Bool) -> Void)?)
   
   //MARK: - Item Related Functions
-  func addItem(_ item: ItemModel, allItemsList: List?, response: ((Bool) -> Void)?)
+  func addItem(_ item: ItemModel, allItemsList: List?, withHaptic: Bool, response: ((Bool) -> Void)?)
   func get(ItemsForListUID: UUID, response: @escaping ([Item]) -> Void)
   func getAllItems(response: @escaping ([Item]) -> Void)
   func delete(Item item: Item, allItemsList: List?, response: ((Bool) -> Void)?)

@@ -15,6 +15,7 @@ protocol HomeControllerDelegate: class {
 
 extension HomeController: HomeControllerDelegate {
   func listAdded(_ list: List) {
+    fetchLists()
     if let lists = listsDataSource.frc.fetchedObjects, lists.count - 1 > 0 {
       let row = lists.count - 1
       let index = IndexPath(item: row, section: 0)
@@ -23,7 +24,7 @@ extension HomeController: HomeControllerDelegate {
       let listType = ListType(rawValue: lists[row].type) ?? ListType.default
       let predicate = properPredicateFor(ListType: listType, listId: lists[row].id ?? "")
       fetchItems(predicate)
-      thereAreItems()
+      thereAreItems(listType: listType)
     }
   }
 }
@@ -32,13 +33,13 @@ extension HomeController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == titleItemTextField, let text = textField.text, !text.isEmpty, let selectedList = selectedList {
       let item = ItemModel(title: text, notifDate: nil, repeats: nil, description: nil, parentList: selectedList, state: nil)
-      dbManager.addItem(item, allItemsList: allItemsList, response: nil)
+      dbManager.addItem(item, allItemsList: allItemsList, withHaptic: true, response: nil)
       titleItemTextField.text = nil
       let listType = ListType(rawValue: selectedList.type) ?? ListType.default
       let listId = selectedList.id ?? ""
       let predicate = properPredicateFor(ListType: listType, listId: listId)
       fetchItems(predicate)
-      thereAreItems()
+      thereAreItems(listType: listType)
       Haptico.shared().generate(.success)
       return true
     } else {

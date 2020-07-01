@@ -14,7 +14,7 @@ enum ListType: Int16 {
   case reminder = 1
   case note = 2
   case countdown = 3
-  //case habit = 4
+  case habit = 4
   //case media = 5
   
   case favorites = 98
@@ -35,14 +35,14 @@ extension ListType {
       return "note_lists_type".localize()
     case .countdown:
       return "countdown_lists_type".localize()
+    case .habit:
+      return "habits_lists_type".localize()
       
     case .all:
       return "all_lists_type".localize()
     case .favorites:
       return "favorites_lists_type".localize()
-//    case .today:
-//      return "today_lists_type".localize()
-      
+    
     }
   }
   func quantityTitle() -> String {
@@ -56,14 +56,15 @@ extension ListType {
       return "countdown_lists_type_quantity".localize()
     case .note:
       return "note_lists_type_quantity".localize()
+    case .habit:
+      return "habit_lists_type_quantity".localize()
       
     case .all:
       return "all_lists_type_quantity".localize()
     case .favorites:
       return "favorites_lists_type_quantity".localize()
-//    case .today:
-//      return "today_lists_type_quantity".localize()
       
+    
     }
   }
 }

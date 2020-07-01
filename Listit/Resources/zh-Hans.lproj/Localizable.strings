@@ -96,6 +96,20 @@
 
 "add_quick_item_title_placeholder" = "Name you item and tap continue";
 
+
+
+
+// Errors
+"add_title_for_list_error" = "Please add title for your list";
+"select_type_for_list_error" = "Please select your list type";
+
+
+"add_item_no_list_error" = "Please add a list first to add item in it";
+
+"add_title_for_item_error" = "Please add title for your item";
+"select_list_for_item_error" = "Please select a list wanted to be your item in";
+"select_date_for_item_error" = "Please selec a date for your countdown";
+
 // Setting
 "language_title" = "语言:";
 "remove_ads_title" = "删除广告";
@@ -111,21 +125,6 @@
 
 "language_button_title" = "语言";
 "language_button_description" = "请选择您的语言。";
-
-"close_button_title" = "关";
-
-// Errors
-"add_title_for_list_error" = "Please add title for your list";
-"select_type_for_list_error" = "Please select your list type";
-
-
-"add_item_no_list_error" = "Please add a list first to add item in it";
-
-"add_title_for_item_error" = "Please add title for your item";
-"select_list_for_item_error" = "Please select a list wanted to be your item in";
-"select_date_for_item_error" = "Please selec a date for your countdown";
-
-
 ///////
 /// Rate
 
@@ -135,3 +134,4 @@
 "Rate_alertRateTitle" = "费率 Listit";
 "Rate_alertTitle" = "请给我们打分 🙂";
 
+// buttons

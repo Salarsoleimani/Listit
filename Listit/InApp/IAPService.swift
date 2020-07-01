@@ -8,6 +8,7 @@
 
 import Foundation
 import StoreKit
+import Haptico
 
 protocol IAPServiceDelegate {
   func didAdsRemoved()
@@ -58,6 +59,7 @@ extension IAPService: SKProductsRequestDelegate {
       print(product.localizedTitle)
     }
   }
+  
   func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
     delegate?.restoredPurchase()
   }
@@ -74,6 +76,9 @@ extension IAPService: SKPaymentTransactionObserver {
       if transaction.transactionState == .restored, transaction.payment.productIdentifier == IAPProducts.removeAds.rawValue {
         AppAnalytics.shared.adsRemoved()
         delegate?.didAdsRemoved()
+      }
+      if transaction.transactionState == .purchased {
+        Haptico.shared().generate(.success)
       }
       switch transaction.transactionState {
       case .purchasing: break

@@ -10,7 +10,6 @@ import UIKit
 import SPPermissions
 import SwiftLocalNotification
 import GoogleMobileAds
-import Haptico
 
 protocol AddItemControllerDelegate: class {
   func didSelectDateAndTime(date: Date, hour: Int, minute: Int, repeatingInterval: RepeatingInterval)
@@ -43,6 +42,7 @@ class AddItemController: UIViewController {
   @IBOutlet weak var saveAndAddAnotherButton: UIButton!
   
   // MARK:- variables
+  var itemTitle = ""
   var allItemsList: List?
   var parentList: List? {
     didSet {
@@ -51,10 +51,12 @@ class AddItemController: UIViewController {
           descriptionLabel?.text = String(format: "add_item_description".localize(), title)
         }
         if parentList.type == ListType.note.rawValue  {
-          remindMeContainerView?.isHidden = true
+          hideOrShowReminderContainerView(true)
+        } else {
+          hideOrShowReminderContainerView(false)
         }
       } else {
-        remindMeContainerView?.isHidden = false
+        hideOrShowReminderContainerView(false)
       }
     }
   }
@@ -88,6 +90,7 @@ class AddItemController: UIViewController {
     fatalError("init(coder:) has not been implemented")
   }
   // MARK:- LifeCycles
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
@@ -102,11 +105,13 @@ class AddItemController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setupLocalization()
+    isAdsRemoved()
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     titleTextField.becomeFirstResponder()
   }
+  
   // MARK:- Actions
   
   @IBAction private func remindMeButtonPressed(_ sender: UIButton) {
@@ -117,7 +122,9 @@ class AddItemController: UIViewController {
     }
     if isRewardedAdWatched {
       goToDateSelection()
-      isRewardedAdWatched = false
+      if !Defaults.isAdsRemoved {
+        isRewardedAdWatched = false
+      }
       return
     }
     showRewardedAd()
@@ -130,6 +137,7 @@ class AddItemController: UIViewController {
     }
     moreInfoTextView.becomeFirstResponder()
   }
+  
   @IBAction private func saveAndAddAnotherButtonPressed(_ sender: UIButton) {
     let isValid = validateSave()
     if isValid {
@@ -152,6 +160,20 @@ class AddItemController: UIViewController {
     }
   }
   // MARK:- Functions
+  private func hideOrShowReminderContainerView(_ isHidden: Bool) {
+    UIView.animate(withDuration: 0.25) { [remindMeContainerView] in
+      remindMeContainerView?.isHidden = isHidden
+    }
+  }
+  private func isAdsRemoved() {
+    if Defaults.isAdsRemoved {
+      adBannerContainerView.isHidden = true
+      isRewardedAdWatched = true
+    } else {
+      adBannerContainerView.isHidden = false
+      isRewardedAdWatched = false
+    }
+  }
   private func validateSave() -> Bool {
     if let text = titleTextField.text, text.isEmpty {
       navigator.toast(text: "add_title_for_item_error".localize(), hapticFeedbackType: .warning, backgroundColor: Colors.error.value)
@@ -175,8 +197,6 @@ class AddItemController: UIViewController {
     }
   }
   private func saveItem() {
-    Haptico.shared().generate(.success)
-
     if item?.list != nil, item?.list != parentList {
       item?.list?.itemsCount -= 1
       parentList?.itemsCount += 1
@@ -200,7 +220,7 @@ class AddItemController: UIViewController {
     let item = ItemModel(title: titleTextField.text ?? "", notifDate: notifDate, repeats: repeats, description: moreInfoTextView.text, parentList: parentList ?? lists[listsPickerView.tag], state: .doing)
     
     
-    dbManager.addItem(item, allItemsList: allItemsList, response: nil)
+    dbManager.addItem(item, allItemsList: allItemsList, withHaptic: true, response: nil)
   }
   func goToDateSelection() {
     if let notifDate = notifDate, let repeats = repeats {
@@ -255,7 +275,9 @@ extension AddItemController: SPPermissionsDelegate {
   func didAllow(permission: SPPermission) {
     if isRewardedAdWatched {
       goToDateSelection()
-      isRewardedAdWatched = false
+      if !Defaults.isAdsRemoved {
+        isRewardedAdWatched = false
+      }
       return
     }
     showRewardedAd()

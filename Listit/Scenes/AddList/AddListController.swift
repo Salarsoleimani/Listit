@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import GoogleMobileAds
-import Haptico
 
 protocol AddListControllerDelegate {
   func iconSelected(_ icon: IconCellViewModel)
@@ -95,6 +94,7 @@ class AddListController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     setupLocalization()
+    isAdsRemoved()
   }
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -104,7 +104,9 @@ class AddListController: UIViewController {
   @IBAction private func didTapIcon(_ sender: UIButton) {
     if isRewardedAdWatched {
       navigator.toIconSelector(delegate: self, listTitle: list?.title ?? listModel.title)
-      isRewardedAdWatched = false
+      if !Defaults.isAdsRemoved {
+        isRewardedAdWatched = false
+      }
       return
     }
     showRewardedAd()
@@ -129,8 +131,16 @@ class AddListController: UIViewController {
   }
   
   // MARK:- Functions
+  private func isAdsRemoved() {
+    if Defaults.isAdsRemoved {
+      adBannerContainerView.isHidden = true
+      isRewardedAdWatched = true
+    } else {
+      adBannerContainerView.isHidden = false
+      isRewardedAdWatched = false
+    }
+  }
   private func saveList() {
-    Haptico.shared().generate(.success)
     if let list = list {
       list.iconColor = listModel.iconColor
       list.iconId = listModel.iconId
@@ -142,7 +152,7 @@ class AddListController: UIViewController {
       navigator.pop()
       return
     }
-    let list = dbManager.addList(listModel, response: nil)
+    let list = dbManager.addList(listModel, withHaptic: true, response: nil)
     delegate?.listAdded(list)
     navigator.pop()
   }

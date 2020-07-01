@@ -99,6 +99,7 @@
 		254F35A3248C3E3B0099C96C /* AddItemController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254F359E248C3E3B0099C96C /* AddItemController.xib */; };
 		254F35A9248C849A0099C96C /* ItemState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254F35A8248C849A0099C96C /* ItemState.swift */; };
 		2577FDC224A6BFD000319B06 /* EditActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2577FDC124A6BFD000319B06 /* EditActions.swift */; };
+		2577FE1924AC255300319B06 /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2577FE1824AC255300319B06 /* UILabelExtensions.swift */; };
 		25B32BE224A2907F00524CD9 /* AppAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BE124A2907F00524CD9 /* AppAnalytics.swift */; };
 		25B32BE424A2943200524CD9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25B32BE324A2943200524CD9 /* GoogleService-Info.plist */; };
 		25B32BE624A2E03900524CD9 /* HomeAdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32BE524A2E03900524CD9 /* HomeAdMob.swift */; };
@@ -234,6 +235,7 @@
 		254F359E248C3E3B0099C96C /* AddItemController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddItemController.xib; sourceTree = "<group>"; };
 		254F35A8248C849A0099C96C /* ItemState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemState.swift; sourceTree = "<group>"; };
 		2577FDC124A6BFD000319B06 /* EditActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActions.swift; sourceTree = "<group>"; };
+		2577FE1824AC255300319B06 /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
 		25B32BE124A2907F00524CD9 /* AppAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnalytics.swift; sourceTree = "<group>"; };
 		25B32BE324A2943200524CD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		25B32BE524A2E03900524CD9 /* HomeAdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAdMob.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 				254F34D5248734DF0099C96C /* UIViewControllerExtensions.swift */,
 				254F34D6248734DF0099C96C /* UIViewExtensions.swift */,
 				254A40E824916B8100F9E3A7 /* UIButtonExtensions.swift */,
+				2577FE1824AC255300319B06 /* UILabelExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -946,6 +949,7 @@
 				254F357B24888CEB0099C96C /* IconsController.swift in Sources */,
 				254F3547248743B80099C96C /* CoreDataError.swift in Sources */,
 				254F35A9248C849A0099C96C /* ItemState.swift in Sources */,
+				2577FE1924AC255300319B06 /* UILabelExtensions.swift in Sources */,
 				254F34AB2485F4F60099C96C /* SceneDelegate.swift in Sources */,
 				254F34E6248735540099C96C /* UserDefaults.swift in Sources */,
 				254F34D2248734160099C96C /* Constants.swift in Sources */,
@@ -1107,6 +1111,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Listit/Listit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7FQDK9Y97S;
 				INFOPLIST_FILE = "$(SRCROOT)/Listit/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1114,7 +1119,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = Listit;
 				SWIFT_VERSION = 5.0;
@@ -1129,6 +1134,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Listit/Listit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7FQDK9Y97S;
 				INFOPLIST_FILE = "$(SRCROOT)/Listit/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1136,7 +1142,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = Listit;
 				SWIFT_VERSION = 5.0;

@@ -36,9 +36,7 @@ extension AddListController {
 
   }
   private func setupRewardedAd() {
-    if Defaults.appOpenedCount > 15 {
-      rewardedAd = createAndLoadRewardedAd()
-    }
+    rewardedAd = createAndLoadRewardedAd()
   }
   private func createAndLoadRewardedAd() -> GADRewardedAd? {
     rewardedAd = GADRewardedAd(adUnitID: Constants.AdMobIds.testAdRewardedVideoUnitID) // [TODO] -force change to adRewardedAddItem testAdRewardedVideoUnitID

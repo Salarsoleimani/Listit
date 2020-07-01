@@ -46,7 +46,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="h9f-QZ-c3A">
-                                        <rect key="frame" x="0.0" y="105" width="384" height="32"/>
+                                        <rect key="frame" x="0.0" y="105" width="384" height="55"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" id="0K7-1M-tS5">
                                                 <rect key="frame" x="20" y="22" width="145" height="29"/>
@@ -115,9 +115,6 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </view>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="5tx-bg-8Lk"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>

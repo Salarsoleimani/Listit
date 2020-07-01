@@ -47,6 +47,7 @@ extension ListCell: BEKBindableCell {
     iconImageView.tintColor = Colors.white.value
     iconImageView.image = viewModel.iconImage
     titleLabel.text = viewModel.title
+    titleLabel.setLineSpacing(lineHeightMultiple: 0.7)
     itemsQtyLabel.text = viewModel.itemsCount
   }
 }

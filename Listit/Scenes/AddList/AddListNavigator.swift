@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Haptico
 
 final class AddListNavigator: Navigator {
   func setup(list: List?, delegate: HomeControllerDelegate) {
@@ -16,6 +17,7 @@ final class AddListNavigator: Navigator {
     navigationController.pushViewController(vc, animated: true)
   }
   func toIconSelector(delegate: AddListControllerDelegate, listTitle: String) {
+    Haptico.shared().generate(.light)
     IconsNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(delegate: delegate, listTitle: listTitle)
   }
   func pop() {

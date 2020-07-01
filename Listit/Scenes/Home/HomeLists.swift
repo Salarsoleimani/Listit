@@ -29,7 +29,16 @@ extension HomeController {
     listsDataSource = ListsCollectionViewDataSource(fetchRequest: listsFetchRequest, context: CoreDataStack.managedContext, sectionNameKeyPath: nil, delegate: self, collectionView: listsCollectionView)
     listsCollectionView.dataSource = listsDataSource
     listsCollectionView.delegate = self
+    fetchLists()
+    thereAreItems()
+  }
+  internal func fetchLists() {
     listsDataSource.performFetch()
-
+    allLists = listsDataSource.frc.fetchedObjects ?? [List]()
+    let filteredList = allLists.filter { (list) -> Bool in
+      let type = ListType(rawValue: list.type) ?? ListType.default
+      return type != .all && type != .favorites
+    }
+    yourLists = filteredList
   }
 }

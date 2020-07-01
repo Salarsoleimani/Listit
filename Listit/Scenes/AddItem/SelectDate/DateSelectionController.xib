@@ -14,10 +14,11 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DateSelectionController" customModule="New_Todo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DateSelectionController" customModule="Listit" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="lEc-99-gcH" id="oCg-4E-uaF"/>
                 <outlet property="dateContainerView" destination="liM-zw-5f2" id="Tcu-5E-Odj"/>
+                <outlet property="dateContainerViewStackView" destination="Fwj-z2-GbJ" id="bBf-o9-G9b"/>
                 <outlet property="dateTextField" destination="tc9-QK-VCZ" id="X00-gS-lm0"/>
                 <outlet property="dateTitleLabel" destination="bpQ-ZG-tDS" id="yMC-S0-lsX"/>
                 <outlet property="deleteButton" destination="Eez-LW-i9q" id="vkp-NE-pzW"/>
@@ -38,7 +39,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="VYk-kf-W1d">
-                    <rect key="frame" x="16" y="16" width="1051.5" height="496.5"/>
+                    <rect key="frame" x="16" y="16" width="1051.5" height="516.5"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NDC-nL-KZy">
                             <rect key="frame" x="0.0" y="0.0" width="1051.5" height="166"/>
@@ -80,10 +81,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZD8-j8-VR7">
-                            <rect key="frame" x="0.0" y="178" width="1051.5" height="159.5"/>
+                            <rect key="frame" x="0.0" y="178" width="1051.5" height="179.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gtf-R8-vP3">
-                                    <rect key="frame" x="16" y="16" width="1019.5" height="127.5"/>
+                                    <rect key="frame" x="16" y="16" width="1019.5" height="147.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeats:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="392-hk-fUP">
                                             <rect key="frame" x="0.0" y="0.0" width="1019.5" height="20.5"/>
@@ -92,7 +93,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Tew-en-2w9">
-                                            <rect key="frame" x="0.0" y="28.5" width="1019.5" height="100"/>
+                                            <rect key="frame" x="0.0" y="28.5" width="1019.5" height="120"/>
                                             <segments>
                                                 <segment title="once"/>
                                                 <segment title="hourly"/>
@@ -117,7 +118,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="liM-zw-5f2">
-                            <rect key="frame" x="0.0" y="349.5" width="1051.5" height="85"/>
+                            <rect key="frame" x="0.0" y="369.5" width="1051.5" height="85"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="bQv-Qn-88k">
                                     <rect key="frame" x="16" y="16" width="59" height="53"/>
@@ -169,7 +170,7 @@
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" id="ZYJ-v2-eyv">
-                            <rect key="frame" x="0.0" y="446.5" width="1051.5" height="30"/>
+                            <rect key="frame" x="0.0" y="466.5" width="1051.5" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eez-LW-i9q" userLabel="Delete">

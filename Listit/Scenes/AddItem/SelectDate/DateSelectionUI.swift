@@ -29,7 +29,7 @@ extension DateSelectionController {
     repeatsContainerView.backgroundColor = Colors.listCellBackground.value
     repeatsContainerView.layer.cornerRadius = Constants.Radius.cornerRadius
     
-    repeatsSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: Fonts.h7Regular], for: .normal)
+    repeatsSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: Fonts.h6Regular], for: .normal)
     repeatsSegmentedControl.selectedSegmentTintColor = Colors.main.value
     
     dateTextField.font = Fonts.itemCellDescription

@@ -9,6 +9,7 @@
 import UIKit
 import Siren
 import SwiftRater
+import Haptico
 
 extension SettingController {
   func setupUI() {
@@ -84,12 +85,15 @@ extension SettingController {
   }
   
   private func donateButtonPressed() {
+    Haptico.shared().generate(.light)
     present(donateAlert, animated: true, completion: nil)
   }
   private func rateUsButtonPressed() {
+    Haptico.shared().generate(.light)
     SwiftRater.rateApp()
   }
   private func shareButtonPressed() {
+    Haptico.shared().generate(.light)
     Utility.shareText(text: Defaults.shareText, view: self)
   }
   
@@ -161,6 +165,7 @@ extension SettingController {
   }
   
   private func setLanguage(_ lang: Languages) {
+    Haptico.shared().generate(.success)
     LanguageManager.shared.setLanguage(language: lang)
     Application.shared.setRateManagerLocalization()
     setLocalizations()
@@ -171,6 +176,7 @@ extension SettingController {
       if rewardedAd?.isReady == true {
         rewardedAd?.present(fromRootViewController: self, delegate: self)
       }
+      Haptico.shared().generate(.light)
       return
     }
     switch dollar {

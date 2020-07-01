@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Haptico
 
 extension SettingController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,6 +40,7 @@ extension SettingController: UITableViewDelegate, UITableViewDataSource {
     } else if indexPath.section == 2, indexPath.row == 1 { // Privacy policy
       
     }
+    Haptico.shared().generate(.light)
   }
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 66

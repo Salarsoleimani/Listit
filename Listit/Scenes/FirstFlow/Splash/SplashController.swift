@@ -44,9 +44,9 @@ class SplashController: UIViewController {
       AppSoundEffects().playPopSound()
       Vibrator.vibrate(hardness: 5)
       //launchImage?.image = UIImage(named: "Splash_Last")
-    }.then().scaleXY(endingScale, endingScale).moveY(-30).snap(1).duration(0.3).completion {
+    }.then().scaleXY(endingScale, endingScale).moveY(-26).snap(1).duration(0.3).completion {
       completion()
     }.animate()
-    logoLabel.delay(1).moveY(32).makeAlpha(1).duration(0.8).animate()
+    logoLabel.delay(1).moveY(24).makeAlpha(1).duration(0.8).animate()
   }
 }

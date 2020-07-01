@@ -20,15 +20,13 @@ class HomeController: UIViewController {
   
   @IBOutlet weak var listsCollectionView: UICollectionView!
   
+  @IBOutlet weak var addItembuttonContainerView: UIView!
   @IBOutlet weak var addItemLabel: UILabelX!
   @IBOutlet weak var addItemButton: UIButton!
   @IBOutlet weak var addListButton: UIButton!
   @IBOutlet weak var addListLabel: UILabelX!
   
-  @IBOutlet weak var quickAddItembuttonContainerView: UIView!
-  @IBOutlet weak var quickAddItemLabel: UILabelX!
-  @IBOutlet weak var quickAddItemButton: UIButton!
-  
+  @IBOutlet weak var addMoreDetailForItemButton: UIButton!
   @IBOutlet weak var titleItemTextField: UITextField!
   @IBOutlet weak var titleItemContainerView: UIView!
   @IBOutlet weak var titleItemContainerViewBottomAnchor: NSLayoutConstraint!
@@ -49,18 +47,9 @@ class HomeController: UIViewController {
   //MARK:- Variables
   internal lazy var allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
   internal lazy var favoriteList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.favorites.rawValue}.first
-  lazy var allLists: [List] = {
-    listsDataSource.performFetch()
-    return listsDataSource.frc.fetchedObjects ?? [List]()
-  }()
+  var allLists = [List]()
   
-  lazy var yourLists: [List] = {
-    let filteredList = allLists.filter { (list) -> Bool in
-      let type = ListType(rawValue: list.type) ?? ListType.default
-      return type != .all && type != .favorites
-    }
-    return filteredList
-  }()
+  var yourLists = [List]()
   var selecteItemIndexpaths = [IndexPath]()
   var selectedList: List? {
     didSet {
@@ -82,13 +71,14 @@ class HomeController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    
     setupNavigationButtons()
     setupKeyboardObserver()
     
     registerCells()
     
-    configureListsDataSource()
     configureItemsDataSource()
+    configureListsDataSource()
     
     if !Defaults.isAdsRemoved {
       setupAds()
@@ -97,27 +87,36 @@ class HomeController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setLocalization()
+    isAdsRemoved()
   }
-  
+  private func isAdsRemoved() {
+    if Defaults.isAdsRemoved {
+      adBannerContainerView.isHidden = true
+    } else {
+      adBannerContainerView.isHidden = false
+    }
+  }
   //MARK:- Actions
   @IBAction private func addItemButtonPressed(_ sender: UIButton) {
-    if !yourLists.isEmpty {
-      navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: yourLists, allItemsList: allItemsList)
-      Haptico.shared().generate(.light)
-    } else {
-      navigator.toast(text: "add_item_no_list_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
-      navigator.toAddOrEditList(list: nil, delegate: self)
+    if sender.tag == 0 {
+      addList()
+      return
     }
+    quickAddList()
   }
   
   @IBAction private func addListButtonPressed(_ sender: UIButton) {
-    Haptico.shared().generate(.light)
     navigator.toAddOrEditList(list: nil, delegate: self)
   }
   @IBAction private func removeAdsButtonPressed(_ sender: UIButton) {
     
   }
-  @IBAction internal func quickAddListButtonPressed(_ sender: Any) {
+  @IBAction private func addMoreDetailForItemButtonPressed(_ sender: UIButton) {
+    view.endEditing(true)
+    titleItemTextField.text = ""
+    navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: allLists, allItemsList: allItemsList, itemTitle: titleItemTextField.text ?? "")
+  }
+  internal func quickAddList() {
     if let selectedList = selectedList, selectedList.type != ListType.all.rawValue, selectedList.type != ListType.favorites.rawValue {
       titleItemTextField.becomeFirstResponder()
       Haptico.shared().generate(.light)
@@ -125,9 +124,15 @@ class HomeController: UIViewController {
       navigator.toast(text: "select_list_for_item_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
     }
   }
-  
+  internal func addList() {
+    if !yourLists.isEmpty {
+      navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: yourLists, allItemsList: allItemsList)
+    } else {
+      navigator.toast(text: "add_item_no_list_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
+      navigator.toAddOrEditList(list: nil, delegate: self)
+    }
+  }
   @objc private func settingButtonPressed() {
-    Haptico.shared().generate(.light)
     navigator.toSetting()
   }
   //MARK:- Functions
@@ -145,14 +150,15 @@ class HomeController: UIViewController {
      let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
      
      if notification.name == UIResponder.keyboardWillHideNotification {
-       UIView.animate(withDuration: 0.5) { [view, titleItemContainerViewBottomAnchor] in
-         titleItemContainerViewBottomAnchor?.constant = -102
-         view?.layoutIfNeeded()
+       UIView.animate(withDuration: 0.5) { [titleItemContainerView, titleItemContainerViewBottomAnchor, titleItemTextField] in
+         titleItemContainerViewBottomAnchor?.constant = -132
+        titleItemTextField?.text = ""
+        titleItemContainerView?.layoutIfNeeded()
        }
      } else {
-       UIView.animate(withDuration: 0.5) { [view, titleItemContainerViewBottomAnchor] in
+       UIView.animate(withDuration: 0.5) { [titleItemContainerView, titleItemContainerViewBottomAnchor] in
          titleItemContainerViewBottomAnchor?.constant = keyboardViewEndFrame.height - 20
-         view?.layoutIfNeeded()
+         titleItemContainerView?.layoutIfNeeded()
        }
      }
    }

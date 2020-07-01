@@ -9,8 +9,7 @@
 import UIKit
 import GoogleMobileAds
 import MessageUI
-import SwiftRater
-import Siren
+import Haptico
 
 class SettingController: UIViewController {
   // MARK:- Outlets
@@ -57,30 +56,44 @@ class SettingController: UIViewController {
     setupUI()
     setupAlerts()
     setupTableView()
+    isAdsRemoved()
+    IAPService.shared.getProducts()
   }
   // MARK:- Actions
   @IBAction private func languageButtonPressed(_ sender: UIButton) {
+    Haptico.shared().generate(.light)
     present(languageAlert, animated: true, completion: nil)
   }
   
   // MARK:- Functions
+  private func isAdsRemoved() {
+    if Defaults.isAdsRemoved {
+      adBannerContainerView.isHidden = true
+    } else {
+      adBannerContainerView.isHidden = false
+    }
+  }
   private func setupTableView() {
     let nib = UINib(nibName: "SettingCell", bundle: nil)
     settingTableView.register(nib, forCellReuseIdentifier: Constants.CellIds.cellId)
     settingTableView.delegate = self
     settingTableView.dataSource = self
   }
-  
-  
 }
 extension SettingController: IAPServiceDelegate {
   func didAdsRemoved() {
+    Haptico.shared().generate(.success)
     adBannerContainerView.isHidden = true
     removeAdButton.isHidden = true
+    Defaults.isAdsRemoved = true
+    navigator.toast(text: "removed_ad_success".localize(), hapticFeedbackType: .success, backgroundColor: Colors.main.value)
   }
   
   func restoredPurchase() {
+    Haptico.shared().generate(.success)
     adBannerContainerView.isHidden = true
     removeAdButton.isHidden = true
+    Defaults.isAdsRemoved = true
+    navigator.toast(text: "restored_purchase_success".localize(), hapticFeedbackType: .success, backgroundColor: Colors.main.value)
   }
 }

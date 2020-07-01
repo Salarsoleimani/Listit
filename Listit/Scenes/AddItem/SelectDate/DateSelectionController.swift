@@ -22,6 +22,8 @@ class DateSelectionController: UIViewController {
   
   @IBOutlet weak var dateTitleLabel: UILabel!
   @IBOutlet weak var dateContainerView: UIView!
+  @IBOutlet weak var dateContainerViewStackView: UIStackView!
+
   @IBOutlet weak var dateTextField: UITextField!
   @IBOutlet weak var timeTitleLabel: UILabel!
   @IBOutlet weak var timeTextField: UITextField!
@@ -96,21 +98,32 @@ class DateSelectionController: UIViewController {
     switch sender.selectedSegmentIndex {
     case 0:
       repeatingInterval = RepeatingInterval.none
+      showOrHideDateContainer(isHidden: false)
     case 1:
       repeatingInterval = .hourly
+      showOrHideDateContainer(isHidden: true)
     case 2:
       repeatingInterval = .daily
+      showOrHideDateContainer(isHidden: true)
     case 3:
       repeatingInterval = .weekly
+      showOrHideDateContainer(isHidden: false)
     case 4:
       repeatingInterval = .monthly
+      showOrHideDateContainer(isHidden: false)
     case 5:
       repeatingInterval = .yearly
+      showOrHideDateContainer(isHidden: false)
     default:
       print("Used undefined segment index")
     }
   }
   // MARK:- Functions
+  private func showOrHideDateContainer(isHidden: Bool) {
+    UIView.animate(withDuration: 0.25) { [dateContainerViewStackView] in
+      dateContainerViewStackView?.isHidden = isHidden
+    }
+  }
   private func fillData() {
     if let passedDate = date {
       date = passedDate
