@@ -91,9 +91,8 @@
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adp-sn-AFL">
                     <rect key="frame" x="0.0" y="862" width="414" height="0.0"/>
                     <subviews>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXX-0o-W3a">
-                            <rect key="frame" x="342" y="-9.5" width="56" height="19"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXX-0o-W3a">
+                            <rect key="frame" x="322" y="-12" width="76" height="24"/>
                             <state key="normal" title="remove" image="multiply.circle" catalog="system"/>
                             <connections>
                                 <action selector="removeAdsButtonPressed:" destination="-1" eventType="touchUpInside" id="MYM-Mh-Fdr"/>

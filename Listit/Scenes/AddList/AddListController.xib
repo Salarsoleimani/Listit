@@ -145,9 +145,8 @@
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFc-9F-brc">
                                     <rect key="frame" x="0.0" y="272" width="382" height="0.0"/>
                                     <subviews>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAF-Lc-jQj">
-                                            <rect key="frame" x="310" y="-9.5" width="56" height="19"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAF-Lc-jQj">
+                                            <rect key="frame" x="290" y="-12" width="76" height="24"/>
                                             <state key="normal" title="remove" image="multiply.circle" catalog="system"/>
                                             <connections>
                                                 <action selector="removeAdsButtonPressed:" destination="-1" eventType="touchUpInside" id="xGJ-hx-vR0"/>
