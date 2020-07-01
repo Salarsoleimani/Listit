@@ -129,7 +129,9 @@ class AddListController: UIViewController {
     listTypeTextField.inputView = listTypesPickerView
     listTypeTextField.becomeFirstResponder()
   }
-  
+  @IBAction private func removeAdsButtonPressed(_ sender: UIButton) {
+    navigator.toSetting()
+  }
   // MARK:- Functions
   private func isAdsRemoved() {
     if Defaults.isAdsRemoved {

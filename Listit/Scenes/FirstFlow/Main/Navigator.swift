@@ -53,6 +53,10 @@ class Navigator: NSObject {
 
     SwiftEntryKit.display(entry: contentView, using: attributes)
   }
+  func toSetting() {
+    Haptico.shared().generate(.light)
+    SettingNavigator(navigationController: navigationController, servicePackage: servicePackage).setup()
+  }
 }
 
 

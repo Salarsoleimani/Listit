@@ -159,6 +159,9 @@ class AddItemController: UIViewController {
       navigator.pop()
     }
   }
+  @IBAction private func removeAdsButtonPressed(_ sender: UIButton) {
+    navigator.toSetting()
+  }
   // MARK:- Functions
   private func hideOrShowReminderContainerView(_ isHidden: Bool) {
     UIView.animate(withDuration: 0.25) { [remindMeContainerView] in

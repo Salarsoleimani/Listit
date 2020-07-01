@@ -24,8 +24,4 @@ final class HomeNavigator: Navigator {
     Haptico.shared().generate(.light)
     AddItemNavigator(navigationController: navigationController, servicePackage: servicePackage).setup(item: item, parentList: forList, lists: lists, allItemsList: allItemsList, itemTitle: itemTitle)
   }
-  func toSetting() {
-    Haptico.shared().generate(.light)
-    SettingNavigator(navigationController: navigationController, servicePackage: servicePackage).setup()
-  }
 }

@@ -64,7 +64,9 @@ class SettingController: UIViewController {
     Haptico.shared().generate(.light)
     present(languageAlert, animated: true, completion: nil)
   }
-  
+  @IBAction private func removeAdsButtonPressed(_ sender: UIButton) {
+    IAPService.shared.purchase(product: .removeAds, delegate: self)
+  }
   // MARK:- Functions
   private func isAdsRemoved() {
     if Defaults.isAdsRemoved {

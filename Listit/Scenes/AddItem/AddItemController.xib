@@ -152,6 +152,9 @@
                                             <rect key="frame" x="310" y="-9.5" width="56" height="19"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <state key="normal" title="remove" image="multiply.circle" catalog="system"/>
+                                            <connections>
+                                                <action selector="removeAdsButtonPressed:" destination="-1" eventType="touchUpInside" id="Phh-zm-yR5"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

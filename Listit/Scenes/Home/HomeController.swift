@@ -109,7 +109,7 @@ class HomeController: UIViewController {
     navigator.toAddOrEditList(list: nil, delegate: self)
   }
   @IBAction private func removeAdsButtonPressed(_ sender: UIButton) {
-    
+    navigator.toSetting()
   }
   @IBAction private func addMoreDetailForItemButtonPressed(_ sender: UIButton) {
     view.endEditing(true)
