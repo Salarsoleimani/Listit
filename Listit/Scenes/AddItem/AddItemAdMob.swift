@@ -36,9 +36,7 @@ extension AddItemController {
 
   }
   private func setupRewardedAd() {
-    if Defaults.appOpenedCount > 15 {
-      rewardedAd = createAndLoadRewardedAd()
-    }
+    rewardedAd = createAndLoadRewardedAd()
   }
   
   private func createAndLoadRewardedAd() -> GADRewardedAd? {

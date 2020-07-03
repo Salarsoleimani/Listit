@@ -31,7 +31,7 @@ struct ItemViewModel {
     self.model = model
     self.title = model.title ?? ""
     self.description = model.desc ?? ""
-    let type = ListType(rawValue: model.list?.type ?? ListType.default.rawValue) ?? ListType.default
+    let type = model.list?.getListType() ?? .default
     self.type = type
     
     let now = Date()
@@ -86,7 +86,7 @@ struct ItemViewModel {
     }
     
     self.backgroundColor = UIColor(hexString: model.list?.iconColor ?? "") .withAlphaComponent(0.4)
-    self.borderColor = UIColor(hexString: model.list?.iconColor ?? "").withAlphaComponent(0.7)
+    self.borderColor = UIColor(hexString: model.list?.iconColor ?? "")
     self.isFavoriteImage = model.isFavorite ? UIImage(systemName: "star.fill")!.withTintColor(Colors.itemCellTitle.value, renderingMode: .alwaysTemplate) : UIImage(systemName: "star")!.withTintColor(Colors.itemCellTitle.value, renderingMode: .alwaysTemplate)
     let finishedLineRandomImage = [UIImage(named: "img_line1")!, UIImage(named: "img_line2")!].randomElement() ?? UIImage()
     self.finishedLineImage = finishedLineRandomImage

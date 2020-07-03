@@ -17,10 +17,8 @@ class ItemsTableViewDataSource: FRCTableViewDataSource<Item> {
 extension HomeController: FRCTableViewDelegate {
   func frcTableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if selecteItemIndexpaths.contains(indexPath) {
-      for (index, indexP) in selecteItemIndexpaths.enumerated() {
-        if indexP == indexPath {
-          selecteItemIndexpaths.remove(at: index)
-        }
+      for (index, indexP) in selecteItemIndexpaths.enumerated() where indexP == indexPath {
+        selecteItemIndexpaths.remove(at: index)
       }
     } else {
       selecteItemIndexpaths.append(indexPath)
@@ -98,7 +96,7 @@ extension HomeController: FRCTableViewDelegate {
     if selecteItemIndexpaths.contains(indexPath) {
       if let items = items, indexPath.row < items.count {
         let specificItem = items[indexPath.row]
-        let itemListType = ListType(rawValue: specificItem.list?.type ?? ListType.default.rawValue) ?? ListType.default
+        let itemListType = specificItem.list?.getListType() ?? .default
         switch itemListType {
         case .reminder:
           height =  110
@@ -118,7 +116,7 @@ extension HomeController: FRCTableViewDelegate {
     }
     if let items = items, indexPath.row < items.count {
       let specificItem = items[indexPath.row]
-      let itemListType = ListType(rawValue: specificItem.list?.type ?? ListType.default.rawValue) ?? ListType.default
+      let itemListType = specificItem.list?.getListType() ?? .default
       switch itemListType {
       case .reminder:
         height = 56

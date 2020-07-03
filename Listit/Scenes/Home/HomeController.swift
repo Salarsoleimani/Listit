@@ -25,8 +25,10 @@ class HomeController: UIViewController {
   @IBOutlet weak var addItemButton: UIButton!
   @IBOutlet weak var addListButton: UIButton!
   @IBOutlet weak var addListLabel: UILabelX!
-  
+  @IBOutlet weak var closeQiuckItemButton: UIButton!
+
   @IBOutlet weak var addMoreDetailForItemButton: UIButton!
+  @IBOutlet weak var saveAndAddAnotherItemButton: UIButton!
   @IBOutlet weak var titleItemTextField: UITextField!
   @IBOutlet weak var titleItemContainerView: UIView!
   @IBOutlet weak var titleItemContainerViewBottomAnchor: NSLayoutConstraint!
@@ -71,11 +73,9 @@ class HomeController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupUI()
+    setupConfiguration()
     
-    setupNavigationButtons()
     setupKeyboardObserver()
-    
-    registerCells()
     
     configureItemsDataSource()
     configureListsDataSource()
@@ -97,12 +97,21 @@ class HomeController: UIViewController {
     }
   }
   //MARK:- Actions
+  @IBAction private func closeQiuckItemButtonPressed(_ sender: UIButton) {
+    dismissQuickItem()
+  }
+  @IBAction private func saveAndAddAnotherItemButtonPressed(_ sender: UIButton) {
+    _ = addQuickItem(titleItemTextField)
+  }
+  @IBAction private func addMoreDetailForItemButtonPressed(_ sender: UIButton) {
+    navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: allLists, allItemsList: allItemsList, itemTitle: titleItemTextField.text ?? "")
+  }
   @IBAction private func addItemButtonPressed(_ sender: UIButton) {
     if sender.tag == 0 {
       addList()
       return
     }
-    quickAddList()
+    quickAddItem()
   }
   
   @IBAction private func addListButtonPressed(_ sender: UIButton) {
@@ -111,12 +120,10 @@ class HomeController: UIViewController {
   @IBAction private func removeAdsButtonPressed(_ sender: UIButton) {
     navigator.toSetting()
   }
-  @IBAction private func addMoreDetailForItemButtonPressed(_ sender: UIButton) {
-    view.endEditing(true)
-    titleItemTextField.text = ""
-    navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: allLists, allItemsList: allItemsList, itemTitle: titleItemTextField.text ?? "")
-  }
-  internal func quickAddList() {
+  
+  
+  //MARK:- Functions
+  internal func quickAddItem() {
     if let selectedList = selectedList, selectedList.type != ListType.all.rawValue, selectedList.type != ListType.favorites.rawValue {
       titleItemTextField.becomeFirstResponder()
       Haptico.shared().generate(.light)
@@ -132,10 +139,11 @@ class HomeController: UIViewController {
       navigator.toAddOrEditList(list: nil, delegate: self)
     }
   }
-  @objc private func settingButtonPressed() {
-    navigator.toSetting()
+  private func dismissQuickItem() {
+    titleItemTextField.text = ""
+    view.endEditing(true)
   }
-  //MARK:- Functions
+  
   private func setupKeyboardObserver() {
     let notificationCenter = NotificationCenter.default
     notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -151,7 +159,7 @@ class HomeController: UIViewController {
      
      if notification.name == UIResponder.keyboardWillHideNotification {
        UIView.animate(withDuration: 0.5) { [view, titleItemContainerViewBottomAnchor, titleItemTextField] in
-         titleItemContainerViewBottomAnchor?.constant = -132
+         titleItemContainerViewBottomAnchor?.constant = -156
         titleItemTextField?.text = ""
         view?.layoutIfNeeded()
        }
@@ -163,10 +171,7 @@ class HomeController: UIViewController {
      }
    }
   
-  private func setupNavigationButtons() {
-    let rightBarButton = UIBarButtonItem(image: UIImage(named: "ic_menu"), style: .plain, target: self, action: #selector(settingButtonPressed))
-    navigationItem.rightBarButtonItems = [rightBarButton]
-  }
+  
  
 }
 

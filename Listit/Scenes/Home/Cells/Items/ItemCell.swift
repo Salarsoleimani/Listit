@@ -46,6 +46,8 @@ class ItemCell: SwipeTableViewCell {
   private func setupUI() {
     backgroundColor = .clear
     
+    containerView.backgroundColor = Colors.secondBackground.value
+
     containerView.layer.borderWidth = 1.5
     containerView.layer.cornerRadius = Constants.Radius.cornerRadius
             
@@ -98,7 +100,6 @@ extension ItemCell {
   func bindData(withViewModel viewModel: ItemViewModel) {
     self.viewModel = viewModel
 
-    containerView.backgroundColor = viewModel.backgroundColor
     containerView.layer.borderColor = viewModel.borderColor.cgColor
 
     reminderDateContainerView.layer.borderColor = viewModel.borderColor.cgColor

@@ -34,6 +34,8 @@ class AddItemController: UIViewController {
   @IBOutlet weak var whichListTitleLabel: UILabel!
   @IBOutlet weak var whichListTextField: UITextField!
   
+  @IBOutlet weak var rightArrowImageView: UIImageView!
+
   @IBOutlet weak var remindMeContainerView: UIView?
   @IBOutlet weak var remindMeTitleLabel: UILabel!
   @IBOutlet weak var remindMeButton: UIButton!
@@ -97,10 +99,10 @@ class AddItemController: UIViewController {
     if !Defaults.isAdsRemoved {
       setupAds()
     }
-    if let parentList = parentList, parentList.type == ListType.note.rawValue {
+    if parentList?.type == ListType.note.rawValue {
       remindMeContainerView?.isHidden = true
     }
-    whichListTextField.inputView = listsPickerView
+    configWhichListTextField()
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -129,14 +131,20 @@ class AddItemController: UIViewController {
     }
     showRewardedAd()
   }
+  private func configWhichListTextField() {
+    whichListTextField.inputView = listsPickerView
+    whichListTextField.delegate = self
+//    whichListTextField.isUserInteractionEnabled = true
+//    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(whichListTextFieldPressed))
+//    whichListTextField.addGestureRecognizer(tapGesture)
+  }
   
   @IBAction func moreInfoButtonPressed(_ sender: Any) {
-    UIView.animate(withDuration: 0.25) { [moreInfoTextView, moreInfoButton] in
-      moreInfoTextView?.isHidden = false
-      moreInfoButton?.isHidden = true
-    }
+    moreInfoTextView.showOrHideWithAnimation(false)
+    moreInfoButton.showOrHideWithAnimation(true)
     moreInfoTextView.becomeFirstResponder()
   }
+  
   
   @IBAction private func saveAndAddAnotherButtonPressed(_ sender: UIButton) {
     let isValid = validateSave()
@@ -164,10 +172,9 @@ class AddItemController: UIViewController {
   }
   // MARK:- Functions
   private func hideOrShowReminderContainerView(_ isHidden: Bool) {
-    UIView.animate(withDuration: 0.25) { [remindMeContainerView] in
-      remindMeContainerView?.isHidden = isHidden
-    }
+    remindMeContainerView?.showOrHideWithAnimation(isHidden)
   }
+  
   private func isAdsRemoved() {
     if Defaults.isAdsRemoved {
       adBannerContainerView.isHidden = true
@@ -283,5 +290,20 @@ extension AddItemController: SPPermissionsDelegate {
       return
     }
     showRewardedAd()
+  }
+}
+extension AddItemController: UITextFieldDelegate {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    whichListTextFieldDidBeginEditing()
+  }
+  private func whichListTextFieldDidBeginEditing() {
+    if parentList == nil {
+      parentList = lists.first
+      whichListTextField.text = parentList?.title
+    } else {
+      for (index, list) in lists.enumerated() where parentList == list {
+        listsPickerView.selectRow(index, inComponent: 0, animated: false)
+      }
+    }
   }
 }

@@ -30,7 +30,7 @@ extension AddItemController {
     whichListTitleLabel.text = "which_list_title".localize()
     
     if let parentList = parentList {
-      let type = ListType(rawValue: parentList.type) ?? ListType.default
+      let type = parentList.getListType()
       if type != .all && type != .favorites {
         whichListTextField.text = parentList.title
       } else {
@@ -95,6 +95,8 @@ extension AddItemController {
     whichListTextField.font = Fonts.h5Regular
     whichListTextField.textColor = Colors.listCellTitle.value
     
+    rightArrowImageView.tintColor = Colors.listCellTitle.value
+      
     saveAndAddAnotherButton.titleLabel?.adjustsFontSizeToFitWidth = true
     
     titleTextField.text = itemTitle

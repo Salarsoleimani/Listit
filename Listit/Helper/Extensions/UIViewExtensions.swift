@@ -77,3 +77,11 @@ public extension UIView {
     layer.shadowOpacity = 0.2
   }
 }
+
+extension UIView {
+  func showOrHideWithAnimation(_ isHidden: Bool) {
+    UIView.animate(withDuration: 0.25) { [unowned self] in
+      self.isHidden = isHidden
+    }
+  }
+}

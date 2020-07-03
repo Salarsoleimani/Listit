@@ -10,20 +10,7 @@ import UIKit
 import RxSwift
 import GoogleMobileAds
 
-protocol AddListControllerDelegate {
-  func iconSelected(_ icon: IconCellViewModel)
-}
-extension AddListController: AddListControllerDelegate {
-  func iconSelected(_ icon: IconCellViewModel) {
-    listModel.iconName = "ic_\(icon.model.id)"
-    listModel.iconId = Int16(icon.model.id)
-    listModel.iconColor = icon.colorModel.value
-    
-    iconButton.setTitle("", for: .normal)
-    iconButton.setImage(icon.image, for: .normal)
-    iconContainerView.backgroundColor = icon.color
-  }
-}
+
 class AddListController: UIViewController {
   // MARK:- Outlets
   @IBOutlet weak var adBannerContainerView: UIView!
@@ -34,27 +21,26 @@ class AddListController: UIViewController {
   @IBOutlet weak var iconButton: UIButton!
   @IBOutlet weak var iconContainerView: UIView!
   @IBOutlet weak var titleTextField: UITextField!
-  
+  @IBOutlet weak var editIconLabel: UILabel!
+
   @IBOutlet weak var listTypeContainerView: UIView!
   
   @IBOutlet weak var listTypeTitleLabel: UILabel!
-  
-  @IBOutlet weak var listTypeTextField: UITextField!
+  @IBOutlet weak var listTypeSegmentedControl: UISegmentedControl!
   
   @IBOutlet weak var saveButton: UIButton!
   
-  lazy var listTypesPickerView: UIPickerView = {
-    let pv = UIPickerView()
-    pv.dataSource = self
-    pv.delegate = self
-    return pv
-  }()
+//  lazy var listTypesPickerView: UIPickerView = {
+//    let pv = UIPickerView()
+//    pv.dataSource = self
+//    pv.delegate = self
+//    return pv
+//  }()
   
   // MARK:- variables
   var delegate: HomeControllerDelegate?
   var list: List?
-  var listModel = ListModel(iconColor: Constants.Defaults.color, iconId: 0, iconName: "ic_0", itemsCount: 0, title: "", type: 0)
-  var listTypes = [ListType.reminder, .countdown, .note]
+  var listModel = ListModel(iconColor: Constants.Defaults.color, iconId: 0, iconName: "ic_0", itemsCount: 0, title: "", type: 1)
   
   let bannerView = GADBannerView(adSize: kGADAdSizeBanner)
   var rewardedAd: GADRewardedAd?
@@ -118,19 +104,25 @@ class AddListController: UIViewController {
     } else if titleTextField.text == nil {
       navigator.toast(text: "add_title_for_list_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
       titleTextField.becomeFirstResponder()
-    } else if listModel.type == 0 {
-      navigator.toast(text: "select_type_for_list_error".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
-      listTypeButtonPressed(0)
     } else {
       saveList()
     }
   }
-  @IBAction func listTypeButtonPressed(_ sender: Any) {
-    listTypeTextField.inputView = listTypesPickerView
-    listTypeTextField.becomeFirstResponder()
-  }
+  
   @IBAction private func removeAdsButtonPressed(_ sender: UIButton) {
     navigator.toSetting()
+  }
+  @IBAction private func listTypeSegmentControlValueChanged(_ sender: UISegmentedControl) {
+    switch sender.selectedSegmentIndex {
+    case 0:
+      listModel.type = 1
+    case 1:
+      listModel.type = 2
+    case 2:
+      listModel.type = 3
+    default:
+      print("Used undefined segment index for list")
+    }
   }
   // MARK:- Functions
   private func isAdsRemoved() {
@@ -197,25 +189,5 @@ class AddListController: UIViewController {
       listModel.iconId = Int16(randomIcon.id)
       listModel.iconName = "ic_\(randomIcon.id)"
     }
-  }
-}
-extension AddListController: UIPickerViewDelegate, UIPickerViewDataSource {
-  func numberOfComponents(in pickerView: UIPickerView) -> Int {
-    return 1
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return listTypes.count
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return listTypes[row].title()
-  }
-  
-  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-    pickerView.tag = row
-    listTypeTextField.text = listTypes[row].title()
-    listModel.type = listTypes[row].rawValue
-    view.endEditing(true)
   }
 }

@@ -17,6 +17,7 @@ struct Fonts {
   static let h6Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h6)).instance
 
   static let h5Bold = SSFont(.installed(.montserrat, .bold), size: .standard(.h5)).instance
+  static let h6Bold = SSFont(.installed(.montserrat, .bold), size: .standard(.h6)).instance
 
   // Navigation
   static let navigationLargeTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h1)).instance

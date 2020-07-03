@@ -11,7 +11,7 @@ import Haptico
 
 extension HomeController: UICollectionViewDelegate {
   private func updateItemsTableView(_ list: List, selectedListItem: Int) {
-    let listType = ListType(rawValue: list.type) ?? ListType.default
+    let listType = list.getListType()
     //let filteredItems = allItems.filter{ $0.list == allLists[selectedListRow] }
     let predicate = properPredicateFor(ListType: listType, listId: list.id ?? "")
     let stateSort = NSSortDescriptor(key: "state", ascending: true)
@@ -36,7 +36,7 @@ extension HomeController: UICollectionViewDelegate {
   }
   private func listSelected(_ list: List, selectedItem: Int) {
     Haptico.shared().generate(.light)
-    let type = ListType(rawValue: list.type) ?? ListType.default
+    let type = list.getListType()
     if type == .all {
       selectedList = nil
       navigationItem.title = allItemsList?.title
@@ -48,32 +48,21 @@ extension HomeController: UICollectionViewDelegate {
     }
     updateItemsTableView(list, selectedListItem: selectedItem)
     
-    autoLayoutAddItemButtons(type)
+    autoLayoutAddItemButtonUI(type)
     
   }
-  internal func autoLayoutAddItemButtons(_ type: ListType) {
-    if type == .all || type == .favorites {
-      setupAddItemButton()
-      addItemButton.tag = 0
-    } else {
-      addItemLabel.text = "quick_add_item_button_title".localize()
-      addItemLabel.font = Fonts.listCellTitle
-      addItemLabel.textColor = Colors.white.value
-      
-      addItemButton.backgroundColor = Colors.second.value
-      addItemButton.tag = 1
-    }
-  }
+  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if let listCell = collectionView.cellForItem(at: indexPath) as? ListCell {
       let selectedList = listCell.viewModel.model
       listSelected(selectedList, selectedItem: indexPath.item)
     }
   }
+  
   func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
     if collectionView == listsCollectionView, let listCell = collectionView.cellForItem(at: indexPath) as? ListCell {
       let selectedList = listCell.viewModel.model
-      let type = ListType(rawValue: selectedList.type) ?? ListType.default
+      let type = selectedList.getListType()
       if type != .favorites, type != .all {
         let listConfiguration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [editListAction, deleteListAction, quickAddNewItemAction] action in
           let typeTitle = type.quantityTitle().dropLast().description
@@ -103,7 +92,7 @@ extension HomeController: UICollectionViewDelegate {
   }
   private func quickAddNewItemAction(_ list: List) {
     selectedList = list
-    quickAddList()
+    quickAddItem()
   }
   private func deleteListAction(list: List) {
     Haptico.shared().generate(.light)
@@ -118,15 +107,16 @@ extension HomeController: UICollectionViewDelegate {
     present(alertt, animated: true, completion: nil)
   }
   private func deleteList(_ list: List) {
-    if let items = list.items?.allObjects as? [Item] {
-      for item in items where item.list == list {
+    dbManager.delete(List: list, response: nil)
+
+    if let items = itemsDataSource.frc.fetchedObjects {
+      for item in items where item.list == nil {
         dbManager.delete(Item: item, allItemsList: allItemsList, response: nil)
       }
     }
     if let allItemsList = allItemsList {
       listSelected(allItemsList, selectedItem: 0)
     }
-    dbManager.delete(List: list, response: nil)
   }
   internal func properPredicateFor(ListType listType: ListType, listId: String) -> NSPredicate? {
     var predicate: NSPredicate?

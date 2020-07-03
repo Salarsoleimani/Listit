@@ -10,17 +10,19 @@ import UIKit
 
 extension HomeController {
   func setLocalization() {
-    addItemLabel.text = "add_item_button_title".localize()
-
     addListLabel.text = "add_list_button_title".localize()
 
     titleItemTextField.placeholder = "add_item_title_placeholder".localize()
     
     addMoreDetailForItemButton.setTitle("add_more_detail_quick_item".localize(), for: .normal)
-
+    saveAndAddAnotherItemButton.setTitle("save_and_another_item_button_title".localize(), for: .normal)
   }
-  
+  func setupConfiguration() {
+    setupNavigationButtons()
+    registerCells()
+  }
   func setupUI() {
+    let mainColor = Colors.main.value
     navigationItem.title = "all_items_navigation_title".localize()
 
     view.backgroundColor = Colors.background.value
@@ -28,31 +30,57 @@ extension HomeController {
     listsCollectionView.backgroundColor = .clear
     itemsTableView.backgroundColor = .clear
 
-    setupAddItemButton()
+    autoLayoutAddItemButtonUI(.all)
     
     addListButton.makeNewTodoButton(title: "")
     addListLabel.font = Fonts.listCellTitle
     addListLabel.textColor = Colors.white.value
     
     addMoreDetailForItemButton.titleLabel?.font = Fonts.h5Regular
-    addMoreDetailForItemButton.tintColor = Colors.main.value
+    addMoreDetailForItemButton.tintColor = mainColor
+    addMoreDetailForItemButton.setTitleColor(mainColor, for: .normal)
     
-    titleItemTextField.tintColor = Colors.main.value
+    saveAndAddAnotherItemButton.titleLabel?.font = Fonts.h5Bold
+    saveAndAddAnotherItemButton.tintColor = Colors.white.value
+    saveAndAddAnotherItemButton.backgroundColor = mainColor
+    saveAndAddAnotherItemButton.layer.cornerRadius = Constants.Radius.cornerRadius
+    
+    titleItemTextField.tintColor = mainColor
     titleItemTextField.font = Fonts.itemCellTitle
     titleItemTextField.textColor = Colors.itemCellTitle.value
     
-    titleItemContainerView.backgroundColor = Colors.background.value
+    titleItemContainerView.backgroundColor = Colors.secondBackground.value
     
     noItemsLabel.font = Fonts.h5Regular
     noItemsLabel.textColor = Colors.itemCellTitle.value
+    
+    closeQiuckItemButton.tintColor = mainColor
   }
-  func setupAddItemButton() {
+  
+  internal func autoLayoutAddItemButtonUI(_ type: ListType) {
     addItemButton.makeNewTodoButton(title: "")
     addItemLabel.font = Fonts.listCellTitle
     addItemLabel.textColor = Colors.white.value
-    addItemLabel.text = "add_item_button_title".localize()
+    
+    if type == .all || type == .favorites {
+      addItemButton.backgroundColor = Colors.main.value
+      addItemLabel.text = "add_item_button_title".localize()
+      addItemButton.tag = 0
+      return
+    }
+    addItemButton.backgroundColor = Colors.second.value
+    addItemLabel.text = "quick_add_item_button_title".localize()
+    addItemButton.tag = 1
   }
-  func registerCells() {
+  
+  private func setupNavigationButtons() {
+    let rightBarButton = UIBarButtonItem(image: UIImage(named: "ic_menu"), style: .plain, target: self, action: #selector(settingButtonPressed))
+    navigationItem.rightBarButtonItems = [rightBarButton]
+  }
+  @objc private func settingButtonPressed() {
+    navigator.toSetting()
+  }
+  private func registerCells() {
     let listNib = UINib(nibName: "ListCell", bundle: nil)
     listsCollectionView.register(listNib, forCellWithReuseIdentifier: Constants.CellIds.cellId)
     let itemNib = UINib(nibName: "ItemCell", bundle: nil)

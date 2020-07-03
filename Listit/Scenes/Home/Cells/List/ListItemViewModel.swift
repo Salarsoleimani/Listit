@@ -20,7 +20,7 @@ struct ListItemViewModel {
     
     self.title = model.title ?? ""
     
-    let type = ListType(rawValue: model.type) ?? ListType.default
+    let type = model.getListType()
     self.type = type
     
     let itemsQuantity = model.itemsCount

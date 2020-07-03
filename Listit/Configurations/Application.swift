@@ -30,7 +30,6 @@ final class Application {
   
   func setupApplicationConfigurations() {
     LanguageManager.shared.defaultLanguage = .deviceLanguage
-    configureKeyboard()
     setupRateManager()
     setupUpdateManager()
     resetNotificationBadge()

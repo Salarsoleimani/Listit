@@ -56,8 +56,7 @@
 "add_list_navigation_title" = "Add List";
 
 "add_list_title_placeholder" = "Your list title";
-"list_type_title" = "List type:";
-"select_list_type_placeholder" = "Please select type of your list";
+"list_type_title" = "List style";
 "select_icon_description" = "Please choose a color and pick an icon for your %@ list.";
 
 // - add item
@@ -88,7 +87,7 @@
 // Home
 
 
-"add_quick_item_title_placeholder" = "Name you item and tap continue";
+"add_quick_item_title_placeholder" = "Name your item and tap \"save & add another\"";
 "no_items_in_list_title" = "There is no item in %@ list.\nChoose to add item quickly or with more detail.";
 "no_items_in_importants_title" = "There is no item in importants.\nSwipe left on an item to add it into importants.";
 "add_more_detail_quick_item" = "Add more detail";
@@ -149,4 +148,5 @@
 
 "add_list_button_title" = "+ add list";
 "add_item_button_title" = "+ add item";
-"quick_add_item_button_title" = "+ (quick) add item";
+"quick_add_item_button_title" = "+ add item (Quick)";
+"edit_button_title" = "edit";

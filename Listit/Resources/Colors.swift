@@ -17,6 +17,9 @@ enum Colors {
   case second
   
   case error
+  case shadow
+  
+  case secondBackground
   
   case walktroughTarget
   case walktroughBackground
@@ -58,6 +61,9 @@ extension Colors {
     case .second:
       instanceColor = UIColor(hex: 0xe76f51)
       
+    case .secondBackground:
+      instanceColor =  UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x353535), lightModeColor: UIColor(hex: 0xDADADA))
+
       // Walkthrough
     case .walktroughTarget:
       instanceColor =  UIColor.UITraitCollectionColor(darkModeColor: UIColor(hex: 0x444444), lightModeColor: UIColor(hex: 0x989595))
@@ -82,6 +88,9 @@ extension Colors {
       //
     case .error:
       instanceColor = UIColor(hex: 0xEA2127)
+    case .shadow:
+      instanceColor = UIColor(hex: 0x232323)
+      
     case .white:
       instanceColor = .white
     // Custom

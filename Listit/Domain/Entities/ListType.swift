@@ -21,6 +21,11 @@ enum ListType: Int16 {
   //case today = 99
   case all = 100
 }
+extension List {
+  func getListType() -> ListType {
+    return ListType(rawValue: type) ?? ListType.default
+  }
+}
 
 extension ListType {
   static let `default` = ListType.none
