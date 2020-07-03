@@ -1,6 +1,6 @@
 [
   {
-    "iconColor": "#9E52D1",
+    "iconColor": "#02C39A",
     "iconName": "ic_all_lists",
     "iconId": -1,
     "itemsCount": 0,
@@ -8,7 +8,7 @@
     "type": 100
   },
   {
-    "iconColor": "#E76F51",
+    "iconColor": "#FF0800",
     "iconName": "ic_favourite",
     "iconId": -1,
     "itemsCount": 0,
@@ -16,9 +16,9 @@
     "type": 98
   },
   {
-    "iconColor": "#87B37A",
-    "iconName": "ic_24",
-    "iconId": 24,
+    "iconColor": "#363374",
+    "iconName": "ic_33",
+    "iconId": 33,
     "itemsCount": 0,
     "title": "template_motivations_list",
     "type": 1

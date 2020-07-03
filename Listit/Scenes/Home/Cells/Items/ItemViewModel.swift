@@ -23,7 +23,7 @@ struct ItemViewModel {
 
   let backgroundColor: UIColor
   let borderColor: UIColor
-  let isFavoriteImage: UIImage
+  let isFavoriteHidden: Bool
   let finishedLineImage: UIImage
   var finishedLineIsHidden: Bool
   var isShowingDetail: Bool
@@ -87,7 +87,7 @@ struct ItemViewModel {
     
     self.backgroundColor = UIColor(hexString: model.list?.iconColor ?? "") .withAlphaComponent(0.4)
     self.borderColor = UIColor(hexString: model.list?.iconColor ?? "")
-    self.isFavoriteImage = model.isFavorite ? UIImage(systemName: "star.fill")!.withTintColor(Colors.itemCellTitle.value, renderingMode: .alwaysTemplate) : UIImage(systemName: "star")!.withTintColor(Colors.itemCellTitle.value, renderingMode: .alwaysTemplate)
+    self.isFavoriteHidden = !model.isFavorite
     let finishedLineRandomImage = [UIImage(named: "img_line1")!, UIImage(named: "img_line2")!].randomElement() ?? UIImage()
     self.finishedLineImage = finishedLineRandomImage
     self.finishedLineIsHidden = model.state == ItemState.done.rawValue ? false : true

@@ -18,6 +18,7 @@ enum Colors {
   
   case error
   case shadow
+  case red
   
   case secondBackground
   
@@ -90,6 +91,8 @@ extension Colors {
       instanceColor = UIColor(hex: 0xEA2127)
     case .shadow:
       instanceColor = UIColor(hex: 0x232323)
+    case .red:
+      instanceColor = UIColor(hex: 0xff0800)
       
     case .white:
       instanceColor = .white

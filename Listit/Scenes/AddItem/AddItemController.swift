@@ -181,7 +181,6 @@ class AddItemController: UIViewController {
       isRewardedAdWatched = true
     } else {
       adBannerContainerView.isHidden = false
-      isRewardedAdWatched = false
     }
   }
   private func validateSave() -> Bool {

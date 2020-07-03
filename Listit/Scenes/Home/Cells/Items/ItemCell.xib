@@ -118,13 +118,38 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pv0-08-ZfW">
+                                <rect key="frame" x="372" y="8" width="24" height="24"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_favourite" translatesAutoresizingMaskIntoConstraints="NO" id="k8p-N0-REL">
+                                        <rect key="frame" x="4" y="4" width="16" height="16"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="k8p-N0-REL" secondAttribute="bottom" constant="4" id="0GK-vh-ffi"/>
+                                    <constraint firstAttribute="width" secondItem="Pv0-08-ZfW" secondAttribute="height" multiplier="1:1" id="BWg-9U-oq4"/>
+                                    <constraint firstAttribute="trailing" secondItem="k8p-N0-REL" secondAttribute="trailing" constant="4" id="D0g-UP-YCs"/>
+                                    <constraint firstAttribute="height" constant="24" id="ZQS-hS-oc2"/>
+                                    <constraint firstItem="k8p-N0-REL" firstAttribute="top" secondItem="Pv0-08-ZfW" secondAttribute="top" constant="4" id="ffj-8q-9ME"/>
+                                    <constraint firstItem="k8p-N0-REL" firstAttribute="leading" secondItem="Pv0-08-ZfW" secondAttribute="leading" constant="4" id="oXA-IX-srp"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="11"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="mEr-Hg-V0X" secondAttribute="bottom" constant="8" id="36P-XC-1JM"/>
+                            <constraint firstItem="Pv0-08-ZfW" firstAttribute="top" secondItem="duc-PK-5Hh" secondAttribute="top" constant="8" id="L8A-rG-RHa"/>
                             <constraint firstAttribute="trailing" secondItem="mEr-Hg-V0X" secondAttribute="trailing" constant="12" id="TmB-7M-UoG"/>
                             <constraint firstItem="mEr-Hg-V0X" firstAttribute="top" secondItem="duc-PK-5Hh" secondAttribute="top" constant="8" id="jZc-6J-eko"/>
                             <constraint firstItem="mEr-Hg-V0X" firstAttribute="leading" secondItem="duc-PK-5Hh" secondAttribute="leading" constant="12" id="vNf-xF-cfd"/>
+                            <constraint firstAttribute="trailing" secondItem="Pv0-08-ZfW" secondAttribute="trailing" constant="12" id="yYM-Op-dZa"/>
                         </constraints>
                     </view>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_line1" translatesAutoresizingMaskIntoConstraints="NO" id="4oT-cT-erA">
@@ -151,6 +176,7 @@
                 <outlet property="countdownLabel" destination="grm-Dl-Sj3" id="fx5-bJ-lc5"/>
                 <outlet property="dateContainerStackView" destination="h9f-QZ-c3A" id="hqj-zH-Edt"/>
                 <outlet property="descriptionLabel" destination="Hh9-ih-HIL" id="7gZ-4t-uEl"/>
+                <outlet property="favoriteView" destination="Pv0-08-ZfW" id="il6-hv-X7v"/>
                 <outlet property="finishedLineImageView" destination="4oT-cT-erA" id="fDM-cn-jOJ"/>
                 <outlet property="reminderDateContainerView" destination="oFR-Qb-AMb" id="lFI-H1-Q3D"/>
                 <outlet property="reminderDateIcon" destination="n8W-8g-lEU" id="Yuz-UD-ikf"/>
@@ -165,6 +191,7 @@
     </objects>
     <resources>
         <image name="alarm" catalog="system" width="62" height="64"/>
+        <image name="ic_favourite" width="245" height="250"/>
         <image name="img_line1" width="1036" height="100"/>
         <image name="repeat" catalog="system" width="64" height="48"/>
     </resources>

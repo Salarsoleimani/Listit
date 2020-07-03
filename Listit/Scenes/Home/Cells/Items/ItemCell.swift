@@ -16,6 +16,8 @@ class ItemCell: SwipeTableViewCell {
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var containerStackView: UIStackView!
 
+  @IBOutlet weak var favoriteView: UIView!
+
   @IBOutlet weak var countdownLabel: CountdownLabel!
 
   @IBOutlet weak var titleLabel: UILabel!
@@ -47,7 +49,9 @@ class ItemCell: SwipeTableViewCell {
     backgroundColor = .clear
     
     containerView.backgroundColor = Colors.secondBackground.value
-
+    
+    favoriteView.backgroundColor = Colors.red.value
+    
     containerView.layer.borderWidth = 1.5
     containerView.layer.cornerRadius = Constants.Radius.cornerRadius
             
@@ -101,7 +105,9 @@ extension ItemCell {
     self.viewModel = viewModel
 
     containerView.layer.borderColor = viewModel.borderColor.cgColor
-
+    
+    favoriteView.isHidden = viewModel.isFavoriteHidden
+    
     reminderDateContainerView.layer.borderColor = viewModel.borderColor.cgColor
     
     repeatContainerView.layer.borderColor = viewModel.borderColor.cgColor

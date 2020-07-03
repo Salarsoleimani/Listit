@@ -32,7 +32,22 @@ final public class DBManager: DatabaseManagerProtocol {
           print(error.localizedDescription)
           return
         } else {
-          if let results = results, results.count == 0 {
+          if results?.count == 0 {
+            addTemplateLists()
+          }
+        }
+      }
+    } else {
+      let query = CKQuery(recordType: "CD_List", predicate: NSPredicate(value: true))
+      CKContainer.default().privateCloudDatabase.perform(query, inZoneWith: nil) { [addTemplateLists] results, error in
+        if let error = error as NSError? {
+          if error.code == 11 {
+            addTemplateLists()
+          }
+          print(error.localizedDescription)
+          return
+        } else {
+          if results?.count == 0 {
             addTemplateLists()
           }
         }
@@ -41,6 +56,8 @@ final public class DBManager: DatabaseManagerProtocol {
   }
   
   private func addTemplateLists() {
+    CoreDataStack.shared.deleteAllRecords(entityName: "List")
+    CoreDataStack.shared.deleteAllRecords(entityName: "Item")
     let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
     let templateItems = SSMocker<ItemModelCodable>.loadGenericObjectsFromLocalJson(fileName: "TemplateItems")
     

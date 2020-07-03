@@ -86,4 +86,16 @@ final class CoreDataStack {
       }
     }
   }
+  
+  func deleteAllRecords(entityName: String) {
+    let coord = persistentContainer.viewContext.persistentStoreCoordinator
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    
+    do {
+      try coord?.execute(deleteRequest, with: persistentContainer.viewContext)
+    } catch let error as NSError {
+      debugPrint(error)
+    }
+  }
 }
