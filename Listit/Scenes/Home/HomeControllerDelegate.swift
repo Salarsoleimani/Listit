@@ -32,9 +32,13 @@ extension HomeController: HomeControllerDelegate {
 
 extension HomeController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    return addQuickItem(textField)
+    if textField.text != "" {
+      return addQuickItem(textField, showToast: false)
+    }
+    view.endEditing(true)
+    return true
   }
-  internal func addQuickItem(_ textField: UITextField) -> Bool {
+  internal func addQuickItem(_ textField: UITextField, showToast: Bool = true) -> Bool {
     if textField == titleItemTextField, let text = textField.text, !text.isEmpty, let selectedList = selectedList {
       let item = ItemModel(title: text, notifDate: nil, repeats: nil, description: nil, parentList: selectedList, state: nil)
       dbManager.addItem(item, allItemsList: allItemsList, withHaptic: true, response: nil)
@@ -45,9 +49,15 @@ extension HomeController: UITextFieldDelegate {
       fetchItems(predicate)
       thereAreItems(listType: listType)
       Haptico.shared().generate(.success)
+      if !showToast {
+        view.endEditing(true)
+      }
       return true
     } else {
-      navigator.toast(text: "add_quick_item_title_placeholder".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
+      if showToast {
+        navigator.toast(text: "add_quick_item_title_placeholder".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
+
+      }
       return false
     }
   }

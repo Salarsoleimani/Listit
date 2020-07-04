@@ -36,6 +36,10 @@ extension HomeController {
     addListLabel.font = Fonts.listCellTitle
     addListLabel.textColor = Colors.white.value
     
+    backToFirstButton.backgroundColor = Colors.main.value
+    backToFirstButton.layer.cornerRadius = Constants.Radius.cornerRadius
+    backToFirstButton.tintColor = Colors.white.value
+    
     addMoreDetailForItemButton.titleLabel?.font = Fonts.h5Regular
     addMoreDetailForItemButton.tintColor = mainColor
     addMoreDetailForItemButton.setTitleColor(mainColor, for: .normal)

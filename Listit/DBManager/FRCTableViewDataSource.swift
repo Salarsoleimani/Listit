@@ -109,10 +109,10 @@ class FRCTableViewDataSource<FetchRequestResult: NSFetchRequestResult>: NSObject
     switch type {
     case .insert:
       guard let newIndexPath = newIndexPath else { break }
-      tableView?.insertRows(at: [newIndexPath], with: .bottom)
+      tableView?.insertRows(at: [newIndexPath], with: .automatic)
     case .delete:
       guard let indexPath = indexPath else { break }
-      tableView?.deleteRows(at: [indexPath], with: .middle)
+      tableView?.deleteRows(at: [indexPath], with: .automatic)
     case .update:
       guard let indexPath = indexPath else { break }
       tableView?.reloadRows(at: [indexPath], with: .automatic)

@@ -135,7 +135,7 @@ extension HomeController: FRCTableViewDelegate {
   }
   private func deleteItem(_ item: Item, indexPath: IndexPath) {
     Haptico.shared().generate(.success)
-    dbManager.delete(Item: item, allItemsList: allItemsList, response: nil)
+    dbManager.delete(Item: item, allItemsList: allItemsList, favoriteList: favoriteList, response: nil)
   }
 }
 // MARK:- SwipeActions

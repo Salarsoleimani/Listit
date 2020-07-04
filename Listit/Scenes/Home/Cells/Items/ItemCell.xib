@@ -119,10 +119,10 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pv0-08-ZfW">
-                                <rect key="frame" x="372" y="8" width="24" height="24"/>
+                                <rect key="frame" x="376" y="50.5" width="20" height="20"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_favourite" translatesAutoresizingMaskIntoConstraints="NO" id="k8p-N0-REL">
-                                        <rect key="frame" x="4" y="4" width="16" height="16"/>
+                                        <rect key="frame" x="4" y="4" width="12" height="12"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
@@ -131,13 +131,13 @@
                                     <constraint firstAttribute="bottom" secondItem="k8p-N0-REL" secondAttribute="bottom" constant="4" id="0GK-vh-ffi"/>
                                     <constraint firstAttribute="width" secondItem="Pv0-08-ZfW" secondAttribute="height" multiplier="1:1" id="BWg-9U-oq4"/>
                                     <constraint firstAttribute="trailing" secondItem="k8p-N0-REL" secondAttribute="trailing" constant="4" id="D0g-UP-YCs"/>
-                                    <constraint firstAttribute="height" constant="24" id="ZQS-hS-oc2"/>
+                                    <constraint firstAttribute="height" constant="20" id="ZQS-hS-oc2"/>
                                     <constraint firstItem="k8p-N0-REL" firstAttribute="top" secondItem="Pv0-08-ZfW" secondAttribute="top" constant="4" id="ffj-8q-9ME"/>
                                     <constraint firstItem="k8p-N0-REL" firstAttribute="leading" secondItem="Pv0-08-ZfW" secondAttribute="leading" constant="4" id="oXA-IX-srp"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <integer key="value" value="11"/>
+                                        <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -145,7 +145,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="mEr-Hg-V0X" secondAttribute="bottom" constant="8" id="36P-XC-1JM"/>
-                            <constraint firstItem="Pv0-08-ZfW" firstAttribute="top" secondItem="duc-PK-5Hh" secondAttribute="top" constant="8" id="L8A-rG-RHa"/>
+                            <constraint firstItem="Pv0-08-ZfW" firstAttribute="centerY" secondItem="Ee3-LY-Wtu" secondAttribute="centerY" id="Mgh-60-JrY"/>
                             <constraint firstAttribute="trailing" secondItem="mEr-Hg-V0X" secondAttribute="trailing" constant="12" id="TmB-7M-UoG"/>
                             <constraint firstItem="mEr-Hg-V0X" firstAttribute="top" secondItem="duc-PK-5Hh" secondAttribute="top" constant="8" id="jZc-6J-eko"/>
                             <constraint firstItem="mEr-Hg-V0X" firstAttribute="leading" secondItem="duc-PK-5Hh" secondAttribute="leading" constant="12" id="vNf-xF-cfd"/>

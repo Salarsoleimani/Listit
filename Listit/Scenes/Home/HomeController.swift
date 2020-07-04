@@ -23,8 +23,15 @@ class HomeController: UIViewController {
   @IBOutlet weak var addItembuttonContainerView: UIView!
   @IBOutlet weak var addItemLabel: UILabelX!
   @IBOutlet weak var addItemButton: UIButton!
+  
+  @IBOutlet weak var addListContainerViewLeftAnchor: NSLayoutConstraint!
+  @IBOutlet weak var addListContainerView: UIView!
   @IBOutlet weak var addListButton: UIButton!
   @IBOutlet weak var addListLabel: UILabelX!
+  
+  @IBOutlet weak var backToFirstButton: UIButton!
+  @IBOutlet weak var backToFirstButtonLeftAnchor: NSLayoutConstraint!
+  
   @IBOutlet weak var closeQiuckItemButton: UIButton!
 
   @IBOutlet weak var addMoreDetailForItemButton: UIButton!
@@ -121,6 +128,15 @@ class HomeController: UIViewController {
     navigator.toSetting()
   }
   
+  @IBAction func backToFIrstButtonPressed(_ sender: Any) {
+    
+    listsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
+    Utility.delay(0.25) { [changeAddListButtonLayoutToBack] in
+      UIView.animate(withDuration: 0.25) { [changeAddListButtonLayoutToBack] in
+        changeAddListButtonLayoutToBack(false)
+      }
+    }
+  }
   
   //MARK:- Functions
   internal func quickAddItem() {

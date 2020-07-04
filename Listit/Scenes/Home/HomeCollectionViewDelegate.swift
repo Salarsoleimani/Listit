@@ -20,6 +20,31 @@ extension HomeController: UICollectionViewDelegate {
     fetchItems(predicate)
     thereAreItems(listType: listType)
   }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if scrollView.contentOffset.x > 280 {
+      UIView.animate(withDuration: 0.25) { [changeAddListButtonLayoutToBack] in
+        changeAddListButtonLayoutToBack(true)
+      }
+    } else if scrollView.contentOffset.x <= 280, addListContainerViewLeftAnchor.constant == -50 {
+      UIView.animate(withDuration: 0.25) { [changeAddListButtonLayoutToBack] in
+        changeAddListButtonLayoutToBack(false)
+      }
+    }
+   
+  }
+  internal func changeAddListButtonLayoutToBack(_ isBackButtonHidden: Bool) {
+    if isBackButtonHidden {
+      backToFirstButtonLeftAnchor.constant = 8
+      addListContainerViewLeftAnchor.constant = -50
+      view.layoutIfNeeded()
+      return
+    }
+    backToFirstButtonLeftAnchor.constant = -50
+    addListContainerViewLeftAnchor.constant = 0
+    view.layoutIfNeeded()
+  }
+  
   internal func fetchItems(_ predicate: NSPredicate? = nil) {
     itemsDataSource.frc.fetchRequest.predicate = predicate
     itemsDataSource.performFetch()
@@ -108,15 +133,17 @@ extension HomeController: UICollectionViewDelegate {
   }
   private func deleteList(_ list: List) {
     dbManager.delete(List: list, response: nil)
-
-    if let items = itemsDataSource.frc.fetchedObjects {
-      for item in items where item.list == nil {
-        dbManager.delete(Item: item, allItemsList: allItemsList, response: nil)
-      }
-    }
     if let allItemsList = allItemsList {
       listSelected(allItemsList, selectedItem: 0)
     }
+    Utility.delay(0.1) { [itemsDataSource, dbManager, favoriteList, allItemsList] in
+      if let items = itemsDataSource?.frc.fetchedObjects {
+        for item in items where item.list == nil {
+          dbManager.delete(Item: item, allItemsList: allItemsList, favoriteList: favoriteList, response: nil)
+        }
+      }
+    }
+    
   }
   internal func properPredicateFor(ListType listType: ListType, listId: String) -> NSPredicate? {
     var predicate: NSPredicate?

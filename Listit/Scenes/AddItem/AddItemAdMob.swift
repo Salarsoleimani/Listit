@@ -53,6 +53,8 @@ extension AddItemController {
   func showRewardedAd() {
     if rewardedAd?.isReady == true {
       rewardedAd?.present(fromRootViewController: self, delegate: self)
+    } else {
+      navigator.toast(text: "wait_ad_description".localize(), hapticFeedbackType: .error, backgroundColor: Colors.error.value)
     }
   }
 }

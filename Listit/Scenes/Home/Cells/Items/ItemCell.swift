@@ -75,7 +75,8 @@ class ItemCell: SwipeTableViewCell {
     
     reminderDateLabel.font = Fonts.itemCellDescription
     reminderDateLabel.textColor = Colors.itemCellDescription.value
-
+    reminderDateLabel.adjustsFontSizeToFitWidth = true
+    
     reminderDateContainerView.backgroundColor = .clear
     reminderDateContainerView.layer.borderWidth = 1.5
     reminderDateContainerView.layer.cornerRadius = Constants.Radius.cornerRadius

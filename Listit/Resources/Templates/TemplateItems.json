@@ -40,10 +40,12 @@
   },
   {
     "title": "Cucumber",
-    "description": "2 pounds"
+    "description": "2 pounds",
+    "isFavorite": true
   },
   {
     "title": "Cream cheese",
-    "state": 1
+    "state": 1,
+    "isFavorite": true
   }
 ]

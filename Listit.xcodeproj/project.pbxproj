@@ -238,6 +238,8 @@
 		2577FDC124A6BFD000319B06 /* EditActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActions.swift; sourceTree = "<group>"; };
 		2577FE1824AC255300319B06 /* UILabelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
 		2577FE1A24AE6BE900319B06 /* AddListDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListDelegates.swift; sourceTree = "<group>"; };
+		2577FE1C24B12E9900319B06 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2577FE1D24B12EBB00319B06 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		25B32BE124A2907F00524CD9 /* AppAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnalytics.swift; sourceTree = "<group>"; };
 		25B32BE324A2943200524CD9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		25B32BE524A2E03900524CD9 /* HomeAdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAdMob.swift; sourceTree = "<group>"; };
@@ -259,10 +261,6 @@
 		25B32C0B24A3E31200524CD9 /* SettingTableViewDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewDelegates.swift; sourceTree = "<group>"; };
 		25B32C0D24A3ED0900524CD9 /* SettingAdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAdMob.swift; sourceTree = "<group>"; };
 		25B32C0F24A3F06900524CD9 /* SettingAppMailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAppMailDelegate.swift; sourceTree = "<group>"; };
-		25B32C1124A5822A00524CD9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		25B32C1224A5822B00524CD9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		25B32C1324A5823C00524CD9 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		25B32C1424A5823D00524CD9 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		25B32C1524A592AF00524CD9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		25B32C1724A592F500524CD9 /* ConfigurationNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationNetworkModel.swift; sourceTree = "<group>"; };
 		681C012384A06C1A9D1A7C6B /* Pods_Listit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Listit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -973,8 +971,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				254F34B72485F4F80099C96C /* Base */,
-				25B32C1124A5822A00524CD9 /* zh-Hans */,
-				25B32C1324A5823C00524CD9 /* fa */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -983,8 +979,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				254F34CA248733B00099C96C /* en */,
-				25B32C1224A5822B00524CD9 /* zh-Hans */,
-				25B32C1424A5823D00524CD9 /* fa */,
+				2577FE1C24B12E9900319B06 /* zh-Hans */,
+				2577FE1D24B12EBB00319B06 /* fa */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

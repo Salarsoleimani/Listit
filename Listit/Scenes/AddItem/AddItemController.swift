@@ -72,7 +72,7 @@ class AddItemController: UIViewController {
   var rewardedAd: GADRewardedAd?
   var isRewardedAdWatched = false
 
-  private let navigator: AddItemNavigator
+  internal let navigator: AddItemNavigator
   private let dbManager: DatabaseManagerProtocol
   
   lazy var listsPickerView: UIPickerView = {
@@ -271,9 +271,45 @@ extension AddItemController: AddItemControllerDelegate {
     
     if let rep = repeats, let notifDate = notifDate {
       let formatter = DateFormatter()
-      formatter.dateFormat = "YYYY/MMM/dd HH:mm"
+      switch rep {
+      case .none:
+        formatter.dateFormat = "MMM dd, YYYY, HH:mm"
+      case .hourly:
+        formatter.dateFormat = "HH:mm"
+      case .daily:
+        formatter.dateFormat = "HH:mm"
+      case .weekly:
+        formatter.dateFormat = "EEEE, HH:mm"
+      case .monthly:
+        formatter.dateFormat = "d,HH:mm"
+      case .yearly:
+        formatter.dateFormat = "MMM dd, HH:mm"
+      default:
+        print("Used minutely")
+      }
+      var title = ""
       let dateStr = formatter.string(from: notifDate)
-      let title = rep != .none ? "\(dateStr) (\(rep.rawValue))": dateStr
+      if rep == .none {
+        title = dateStr
+      } else if rep == .monthly {
+        let dateAndTime = dateStr.components(separatedBy: ",")
+        if dateAndTime.count == 2 {
+          let day = dateAndTime[0]
+          let time = dateAndTime[1]
+          let dayTitle = "day_title".localize()
+          let ofMonthTitle = "of_month_title".localize()
+          if day == "1" {
+            title = "\(day)st \(dayTitle) \(ofMonthTitle), \(time)"
+          } else if day == "2" {
+            title = "\(day)nd \(dayTitle) \(ofMonthTitle), \(time)"
+          } else {
+            title = "\(day)th \(dayTitle) \(ofMonthTitle), \(time)"
+          }
+        }
+      } else {
+        title = "\(dateStr) (\(rep.rawValue))"
+      }
+      
       remindMeButton.setTitle(title, for: .normal)
     }
   }

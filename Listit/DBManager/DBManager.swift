@@ -117,7 +117,7 @@ final public class DBManager: DatabaseManagerProtocol {
             print("Another index of template items for coundowns")
           }
           item.notifDate = notifDate
-          item.repeats = RepeatingInterval.none
+          item.repeats = RepeatingInterval.yearly
 
           addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
 
@@ -212,10 +212,12 @@ final public class DBManager: DatabaseManagerProtocol {
     Haptico.shared().generate(.success)
   }
   
-  func delete(Item item: Item, allItemsList: List?, response: ((Bool) -> Void)?) {
+  func delete(Item item: Item, allItemsList: List?, favoriteList: List?, response: ((Bool) -> Void)?) {
     allItemsList?.itemsCount -= 1
     item.list?.itemsCount -= 1
-    
+    if item.isFavorite {
+      favoriteList?.itemsCount -= 1
+    }
     DBManager.scheduler.cancel(notificationIds: item.id ?? "")
     CoreDataStack.managedContext.delete(item)
     CoreDataStack.shared.saveContext()

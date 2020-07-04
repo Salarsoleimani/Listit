@@ -14,6 +14,6 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
     return CGSize(width: listHeight, height: listHeight)
   }
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+    return UIEdgeInsets(top: 0, left: 58, bottom: 0, right: 8)
   }
 }

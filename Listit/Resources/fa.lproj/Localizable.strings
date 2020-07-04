@@ -8,22 +8,21 @@
 
 /// - titles
 "all_items_navigation_title" = "All";
-"add_list_navigation_title" = "Add List";
-"edit_list_navigation_title" = "Edit List";
 "select_icon_navigation_title" = "Icon & Color";
 
 "add_item_navigation_title" = "Add item";
 "edit_item_navigation_title" = "Edit item";
 
-"setting_navigation_title" = "تنظیمات";
+"setting_navigation_title" = "Setting";
 
 /// - list types title
 "all_lists_type" = "All";
-"favorites_lists_type" = "Favorites";
+"favorites_lists_type" = "Importants";
 "today_lists_type" = "Today";
 "reminder_lists_type" = "Reminder";
 "countdown_lists_type" = "Countdown";
 "note_lists_type" = "Note";
+"habits_lists_type" = "Habit";
 
 "template_motivations_list" = "Motivation quotes";
 "template_birthdays_list" = "Birthdays";
@@ -31,35 +30,34 @@
 
 /// - list types quantity title
 "all_lists_type_quantity" = "items";
-"favorites_lists_type_quantity" = "favorites";
-"today_lists_type_quantity" = "tasks";
-"reminder_lists_type_quantity" = "tasks";
+"favorites_lists_type_quantity" = "importants";
+"today_lists_type_quantity" = "reminders";
+"reminder_lists_type_quantity" = "reminders";
 "countdown_lists_type_quantity" = "countdowns";
 "note_lists_type_quantity" = "notes";
 "none_lists_type_quantity" = "items";
-
+"habit_lists_type_quantity" = "habits";
 // - list menu actions
 "cancel_list_action" = "Cancel";
 "delete_list_action" = "Delete";
 "edit_list_action" = "Edit";
 
-"add_new_item_to_list_action" = "Add new";
 "quick_add_new_item_to_list_action" = "Quick add new";
 
-"favorite_item_title" = "Add to favorites";
-"unfavorite_item_title" = "Remove from favorites";
+"favorite_item_title" = "It is important";
+"unfavorite_item_title" = "Not important anymore";
 
-"mark_as_completed_item_title" = "Mark as finished";
-"uncomplete_item_title" = "Mark as unfinished";
+"mark_as_completed_item_title" = "Finished?";
+"uncomplete_item_title" = "Unfinished";
 
-// - add list
+// - add or edit list
+"edit_list_navigation_title" = "Edit List";
+
+"add_list_navigation_title" = "Add List";
+
 "add_list_title_placeholder" = "Your list title";
-"select_list_type_placeholder" = "Please select your list type";
-"list_type_title" = "List type:";
-"save_button_title" = "Save";
-"update_button_title" = "Update";
-
-"select_icon_description" = "Please pick a color and icon for your %@ list.";
+"list_type_title" = "List type";
+"select_icon_description" = "Please choose a color and pick an icon for your %@ list.";
 
 // - add item
 
@@ -67,54 +65,60 @@
 "remind_me_title" = "Remind at:";
 "which_list_title" = "Into which list:";
 "select_list_placeholder" = "Please select a list";
-"save_and_another_item_button_title" = "Save & Add another";
-"update_and_another_item_button_title" = "Update & Add another";
+
 
 "select_into_which_list_placeholder" = "Please select a list to move your item into it";
 
-"remind_me_button_title" = "Please tap to set reminder";
 "add_item_description" = "Add a new item into \"%@\" list. You can just save it or save the current and add another one.";
 "more_info_about_item_title" = "Add comment";
 
 "doesnt_set_date_title" = "No due date";
 "doesnt_set_repeats_title" = "No repeats";
+
 // - date pick
 "pick_date_description" = "Please pick a date to remind you by push notification. You can also select the repeating interval to get the notification regularly.";
 "pick_date_navigation_title" = "Remind date";
 "date_title" = "Date:";
 "time_title" = "Time:";
 "repeating_title" = "Repeats:";
-"delete_reminder_button_title" = "Delete reminder";
 // - alerts
 "delete_list_title_alert" = "Deleting \"%@\" list notice";
 "delete_list_desc_alert" = "Are you sure about deleting the \"%@\" list? It will permanently delete the list and items in it from the iCloud server and your phone. You won't be able to restore your data any more.\nAgain, are you sure about deleting the \"%@\" list?";
 
 // Home
-"add_list_button_title" = "+ add list";
-"add_item_button_title" = "+ add item";
-"quick_add_item_button_title" = "+ (quick) add item";
 
-"add_quick_item_title_placeholder" = "Name you item and tap continue";
+
+"add_quick_item_title_placeholder" = "Name your item and tap \"save & add another\"";
+"no_items_in_list_title" = "There is no item in %@ list.\nChoose to add item quickly or with more detail.";
+"no_items_in_importants_title" = "There is no item in importants.\nSwipe left on an item to add it into importants.";
+"add_more_detail_quick_item" = "Add more detail";
 // Setting
 
-"language_title" = "زبان:";
-"remove_ads_title" = "حذف تبلیغات";
-"restore_purchase_title" = "بازگرداندن خرید قبلی";
-"make_us_better_title" = "ما را بهینه‌تر کنید 😉";
-"support_us_title" = "پشتیبان ما باشید 🙏🏾";
-"terms_of_use_title" = "قوانین استفاده از اپلیکیشن";
-"policy_privacy_title" = "حریم خصوصی";
+"language_title" = "Language:";
+"remove_ads_title" = "Remove advertisements forever";
+"restore_purchase_title" = "Restore purchase";
+"make_us_better_title" = "Make us better 😉";
+"support_us_title" = "Support us 🙏🏾";
+"support_us_description" = "Support us to improve the Listit app. We need your support to make app functionality better and more useful. We are very proud that you are using Listit and It means a lot for us, more than you imagine, that you support us as well. Thank you 🙏🏾";
+
+"terms_of_use_title" = "Terms of use";
+"policy_privacy_title" = "Privacy policy";
 
 
-"donate_button_title" = "لطفا کمک کنید";
-"donate_description" = "با پشتیبانی از Listit شما برای بهتر شدن اپلیکیشن به ما کمک بزرگی میکنید تا اپلیکیشن بهینه‌تر و مناسب تر با نیازهای شما بسازیم.\nاگه دارید از اپلیکیشن لذت میبرید لطفا حداقل با دیدن یک ویدیو تبلیغاتی به ما کمک کنید.";
+"donate_description" = "If you enjoy using the Listit, please donate us at least by watching a video.";
 
+"donate_button_title" = "Please donate";
 
-"language_button_title" = "انتخاب زبان";
-"language_button_description" = "لطفا زبان مورد نظر خود را انتخاب کنید.";
+"language_button_title" = "Language";
+"language_button_description" = "Please select your language.";
 
-"close_button_title" = "بستن";
+"close_button_title" = "Close";
 
+"rate_alert_title" = "Please rate Listit";
+"share_us_alert_title" = "Tell your friends about us";
+
+"restored_purchase_success" = "Restored purchase successfully";
+"removed_ad_success" = "Remove advertisements successfully purchased";
 // Errors
 "add_title_for_list_error" = "Please add title for your list";
 "select_type_for_list_error" = "Please select your list type";
@@ -124,14 +128,32 @@
 
 "add_title_for_item_error" = "Please add title for your item";
 "select_list_for_item_error" = "Please select a list wanted to be your item in";
-"select_date_for_item_error" = "Please selec a date for your countdown";
+"select_date_for_item_error" = "Please select a date for your countdown";
+"wait_ad_description" = "Please wait to load the advertisement and tap again. Or go to setting and remove advertisements forever.";
 
-///////
 /// Rate
 
-"Rate_alertCancelTitle" = "الان نه، ممنون";
-"Rate_alertMessage" = "اگر از استفاده از Listit لذت می برید ، آیا می خواهید یک لحظه برای ارزیابی آن دقت کنید؟ فقط کمتر از یک دقیقه طول می کشد. این برنامه از ما برای ترغیب برنامه مناسب تر حمایت می کند. \n از حمایت شما متشکریم";
-"Rate_alertRateLaterTitle" = "بعدا به من یادآوری کن";
-"Rate_alertRateTitle" = "به Listit امتیاز دهید";
-"Rate_alertTitle" = "به ما امتیاز دهید 🙂";
+"Rate_alertCancelTitle" = "Not now, thanks";
+"Rate_alertMessage" = "If you enjoy using Listit, would you mind taking a moment to rate it? it just takes less than a minute. it supports to encourage us to make the app more sufficient.\nThanks for your support 🙌🏾";
+"Rate_alertRateLaterTitle" = "Remind me later";
+"Rate_alertRateTitle" = "Rate Listit";
+"Rate_alertTitle" = "Please rate us 🙂";
 
+// BUTTONS
+
+"save_button_title" = "Save";
+"update_button_title" = "Update";
+"save_and_another_item_button_title" = "Save & Add another";
+"update_and_another_item_button_title" = "Update & Add another";
+"remind_me_button_title" = "Please tap to set reminder";
+"delete_reminder_button_title" = "Delete reminder";
+
+"add_list_button_title" = "+ add list";
+"add_item_button_title" = "+ add item";
+"quick_add_item_button_title" = "+ add item (Quick)";
+"edit_button_title" = "edit";
+
+// Shared
+"day_title" = "day";
+"of_month_title" = "of month";
+ 

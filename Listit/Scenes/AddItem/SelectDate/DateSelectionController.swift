@@ -99,6 +99,8 @@ class DateSelectionController: UIViewController {
     case 0:
       repeatingInterval = RepeatingInterval.none
       showOrHideDateContainer(isHidden: false)
+      dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+      
     case 1:
       repeatingInterval = .hourly
       showOrHideDateContainer(isHidden: true)
@@ -108,14 +110,22 @@ class DateSelectionController: UIViewController {
     case 3:
       repeatingInterval = .weekly
       showOrHideDateContainer(isHidden: false)
+      dateFormatter.dateFormat = "EEEE"
     case 4:
       repeatingInterval = .monthly
       showOrHideDateContainer(isHidden: false)
+      dateFormatter.dateFormat = "d"
+
     case 5:
       repeatingInterval = .yearly
       showOrHideDateContainer(isHidden: false)
+      dateFormatter.dateFormat = "EEEE, MMM d"
     default:
       print("Used undefined segment index")
+    }
+    if let date = date {
+      changeTimeLabel(date: date)
+      chageDateLabel(date: date)
     }
   }
   // MARK:- Functions
@@ -182,20 +192,39 @@ class DateSelectionController: UIViewController {
     dateTextField.inputView = datePicker
     timeTextField.inputView = timePicker
     
-    timePicker.rx.date.subscribe(onNext: { [unowned self] (date) in
-      let timeFormatterString = self.timeFormatter.string(from: date)
-      self.timeTextField.text = timeFormatterString
-      let hourMinute = timeFormatterString.components(separatedBy: ":")
-      if hourMinute.count == 2 {
-        self.minute = Int(hourMinute[1]) ?? 0
-        self.hour = Int(hourMinute[0]) ?? 0
-      }
+    timePicker.rx.date.subscribe(onNext: { [changeTimeLabel] (date) in
+      changeTimeLabel(date)
     }).disposed(by: disposeBag)
     
-    datePicker.rx.date.subscribe(onNext: { [unowned self] (date) in
-      self.dateTextField.text = self.dateFormatter.string(from: date)
-      let newDate = Calendar.current.date(bySettingHour: self.hour, minute: self.minute, second: 0, of: date) ?? Date()
-      self.date = newDate
+    datePicker.rx.date.subscribe(onNext: { [chageDateLabel] (date) in
+      chageDateLabel(date)
     }).disposed(by: disposeBag)
+  }
+  
+  private func changeTimeLabel(date: Date) {
+    let timeFormatterString = timeFormatter.string(from: date)
+    self.timeTextField.text = timeFormatterString
+    let hourMinute = timeFormatterString.components(separatedBy: ":")
+    if hourMinute.count == 2 {
+      self.minute = Int(hourMinute[1]) ?? 0
+      self.hour = Int(hourMinute[0]) ?? 0
+    }
+  }
+  private func chageDateLabel(date: Date) {
+    dateTextField.text = dateFormatter.string(from: date)
+    if dateFormatter.dateFormat == "d" {
+      let stringDate = dateFormatter.string(from: date)
+      let dayTitle = "day_title".localize()
+      let ofMonthTitle = "of_month_title".localize()
+      if stringDate == "1" {
+        dateTextField.text = "\(stringDate)st \(dayTitle) \(ofMonthTitle)"
+      } else if stringDate == "2" {
+        dateTextField.text = "\(stringDate)nd \(dayTitle) \(ofMonthTitle)"
+      } else {
+        dateTextField.text = "\(stringDate)th \(dayTitle) \(ofMonthTitle)"
+      }
+    }
+    let newDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: date) ?? Date()
+    self.date = newDate
   }
 }

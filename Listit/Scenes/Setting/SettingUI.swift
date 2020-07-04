@@ -13,7 +13,12 @@ import Haptico
 
 extension SettingController {
   func setupUI() {
-    setSettingData()
+    if Defaults.isAdsRemoved {
+      setSettingDataWithoutAd()
+    } else {
+      setSettingData()
+    }
+    
     setLocalizations()
     navigationItem.title = "setting_navigation_title".localize()
 
@@ -38,6 +43,9 @@ extension SettingController {
   }
   private func setSettingData() {
     settingData = [["remove_ads_title".localize(), "restore_purchase_title".localize()], ["make_us_better_title".localize(), "support_us_title".localize()], ["terms_of_use_title".localize(), "policy_privacy_title".localize()]]
+  }
+  func setSettingDataWithoutAd() {
+    settingData = [["make_us_better_title".localize(), "support_us_title".localize()], ["terms_of_use_title".localize(), "policy_privacy_title".localize()]]
   }
   
   private func setLocalizations() {

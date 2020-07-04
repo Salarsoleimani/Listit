@@ -49,7 +49,11 @@ struct ItemViewModel {
     self.toDate = Calendar.current.date(from: component)
     
     if let repeats = model.repeats {
-      self.repeats = repeats
+      if repeats == "none" {
+        self.repeats = "once"
+      } else {
+        self.repeats = repeats
+      }
     } else {
       self.repeats = "doesnt_set_repeats_title".localize()
     }
@@ -68,17 +72,34 @@ struct ItemViewModel {
       dateFormatter.dateFormat = "HH:mm"
       self.countdownTimeFormat = "hh:mm:ss"
     case .weekly:
-      dateFormatter.dateFormat = "YYYY/MMM/dd HH:mm"
+      dateFormatter.dateFormat = "EEEE, HH:mm"
       self.countdownTimeFormat = "dd:hh:mm:ss"
     case .monthly:
-      dateFormatter.dateFormat = "YYYY/MMM/dd HH:mm"
+      dateFormatter.dateFormat = "d,HH:mm"
       self.countdownTimeFormat = "dd:hh:mm:ss"
     case .yearly:
-      dateFormatter.dateFormat = "YYYY/MMM/dd HH:mm"
+      dateFormatter.dateFormat = "MMM dd, HH:mm"
       self.countdownTimeFormat = "dd:hh:mm:ss"
     }
     if let notifDate = model.notifDate {
-      self.dueDate = dateFormatter.string(from: notifDate)
+      var dateStr = dateFormatter.string(from: notifDate)
+      if intervals == .monthly {
+        let dateAndTime = dateStr.components(separatedBy: ",")
+        if dateAndTime.count == 2 {
+          let day = dateAndTime[0]
+          let time = dateAndTime[1]
+          let dayTitle = "day_title".localize()
+          let ofMonthTitle = "of_month_title".localize()
+          if day == "1" {
+            dateStr = "\(day)st \(dayTitle) \(ofMonthTitle), \(time)"
+          } else if day == "2" {
+            dateStr = "\(day)nd \(dayTitle) \(ofMonthTitle), \(time)"
+          } else {
+            dateStr = "\(day)th \(dayTitle) \(ofMonthTitle), \(time)"
+          }
+        }
+      }
+      self.dueDate = dateStr
       self.haveDate = true
     } else {
       self.dueDate = "doesnt_set_date_title".localize()

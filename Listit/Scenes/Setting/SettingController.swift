@@ -89,6 +89,7 @@ extension SettingController: IAPServiceDelegate {
     removeAdButton.isHidden = true
     Defaults.isAdsRemoved = true
     navigator.toast(text: "removed_ad_success".localize(), hapticFeedbackType: .success, backgroundColor: Colors.main.value)
+    setSettingDataWithoutAd()
   }
   
   func restoredPurchase() {
@@ -97,5 +98,6 @@ extension SettingController: IAPServiceDelegate {
     removeAdButton.isHidden = true
     Defaults.isAdsRemoved = true
     navigator.toast(text: "restored_purchase_success".localize(), hapticFeedbackType: .success, backgroundColor: Colors.main.value)
+    setSettingDataWithoutAd()
   }
 }
