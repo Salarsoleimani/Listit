@@ -7,153 +7,159 @@
 */
 
 /// - titles
-"all_items_navigation_title" = "All";
-"select_icon_navigation_title" = "Icon & Color";
+"all_items_navigation_title" = "همه";
+"select_icon_navigation_title" = "آیکون و رنگ";
 
-"add_item_navigation_title" = "Add item";
-"edit_item_navigation_title" = "Edit item";
+"add_item_navigation_title" = "اضافه کردن آیتم";
+"edit_item_navigation_title" = "تغییرات آیتم";
 
-"setting_navigation_title" = "Setting";
+"setting_navigation_title" = "تنظیمات";
 
 /// - list types title
-"all_lists_type" = "All";
-"favorites_lists_type" = "Importants";
-"today_lists_type" = "Today";
+"all_lists_type" = "همه";
+"favorites_lists_type" = "مهم ";
+"today_lists_type" = "امروز";
 "reminder_lists_type" = "Reminder";
 "countdown_lists_type" = "Countdown";
 "note_lists_type" = "Note";
 "habits_lists_type" = "Habit";
 
-"template_motivations_list" = "Motivation quotes";
-"template_birthdays_list" = "Birthdays";
-"template_geroceries_list" = "Groceries";
+"template_motivations_list" = "جملات انگیزشی";
+"template_birthdays_list" = "تولدها";
+"template_geroceries_list" = "خرید خانه";
 
 /// - list types quantity title
-"all_lists_type_quantity" = "items";
-"favorites_lists_type_quantity" = "importants";
-"today_lists_type_quantity" = "reminders";
-"reminder_lists_type_quantity" = "reminders";
-"countdown_lists_type_quantity" = "countdowns";
-"note_lists_type_quantity" = "notes";
-"none_lists_type_quantity" = "items";
-"habit_lists_type_quantity" = "habits";
+"all_lists_type_quantity" = "آیتم ";
+"favorites_lists_type_quantity" = "مهم ";
+"today_lists_type_quantity" = "یادآوری ";
+"reminder_lists_type_quantity" = "یادآوری ";
+"countdown_lists_type_quantity" = "شمارش معکوس ";
+"note_lists_type_quantity" = "یادداشت ";
+"none_lists_type_quantity" = "آیتم ";
+"habit_lists_type_quantity" = "عادت روزانه ";
 // - list menu actions
-"cancel_list_action" = "Cancel";
-"delete_list_action" = "Delete";
-"edit_list_action" = "Edit";
+"cancel_list_action" = "بستن";
+"delete_list_action" = "حذف";
+"edit_list_action" = "تغییر";
 
-"quick_add_new_item_to_list_action" = "Quick add new";
+"quick_add_new_item_to_list_action" = "اضافه کردن سریع";
 
-"favorite_item_title" = "It is important";
-"unfavorite_item_title" = "Not important anymore";
+"favorite_item_title" = "این مهمه";
+"unfavorite_item_title" = "دیگه مهم نیست";
 
-"mark_as_completed_item_title" = "Finished?";
-"uncomplete_item_title" = "Unfinished";
+"mark_as_completed_item_title" = "خط بزن";
+"uncomplete_item_title" = "دوباره انجام بده";
 
 // - add or edit list
-"edit_list_navigation_title" = "Edit List";
+"edit_list_navigation_title" = "تغییر لیست";
 
-"add_list_navigation_title" = "Add List";
+"add_list_navigation_title" = "اضافه کردن لیست";
 
-"add_list_title_placeholder" = "Your list title";
-"list_type_title" = "List type";
-"select_icon_description" = "Please choose a color and pick an icon for your %@ list.";
+"add_list_title_placeholder" = "عنوان لیست";
+"list_type_title" = "نوع لیست";
+"select_icon_description" = "لطفا یک رنگ و آیکون برای لیست %@ انتخاب کن.";
 
 // - add item
 
-"add_item_title_placeholder" = "Your item title";
-"remind_me_title" = "Remind at:";
-"which_list_title" = "Into which list:";
-"select_list_placeholder" = "Please select a list";
+"add_item_title_placeholder" = "عنوان آیتم";
+"remind_me_title" = "یادآوری کن در:";
+"which_list_title" = "داخل کدام لیست:";
+"select_list_placeholder" = "لطفا یک لیست انتخاب کن";
 
 
-"select_into_which_list_placeholder" = "Please select a list to move your item into it";
+"select_into_which_list_placeholder" = "لطفا یک لیست انتخاب کن تا آیتم در آن قرار بگیره.";
 
-"add_item_description" = "Add a new item into \"%@\" list. You can just save it or save the current and add another one.";
-"more_info_about_item_title" = "Add comment";
+"add_item_description" = "یک آیتم جدید در لیست \"%@\" اضافه کن. شما میتونید فقط ذخیره‌اش کنی یا اینو ذخیره کنی و یک آیتم جدید دوباره توی همین صفحه اضافه کنی.";
+"more_info_about_item_title" = "توضیحات بیشتر";
 
-"doesnt_set_date_title" = "No due date";
-"doesnt_set_repeats_title" = "No repeats";
+"doesnt_set_date_title" = "بدون تاریخ";
+"doesnt_set_repeats_title" = "بدون تکرار";
 
 // - date pick
-"pick_date_description" = "Please pick a date to remind you by push notification. You can also select the repeating interval to get the notification regularly.";
-"pick_date_navigation_title" = "Remind date";
-"date_title" = "Date:";
-"time_title" = "Time:";
-"repeating_title" = "Repeats:";
+
+"pick_date_description" = "لطفا یک تاریخ انتخاب کن تا با نوتیفیکیشن یا اعلان از آن خبردار بشی. شما میتونید تکرار هم انتخاب کنی تا به طور مرتب آن نوتیفیکیشن و دریافت کنی.";
+"pick_date_navigation_title" = "تاریخ یادآوری";
+"date_title" = "تاریخ:";
+"time_title" = "زمان:";
+"repeating_title" = "تکرار:";
 // - alerts
-"delete_list_title_alert" = "Deleting \"%@\" list notice";
-"delete_list_desc_alert" = "Are you sure about deleting the \"%@\" list? It will permanently delete the list and items in it from the iCloud server and your phone. You won't be able to restore your data any more.\nAgain, are you sure about deleting the \"%@\" list?";
+"delete_list_title_alert" = "اخطار خذف لیست \"%@\"";
+
+"delete_list_desc_alert" = "آیا از حذف لیست \"%@\" اطمینان داری؟ با زدن دکمه حذف، لیست و تمام آیتم‌های زیرمجموعه‌ی آن از سرور و دستگاه شما برای همیشه پاک خواهد شد و دیگر قابل به بازگردانی نیستند.\nدوباره، آیا از حذف لیست \"%@\" مطمئن هستید؟";
 
 // Home
 
 
-"add_quick_item_title_placeholder" = "Name your item and tap \"save & add another\"";
-"no_items_in_list_title" = "There is no item in %@ list.\nChoose to add item quickly or with more detail.";
-"no_items_in_importants_title" = "There is no item in importants.\nSwipe left on an item to add it into importants.";
-"add_more_detail_quick_item" = "Add more detail";
+"add_quick_item_title_placeholder" = "عنوان آیتمی که میخواهید را وارد کنید و دکمه ذخیره یا \"Done\" رو بفشارید.";
+
+"no_items_in_list_title" = "هیچ آیتمی در لیست %@ نیست.\nدکمه‌ی اضافه کردن آیتم را بزنید تا آیتم جدید وارد کنید.";
+
+"no_items_in_importants_title" = "هیچ آیتمی در لیست مهم‌ها نیست.\nهر آیتم را به سمت چپ بکشید، و یا روی آیتم انگششتان را نگه دارید، آن آیتم وارد لیست مهم‌ها میشود.";
+"add_more_detail_quick_item" = "جزییات بیشتر";
 // Setting
 
-"language_title" = "Language:";
-"remove_ads_title" = "Remove advertisements forever";
-"restore_purchase_title" = "Restore purchase";
-"make_us_better_title" = "Make us better 😉";
-"support_us_title" = "Support us 🙏🏾";
-"support_us_description" = "Support us to improve the Listit app. We need your support to make app functionality better and more useful. We are very proud that you are using Listit and It means a lot for us, more than you imagine, that you support us as well. Thank you 🙏🏾";
+"language_title" = "زبان:";
+"remove_ads_title" = "حذف تبلیغات";
+"restore_purchase_title" = "بازگرداندن خرید قبلی";
+"make_us_better_title" = "ما را بهتر کنید 😉";
+"support_us_title" = "حامی ما باشید 🙏🏾";
 
-"terms_of_use_title" = "Terms of use";
-"policy_privacy_title" = "Privacy policy";
+"support_us_description" = "حامی ما باشید تا به بهتر شدن Listit کمک کنید. ما به کمک شما نیازمندیم تا اپلیکیشن رو اونطوری که شما میپسندید درستش کنیم. ما بسیار خوشحالیم که از Listit استفاده میکنید و از آنی که تصور میکنید این واقعاً به ما قوت قلب میده. ممنونم از حمایتتون 🙏🏾";
+
+"terms_of_use_title" = "قوانین استفاده از اپلیکیشن";
+"policy_privacy_title" = "حریم خصوصی";
 
 
-"donate_description" = "If you enjoy using the Listit, please donate us at least by watching a video.";
+"donate_description" = "با پشتیبانی از Listit شما برای بهتر شدن اپلیکیشن به ما کمک بزرگی میکنید تا اپلیکیشن بهینه‌تر و مناسب تر با نیازهای شما بسازیم.\nاگه دارید از اپلیکیشن لذت میبرید لطفا حداقل با دیدن یک ویدیو تبلیغاتی به ما کمک کنید.";
 
-"donate_button_title" = "Please donate";
+"donate_button_title" = "لطفا کمک کنید";
 
-"language_button_title" = "Language";
-"language_button_description" = "Please select your language.";
+"language_button_title" = "انتخاب زبان";
+"language_button_description" = "لطفا زبان مورد نظر خود را انتخاب کنید.";
 
-"close_button_title" = "Close";
+"close_button_title" = "فعلاً نه";
 
-"rate_alert_title" = "Please rate Listit";
-"share_us_alert_title" = "Tell your friends about us";
+"rate_alert_title" = "لطفا به Listit امتیاز دهید";
+"share_us_alert_title" = "به دوستان خود راجع ما بگو";
 
-"restored_purchase_success" = "Restored purchase successfully";
-"removed_ad_success" = "Remove advertisements successfully purchased";
+"restored_purchase_success" = "بازگردانی خرید با موفقیت انجام شد";
+"removed_ad_success" = "حذف تبلیغات با موفقیت انجام شد";
 // Errors
-"add_title_for_list_error" = "Please add title for your list";
-"select_type_for_list_error" = "Please select your list type";
+"add_title_for_list_error" = "لطفاً برای لیست، عنوان انتخاب کنید";
+"select_type_for_list_error" = "لطفا نوع لیست خود را انتخاب کنید";
 
 
-"add_item_no_list_error" = "Please add a list first to add item in it";
+"add_item_no_list_error" = "لطفاً اول لیست اضافه کنید و بعد داخل آن لیست آیتم اضافه کنید";
 
-"add_title_for_item_error" = "Please add title for your item";
-"select_list_for_item_error" = "Please select a list wanted to be your item in";
-"select_date_for_item_error" = "Please select a date for your countdown";
-"wait_ad_description" = "Please wait to load the advertisement and tap again. Or go to setting and remove advertisements forever.";
+"add_title_for_item_error" = "لطفاً برای آیتم، عنوان انتخاب کنید";
+"select_list_for_item_error" = "لطفا لیستی که میخواهید آیتم در آن باشید را انتخاب کنید";
+"select_date_for_item_error" = "لطفا برای شمارش معکوس خود زمان انتخاب کنید";
+
+"wait_ad_description" = "لطفا صبر کنید تا تبلیغ بارگزاری بشه و دوباره بفشارید و یا به تنظیمات برید و گزینه‌ی حذف تبلیغات برای همیشه رو انتخاب کنید.";
 
 /// Rate
 
-"Rate_alertCancelTitle" = "Not now, thanks";
-"Rate_alertMessage" = "If you enjoy using Listit, would you mind taking a moment to rate it? it just takes less than a minute. it supports to encourage us to make the app more sufficient.\nThanks for your support 🙌🏾";
-"Rate_alertRateLaterTitle" = "Remind me later";
-"Rate_alertRateTitle" = "Rate Listit";
-"Rate_alertTitle" = "Please rate us 🙂";
+"Rate_alertCancelTitle" = "الان نه، ممنون";
+"Rate_alertMessage" = "اگر از استفاده از Listit لذت می برید ، آیا می خواهید یک لحظه برای ارزیابی آن دقت کنید؟ فقط کمتر از یک دقیقه طول می کشد. این برنامه از ما برای ترغیب برنامه مناسب تر حمایت می کند. \n از حمایت شما متشکریم 🙌🏾";
+"Rate_alertRateLaterTitle" = "بعدا به من یادآوری کن";
+"Rate_alertRateTitle" = "به Listit امتیاز دهید";
+"Rate_alertTitle" = "به ما امتیاز دهید 🙂";
 
 // BUTTONS
 
-"save_button_title" = "Save";
-"update_button_title" = "Update";
-"save_and_another_item_button_title" = "Save & Add another";
-"update_and_another_item_button_title" = "Update & Add another";
-"remind_me_button_title" = "Please tap to set reminder";
-"delete_reminder_button_title" = "Delete reminder";
+"save_button_title" = "ذخیره کن";
+"update_button_title" = "اعمال تغییرات";
+"save_and_another_item_button_title" = "ذخیره و آیتم جدید";
+"update_and_another_item_button_title" = "اعمال تغییرات و آیتم جدید";
+"remind_me_button_title" = "اضافه کردن یادآوری";
+"delete_reminder_button_title" = "حذف یادآوری";
 
-"add_list_button_title" = "+ add list";
-"add_item_button_title" = "+ add item";
-"quick_add_item_button_title" = "+ add item (Quick)";
-"edit_button_title" = "edit";
+"add_list_button_title" = "+ اضافه کردن لیست";
+"add_item_button_title" = "+ اضافه کردن آیتم";
+"quick_add_item_button_title" = "+ اضافه کردن آیتم (سریع)";
+"edit_button_title" = "ویرایش";
 
 // Shared
-"day_title" = "day";
-"of_month_title" = "of month";
+"day_title" = "روز";
+"of_month_title" = "از ماه";
  

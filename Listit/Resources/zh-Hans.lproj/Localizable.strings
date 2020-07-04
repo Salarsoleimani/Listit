@@ -95,22 +95,22 @@
 // Setting
 
 "language_title" = "语言:";
-"remove_ads_title" = "Remove advertisements forever";
-"restore_purchase_title" = "Restore purchase";
-"make_us_better_title" = "Make us better 😉";
-"support_us_title" = "Support us 🙏🏾";
-"support_us_description" = "Support us to improve the Listit app. We need your support to make app functionality better and more useful. We are very proud that you are using Listit and It means a lot for us, more than you imagine, that you support us as well. Thank you 🙏🏾";
+"remove_ads_title" = "删除广告";
+"restore_purchase_title" = "恢复购买";
+"make_us_better_title" = "让我们变得更好😉";
+"support_us_title" = "支持我们🙏🏾";
+"support_us_description" = "Support us to improve the Listit app. We need your support to make app functionality better and more useful. We are very proud that you are using Listit and It means a lot for us, more than you imagine, that you support us as well. Thank you.";
 
-"terms_of_use_title" = "Terms of use";
-"policy_privacy_title" = "Privacy policy";
+"terms_of_use_title" = "使用条款";
+"policy_privacy_title" = "隐私政策";
 
 
-"donate_description" = "If you enjoy using the Listit, please donate us at least by watching a video.";
+"donate_description" = "支持我们改进 “Listit” 应用程序。 我们需要您的支持，以使应用程序功能更好，更有用。\n如果您喜欢使用 “Listit”，请至少通过观看视频向我们捐款。";
 
-"donate_button_title" = "Please donate";
+"donate_button_title" = "请捐款支持我们";
 
-"language_button_title" = "Language";
-"language_button_description" = "Please select your language.";
+"language_button_title" = "语言";
+"language_button_description" = "请选择您的语言。";
 
 "close_button_title" = "Close";
 
@@ -133,11 +133,11 @@
 
 /// Rate
 
-"Rate_alertCancelTitle" = "Not now, thanks";
-"Rate_alertMessage" = "If you enjoy using Listit, would you mind taking a moment to rate it? it just takes less than a minute. it supports to encourage us to make the app more sufficient.\nThanks for your support 🙌🏾";
-"Rate_alertRateLaterTitle" = "Remind me later";
-"Rate_alertRateTitle" = "Rate Listit";
-"Rate_alertTitle" = "Please rate us 🙂";
+"Rate_alertCancelTitle" = "不是现在，谢谢";
+"Rate_alertMessage" = "如果您喜欢使用 Listit，您会花一点时间对其进行评分吗？ 只需不到一分钟。 它支持鼓励我们使应用程序变得更充分。\n感谢您的支持 🙌🏾";
+"Rate_alertRateLaterTitle" = "稍后提醒我";
+"Rate_alertRateTitle" = "费率 Listit";
+"Rate_alertTitle" = "请给我们打分 🙂";
 
 // BUTTONS
 
