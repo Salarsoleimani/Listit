@@ -35,7 +35,7 @@ struct SSFont {
 //    case barlowCondensed              = "BarlowCondensed"
 //    case playfairDisplay              = "PlayfairDisplay"
 //    case nunito                       = "Nunito"
-    case montserrat                   = "Montserrat"
+    case montserrat = "Montserrat"
 //    case merriweather                 = "Merriweather"
 //
 //    case aristotelicaDisplayRegular   = "AristotelicaDisplayTrial-Regula"

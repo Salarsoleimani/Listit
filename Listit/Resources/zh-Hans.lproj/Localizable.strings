@@ -7,91 +7,91 @@
 */
 
 /// - titles
-"all_items_navigation_title" = "All";
-"select_icon_navigation_title" = "Icon & Color";
+"all_items_navigation_title" = "所有";
+"select_icon_navigation_title" = "图标和颜色";
 
-"add_item_navigation_title" = "Add item";
-"edit_item_navigation_title" = "Edit item";
+"add_item_navigation_title" = "新增项目";
+"edit_item_navigation_title" = "编辑项目";
 
-"setting_navigation_title" = "Setting";
+"setting_navigation_title" = "设置";
 
 /// - list types title
-"all_lists_type" = "All";
-"favorites_lists_type" = "Importants";
-"today_lists_type" = "Today";
-"reminder_lists_type" = "Reminder";
-"countdown_lists_type" = "Countdown";
-"note_lists_type" = "Note";
-"habits_lists_type" = "Habit";
+"all_lists_type" = "所有";
+"favorites_lists_type" = "重要";
+"today_lists_type" = "今天";
+"reminder_lists_type" = "提醒";
+"countdown_lists_type" = "倒数";
+"note_lists_type" = "注意";
+"habits_lists_type" = "习惯";
 
-"template_motivations_list" = "Motivation quotes";
-"template_birthdays_list" = "Birthdays";
-"template_geroceries_list" = "Groceries";
+"template_motivations_list" = "励志名言";
+"template_birthdays_list" = "生日";
+"template_geroceries_list" = "杂货";
 
 /// - list types quantity title
-"all_lists_type_quantity" = "items";
-"favorites_lists_type_quantity" = "importants";
-"today_lists_type_quantity" = "reminders";
-"reminder_lists_type_quantity" = "reminders";
-"countdown_lists_type_quantity" = "countdowns";
-"note_lists_type_quantity" = "notes";
-"none_lists_type_quantity" = "items";
-"habit_lists_type_quantity" = "habits";
+"all_lists_type_quantity" = "项目 ";
+"favorites_lists_type_quantity" = "重要 ";
+"today_lists_type_quantity" = "提醒 ";
+"reminder_lists_type_quantity" = "提醒 ";
+"countdown_lists_type_quantity" = "倒计时 ";
+"note_lists_type_quantity" = "笔记 ";
+"none_lists_type_quantity" = "项目 ";
+"habit_lists_type_quantity" = "习惯 ";
 // - list menu actions
-"cancel_list_action" = "Cancel";
-"delete_list_action" = "Delete";
-"edit_list_action" = "Edit";
+"cancel_list_action" = "取消";
+"delete_list_action" = "删除";
+"edit_list_action" = "编辑";
 
-"quick_add_new_item_to_list_action" = "Quick add new";
+"quick_add_new_item_to_list_action" = "快速添加新";
 
-"favorite_item_title" = "It is important";
-"unfavorite_item_title" = "Not important anymore";
+"favorite_item_title" = "这很重要";
+"unfavorite_item_title" = "不再重要";
 
-"mark_as_completed_item_title" = "Finished?";
-"uncomplete_item_title" = "Unfinished";
+"mark_as_completed_item_title" = "做完了吗?";
+"uncomplete_item_title" = "未完成";
 
 // - add or edit list
-"edit_list_navigation_title" = "Edit List";
+"edit_list_navigation_title" = "编辑清单";
 
-"add_list_navigation_title" = "Add List";
+"add_list_navigation_title" = "新增清单";
 
-"add_list_title_placeholder" = "Your list title";
-"list_type_title" = "List type";
-"select_icon_description" = "Please choose a color and pick an icon for your %@ list.";
+"add_list_title_placeholder" = "您的清单标题";
+"list_type_title" = "清单类型";
+"select_icon_description" = "请选择一种颜色，然后为您的 ％@ 列表选择一个图标。";
 
 // - add item
 
-"add_item_title_placeholder" = "Your item title";
-"remind_me_title" = "Remind at:";
-"which_list_title" = "Into which list:";
-"select_list_placeholder" = "Please select a list";
+"add_item_title_placeholder" = "您的商品标题";
+"remind_me_title" = "提醒：";
+"which_list_title" = "进入哪个列表：";
+"select_list_placeholder" = "请选择一个清单";
 
 
-"select_into_which_list_placeholder" = "Please select a list to move your item into it";
+"select_into_which_list_placeholder" = "请选择一个列表将您的物品移入其中";
 
-"add_item_description" = "Add a new item into \"%@\" list. You can just save it or save the current and add another one.";
-"more_info_about_item_title" = "Add comment";
+"add_item_description" = "将一个新项目添加到 \"％@\" 列表中。 您可以保存它或保存当前的内容并添加另一个。";
+"more_info_about_item_title" = "添加评论";
 
-"doesnt_set_date_title" = "No due date";
-"doesnt_set_repeats_title" = "No repeats";
+"doesnt_set_date_title" = "无截止日期";
+"doesnt_set_repeats_title" = "没有重复";
 
 // - date pick
-"pick_date_description" = "Please pick a date to remind you by push notification. You can also select the repeating interval to get the notification regularly.";
-"pick_date_navigation_title" = "Remind date";
-"date_title" = "Date:";
-"time_title" = "Time:";
-"repeating_title" = "Repeats:";
+"pick_date_description" = "请选择日期以通过推送通知提醒您。 您还可以选择重复间隔以定期获取通知。";
+"pick_date_navigation_title" = "提醒日期";
+"date_title" = "日期：";
+"time_title" = "时间：";
+"repeating_title" = "重复：";
 // - alerts
-"delete_list_title_alert" = "Deleting \"%@\" list notice";
-"delete_list_desc_alert" = "Are you sure about deleting the \"%@\" list? It will permanently delete the list and items in it from the iCloud server and your phone. You won't be able to restore your data any more.\nAgain, are you sure about deleting the \"%@\" list?";
+"delete_list_title_alert" = "删除 \"％@\" 列表通知";
+"delete_list_desc_alert" = "您确定要删除 \"％@\" 列表吗？ 它将从iCloud服务器和手机中永久删除列表和其中的项目。 您将无法再恢复数据。\n再次确定要删除 \"％@\" 列表吗？";
 
 // Home
 
 
-"add_quick_item_title_placeholder" = "Name your item and tap \"save & add another\"";
-"no_items_in_list_title" = "There is no item in %@ list.\nChoose to add item quickly or with more detail.";
-"no_items_in_importants_title" = "There is no item in importants.\nSwipe left on an item to add it into importants.";
-"add_more_detail_quick_item" = "Add more detail";
+"add_quick_item_title_placeholder" = "为项目命名，然后点击 \"保存并添加另一个\"";
+"no_items_in_list_title" = "％@列表中没有任何项目。\n选择快速添加项目或添加更多详细信息。";
+"no_items_in_importants_title" = "重要信息中没有任何项目。\n向左滑动即可将其添加到重要信息中。";
+"add_more_detail_quick_item" = "添加更多细节";
 // Setting
 
 "language_title" = "语言:";
@@ -99,7 +99,7 @@
 "restore_purchase_title" = "恢复购买";
 "make_us_better_title" = "让我们变得更好😉";
 "support_us_title" = "支持我们🙏🏾";
-"support_us_description" = "Support us to improve the Listit app. We need your support to make app functionality better and more useful. We are very proud that you are using Listit and It means a lot for us, more than you imagine, that you support us as well. Thank you.";
+"support_us_description" = "支持我们改进Listit应用程序。 我们需要您的支持，以使应用程序功能更好，更有用。 我们为您使用Listit感到非常自豪，并且对我们的意义比您想像的还要多，您也支持我们。 谢谢。";
 
 "terms_of_use_title" = "使用条款";
 "policy_privacy_title" = "隐私政策";
@@ -112,24 +112,24 @@
 "language_button_title" = "语言";
 "language_button_description" = "请选择您的语言。";
 
-"close_button_title" = "Close";
+"close_button_title" = "关";
 
-"rate_alert_title" = "Please rate Listit";
-"share_us_alert_title" = "Tell your friends about us";
+"rate_alert_title" = "请评价Listit";
+"share_us_alert_title" = "告诉你的朋友我们";
 
-"restored_purchase_success" = "Restored purchase successfully";
-"removed_ad_success" = "Remove advertisements successfully purchased";
+"restored_purchase_success" = "恢复购买成功";
+"removed_ad_success" = "删除成功购买的广告";
 // Errors
-"add_title_for_list_error" = "Please add title for your list";
-"select_type_for_list_error" = "Please select your list type";
+"add_title_for_list_error" = "请为您的列表添加标题";
+"select_type_for_list_error" = "请选择您的清单类型";
 
 
-"add_item_no_list_error" = "Please add a list first to add item in it";
+"add_item_no_list_error" = "请先添加列表以在其中添加项目";
 
-"add_title_for_item_error" = "Please add title for your item";
-"select_list_for_item_error" = "Please select a list wanted to be your item in";
-"select_date_for_item_error" = "Please select a date for your countdown";
-"wait_ad_description" = "Please wait to load the advertisement and tap again. Or go to setting and remove advertisements forever.";
+"add_title_for_item_error" = "请为您的商品添加标题";
+"select_list_for_item_error" = "请选择一个想要成为您物品的清单";
+"select_date_for_item_error" = "请选择倒数日期";
+"wait_ad_description" = "请等待加载广告，然后再次点击。 或永久设置并删除广告。";
 
 /// Rate
 
@@ -141,19 +141,19 @@
 
 // BUTTONS
 
-"save_button_title" = "Save";
-"update_button_title" = "Update";
-"save_and_another_item_button_title" = "Save & Add another";
-"update_and_another_item_button_title" = "Update & Add another";
-"remind_me_button_title" = "Please tap to set reminder";
-"delete_reminder_button_title" = "Delete reminder";
+"save_button_title" = "保存";
+"update_button_title" = "更新资料";
+"save_and_another_item_button_title" = "保存并添加另一个";
+"update_and_another_item_button_title" = "更新并添加另一个";
+"remind_me_button_title" = "请点击以设置提醒";
+"delete_reminder_button_title" = "删除提醒";
 
-"add_list_button_title" = "+ add list";
-"add_item_button_title" = "+ add item";
-"quick_add_item_button_title" = "+ add item (Quick)";
-"edit_button_title" = "edit";
+"add_list_button_title" = "+添加列表";
+"add_item_button_title" = "+添加项目";
+"quick_add_item_button_title" = "+添加项目（快速）";
+"edit_button_title" = "编辑";
 
 // Shared
-"day_title" = "day";
-"of_month_title" = "of month";
+"day_title" = "天";
+"of_month_title" = "的月份";
  

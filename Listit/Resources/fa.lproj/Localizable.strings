@@ -19,10 +19,10 @@
 "all_lists_type" = "همه";
 "favorites_lists_type" = "مهم ";
 "today_lists_type" = "امروز";
-"reminder_lists_type" = "Reminder";
-"countdown_lists_type" = "Countdown";
-"note_lists_type" = "Note";
-"habits_lists_type" = "Habit";
+"reminder_lists_type" = "يادآور";
+"countdown_lists_type" = "شمارش معکوس";
+"note_lists_type" = "یادداشت";
+"habits_lists_type" = "عادت روزانه";
 
 "template_motivations_list" = "جملات انگیزشی";
 "template_birthdays_list" = "تولدها";
