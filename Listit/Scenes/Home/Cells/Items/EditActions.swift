@@ -3,7 +3,7 @@
 //  Listit
 //
 //  Created by Salar Soleimani on 2020-06-26.
-//  Copyright © 2020 SaSApps. All rights reserved.
+//  Copyright © 2020 ssmobileapps.com All rights reserved.
 //
 
 import UIKit
@@ -15,8 +15,8 @@ enum ActionDescriptor {
     switch self {
     case .finished: return "mark_as_completed_item_title".localize()
     case .unfinished: return "uncomplete_item_title".localize()
-    case .edit: return "Edit"
-    case .delete: return "Delete"
+    case .edit: return "edit_list_action".localize()
+    case .delete: return "delete_list_action".localize()
     case .important: return "favorite_item_title".localize()
     case .notImportant: return "unfavorite_item_title".localize()
     }
@@ -39,8 +39,8 @@ enum ActionDescriptor {
   
   func color() -> UIColor {
     switch self {
-    case .finished, .unfinished: return Colors.error.value
-    case .important, .notImportant: return Colors.second.value
+    case .finished, .unfinished: return Colors.main.value
+    case .important, .notImportant: return Colors.red.value
     case .edit:
       return #colorLiteral(red: 0.7803494334, green: 0.7761332393, blue: 0.7967314124, alpha: 1)
     case .delete: return #colorLiteral(red: 1, green: 0.2352941176, blue: 0.1882352941, alpha: 1)

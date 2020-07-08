@@ -1,9 +1,9 @@
 //
 //  ListCell.swift
-//  New Todo
+//  Listit
 //
 //  Created by Salar Soleimani on 2020-06-03.
-//  Copyright © 2020 SaSApps. All rights reserved.
+//  Copyright © 2020 ssmobileapps.com All rights reserved.
 //
 
 import UIKit
@@ -46,7 +46,13 @@ extension ListCell: BEKBindableCell {
     iconContainerView.backgroundColor = viewModel.iconColor
     iconImageView.tintColor = Colors.white.value
     iconImageView.image = viewModel.iconImage
-    titleLabel.text = viewModel.title
+    if viewModel.type == .all {
+      titleLabel.text = "all_lists_type".localize()
+    } else if viewModel.type == .favorites {
+      titleLabel.text = "favorites_lists_type".localize()
+    } else {
+      titleLabel.text = viewModel.title
+    }
     titleLabel.setLineSpacing(lineHeightMultiple: 0.7)
     itemsQtyLabel.text = viewModel.itemsCount
   }
