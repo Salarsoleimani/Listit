@@ -7,7 +7,7 @@
 */
 
 /// - titles
-"all_items_navigation_title" = "所有";
+"all_items_navigation_title" = "所有项目";
 "select_icon_navigation_title" = "图标和颜色";
 
 "add_item_navigation_title" = "新增项目";
@@ -16,7 +16,7 @@
 "setting_navigation_title" = "设置";
 
 /// - list types title
-"all_lists_type" = "所有";
+"all_lists_type" = "所有项目";
 "favorites_lists_type" = "重要";
 "today_lists_type" = "今天";
 "reminder_lists_type" = "提醒";
@@ -49,7 +49,9 @@
 
 "mark_as_completed_item_title" = "做完了吗?";
 "uncomplete_item_title" = "未完成";
-
+// - add templates
+"add_template_navigation_title" = "首次使用讯息";
+"add_template_description" = "这是您第一次使用Listit。\n我们有一些预定义的模板列表，其中包含不同的随机项目，您可以将其添加到您的应用中。 选择您喜欢的人。";
 // - add or edit list
 "edit_list_navigation_title" = "编辑清单";
 
@@ -150,7 +152,7 @@
 
 "add_list_button_title" = "+添加列表";
 "add_item_button_title" = "+添加项目";
-"quick_add_item_button_title" = "+添加项目（快速）";
+"quick_add_item_button_title" = "+快速添加项目";
 "edit_button_title" = "编辑";
 
 // Shared

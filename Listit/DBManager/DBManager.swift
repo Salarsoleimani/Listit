@@ -12,128 +12,153 @@ import SwiftLocalNotification
 import Haptico
 
 final public class DBManager: DatabaseManagerProtocol {
+  
   private static let scheduler = SwiftLocalNotification()
   //MARK: - Configuration
-  func configureDataBase() {
-    if !Defaults.isDatabaseConfigured {
-      CKContainer.default().fetchUserRecordID { (id, err) in
-        if let error = err as NSError? {
-          print("errrrrrrr\(error.code)")
-        } else {
-          print("idddd: \(String(describing: id))")
-        }
+  func checkIsUserLoggedInIcloud(completion: @escaping (_ userId: String?)->()) {
+    CKContainer.default().fetchUserRecordID { (id, err) in
+      if let error = err as NSError? {
+        completion(nil)
+        print("Error with code: \(error.code), user is not logged in iCloud")
+      } else {
+        let idString = String(describing: id)
+        completion(idString)
+        print("User iCloud id: \(idString)")
       }
-      let query = CKQuery(recordType: "CD_List", predicate: NSPredicate(value: true))
-      CKContainer.default().privateCloudDatabase.perform(query, inZoneWith: nil) { [addTemplateLists] results, error in
-        if let error = error as NSError? {
-          if error.code == 11 {
-            addTemplateLists()
-          }
-          print(error.localizedDescription)
-          return
-        } else {
-          if results?.count == 0 {
-            addTemplateLists()
-          }
+    }
+  }
+  
+  func getListsFromCloudKit(completion: @escaping(_ haveList: Bool?) -> ()) {
+    let query = CKQuery(recordType: "CD_List", predicate: NSPredicate(value: true))
+    CKContainer.default().privateCloudDatabase.perform(query, inZoneWith: nil) { results, error in
+      if let error = error as NSError? {
+        // Error code 11 = no lists, error code 9 = not authenticated
+        if error.code == 11 {
+          completion(false)
         }
-      }
-    } else {
-      let query = CKQuery(recordType: "CD_List", predicate: NSPredicate(value: true))
-      CKContainer.default().privateCloudDatabase.perform(query, inZoneWith: nil) { [addTemplateLists] results, error in
-        if let error = error as NSError? {
-          if error.code == 11 {
-            addTemplateLists()
-          }
-          print(error.localizedDescription)
-          return
+        print("error on getting list with err: \(error.localizedDescription)")
+        return
+      } else {
+        if results?.count == 0 {
+          completion(false)
         } else {
-          if results?.count == 0 {
-            addTemplateLists()
-          }
+          completion(true)
         }
       }
     }
   }
   
-  private func addTemplateLists() {
-    CoreDataStack.shared.deleteAllRecords(entityName: "List")
-    CoreDataStack.shared.deleteAllRecords(entityName: "Item")
-    let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
-    let templateItems = SSMocker<ItemModelCodable>.loadGenericObjectsFromLocalJson(fileName: "TemplateItems")
+  var allItemsList: List?
+  
+  func configureDataBase(templates: [TemplateList]) {
     
-    var allItemsList: List?
-    for templateList in templateLists {
+    if templates.isEmpty {
+      addAllAndImportantList()
+    } else {
+      CoreDataStack.shared.deleteAllRecords(entityName: "List")
+      CoreDataStack.shared.deleteAllRecords(entityName: "Item")
+      let templateLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists")
+      if let allList = templateLists.filter({$0.type == ListType.all.rawValue}).first {
+        allItemsList = addList(allList, withHaptic: false, response: nil)
+      }
+      if let favList = templateLists.filter({$0.type == ListType.favorites.rawValue}).first {
+        _ = addList(favList, withHaptic: false, response: nil)
+      }
+      for list in templates {
+        addListWithItem(list: list)
+      }
+    }
+  }
+  private func addListWithItem(list: TemplateList) {
+    
+    
+    let templateList = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists").filter{$0.type == list.rawValue}.first!
+    let templateItems = SSMocker<ItemModelCodable>.loadGenericObjectsFromLocalJson(fileName: "TemplateItems").filter { (item) -> Bool in
+      return item.listId == list.rawValue
+    }
+    switch list {
       
+    case .motivations:
+      var ls = templateList
+      ls.title = templateList.title.localize()
+      let dbList = addList(ls, withHaptic: false, response: nil)
+      for (index, templateItem) in templateItems.enumerated() {
+        var item = templateItem.toItemModel()
+        item.title = templateItem.title
+        item.parentList = dbList
+        item.isFavorite = templateItem.isFavorite
+        var notifDate: Date?
+        switch index {
+        case 0:
+          notifDate = Calendar.current.date(bySettingHour: 10, minute: 0, second: 0, of: Date()) ?? Date()
+        case 1:
+          notifDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date()) ?? Date()
+        case 2:
+          notifDate = Calendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date()) ?? Date()
+        case 3:
+          notifDate = Calendar.current.date(bySettingHour: 16, minute: 0, second: 0, of: Date()) ?? Date()
+        case 4:
+          notifDate = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date()) ?? Date()
+        default:
+          print("Another index of template items for reminders")
+        }
+        item.notifDate = notifDate
+        item.repeats = RepeatingInterval.daily
+        addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
+      }
+    case .birthdays:
+      var ls = templateList
+      ls.title = templateList.title.localize()
+      let dbList = addList(ls, withHaptic: false, response: nil)
+      for (index, templateItem) in templateItems.enumerated() {
+        var item = templateItem.toItemModel()
+        item.title = templateItem.title
+        item.parentList = dbList
+        item.isFavorite = templateItem.isFavorite
+        var notifDate: Date?
+        switch index {
+        case 0:
+          notifDate = Date()
+        case 1:
+          var dateComponents = DateComponents()
+          dateComponents.year = 1989
+          dateComponents.month = 8
+          dateComponents.day = 2
+          dateComponents.hour = 0
+          dateComponents.minute = 0
+          dateComponents.timeZone = Calendar.current.timeZone
+          notifDate = Calendar.current.date(from: dateComponents)
+        default:
+          print("Another index of template items for coundowns")
+        }
+        item.notifDate = notifDate
+        item.repeats = RepeatingInterval.yearly
+        
+        addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
+      }
+      
+    case .geroceries:
+      var ls = templateList
+      ls.title = templateList.title.localize()
+      let dbList = addList(ls, withHaptic: false, response: nil)
+      for (_, templateItem) in templateItems.enumerated() {
+        var item = templateItem.toItemModel()
+        item.title = templateItem.title
+        item.parentList = dbList
+        item.isFavorite = templateItem.isFavorite
+        addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
+      }
+    }
+    
+  }
+  private func addAllAndImportantList() {
+    let allAndImportantLists = SSMocker<ListModel>.loadGenericObjectsFromLocalJson(fileName: "TemplateLists").filter{$0.type == 100 || $0.type == 98}
+    for templateList in allAndImportantLists {
       var list = templateList
       list.title = templateList.title.localize()
-      let dbList = addList(list, withHaptic: false, response: nil)
-      
-      if templateList.type == ListType.all.rawValue {
-        allItemsList = dbList
-      }
-      
-      for (index, templateItem) in templateItems.enumerated() {
-        if index <= 4, templateList.type == ListType.reminder.rawValue {
-          var item = templateItem.toItemModel()
-          item.title = templateItem.title
-          item.parentList = dbList
-          var notifDate: Date?
-          switch index {
-          case 0:
-            notifDate = Calendar.current.date(bySettingHour: 10, minute: 0, second: 0, of: Date()) ?? Date()
-          case 1:
-            notifDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date()) ?? Date()
-          case 2:
-            notifDate = Calendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date()) ?? Date()
-          case 3:
-            notifDate = Calendar.current.date(bySettingHour: 16, minute: 0, second: 0, of: Date()) ?? Date()
-          case 4:
-            notifDate = Calendar.current.date(bySettingHour: 18, minute: 0, second: 0, of: Date()) ?? Date()
-          default:
-            print("Another index of template items for reminders")
-          }
-          item.notifDate = notifDate
-          item.repeats = RepeatingInterval.daily
-          addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
-
-        } else if index > 4, index <= 6, templateList.type == ListType.countdown.rawValue {
-          var item = templateItem.toItemModel()
-          item.title = templateItem.title
-          item.parentList = dbList
-          var notifDate: Date?
-          switch index {
-          case 5:
-            notifDate = Date()
-          case 6:
-            var dateComponents = DateComponents()
-            dateComponents.year = 1989
-            dateComponents.month = 8
-            dateComponents.day = 2
-            dateComponents.hour = 0
-            dateComponents.minute = 0
-            dateComponents.timeZone = Calendar.current.timeZone
-            notifDate = Calendar.current.date(from: dateComponents)
-          default:
-            print("Another index of template items for coundowns")
-          }
-          item.notifDate = notifDate
-          item.repeats = RepeatingInterval.yearly
-
-          addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
-
-        } else if index > 6, index <= 9, templateList.type == ListType.note.rawValue {
-          var item = templateItem.toItemModel()
-          item.title = templateItem.title
-          item.parentList = dbList
-          addItem(item, allItemsList: allItemsList, withHaptic: false, response: nil)
-        }
-      }
-      
-      if let last = templateLists.last, templateList == last {
-        Defaults.isDatabaseConfigured = true
-      }
-      
+      _ = addList(list, withHaptic: false, response: nil)
     }
+    Defaults.isDatabaseConfigured = true
   }
   
   //MARK: - List Related Functions
@@ -202,7 +227,7 @@ final public class DBManager: DatabaseManagerProtocol {
   func update(Item item: Item, isNotifDateChanged: Bool, response: ((Bool) -> Void)?) {
     if isNotifDateChanged {
       DBManager.scheduler.cancel(notificationIds: item.id ?? "")
-
+      
       if let notifDate = item.notifDate, let repeats = item.repeats {
         let notifModel = SwiftLocalNotificationModel(title: item.title ?? "", body: item.desc ?? "", date: notifDate, repeating: RepeatingInterval(rawValue: repeats) ?? RepeatingInterval.none)
         item.id = DBManager.scheduler.schedule(notification: notifModel)

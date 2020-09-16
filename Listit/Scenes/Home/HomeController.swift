@@ -54,18 +54,29 @@ class HomeController: UIViewController {
   internal var listsDataSource: ListsCollectionViewDataSource!
   
   //MARK:- Variables
-  internal lazy var allItemsList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
-  internal lazy var favoriteList = listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.favorites.rawValue}.first
-  var allLists = [List]()
+  internal var allItemsList: List? {
+    get {
+      return listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.all.rawValue}.first
+    }
+  }
+  internal var favoriteList: List? {
+    get {
+      return listsDataSource.frc.fetchedObjects?.filter{$0.type == ListType.favorites.rawValue}.first
+    }
+  }
   
+  var allLists = [List]()
   var yourLists = [List]()
+  
   var selecteItemIndexpaths = [IndexPath]()
+  
   var selectedList: List? {
     didSet {
       selecteItemIndexpaths.removeAll()
       navigationItem.title = selectedList?.title ?? ""
     }
   }
+  
   //MARK:- Initialization
   init(navigator: HomeNavigator, dbManager: DatabaseManagerProtocol) {
     self.navigator = navigator
@@ -93,6 +104,9 @@ class HomeController: UIViewController {
   }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    if let allItemsList = allItemsList {
+      listSelected(allItemsList, selectedItem: 0)
+    }
     setLocalization()
     isAdsRemoved()
   }
@@ -111,7 +125,7 @@ class HomeController: UIViewController {
     _ = addQuickItem(titleItemTextField)
   }
   @IBAction private func addMoreDetailForItemButtonPressed(_ sender: UIButton) {
-    navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: allLists, allItemsList: allItemsList, itemTitle: titleItemTextField.text ?? "")
+    navigator.toAddOrEditItem(item: nil, forList: selectedList, lists: yourLists, allItemsList: allItemsList, itemTitle: titleItemTextField.text ?? "")
   }
   @IBAction private func addItemButtonPressed(_ sender: UIButton) {
     if sender.tag == 0 {

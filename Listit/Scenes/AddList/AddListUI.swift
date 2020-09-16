@@ -21,9 +21,9 @@ extension AddListController {
     listTypeSegmentedControl.setTitle("countdown_lists_type".localize(), forSegmentAt: 2)
 
     if list != nil {
-      saveButton.makeNewTodoButton(title: "update_button_title".localize())
+      saveButton.makeListitButton(title: "update_button_title".localize())
     } else {
-      saveButton.makeNewTodoButton(title: "save_button_title".localize())
+      saveButton.makeListitButton(title: "save_button_title".localize())
     }
   }
   func setupUI() {

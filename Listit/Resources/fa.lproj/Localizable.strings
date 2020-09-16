@@ -7,7 +7,7 @@
 */
 
 /// - titles
-"all_items_navigation_title" = "همه";
+"all_items_navigation_title" = "همه آیتم‌ها";
 "select_icon_navigation_title" = "آیکون و رنگ";
 
 "add_item_navigation_title" = "اضافه کردن آیتم";
@@ -16,7 +16,7 @@
 "setting_navigation_title" = "تنظیمات";
 
 /// - list types title
-"all_lists_type" = "همه";
+"all_lists_type" = "همه آیتم‌ها";
 "favorites_lists_type" = "مهم ";
 "today_lists_type" = "امروز";
 "reminder_lists_type" = "يادآور";
@@ -50,6 +50,9 @@
 "mark_as_completed_item_title" = "خط بزن";
 "uncomplete_item_title" = "دوباره انجام بده";
 
+// - add templates
+"add_template_navigation_title" = "پیام اولین استفاده";
+"add_template_description" = "این اولین بار است که از این برنامه استفاده میکنید.\nما چندین لیست از پیش تعیین شده داریم که در آنها آیتم های مختلفی وجود داره. اونی که دوست داری رو انتخاب کن.";
 // - add or edit list
 "edit_list_navigation_title" = "تغییر لیست";
 
@@ -154,9 +157,9 @@
 "remind_me_button_title" = "اضافه کردن یادآوری";
 "delete_reminder_button_title" = "حذف یادآوری";
 
-"add_list_button_title" = "+ اضافه کردن لیست";
-"add_item_button_title" = "+ اضافه کردن آیتم";
-"quick_add_item_button_title" = "+ اضافه کردن آیتم (سریع)";
+"add_list_button_title" = "+ لیست جدید";
+"add_item_button_title" = "+ آیتم جدید";
+"quick_add_item_button_title" = "+ آیتم جدید";
 "edit_button_title" = "ویرایش";
 
 // Shared

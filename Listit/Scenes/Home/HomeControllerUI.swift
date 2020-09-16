@@ -32,7 +32,7 @@ extension HomeController {
 
     autoLayoutAddItemButtonUI(.all)
     
-    addListButton.makeNewTodoButton(title: "")
+    addListButton.makeListitButton(title: "")
     addListLabel.font = Fonts.listCellTitle
     addListLabel.textColor = Colors.white.value
     
@@ -62,7 +62,7 @@ extension HomeController {
   }
   
   internal func autoLayoutAddItemButtonUI(_ type: ListType) {
-    addItemButton.makeNewTodoButton(title: "")
+    addItemButton.makeListitButton(title: "")
     addItemLabel.font = Fonts.listCellTitle
     addItemLabel.textColor = Colors.white.value
     

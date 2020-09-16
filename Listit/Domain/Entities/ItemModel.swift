@@ -13,10 +13,11 @@ struct ItemModelCodable: Codable, Equatable {
   let repeats: String?
   let description: String?
   let state: Int16?
-
+  let listId: Int16
+  var isFavorite: Bool?
   func toItemModel() -> ItemModel {
     let statee = ItemState(rawValue: state ?? 0) ?? ItemState.default
-    return ItemModel(title: title, notifDate: nil, repeats: RepeatingInterval(rawValue: repeats ?? "none"), description: description, parentList: nil, state: statee)
+    return ItemModel(title: title, notifDate: nil, repeats: RepeatingInterval(rawValue: repeats ?? "none"), description: description, parentList: nil, state: statee, isFavorite: isFavorite)
   }
 }
 struct ItemModel {
@@ -26,10 +27,12 @@ struct ItemModel {
   let description: String?
   var parentList: List?
   let state: ItemState?
+  var isFavorite: Bool?
   
   func asDBItem() -> Item {
     let dbItem = Item(context: CoreDataStack.managedContext)
     dbItem.id = UUID().uuidString
+    dbItem.isFavorite = isFavorite ?? false
     dbItem.title = title
     dbItem.createdAt = Date()
     dbItem.list = parentList

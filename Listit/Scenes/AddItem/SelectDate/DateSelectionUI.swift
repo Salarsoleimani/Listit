@@ -51,7 +51,7 @@ extension DateSelectionController {
     timeTitleLabel.font = Fonts.h5Bold
     timeTitleLabel.textColor = Colors.listCellTitle.value
     
-    saveButton.makeNewTodoButton(title: "save_button_title".localize())
+    saveButton.makeListitButton(title: "save_button_title".localize())
     
     deleteButton.titleLabel?.font = Fonts.h5Regular
     deleteButton.tintColor = Colors.error.value

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2506F019250C230300E60477 /* TemplateLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506F018250C230300E60477 /* TemplateLists.swift */; };
 		254A40E2248C852D00F9E3A7 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40E1248C852D00F9E3A7 /* ItemModel.swift */; };
 		254A40E4248DDE1200F9E3A7 /* SloppySwipingNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40E3248DDE1200F9E3A7 /* SloppySwipingNav.swift */; };
 		254A40E7248DE31E00F9E3A7 /* UILabelX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254A40E6248DE31E00F9E3A7 /* UILabelX.swift */; };
@@ -124,6 +125,10 @@
 		25B32C1024A3F06900524CD9 /* SettingAppMailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C0F24A3F06900524CD9 /* SettingAppMailDelegate.swift */; };
 		25B32C1624A592AF00524CD9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C1524A592AF00524CD9 /* NetworkManager.swift */; };
 		25B32C1824A592F500524CD9 /* ConfigurationNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B32C1724A592F500524CD9 /* ConfigurationNetworkModel.swift */; };
+		25C1212124E06A9500CF0E16 /* AddTemplatesNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C1211D24E06A9500CF0E16 /* AddTemplatesNavigator.swift */; };
+		25C1212224E06A9500CF0E16 /* AddTemplatesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C1211E24E06A9500CF0E16 /* AddTemplatesController.swift */; };
+		25C1212324E06A9500CF0E16 /* AddTemplatesUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C1211F24E06A9500CF0E16 /* AddTemplatesUI.swift */; };
+		25C1212424E06A9500CF0E16 /* AddTemplatesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C1212024E06A9500CF0E16 /* AddTemplatesController.xib */; };
 		54DCA4EDC7598EDBBF1A5BF2 /* Pods_Listit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681C012384A06C1A9D1A7C6B /* Pods_Listit.framework */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +146,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2506F018250C230300E60477 /* TemplateLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateLists.swift; sourceTree = "<group>"; };
 		254A40E1248C852D00F9E3A7 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		254A40E3248DDE1200F9E3A7 /* SloppySwipingNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SloppySwipingNav.swift; sourceTree = "<group>"; };
 		254A40E6248DE31E00F9E3A7 /* UILabelX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelX.swift; sourceTree = "<group>"; };
@@ -263,6 +269,10 @@
 		25B32C0F24A3F06900524CD9 /* SettingAppMailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAppMailDelegate.swift; sourceTree = "<group>"; };
 		25B32C1524A592AF00524CD9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		25B32C1724A592F500524CD9 /* ConfigurationNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationNetworkModel.swift; sourceTree = "<group>"; };
+		25C1211D24E06A9500CF0E16 /* AddTemplatesNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTemplatesNavigator.swift; sourceTree = "<group>"; };
+		25C1211E24E06A9500CF0E16 /* AddTemplatesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTemplatesController.swift; sourceTree = "<group>"; };
+		25C1211F24E06A9500CF0E16 /* AddTemplatesUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTemplatesUI.swift; sourceTree = "<group>"; };
+		25C1212024E06A9500CF0E16 /* AddTemplatesController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTemplatesController.xib; sourceTree = "<group>"; };
 		681C012384A06C1A9D1A7C6B /* Pods_Listit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Listit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7AA76764A90D72C40FC3B85 /* Pods-Listit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listit.release.xcconfig"; path = "Target Support Files/Pods-Listit/Pods-Listit.release.xcconfig"; sourceTree = "<group>"; };
 		BD000643B42F3E614A290640 /* Pods-Listit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listit.debug.xcconfig"; path = "Target Support Files/Pods-Listit/Pods-Listit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -483,6 +493,7 @@
 		254F350324873BB10099C96C /* FirstFlow */ = {
 			isa = PBXGroup;
 			children = (
+				25F0E1EF24E0650E006DBE19 /* AddTemplates */,
 				254F350524873BC70099C96C /* Splash */,
 				254F350424873BBE0099C96C /* Main */,
 			);
@@ -537,6 +548,7 @@
 				254F359024889ED40099C96C /* ListType.swift */,
 				254F35A8248C849A0099C96C /* ItemState.swift */,
 				25B32C1724A592F500524CD9 /* ConfigurationNetworkModel.swift */,
+				2506F018250C230300E60477 /* TemplateLists.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -721,6 +733,17 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		25F0E1EF24E0650E006DBE19 /* AddTemplates */ = {
+			isa = PBXGroup;
+			children = (
+				25C1211D24E06A9500CF0E16 /* AddTemplatesNavigator.swift */,
+				25C1211E24E06A9500CF0E16 /* AddTemplatesController.swift */,
+				25C1211F24E06A9500CF0E16 /* AddTemplatesUI.swift */,
+				25C1212024E06A9500CF0E16 /* AddTemplatesController.xib */,
+			);
+			path = AddTemplates;
+			sourceTree = "<group>";
+		};
 		688903B344A7F855D872F57D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +832,7 @@
 				254F34FE248738C50099C96C /* Icons.json in Resources */,
 				254F34B82485F4F80099C96C /* LaunchScreen.storyboard in Resources */,
 				254A4103249C5B2700F9E3A7 /* TemplateItems.json in Resources */,
+				25C1212424E06A9500CF0E16 /* AddTemplatesController.xib in Resources */,
 				254F351124873C020099C96C /* SplashController.xib in Resources */,
 				254F34C9248733B00099C96C /* Localizable.strings in Resources */,
 				254F34B52485F4F80099C96C /* Assets.xcassets in Resources */,
@@ -923,8 +947,10 @@
 				254F35412487428A0099C96C /* DBManager.swift in Sources */,
 				254F34AD2485F4F60099C96C /* HomeController.swift in Sources */,
 				254F34A92485F4F60099C96C /* AppDelegate.swift in Sources */,
+				25C1212324E06A9500CF0E16 /* AddTemplatesUI.swift in Sources */,
 				254F351524873CD60099C96C /* MainNavigationController.swift in Sources */,
 				25B32BF224A2EFCD00524CD9 /* AddListAdMob.swift in Sources */,
+				2506F019250C230300E60477 /* TemplateLists.swift in Sources */,
 				254F358324888CF60099C96C /* IconCell.swift in Sources */,
 				254F34F2248736700099C96C /* SSFonts.swift in Sources */,
 				254F34D0248734080099C96C /* StaticConstants.swift in Sources */,
@@ -951,6 +977,7 @@
 				254F357B24888CEB0099C96C /* IconsController.swift in Sources */,
 				254F3547248743B80099C96C /* CoreDataError.swift in Sources */,
 				254F35A9248C849A0099C96C /* ItemState.swift in Sources */,
+				25C1212124E06A9500CF0E16 /* AddTemplatesNavigator.swift in Sources */,
 				2577FE1924AC255300319B06 /* UILabelExtensions.swift in Sources */,
 				254F34AB2485F4F60099C96C /* SceneDelegate.swift in Sources */,
 				254F34E6248735540099C96C /* UserDefaults.swift in Sources */,
@@ -959,6 +986,7 @@
 				254A40E924916B8100F9E3A7 /* UIButtonExtensions.swift in Sources */,
 				254F34E8248735540099C96C /* LanguageManager.swift in Sources */,
 				25B32BE624A2E03900524CD9 /* HomeAdMob.swift in Sources */,
+				25C1212224E06A9500CF0E16 /* AddTemplatesController.swift in Sources */,
 				25B32BF524A2F33100524CD9 /* IAPService.swift in Sources */,
 				254F358424888CF60099C96C /* IconCellViewModel.swift in Sources */,
 			);
@@ -1111,7 +1139,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Listit/Listit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 7FQDK9Y97S;
 				INFOPLIST_FILE = "$(SRCROOT)/Listit/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1119,7 +1147,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = Listit;
 				SWIFT_VERSION = 5.0;
@@ -1134,7 +1162,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Listit/Listit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 7FQDK9Y97S;
 				INFOPLIST_FILE = "$(SRCROOT)/Listit/Configurations/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1142,7 +1170,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.ssmobileapps.listit;
 				PRODUCT_NAME = Listit;
 				SWIFT_VERSION = 5.0;

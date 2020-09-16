@@ -7,7 +7,7 @@
 */
 
 /// - titles
-"all_items_navigation_title" = "All";
+"all_items_navigation_title" = "All Items";
 "select_icon_navigation_title" = "Icon & Color";
 
 "add_item_navigation_title" = "Add item";
@@ -16,7 +16,7 @@
 "setting_navigation_title" = "Setting";
 
 /// - list types title
-"all_lists_type" = "All";
+"all_lists_type" = "All Items";
 "favorites_lists_type" = "Importants";
 "today_lists_type" = "Today";
 "reminder_lists_type" = "Reminder";
@@ -24,9 +24,9 @@
 "note_lists_type" = "Note";
 "habits_lists_type" = "Habit";
 
-"template_motivations_list" = "Motivation quotes";
-"template_birthdays_list" = "Birthdays";
-"template_geroceries_list" = "Groceries";
+"template_motivations_list" = "  Motivation quotes";
+"template_birthdays_list" = "  Birthdays";
+"template_geroceries_list" = "  Groceries";
 
 /// - list types quantity title
 "all_lists_type_quantity" = "items";
@@ -50,6 +50,10 @@
 "mark_as_completed_item_title" = "Finished?";
 "uncomplete_item_title" = "Unfinished";
 
+// - add templates
+"add_template_navigation_title" = "First use message";
+"add_template_description" = "This is your first time you are using the Listit\nWe have some predefined template lists with different random items in it, you can add into your app. Select those you like.";
+"lets_go_button" = "Let's go!";
 // - add or edit list
 "edit_list_navigation_title" = "Edit List";
 
@@ -150,7 +154,7 @@
 
 "add_list_button_title" = "+ add list";
 "add_item_button_title" = "+ add item";
-"quick_add_item_button_title" = "+ add item (Quick)";
+"quick_add_item_button_title" = "+ quick add item";
 "edit_button_title" = "edit";
 
 // Shared

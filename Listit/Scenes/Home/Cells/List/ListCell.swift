@@ -34,7 +34,6 @@ class ListCell: UICollectionViewCell {
     itemsQtyLabel.font = Fonts.listCellDescription
     titleLabel.textColor = Colors.listCellTitle.value
     itemsQtyLabel.textColor = Colors.listCellDescription.value
-    
   }
   
 }

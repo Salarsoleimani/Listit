@@ -42,15 +42,13 @@ extension SettingController {
     }
   }
   private func setSettingData() {
-    settingData = [["remove_ads_title".localize(), "restore_purchase_title".localize()], ["make_us_better_title".localize(), "support_us_title".localize()], ["terms_of_use_title".localize(), "policy_privacy_title".localize()]]
+    settingData = [["remove_ads_title", "restore_purchase_title"], ["make_us_better_title", "support_us_title"], ["terms_of_use_title", "policy_privacy_title"]]
   }
   func setSettingDataWithoutAd() {
-    settingData = [["make_us_better_title".localize(), "support_us_title".localize()], ["terms_of_use_title".localize(), "policy_privacy_title".localize()]]
+    settingData = [["make_us_better_title", "support_us_title"], ["terms_of_use_title", "policy_privacy_title"]]
   }
   
   private func setLocalizations() {
-    setSettingData()
-
     navigationItem.title = "setting_navigation_title".localize()
 
     languageTitleLabel.text = "language_title".localize()
@@ -170,6 +168,7 @@ extension SettingController {
       Siren.shared.presentationManager = PresentationManager(forceLanguageLocalization: .english)
     }
     languageButton.setTitle(langId.asStringName(), for: .normal)
+    settingTableView.reloadData()
   }
   
   private func setLanguage(_ lang: Languages) {

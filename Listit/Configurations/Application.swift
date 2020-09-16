@@ -24,7 +24,6 @@ final class Application {
     window.rootViewController = mainNavigationController
     window.makeKeyAndVisible()
     let dbManager = DBManager()
-    dbManager.configureDataBase()
     SplashNavigator(navigationController: mainNavigationController, servicePackage: ServicePackage(dbManager: dbManager)).setup()
   }
   

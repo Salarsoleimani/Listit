@@ -2,50 +2,61 @@
   {
     "title": "Tick tock...",
     "repeats": "daily",
-    "description": "No matter how many mistakes you make or how slow you progress, you are still way ahead of everyone who isn't trying. Try more to suceed."
+    "description": "No matter how many mistakes you make or how slow you progress, you are still way ahead of everyone who isn't trying. Try more to suceed.",
+    "listId": 1
   },
   {
     "title": "Please do something...",
     "repeats": "daily",
-    "description": "All things are difficult before they are easy. So, Start now."
+    "description": "All things are difficult before they are easy. So, Start now.",
+    "listId": 1
   },
   {
     "title": "Keep in mind...",
     "repeats": "daily",
-    "description": "Don't waste your time looking back on what you've lost. Move on, for life is not meant to be traveled backwards."
+    "description": "Don't waste your time looking back on what you've lost. Move on, for life is not meant to be traveled backwards.",
+    "listId": 1
   },
   {
     "title": "Do something and make your day",
     "repeats": "daily",
-    "description": "What you want exists. Don't settle until you get it."
+    "description": "What you want exists. Don't settle until you get it.",
+    "listId": 1
   },
   {
     "title": "Time flies...",
     "repeats": "daily",
-    "description": "The struggle your are in today is developing the strength you need tomorrow. Don't forget to bring goods for tommorow "
+    "description": "The struggle your are in today is developing the strength you need tomorrow. Don't forget to bring goods for tommorow ",
+    "listId": 1
   },
   {
     "title": "Your first use of Listit",
     "repeats": "yearly",
-    "description": "Today is the day that you downloaded Listit and trying to make it better everyday by feedbacking us."
+    "description": "Today is the day that you downloaded Listit and trying to make it better everyday by feedbacking us.",
+    "listId": 3
   },
   {
     "title": "Listit's developer birthday",
     "repeats": "yearly",
-    "description": "My name is Salar. I am the creator of this application and tooday is my birthday 😉."
+    "isFavorite": true,
+    "description": "My name is Mojtaba. I am the creator of this application and today is my birthday 😉.",
+    "listId": 3
   },
   {
     "title": "Avocado",
-    "description": "3 🥑🥑🥑"
+    "description": "3 🥑🥑🥑",
+    "listId": 2
   },
   {
     "title": "Cucumber",
     "description": "2 pounds",
-    "isFavorite": true
+    "isFavorite": true,
+    "listId": 2
   },
   {
     "title": "Cream cheese",
     "state": 1,
-    "isFavorite": true
+    "isFavorite": true,
+    "listId": 2
   }
 ]

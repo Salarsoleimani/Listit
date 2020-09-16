@@ -13,7 +13,5 @@ extension SplashController {
     logoLabel.textColor = Colors.listCellTitle.value
     logoLabel.font = Fonts.navigationTitle
     logoLabel.text = "Listit"
-    
-    
   }
 }

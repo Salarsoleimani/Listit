@@ -59,15 +59,15 @@ extension HomeController: UICollectionViewDelegate {
     }
     itemsTableView.reloadData()
   }
-  private func listSelected(_ list: List, selectedItem: Int) {
+  internal func listSelected(_ list: List, selectedItem: Int) {
     Haptico.shared().generate(.light)
     let type = list.getListType()
     if type == .all {
       selectedList = nil
-      navigationItem.title = allItemsList?.title
+      navigationItem.title = "all_lists_type".localize()
     } else if type == .favorites {
       selectedList = nil
-      navigationItem.title = favoriteList?.title
+      navigationItem.title = "favorites_lists_type".localize()
     } else {
       selectedList = list
     }

@@ -35,6 +35,7 @@ class ItemCell: SwipeTableViewCell {
   @IBOutlet weak var dateContainerStackView: UIStackView!
 
   @IBOutlet weak var finishedLineImageView: UIImageView!
+  
   // MARK:- Variables
   var viewModel: ItemViewModel!
   var isShowingDetail = false
@@ -48,7 +49,7 @@ class ItemCell: SwipeTableViewCell {
   private func setupUI() {
     backgroundColor = .clear
     
-    containerView.backgroundColor = Colors.secondBackground.value
+    containerView.backgroundColor = .clear
     
     favoriteView.backgroundColor = Colors.red.value
     

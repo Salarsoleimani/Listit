@@ -10,7 +10,8 @@ import Foundation
 
 protocol DatabaseManagerProtocol {
   //MARK: - Configuration
-  func configureDataBase()
+  func getListsFromCloudKit(completion: @escaping (_ haveList: Bool?) -> ())
+  func configureDataBase(templates: [TemplateList])
   //MARK: - List Related Functions
   func addList(_ list: ListModel, withHaptic: Bool, response: ((Bool) -> Void)?) -> List
   func delete(List list: List,  response: ((Bool) -> Void)?)

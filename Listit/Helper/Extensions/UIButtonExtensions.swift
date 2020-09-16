@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIButton {
-  func makeNewTodoButton(title: String) {
+  func makeListitButton(title: String) {
     backgroundColor = Colors.main.value
     layer.cornerRadius = Constants.Radius.cornerRadius
     setTitle(title, for: .normal)

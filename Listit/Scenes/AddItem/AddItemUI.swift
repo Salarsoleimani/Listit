@@ -45,12 +45,12 @@ extension AddItemController {
         let title = interval != .none ? "\(dateStr) (\(interval.rawValue))": dateStr
         remindMeButton.setTitle(title, for: .normal)
       }
-      saveButton.makeNewTodoButton(title: "update_button_title".localize())
-      saveAndAddAnotherButton.makeNewTodoButton(title: "update_and_another_item_button_title".localize())
+      saveButton.makeListitButton(title: "update_button_title".localize())
+      saveAndAddAnotherButton.makeListitButton(title: "update_and_another_item_button_title".localize())
       whichListTextField.placeholder = "select_into_which_list_placeholder".localize()
     } else {
-      saveButton.makeNewTodoButton(title: "save_button_title".localize())
-      saveAndAddAnotherButton.makeNewTodoButton(title: "save_and_another_item_button_title".localize())
+      saveButton.makeListitButton(title: "save_button_title".localize())
+      saveAndAddAnotherButton.makeListitButton(title: "save_and_another_item_button_title".localize())
       whichListTextField.placeholder = "select_list_placeholder".localize()
       
     }

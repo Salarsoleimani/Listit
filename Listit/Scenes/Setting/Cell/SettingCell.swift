@@ -21,7 +21,7 @@ class SettingCell: UITableViewCell {
   // MARK:- Functions
   func configure(_ model: String) {
     self.model = model
-    titleLabel.text = model
+    titleLabel.text = model.localize()
   }
   private func setupUI() {
     backgroundColor = Colors.background.value
