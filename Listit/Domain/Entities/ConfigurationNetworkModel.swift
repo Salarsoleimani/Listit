@@ -12,4 +12,6 @@ struct ConfigurationNetworkModel: Codable {
   let emailSubject: String
   let email: String
   let shareText: String
+  let policyPrivacyUrl: String
+  let termOfUseUrl: String
 }

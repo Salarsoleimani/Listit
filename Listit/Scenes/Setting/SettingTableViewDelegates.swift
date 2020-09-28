@@ -41,9 +41,9 @@ extension SettingController: UITableViewDelegate, UITableViewDataSource {
       } else if indexPath.section == 0, indexPath.row == 1 { // Support us
         present(supportUsAlert, animated: true, completion: nil)
       } else if indexPath.section == 1, indexPath.row == 0 { // Terms of use
-        Utility.openURL(url: "")
+        Utility.openURL(url: Defaults.termsUrl)
       } else if indexPath.section == 1, indexPath.row == 1 { // Privacy policy
-        Utility.openURL(url: "")
+        Utility.openURL(url: Defaults.policyUrl)
       }
     } else {
       if indexPath.section == 0, indexPath.row == 0 { // Remove Ads
@@ -55,9 +55,9 @@ extension SettingController: UITableViewDelegate, UITableViewDataSource {
       } else if indexPath.section == 1, indexPath.row == 1 { // Support us
         present(supportUsAlert, animated: true, completion: nil)
       } else if indexPath.section == 2, indexPath.row == 0 { // Terms of use
-        Utility.openURL(url: "")
+        Utility.openURL(url: Defaults.termsUrl)
       } else if indexPath.section == 2, indexPath.row == 1 { // Privacy policy
-        Utility.openURL(url: "")
+        Utility.openURL(url: Defaults.policyUrl)
       }
     }
     Haptico.shared().generate(.light)

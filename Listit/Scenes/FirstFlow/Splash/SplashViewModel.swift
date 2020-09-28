@@ -38,6 +38,8 @@ final class SplashViewModel {
         Defaults.email = response.email
         Defaults.shareText = response.shareText
         Defaults.emailSubject = response.emailSubject
+        Defaults.policyUrl = response.policyPrivacyUrl
+        Defaults.termsUrl = response.termOfUseUrl
       }
     }
   }

@@ -18,7 +18,7 @@ extension HomeController {
     setupRewardedAd()
   }
   private func loadBannerAd() {
-    bannerView.adUnitID = Constants.AdMobIds.testAdBannerUnitID // [TODO] -force change to adHomeBottomBanner testAdBannerUnitID
+    bannerView.adUnitID = Constants.AdMobIds.adHomeBottomBanner // [TODO] -force change to adHomeBottomBanner testAdBannerUnitID
     bannerView.rootViewController = self
     bannerView.load(GADRequest())
   }
@@ -39,7 +39,7 @@ extension HomeController {
     }
   }
   private func createAndLoadRewardedAd() -> GADRewardedAd? {
-    rewardedAd = GADRewardedAd(adUnitID: Constants.AdMobIds.testAdRewardedVideoUnitID) // [TODO] -force change to adRewardedHome testAdRewardedVideoUnitID
+    rewardedAd = GADRewardedAd(adUnitID: Constants.AdMobIds.adRewardedHome) // [TODO] -force change to adRewardedHome testAdRewardedVideoUnitID
     rewardedAd?.load(GADRequest()) { error in
       if let error = error {
         print("Loading ad failed: \(error)")

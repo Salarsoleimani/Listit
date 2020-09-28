@@ -48,6 +48,8 @@ enum Constants {
     static let email = "com.storageKey.email"
     static let emailSubject = "com.storageKey.emailSubject"
     static let shareText = "com.storageKey.shareText"
+    static let policyUrl = "com.storageKey.policyUrl"
+    static let termsUrl = "com.storageKey.termsUrl"
 
 
   }

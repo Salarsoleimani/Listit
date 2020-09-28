@@ -43,4 +43,10 @@ struct Defaults {
   
   @UserDefault(Constants.Keys.shareText, defaultValue: "Hi,/nI am using Listit. It is amazing and so useful. I taught it would help you too./nGo visit their website:/nwww.listitapp.co/n/nor simply download it from Appstore:\nhttps://")
   static var shareText: String
+  
+  @UserDefault(Constants.Keys.policyUrl, defaultValue: "https://listitapps.herokuapp.com/policy")
+  static var policyUrl: String
+  
+  @UserDefault(Constants.Keys.termsUrl, defaultValue: "https://listitapps.herokuapp.com/terms")
+  static var termsUrl: String
 }
