@@ -18,8 +18,8 @@ struct Defaults {
   static var fontFamily: String
   
   // Database
-  @UserDefault(Constants.Keys.isDatabaseConfigured, defaultValue: false)
-  static var isDatabaseConfigured: Bool
+  @UserDefault(Constants.Keys.userId, defaultValue: "")
+  static var userId: String
   
   // Analytics
   @UserDefault(Constants.Keys.appOpenedCount, defaultValue: 0)

@@ -10,7 +10,6 @@ import Firebase
 import Foundation
 import UIKit
 import FirebaseCrashlytics
-import FCUUID
 
 final public class AppAnalytics {
   public static let shared = AppAnalytics()
@@ -18,7 +17,8 @@ final public class AppAnalytics {
   public func setup() {
     FirebaseApp.configure()
     
-    Crashlytics.crashlytics().setUserID("\(FCUUID.uuidForDevice() ?? "")")
+    // TODO create ID
+    //Crashlytics.crashlytics().setUserID("\(FCUUID.uuidForDevice() ?? "")")
   }
   
   public func countUpAppOpened() {

@@ -24,12 +24,12 @@ class SettingCell: UITableViewCell {
     titleLabel.text = model.localize()
   }
   private func setupUI() {
-    backgroundColor = Colors.background.value
+//    backgroundColor = Colors.background.value
     
-    containerView.backgroundColor = Colors.listCellBackground.value
+//    containerView.backgroundColor = Colors.listCellBackground.value
     containerView.layer.cornerRadius = Constants.Radius.cornerRadius
     
-    titleLabel.textColor = Colors.listCellTitle.value
-    titleLabel.font = Fonts.settingTitle
+//    titleLabel.textColor = Colors.listCellTitle.value
+//    titleLabel.font = Fonts.settingTitle
   }
 }

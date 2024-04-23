@@ -8,6 +8,7 @@
 
 
 import UIKit
+import SwiftUI
 
 struct SSFont {
   enum FontType {
@@ -19,6 +20,7 @@ struct SSFont {
     case systemWeighted(weight: CGFloat)
     case monoSpacedDigit(size: CGFloat, weight: CGFloat)
   }
+  
   enum FontSize {
     case standard(StandardSize)
     case custom(CGFloat)
@@ -31,6 +33,7 @@ struct SSFont {
       }
     }
   }
+  
   enum FontFamily: String {
 //    case barlowCondensed              = "BarlowCondensed"
 //    case playfairDisplay              = "PlayfairDisplay"
@@ -66,8 +69,7 @@ struct SSFont {
 }
 
 extension SSFont {
-  var instance: UIFont {
-    
+  var UIFontInstance: UIFont {
     var instanceFont: UIFont!
     switch type {
     case .custom(let fontName):
@@ -93,6 +95,36 @@ extension SSFont {
     case .monoSpacedDigit(let size, let weight):
       instanceFont = UIFont.monospacedDigitSystemFont(ofSize: size, weight: UIFont.Weight.init(rawValue: weight))
     }
+    return instanceFont
+  }
+  var instance: Font {
+    
+    var instanceFont: Font!
+    switch type {
+    case .custom(let fontName):
+      guard let font =  UIFont(name: fontName, size: CGFloat(size.value)) else {
+        fatalError("\(fontName) font is not installed, make sure it added in Info.plist and logged with Utility.logAllAvailableFonts()")
+      }
+      instanceFont = Font(font)
+    case .installed(let fontFamilyName, let fontStyle):
+      
+      let fontName = fontFamilyName.rawValue + fontStyle.rawValue
+      guard let font =  UIFont(name:fontName, size: CGFloat(size.value)) else {
+        fatalError("\(fontName) font is not installed, make sure it added in Info.plist and logged with Utility.logAllAvailableFonts()")
+      }
+      instanceFont = Font(font)
+    case .system:
+      instanceFont = Font(UIFont.systemFont(ofSize: size.value))
+    case .systemBold:
+      instanceFont = Font(UIFont.boldSystemFont(ofSize: size.value))
+    case .systemItatic:
+      instanceFont = Font(UIFont.italicSystemFont(ofSize: size.value))
+    case .systemWeighted(let weight):
+      instanceFont = Font(UIFont.systemFont(ofSize: size.value, weight: UIFont.Weight.init(rawValue: weight)))
+    case .monoSpacedDigit(let size, let weight):
+      instanceFont = Font(UIFont.monospacedDigitSystemFont(ofSize: size, weight: UIFont.Weight.init(rawValue: weight)))
+    }
+    
     return instanceFont
   }
 }

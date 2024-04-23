@@ -36,7 +36,7 @@ enum Constants {
     static let fontFamily = "com.storageKey.fontFamily"
     static let isAdsRemoved = "com.storageKey.isAdsRemoved"
 
-    static let isDatabaseConfigured = "com.storageKey.isDatabaseConfigured"
+    static let userId = "com.storageKey.userId"
 
     static let appOpenedCount = "com.storageKey.appOpenedCount"
     static let watchedRewardAd = "com.storageKey.watchedRewardAd"
@@ -59,7 +59,10 @@ enum Constants {
     static let mail = "coronacareapp@gmail.com"
     static let mailSubject = "About virus care application"
   }
-  
+  struct DeviceScreen {
+    static let width = UIScreen.main.bounds.width
+    static let height = UIScreen.main.bounds.height
+  }
   struct Radius {
     static let cornerRadius: CGFloat = 13
     static let textViewCornerRadius: CGFloat = 8

@@ -10,10 +10,10 @@ import Foundation
 
 final class AddTemplatesNavigator: Navigator {
   func setup() {
-    let addTemplateVC = AddTemplatesController(navigator: self, dbManager: servicePackage.dbManager)
-    if let vc = navigationController.viewControllers.last {
-      addTemplateVC.modalPresentationStyle = .fullScreen
-      vc.present(addTemplateVC, animated: true, completion: nil)
-    }
+//    let addTemplateVC = AddTemplatesController(navigator: self, dbManager: servicePackage.dbManager)
+//    if let vc = navigationController.viewControllers.last {
+//      addTemplateVC.modalPresentationStyle = .fullScreen
+//      vc.present(addTemplateVC, animated: true, completion: nil)
+//    }
   }
 }

@@ -7,19 +7,20 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class SplashNavigator: Navigator {
-  func setup() {
-    let vc = SplashController.initFromNib()
-    vc.viewModel = SplashViewModel(navigator: self, dbManager: servicePackage.dbManager)
+  @MainActor func setup() {
+    let vm = SplashViewModel(navigator: self, dbManager: servicePackage.dbManager)
+    let splashVC = UIHostingController(rootView: SplashView(viewModel: vm))
     navigationController.popViewController(animated: false)
-    navigationController.pushViewController(vc, animated: true)
-    //AnalyticLogProvider.logNavigator(name: NSStringFromClass(type(of: self)), functionName: "setup")
+    navigationController.pushViewController(splashVC, animated: true)
   }
   
-  func toHome() {
+  @MainActor func toHome() {
     HomeNavigator(navigationController: navigationController, servicePackage: servicePackage).setup()
   }
+  
   func toAddTemplates() {
     AddTemplatesNavigator(navigationController: navigationController, servicePackage: servicePackage).setup()
   }

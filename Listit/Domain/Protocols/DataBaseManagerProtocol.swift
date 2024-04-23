@@ -12,6 +12,8 @@ protocol DatabaseManagerProtocol {
   //MARK: - Configuration
   func getListsFromCloudKit(completion: @escaping (_ haveList: Bool?) -> ())
   func configureDataBase(templates: [TemplateList])
+  func checkIsUserLoggedInIcloud(completion: @escaping (_ userId: String?)->())
+  
   //MARK: - List Related Functions
   func addList(_ list: ListModel, withHaptic: Bool, response: ((Bool) -> Void)?) -> List
   func delete(List list: List,  response: ((Bool) -> Void)?)
@@ -23,6 +25,7 @@ protocol DatabaseManagerProtocol {
   func update(Item item: Item, isNotifDateChanged: Bool, response: ((Bool) -> Void)?)
   func updateIsFavorite(isFavorite: Bool, favoriteList: List?, item: Item)
   func updateState(item: Item, state: ItemState)
+  
   // Shared
   func resetFactory()
 }

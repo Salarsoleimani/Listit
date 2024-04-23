@@ -13,6 +13,7 @@ import Haptico
 
 final public class DBManager: DatabaseManagerProtocol {
   
+  
   private static let scheduler = SwiftLocalNotification()
   //MARK: - Configuration
   func checkIsUserLoggedInIcloud(completion: @escaping (_ userId: String?)->()) {
@@ -21,7 +22,7 @@ final public class DBManager: DatabaseManagerProtocol {
         completion(nil)
         print("Error with code: \(error.code), user is not logged in iCloud")
       } else {
-        let idString = String(describing: id)
+        let idString = String(describing: id?.recordName)
         completion(idString)
         print("User iCloud id: \(idString)")
       }
@@ -158,7 +159,7 @@ final public class DBManager: DatabaseManagerProtocol {
       list.title = templateList.title.localize()
       _ = addList(list, withHaptic: false, response: nil)
     }
-    Defaults.isDatabaseConfigured = true
+    //Defaults.isDatabaseConfigured = true
   }
   
   //MARK: - List Related Functions

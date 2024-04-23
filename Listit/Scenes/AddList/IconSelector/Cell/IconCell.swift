@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import BEKListKit
 
 class IconCell: UICollectionViewCell {
   // MARK:- Outlets
@@ -26,12 +25,12 @@ class IconCell: UICollectionViewCell {
   func bindData(withViewModel viewModel: IconCellViewModel) {
     self.viewModel = viewModel
     iconImageView.image = viewModel.image
-    iconImageView.tintColor = Colors.white.value
+//    iconImageView.tintColor = Colors.white.value
     iconContainerView.backgroundColor = viewModel.color
     backgroundColor = viewModel.color
   }
   private func setupUI() {
-    let width = (StaticConstants.mainScreenWidth - 32 - 32) / 5 
+    let width = (Constants.DeviceScreen.width - 32 - 32) / 5 
     layer.cornerRadius = width / 2
   }
 }

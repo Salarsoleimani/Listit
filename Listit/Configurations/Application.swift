@@ -19,7 +19,7 @@ final class Application {
     AppAnalytics.shared.setup()
   }
   
-  func configureMainInterface(in window: UIWindow) {
+  @MainActor func configureMainInterface(in window: UIWindow) {
     let mainNavigationController = MainNavigationController()
     window.rootViewController = mainNavigationController
     window.makeKeyAndVisible()
@@ -37,9 +37,9 @@ final class Application {
   }
   
   private func configureKeyboard() {
-    IQKeyboardManager.shared.enable = true
-    IQKeyboardManager.shared.toolbarTintColor = Colors.main.value
-    IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(HomeController.self)
+//    IQKeyboardManager.shared.enable = true
+//    IQKeyboardManager.shared.toolbarTintColor = Colors.main.value
+//    IQKeyboardManager.shared.disabledDistanceHandlingClasses.append(HomeController.self)
   }
   
   private func setupUpdateManager() {

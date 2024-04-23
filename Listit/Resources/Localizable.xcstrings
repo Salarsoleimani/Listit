@@ -1,0 +1,49 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Hello, World!" : {
+
+    },
+    "Listit" : {
+
+    },
+    "splash-description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Made with love in SS Apps Inc."
+          }
+        },
+        "fa" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ساخته شده با عشق در ssapps.ca"
+          }
+        }
+      }
+    },
+    "splash-loginbutton" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login to iCloud"
+          }
+        }
+      }
+    },
+    "splash-logindesc" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In order to use the app you need to login to your iCloud account."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

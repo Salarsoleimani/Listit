@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "haptico",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/iSapozhnik/Haptico.git",
+      "state" : {
+        "revision" : "1a7bd947f1e96243f4a04a532257eb64b0e046e6",
+        "version" : "1.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -15,15 +15,16 @@ struct Fonts {
   static let h3Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h3)).instance
 
   static let h5Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h5)).instance
-  static let h7Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h7)).instance
   static let h6Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h6)).instance
+  static let h7Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h7)).instance
+  static let h8Regular = SSFont(.installed(.montserrat, .regular), size: .standard(.h8)).instance
 
   static let h5Bold = SSFont(.installed(.montserrat, .bold), size: .standard(.h5)).instance
   static let h6Bold = SSFont(.installed(.montserrat, .bold), size: .standard(.h6)).instance
 
   // Navigation
-  static let navigationLargeTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h1)).instance
-  static let navigationTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h4)).instance
+  static let navigationLargeTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h1)).UIFontInstance
+  static let navigationTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h4)).UIFontInstance
 
   // Lists
   static let listCellTitle = SSFont(.installed(.montserrat, .bold), size: .standard(.h3)).instance

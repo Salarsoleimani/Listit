@@ -1,4 +1,4 @@
-//  
+//
 //  SplashViewModel.swift
 //  Listit
 //
@@ -9,27 +9,64 @@
 import Foundation
 import UIKit
 
-final class SplashViewModel {
+@MainActor class SplashViewModel: ObservableObject, ListitViewModel {
+  @Published var userId: String? = ""
+  @Published var toHome = false
+  @Published var logoImageAnimate = false
+  @Published var logoTextAnimate = false
   
   private let navigator: SplashNavigator
   private let dbManager: DatabaseManagerProtocol
-  let scalePop: CGFloat = 0.25
   
+  let width: CGFloat = Constants.DeviceScreen.width * 0.4
+
   init( navigator: SplashNavigator, dbManager: DatabaseManagerProtocol) {
     self.navigator = navigator
     self.dbManager = dbManager
   }
   
-  func goToHomePage(handler: (()->())?) {
-    navigator.toHome()
-    dbManager.getListsFromCloudKit { [navigator] (haveList) in
-      if let haveList = haveList, !haveList {
-        DispatchQueue.main.async { [navigator] in
-          navigator.toAddTemplates()
+  @MainActor func viewAppeared() {
+    Utility.delay(0.3) { [unowned self] in
+      self.logoImageAnimate = true
+      self.vibrate()
+    }
+    Utility.delay(0.4) { [unowned self] in
+      self.logoTextAnimate = true
+    }
+    Utility.delay(1) { [unowned self] in
+      self.toHome = true
+    }
+  }
+  
+  func goToHomePage() {
+    Utility.delay(1) { [checkIcloudSignIn] in
+      checkIcloudSignIn()
+    }
+  }
+  
+  func resetView() {
+    userId = ""
+    toHome = false
+    logoImageAnimate = false
+    logoTextAnimate = false
+  }
+  
+  func checkIcloudSignIn() {
+    dbManager.checkIsUserLoggedInIcloud { [unowned self] userId in
+      Defaults.userId = userId ?? ""
+      if let userId { // user is signed in to iCloud
+        Task {
+          await MainActor.run {
+            self.navigator.toHome()
+            self.userId = userId
+          }
         }
+      } else {
+        self.toHome = false
       }
     }
   }
+  
   func getConfiguration() {
     let urlString = "https://raw.githubusercontent.com/Salarsoleimani/Listit-Website/master/Configuration.json"
     guard let url = URL(string: urlString) else { return }
